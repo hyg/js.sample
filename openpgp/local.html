@@ -20,43 +20,67 @@
 		});
 	}
 	
-	function handleFiles(files) {
-	
-    if (files.length) {
-        var file = files[0];
-        var reader = new FileReader();
-        reader.onload = function() {
-            //document.write('<pre>' + this.result + '</pre>').appendTo('body');
+	function ReadPubKey(files) {
+		if (files.length) {
+			var file = files[0];
+			var reader = new FileReader();
+			reader.onload = function() {
+				var openpgp = window.openpgp;
 				
-			var openpgp = window.openpgp;
-			
-			var privateKey = openpgp.key.readArmored(this.result).keys[0];
-			var plaintext = prompt("准备加密，请输入明文");
-			var passphrase = prompt("准备解密，请输入密钥口令");
-			
-			if(privateKey.decrypt(passphrase)){
-				alert("decrypted！");
+				var publicKey = openpgp.key.readArmored(this.result).keys[0];
+				var plaintext = prompt("准备加密，请输入明文");
+
+				openpgp.encryptMessage(publicKey, plaintext).then(function(pgpMessage) {
+					// success
+					document.write("密文：<br/><pre>"+pgpMessage+"</pre><br/><br/>");
+								
+				}).catch(function(error) {
+					// failure
+					alert("加密失败！");
+				});		
 			}
-			
-			openpgp.signClearMessage(privateKey,plaintext).then(function(pgpMessage){
-				// success
-				document.write("签名：<br/><pre>"+pgpMessage+"</pre><br/><br/>");
-				
-			}).catch(function(error) {
-				// failure
-				alert("签名失败！");
-			});			
+			reader.readAsText(file);
 		}
-        reader.readAsText(file);
-    }
-}
+	}
+	
+	function ReadSecKey(files) {
+		if (files.length) {
+			var file = files[0];
+			var reader = new FileReader();
+			reader.onload = function() {
+				var openpgp = window.openpgp;
+				
+				var privateKey = openpgp.key.readArmored(this.result).keys[0];
+				var plaintext = prompt("准备签名，请输入明文");
+				var passphrase = prompt("准备签名，请输入密钥口令");
+				
+				if(privateKey.decrypt(passphrase)){
+					alert("decrypted！");
+		
+					openpgp.signClearMessage(privateKey,plaintext).then(function(pgpMessage){
+						// success
+						document.write("签名：<br/><pre>"+pgpMessage+"</pre><br/><br/>");
+						
+					}).catch(function(error) {
+						// failure
+						alert("签名失败！");
+					});		
+				}				
+			}
+			reader.readAsText(file);
+		}
+	}
 	
 	</script>
   </head>
   <body>
     <input type="button" id="createkey" value="创建密钥" onclick="createkeypair()"></input>
 	<br/>
-	<input type="file" id="files" value="读取公钥文件" multiple="" onchange="handleFiles(this.files)"/>
+	<label>读取公钥文件</label><br/>
+	<input type="file" id="files" value="读取公钥文件" multiple="" onchange="ReadPubKey(this.files)"/>
+	<br/>
+	<label>读取私钥文件</label><br/>
+	<input type="file" id="files" value="读取私钥文件" multiple="" onchange="ReadSecKey(this.files)"/>
 	
   
   </body>
