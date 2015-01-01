@@ -1,7 +1,56 @@
 ﻿<!DOCTYPE html>
 <html>
   <head>
-	<script src="main.js"></script>
+	<script src="multiline.js"></script>
+	<!-- or  https://raw.githubusercontent.com/sindresorhus/multiline/master/browser.js -->
+	<script src="openpgp.min.js"></script>
+
+	<script>
+		var openpgp = window.openpgp;
+		var passphrase = prompt('准备创建密钥，请输入密钥口令');
+		var publicKey,privateKey;
+		var opt = {numBits: 512, userId: '测试账号 (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
+		openpgp.generateKeyPair(opt).then(function(key) {
+			document.write("<br/>");
+			document.write("公钥：<br/>"+key.publicKeyArmored);
+
+			document.write("<br/>");
+			document.write("<br/>");
+			document.write("私钥：<br/>"+key.privateKeyArmored);
+
+			document.write("<br/>");
+			document.write("<br/>");
+			
+			publicKey = openpgp.key.readArmored(key.publicKeyArmored).keys[0];
+			privateKey = openpgp.key.readArmored(key.privateKeyArmored).keys[0];
+			
+			var plaintext = prompt("准备加密，请输入明文");
+			
+			openpgp.encryptMessage(publicKey, plaintext).then(function(pgpMessage) {
+				// success
+				document.write("密文：<br/>"+pgpMessage);
+				document.write("<br/>");
+				document.write("<br/>");
+				
+				pgpMessage = openpgp.message.readArmored(pgpMessage);
+				
+				passphrase = prompt("准备解密，请输入密钥口令");
+				privateKey.decrypt(passphrase);
+		
+				openpgp.decryptMessage(privateKey, pgpMessage).then(function(plaintext) {
+					// success
+					document.write("明文是：<br/>"+plaintext);
+				}).catch(function(error) {
+					// failure
+					alert("解密失败！");
+				});
+				
+			}).catch(function(error) {
+				// failure
+				alert("加密失败！");
+			});
+		});
+	</script>
   </head>
   <body>
   
