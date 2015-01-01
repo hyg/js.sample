@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<script src="FileSaver.min.js"></script>
+	<!-- or https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -->
+	<script src="openpgp.min.js"></script>
+	<script>
+	function createkeypair(){
+		var openpgp = window.openpgp;
+		var passphrase = prompt('准备创建密钥，请输入密钥口令');
+		var publicKey,privateKey;
+		var opt = {numBits: 2048, userId: '测试账号 (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
+		openpgp.generateKeyPair(opt).then(function(key) {
+			var pub = new Blob([key.publicKeyArmored], {type: "text/plain;charset=utf-8"});
+			alert("Save the Publc Key");
+			saveAs(pub, "key.pub");
+			var sec = new Blob([key.privateKeyArmored], {type: "text/plain;charset=utf-8"});
+			alert("Save the Private Key");
+			saveAs(sec, "key.sec");
+		});
+	}
+	
+	function handleFiles(files) {
+	
+    if (files.length) {
+        var file = files[0];
+        var reader = new FileReader();
+        reader.onload = function() {
+            //document.write('<pre>' + this.result + '</pre>').appendTo('body');
+				
+			var openpgp = window.openpgp;
+			
+			var privateKey = openpgp.key.readArmored(this.result).keys[0];
+			var plaintext = prompt("准备加密，请输入明文");
+			var passphrase = prompt("准备解密，请输入密钥口令");
+			
+			if(privateKey.decrypt(passphrase)){
+				alert("decrypted！");
+			}
+			
+			openpgp.signClearMessage(privateKey,plaintext).then(function(pgpMessage){
+				// success
+				document.write("签名：<br/><pre>"+pgpMessage+"</pre><br/><br/>");
+				
+			}).catch(function(error) {
+				// failure
+				alert("签名失败！");
+			});			
+		}
+        reader.readAsText(file);
+    }
+}
+	
+	</script>
+  </head>
+  <body>
+    <input type="button" id="createkey" value="创建密钥" onclick="createkeypair()"></input>
+	<br/>
+	<input type="file" id="files" value="读取公钥文件" multiple="" onchange="handleFiles(this.files)"/>
+	
+  
+  </body>
+</html>
