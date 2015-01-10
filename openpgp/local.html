@@ -1,15 +1,16 @@
-<!DOCTYPE html>
-<html>
+ï»¿<!DOCTYPE html>
+<html lang="zh-cn">
   <head>
+    <meta charset="UTF-8"> 
 	<script src="FileSaver.min.js"></script>
 	<!-- or https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -->
 	<script src="openpgp.min.js"></script>
 	<script>
 	function createkeypair(){
 		var openpgp = window.openpgp;
-		var passphrase = prompt('×¼±¸´´½¨ÃÜÔ¿£¬ÇëÊäÈëÃÜÔ¿¿ÚÁî');
+		var passphrase = prompt('å‡†å¤‡åˆ›å»ºå¯†é’¥ï¼Œè¯·è¾“å…¥å¯†é’¥å£ä»¤');
 		var publicKey,privateKey;
-		var opt = {numBits: 2048, userId: '²âÊÔÕËºÅ (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
+		var opt = {numBits: 2048, userId: 'æµ‹è¯•è´¦å· (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
 		openpgp.generateKeyPair(opt).then(function(key) {
 			var pub = new Blob([key.publicKeyArmored], {type: "text/plain;charset=utf-8"});
 			alert("Save the Publc Key");
@@ -28,15 +29,15 @@
 				var openpgp = window.openpgp;
 				
 				var publicKey = openpgp.key.readArmored(this.result).keys[0];
-				var plaintext = prompt("×¼±¸¼ÓÃÜ£¬ÇëÊäÈëÃ÷ÎÄ");
+				var plaintext = prompt("å‡†å¤‡åŠ å¯†ï¼Œè¯·è¾“å…¥æ˜æ–‡");
 
 				openpgp.encryptMessage(publicKey, plaintext).then(function(pgpMessage) {
 					// success
-					document.write("ÃÜÎÄ£º<br/><pre>"+pgpMessage+"</pre><br/><br/>");
+					document.write("å¯†æ–‡ï¼š<br/><pre>"+pgpMessage+"</pre><br/><br/>");
 								
 				}).catch(function(error) {
 					// failure
-					alert("¼ÓÃÜÊ§°Ü£¡");
+					alert("åŠ å¯†å¤±è´¥ï¼");
 				});		
 			}
 			reader.readAsText(file);
@@ -51,19 +52,19 @@
 				var openpgp = window.openpgp;
 				
 				var privateKey = openpgp.key.readArmored(this.result).keys[0];
-				var plaintext = prompt("×¼±¸Ç©Ãû£¬ÇëÊäÈëÃ÷ÎÄ");
-				var passphrase = prompt("×¼±¸Ç©Ãû£¬ÇëÊäÈëÃÜÔ¿¿ÚÁî");
+				var plaintext = prompt("å‡†å¤‡ç­¾åï¼Œè¯·è¾“å…¥æ˜æ–‡");
+				var passphrase = prompt("å‡†å¤‡ç­¾åï¼Œè¯·è¾“å…¥å¯†é’¥å£ä»¤");
 				
 				if(privateKey.decrypt(passphrase)){
-					alert("decrypted£¡");
+					alert("decryptedï¼");
 		
 					openpgp.signClearMessage(privateKey,plaintext).then(function(pgpMessage){
 						// success
-						document.write("Ç©Ãû£º<br/><pre>"+pgpMessage+"</pre><br/><br/>");
+						document.write("ç­¾åï¼š<br/><pre>"+pgpMessage+"</pre><br/><br/>");
 						
 					}).catch(function(error) {
 						// failure
-						alert("Ç©ÃûÊ§°Ü£¡");
+						alert("ç­¾åå¤±è´¥ï¼"+error);
 					});		
 				}				
 			}
@@ -74,13 +75,13 @@
 	</script>
   </head>
   <body>
-    <input type="button" id="createkey" value="´´½¨ÃÜÔ¿" onclick="createkeypair()"></input>
+    <input type="button" id="createkey" value="åˆ›å»ºå¯†é’¥" onclick="createkeypair()"></input>
 	<br/>
-	<label>¶ÁÈ¡¹«Ô¿ÎÄ¼ş</label><br/>
-	<input type="file" id="files" value="¶ÁÈ¡¹«Ô¿ÎÄ¼ş" multiple="" onchange="ReadPubKey(this.files)"/>
+	<label>è¯»å–å…¬é’¥æ–‡ä»¶</label><br/>
+	<input type="file" id="files" value="è¯»å–å…¬é’¥æ–‡ä»¶" multiple="" onchange="ReadPubKey(this.files)"/>
 	<br/>
-	<label>¶ÁÈ¡Ë½Ô¿ÎÄ¼ş</label><br/>
-	<input type="file" id="files" value="¶ÁÈ¡Ë½Ô¿ÎÄ¼ş" multiple="" onchange="ReadSecKey(this.files)"/>
+	<label>è¯»å–ç§é’¥æ–‡ä»¶</label><br/>
+	<input type="file" id="files" value="è¯»å–ç§é’¥æ–‡ä»¶" multiple="" onchange="ReadSecKey(this.files)"/>
 	
   
   </body>
