@@ -7,4 +7,4 @@ var server = net.createServer(function(socket){
 	socket.end();
 });
 
-server.listen(8000);
+server.listen(process.argv[2]);
