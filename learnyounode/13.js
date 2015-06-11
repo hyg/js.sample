@@ -15,7 +15,7 @@ var server = http.createServer(function (req, res) {
 	}
 });
 
-server.listen(8000);
+server.listen(process.argv[2]);
 
 function parsetime(purl,req, res){
 	var iso = new Date(purl.query.iso);
