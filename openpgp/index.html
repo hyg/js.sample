@@ -10,9 +10,10 @@
 		var openpgp = window.openpgp;
 		var passphrase = prompt('准备创建密钥，请输入密钥口令');
 		var publicKey,privateKey;
+		var encryptTxt,signTxt;
 		var opt = {numBits: 512, userId: '测试账号 (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
 		openpgp.generateKeyPair(opt).then(function(key) {
-			document.write("公钥：<br/><pre>"+key.publicKeyArmored+"</pre><br/><br/>");
+			//document.write("公钥：<br/><pre>"+key.publicKeyArmored+"</pre><br/><br/>");
 			document.write("私钥：<br/><pre>"+key.privateKeyArmored+"</pre><br/><br/>");
 			
 			publicKey = openpgp.key.readArmored(key.publicKeyArmored).keys[0];
@@ -27,6 +28,7 @@
 				document.write("密文：<br/><pre>"+pgpMessage+"</pre><br/><br/>");
 				
 				pgpMessage = openpgp.message.readArmored(pgpMessage);
+				encryptTxt = pgpMessage;
 	
 				openpgp.decryptMessage(privateKey, pgpMessage).then(function(plaintext) {
 					// success
@@ -46,6 +48,7 @@
 				document.write("签名：<br/><pre>"+pgpMessage+"</pre><br/><br/>");
 				
 				pgpMessage = openpgp.cleartext.readArmored(pgpMessage);
+				signTxt = pgpMessage;
 				
 				openpgp.verifyClearSignedMessage(publicKey,pgpMessage).then(function(verifiedmessage){
 					// success
@@ -64,6 +67,48 @@
 				// failure
 				alert("签名失败！");
 			});
+			
+			var newpassphrase = prompt('准备更换密钥口令，请输入新口令');
+			if (passphrase === newpassphrase || (!passphrase && !newpassphrase)) {
+				throw new Error('New and old passphrase are the same!');
+			}
+			try {
+				packets = privateKey.getAllKeyPackets();
+				for (var i = 0; i < packets.length; i++) {
+					packets[i].encrypt(newpassphrase);
+				}
+				//newKeyArmored = privateKey.armor();
+				//document.write("新私钥1：<br/><pre>"+key.privateKeyArmored+"</pre><br/><br/>");
+				document.write("新私钥：<br/><pre>"+privateKey.armor()+"</pre><br/><br/>");
+			} catch (e) {
+				throw new Error('Setting new passphrase failed!');
+			}
+			
+			if (!privateKey.decrypt(newPassphrase)) {
+				throw new Error('Decrypting key with new passphrase failed!');
+			}
+			
+			openpgp.decryptMessage(privateKey, encryptTxt).then(function(plaintext) {
+				// success
+				document.write("明文是：<br/><pre>"+plaintext+"</pre><br/><br/>");
+			}).catch(function(error) {
+				// failure
+				alert("解密失败！");
+			});
+			
+			openpgp.verifyClearSignedMessage(publicKey,signTxt).then(function(verifiedmessage){
+					// success
+					document.write("正文：<br/><pre>"+verifiedmessage.text+"</pre><br/><br/>");
+					
+					for (var i=0;i<verifiedmessage.signatures.length;i++)
+					{
+						document.write("第"+i+"个签名人：\tkeyid:"+verifiedmessage.signatures[i].keyid.toHex() +"\tvalid:"+verifiedmessage.signatures[i].valid+"<br/>");
+					}
+				}).catch(function(error) {
+				// failure
+				alert("签名验证失败！");
+			});
+			
 		});
 	</script>
   </head>
