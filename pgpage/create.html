@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<title>测试页面</title>
+		<script src="multiline.js"></script>
+		<script src="hashes.min.js"></script>
+		<script src="openpgp.min.js"></script>
+		<script src="jquery-1.12.3.min.js"></script>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
+		<script>
+			var openpgp = window.openpgp;
+			var passphrase = prompt('准备创建密钥，请输入密钥口令');
+			var salt = randomString(2048);
+			alert(salt);
+			var MD5 = new Hashes.MD5;
+			var truepassphrase = MD5.hex(salt + passphrase) ;
+			alert(truepassphrase);
+			
+			var publicKey,privateKey;
+			
+			
+			var opt = {numBits: 512, userId: '测试账号 (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
+			
+			openpgp.generateKeyPair(opt).then(function(key) {
+				publicKey = openpgp.key.readArmored(key.publicKeyArmored).keys[0];
+				privateKey = openpgp.key.readArmored(key.privateKeyArmored).keys[0];
+				
+				
+				$.post("http://127.0.0.1:747",key.privateKeyArmored, function(data) {
+				  $('p').html(data);
+				});
+			});
+			
+			function randomString(len) {
+			　　len = len || 32;
+			　　var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+			　　var maxPos = $chars.length;
+			　　var pwd = '';
+			　　for (i = 0; i < len; i++) {
+			　　　　pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+			　　}
+			　　return pwd;
+			}
+			
+ 		  </script>
+	</head>
+	<body>
+		<p>aaaa</p>
+	</body>
+</html>
