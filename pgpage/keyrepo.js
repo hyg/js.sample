@@ -7,6 +7,7 @@
 var fs = require('fs');
 var http = require('http');
 var url = require("url");
+var yaml = require('js-yaml');
 
 var server = http.createServer(function (req, res) {
     var chunk = ""; 
@@ -18,13 +19,24 @@ var server = http.createServer(function (req, res) {
 		console.log('BODY length: ' + chunk.length);
         if(req.method == 'POST') {
             console.log("POST");
-            res.writeHead(200, {'Content-Type':'text/html'});    // or text/x-yaml  to make client save a file
-							res.write(chunk);    
-							res.end(); 
+            var body = yaml.safeLoad(chunk);
+            var realPath = body.email + ".keyinfo"
+             
             // read the private key
             // get the user info and check it is new
-            // generate the public key
             // save into file
+            fs.exists(realPath, function (exists) {
+				if (!exists) {
+                    fs.writeFileSync(realPath,chunk);
+                    res.writeHead(200, {'Content-Type':'text/html'});    // or text/x-yaml  to make client save a file
+			        res.write(realPath+" saved.");    
+			        res.end();
+                }else{
+                    res.writeHead(406, {'Content-Type':'text/html'});    // or text/x-yaml  to make client save a file
+			        res.write("this email was used. try another pls.");    
+			        res.end();
+                }
+            });
         }else if(req.method == 'PUT') {
             console.log("PUT");
         }else if(req.method == 'GET') {

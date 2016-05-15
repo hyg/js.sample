@@ -1,51 +1,119 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 	<head>
-		<title>≤‚ ‘“≥√Ê</title>
-		<script src="multiline.js"></script>
+		<title>≤‚ ‘“≥</title>
+		<script src="js-yaml.min.js"></script>
 		<script src="hashes.min.js"></script>
 		<script src="openpgp.min.js"></script>
-		<script src="jquery-1.12.3.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-		<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
 		<script>
 			var openpgp = window.openpgp;
-			var passphrase = prompt('◊º±∏¥¥Ω®√‹‘ø£¨«Î ‰»Î√‹‘øø⁄¡Ó');
-			var salt = randomString(2048);
-			alert(salt);
+			var passphrase = prompt('«Î ‰»Îø⁄¡Ó:');
+			var salt = randomString(128);
+			//alert(salt);
+
 			var MD5 = new Hashes.MD5;
-			var truepassphrase = MD5.hex(salt + passphrase) ;
-			alert(truepassphrase);
+			var SHA1 = new Hashes.SHA1;
+			var SHA256 =  new Hashes.SHA256;
+			var SHA512 = new Hashes.SHA512;
+			var RMD160 = new Hashes.RMD160;
+			var truepassphrase = SHA512.hex(salt + passphrase) ;
+			//alert(truepassphrase+"\n"+truepassphrase.length);
 			
 			var publicKey,privateKey;
 			
-			
-			var opt = {numBits: 512, userId: '≤‚ ‘’À∫≈ (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
+			//var UserId = name + " (" + id + ") <" + email + ">" ;
+			var opt = {numBits: 512, userId: '≤‚ ‘’À∫≈ (hyg/js.sample) <test@jssample.org>', passphrase: truepassphrase};
+			var keyinfo = new Object();
+			keyinfo.email = "test@jssample.org";
+			keyinfo.name = "≤‚ ‘’À∫≈";
+			keyinfo.id = "hyg/js.sample";	
+			keyinfo.salt = salt;
 			
 			openpgp.generateKeyPair(opt).then(function(key) {
 				publicKey = openpgp.key.readArmored(key.publicKeyArmored).keys[0];
 				privateKey = openpgp.key.readArmored(key.privateKeyArmored).keys[0];
 				
+				keyinfo.pubkey = key.publicKeyArmored;
+				keyinfo.seckey = key.privateKeyArmored;
+				var body = jsyaml.safeDump(keyinfo);
 				
-				$.post("http://127.0.0.1:747",key.privateKeyArmored, function(data) {
-				  $('p').html(data);
-				});
+				var xmlhttp=getajaxHttp();
+				xmlhttp.onreadystatechange=function(){
+					if(xmlhttp.readyState==4){
+						var data = xmlhttp.responseText;
+						document.write("xmlhttp.status:<br/><pre>"+xmlhttp.status+"</pre>/>");
+						document.write("xmlhttp.responseText:<br/><pre>"+data+"</pre><br/><br/>");
+						var res = jsyaml.safeLoad(data);
+						var respublicKey = openpgp.key.readArmored(res.pubkey).keys[0];
+						var resprivateKey = openpgp.key.readArmored(res.seckey).keys[0];
+						var respassphrase = SHA512.hex(res.salt + passphrase) ;
+						
+						resprivateKey.decrypt(respassphrase);
+						
+						
+						openpgp.signClearMessage(resprivateKey,"test string").then(function(pgpMessage){
+							// success
+							document.write("signed ClearMessage:<br/><pre>"+pgpMessage+"</pre><br/><br/>");
+							
+							pgpMessage = openpgp.cleartext.readArmored(pgpMessage);
+							signTxt = pgpMessage;
+							
+							openpgp.verifyClearSignedMessage(respublicKey,pgpMessage).then(function(verifiedmessage){
+								// success
+								document.write("the text:<br/><pre>"+verifiedmessage.text+"</pre><br/><br/>");
+								
+								for (var i=0;i<verifiedmessage.signatures.length;i++)
+								{
+									document.write("Signer No. "+i+"  :\tkeyid:"+verifiedmessage.signatures[i].keyid.toHex() +"\tvalid:"+verifiedmessage.signatures[i].valid+"<br/>");
+								}
+							}).catch(function(error) {
+								// failure
+								alert("«©√˚—È÷§ ß∞‹");
+							});
+						}).catch(function(error) {
+							// failure
+							alert("«©√˚ ß∞‹");
+						});
+					}
+				};
+				xmlhttp.open("post","http://127.0.0.1:747",true);
+				xmlhttp.send(body);
 			});
 			
 			function randomString(len) {
-			°°°°len = len || 32;
-			°°°°var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****ƒ¨»œ»•µÙ¡À»›“◊ªÏœ˝µƒ◊÷∑˚oOLl,9gq,Vv,Uu,I1****/
-			°°°°var maxPos = $chars.length;
-			°°°°var pwd = '';
-			°°°°for (i = 0; i < len; i++) {
-			°°°°°°°°pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-			°°°°}
-			°°°°return pwd;
+				//len = len || 32;
+				var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';   
+				var maxPos = $chars.length;
+				var pwd = '';
+				for (i = 0; i < len; i++) {
+					pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+				}
+				return pwd;
 			}
-			
+			function getajaxHttp() {
+				var xmlHttp;
+				try {
+					// Firefox, Opera 8.0+, Safari
+					xmlHttp = new XMLHttpRequest();
+					} catch (e) {
+						// Internet Explorer
+						try {
+							xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+						} catch (e) {
+						try {
+							xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+						} catch (e) {
+							alert("ƒ˙µƒ‰Ø¿¿∆˜≤ª÷ß≥÷AJAX£°");
+							return false;
+						}
+					}
+				}
+				return xmlHttp;
+			}
  		  </script>
 	</head>
 	<body>
-		<p>aaaa</p>
+
 	</body>
 </html>

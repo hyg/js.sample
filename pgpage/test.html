@@ -1,92 +1,93 @@
 ï»¿<!DOCTYPE html>
 <html lang="zh-cn">
 	<head>
-		<title>²âÊÔÒ³Ãæ</title>
-		<script src="multiline.js"></script>
+		<title>æµ‹è¯•é¡µ</title>
 		<script src="js-yaml.min.js"></script>
 		<script src="hashes.min.js"></script>
 		<script src="openpgp.min.js"></script>
-		<script src="jquery-1.12.3.min.js"></script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-		<script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js"></script>
 		<script>
+		
 			var openpgp = window.openpgp;
-			var passphrase = prompt('×¼±¸´´½¨ÃÜÔ¿£¬ÇëÊäÈëÃÜÔ¿¿ÚÁî');
-			var salt = randomString(2048);
-			//alert(salt);
+			var email = prompt('è¯·è¾“å…¥email:');
+			var passphrase = prompt('è¯·è¾“å…¥å£ä»¤:');
 
 			var MD5 = new Hashes.MD5;
 			var SHA1 = new Hashes.SHA1;
 			var SHA256 =  new Hashes.SHA256;
 			var SHA512 = new Hashes.SHA512;
 			var RMD160 = new Hashes.RMD160;
-			var truepassphrase = SHA512.hex(salt + passphrase) ;
-			//alert(truepassphrase);
 			
-			var publicKey,privateKey;
-			
-			
-			var opt = {numBits: 512, userId: '²âÊÔÕËºÅ (hyg/js.sample) <test@jssample.org>', passphrase: truepassphrase};
-			var keyinfo = new Object();
-			keyinfo.salt = salt;
-		
-			openpgp.generateKeyPair(opt).then(function(key) {
-				publicKey = openpgp.key.readArmored(key.publicKeyArmored).keys[0];
-				privateKey = openpgp.key.readArmored(key.privateKeyArmored).keys[0];
-				
-				keyinfo.pubkey = key.publicKeyArmored;
-				keyinfo.seckey = key.privateKeyArmored;
-				var body = jsyaml.safeDump(keyinfo);
-				
-				$.post("http://127.0.0.1:747",body, function(data) {
-					$('p').html(data);
-					var res = jsyaml.safeLoad(data);
-					var respublicKey = openpgp.key.readArmored(res.pubkey).keys[0];
-					var resprivateKey = openpgp.key.readArmored(res.seckey).keys[0];
-					var respassphrase = SHA512.hex(res.salt + passphrase) ;
-					
-					resprivateKey.decrypt(respassphrase);
-					
-					
-					openpgp.signClearMessage(resprivateKey,"test string").then(function(pgpMessage){
-						// success
-						document.write("signed ClearMessage:<br/><pre>"+pgpMessage+"</pre><br/><br/>");
+			readkey(email,passphrase);
+
+			function readkey(email,passphrase) {
+				var xmlhttp=getajaxHttp();
+				xmlhttp.onreadystatechange=function(){
+					if(xmlhttp.readyState==4){
+						var data = xmlhttp.responseText;
+						document.write("xmlhttp.status:<br/><pre>"+xmlhttp.status+"</pre>");
+						document.write("xmlhttp.responseText:<br/><pre>"+data+"</pre><br/><br/>");
+						var keyinfo = jsyaml.safeLoad(data);
+						var publicKey = openpgp.key.readArmored(keyinfo.pubkey).keys[0];
+						var privateKey = openpgp.key.readArmored(keyinfo.seckey).keys[0];
+						var truepassphrase = SHA512.hex(keyinfo.salt + passphrase) ;
 						
-						pgpMessage = openpgp.cleartext.readArmored(pgpMessage);
-						signTxt = pgpMessage;
+						privateKey.decrypt(truepassphrase);
 						
-						openpgp.verifyClearSignedMessage(respublicKey,pgpMessage).then(function(verifiedmessage){
+						openpgp.signClearMessage(privateKey,"test string").then(function(pgpMessage){
 							// success
-							document.write("the text:<br/><pre>"+verifiedmessage.text+"</pre><br/><br/>");
+							document.write("signed ClearMessage:<br/><pre>"+pgpMessage+"</pre><br/><br/>");
 							
-							for (var i=0;i<verifiedmessage.signatures.length;i++)
-							{
-								document.write("Signer No. "+i+"  :\tkeyid:"+verifiedmessage.signatures[i].keyid.toHex() +"\tvalid:"+verifiedmessage.signatures[i].valid+"<br/>");
-							}
+							pgpMessage = openpgp.cleartext.readArmored(pgpMessage);
+							signTxt = pgpMessage;
+							
+							openpgp.verifyClearSignedMessage(publicKey,pgpMessage).then(function(verifiedmessage){
+								// success
+								document.write("the text:<br/><pre>"+verifiedmessage.text+"</pre><br/><br/>");
+								
+								for (var i=0;i<verifiedmessage.signatures.length;i++)
+								{
+									document.write("Signer No. "+i+"  :\tkeyid:"+verifiedmessage.signatures[i].keyid.toHex() +"\tvalid:"+verifiedmessage.signatures[i].valid+"<br/>");
+								}
+							}).catch(function(error) {
+								// failure
+								alert("ç­¾åéªŒè¯å¤±è´¥");
+							});
 						}).catch(function(error) {
 							// failure
-							alert("Ç©ÃûÑéÖ¤Ê§°Ü£¡");
+							alert("ç­¾åå¤±è´¥");
 						});
-					}).catch(function(error) {
-						// failure
-						alert("Ç©ÃûÊ§°Ü£¡");
-					});
-				});
-			});
-			
-			function randomString(len) {
-				len = len || 32;
-				var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';    /****Ä¬ÈÏÈ¥µôÁËÈİÒ×»ìÏıµÄ×Ö·ûoOLl,9gq,Vv,Uu,I1****/
-				var maxPos = $chars.length;
-				var pwd = '';
-				for (i = 0; i < len; i++) {
-					pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+					}
+				};
+				var path = "http://127.0.0.1:747/" + email + ".keyinfo" ;
+				alert(path)
+				xmlhttp.open("get",path,true);
+				xmlhttp.send(email);
+			}
+
+			function getajaxHttp() {
+				var xmlHttp;
+				try {
+					// Firefox, Opera 8.0+, Safari
+					xmlHttp = new XMLHttpRequest();
+					} catch (e) {
+						// Internet Explorer
+						try {
+							xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+						} catch (e) {
+						try {
+							xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+						} catch (e) {
+							alert("æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒAJAXï¼");
+							return false;
+						}
+					}
 				}
-				return pwd;
+				return xmlHttp;
 			}
  		  </script>
 	</head>
 	<body>
-		<p>aaaa</p>
+
 	</body>
 </html>
