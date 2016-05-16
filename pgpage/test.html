@@ -5,87 +5,12 @@
 		<script src="js-yaml.min.js"></script>
 		<script src="hashes.min.js"></script>
 		<script src="openpgp.min.js"></script>
+		<script src="key.util.js"></script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<script>
-		
-			var openpgp = window.openpgp;
-			var email = prompt('请输入email:');
-			var passphrase = prompt('请输入口令:');
-
-			var MD5 = new Hashes.MD5;
-			var SHA1 = new Hashes.SHA1;
-			var SHA256 =  new Hashes.SHA256;
-			var SHA512 = new Hashes.SHA512;
-			var RMD160 = new Hashes.RMD160;
-			
-			readkey(email,passphrase);
-
-			function readkey(email,passphrase) {
-				var xmlhttp=getajaxHttp();
-				xmlhttp.onreadystatechange=function(){
-					if(xmlhttp.readyState==4){
-						var data = xmlhttp.responseText;
-						document.write("xmlhttp.status:<br/><pre>"+xmlhttp.status+"</pre>");
-						document.write("xmlhttp.responseText:<br/><pre>"+data+"</pre><br/><br/>");
-						var keyinfo = jsyaml.safeLoad(data);
-						var publicKey = openpgp.key.readArmored(keyinfo.pubkey).keys[0];
-						var privateKey = openpgp.key.readArmored(keyinfo.seckey).keys[0];
-						var truepassphrase = SHA512.hex(keyinfo.salt + passphrase) ;
-						
-						privateKey.decrypt(truepassphrase);
-						
-						openpgp.signClearMessage(privateKey,"test string").then(function(pgpMessage){
-							// success
-							document.write("signed ClearMessage:<br/><pre>"+pgpMessage+"</pre><br/><br/>");
-							
-							pgpMessage = openpgp.cleartext.readArmored(pgpMessage);
-							signTxt = pgpMessage;
-							
-							openpgp.verifyClearSignedMessage(publicKey,pgpMessage).then(function(verifiedmessage){
-								// success
-								document.write("the text:<br/><pre>"+verifiedmessage.text+"</pre><br/><br/>");
-								
-								for (var i=0;i<verifiedmessage.signatures.length;i++)
-								{
-									document.write("Signer No. "+i+"  :\tkeyid:"+verifiedmessage.signatures[i].keyid.toHex() +"\tvalid:"+verifiedmessage.signatures[i].valid+"<br/>");
-								}
-							}).catch(function(error) {
-								// failure
-								alert("签名验证失败");
-							});
-						}).catch(function(error) {
-							// failure
-							alert("签名失败");
-						});
-					}
-				};
-				var path = "http://127.0.0.1:747/" + email + ".keyinfo" ;
-				alert(path)
-				xmlhttp.open("get",path,true);
-				xmlhttp.send(email);
-			}
-
-			function getajaxHttp() {
-				var xmlHttp;
-				try {
-					// Firefox, Opera 8.0+, Safari
-					xmlHttp = new XMLHttpRequest();
-					} catch (e) {
-						// Internet Explorer
-						try {
-							xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-						} catch (e) {
-						try {
-							xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-						} catch (e) {
-							alert("您的浏览器不支持AJAX！");
-							return false;
-						}
-					}
-				}
-				return xmlHttp;
-			}
- 		  </script>
+			//createandsave("http://127.0.0.1:747/")
+			getkey("http://127.0.0.1:747/")
+		</script>
 	</head>
 	<body>
 
