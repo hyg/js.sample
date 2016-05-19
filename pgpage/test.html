@@ -8,8 +8,53 @@
 		<script src="key.util.js"></script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<script>
-			//createandsave("http://127.0.0.1:747/")
-			getkey("http://127.0.0.1:747/")
+		/*
+			var userId = '黄勇刚 (hyg) <huangyg@mars22.com>';
+			var opt = {numBits: 512, userIds: userId, passphrase: 'passphrase'};
+			openpgp.generateKey(opt).then(function(key) {
+			
+			keyinfo.pubkey = key.publicKeyArmored;
+			keyinfo.seckey = key.privateKeyArmored;
+			var body = jsyaml.safeDump(keyinfo);
+			
+			
+			var xmlhttp=getajaxHttp();
+			xmlhttp.onreadystatechange=function(){
+				if(xmlhttp.readyState==4){
+					alert("xmlhttp.status:\n"+xmlhttp.status+"\nxmlhttp.responseText:\n"+xmlhttp.responseText);
+				}
+			};
+			xmlhttp.open("post","http://127.0.0.1:747/",true);
+			xmlhttp.send(body);
+			
+				//alert(key.publicKeyArmored+"\n\n"+key.privateKeyArmored);
+			  //key = key.key;
+			  key = openpgp.key.readArmored(key.privateKeyArmored).keys[0];
+			  var armor1 = key.armor();
+			  alert(armor1+"\n\n"+key.publicKeyArmored+"\n\n"+key.privateKeyArmored);
+			  var success = key.decrypt('passphrase');
+			  alert(success);
+			  alert(key.primaryKey.isDecrypted);
+			  key.encrypt('new_passphrase');
+			  alert(key.primaryKey.isDecrypted);
+			  var armor3 = key.armor();
+			  alert(armor3);
+			  
+			  
+			  
+			  
+			  success = key.decrypt('passphrase');
+			  alert(success);
+			  alert(key.primaryKey.isDecrypted);
+			  success = key.decrypt('new_passphrase');
+			  alert(success);
+			  alert(key.primaryKey.isDecrypted);
+			  var armor4 = key.armor();
+			  alert(armor4);
+			});
+			*/
+			createandsave("http://127.0.0.1:747/")
+			//changepassphrase("http://127.0.0.1:747/")
 		</script>
 	</head>
 	<body>

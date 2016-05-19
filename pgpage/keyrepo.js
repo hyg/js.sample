@@ -8,6 +8,7 @@ var fs = require('fs');
 var http = require('http');
 var url = require("url");
 var yaml = require('js-yaml');
+var openpgp = require('openpgp');
 
 var server = http.createServer(function (req, res) {
     var chunk = ""; 
@@ -39,6 +40,44 @@ var server = http.createServer(function (req, res) {
             });
         }else if(req.method == 'PUT') {
             console.log("PUT");
+            var CleartextMessage  = openpgp.cleartext.readArmored(chunk);
+            console.log("CleartextMessage.text:\n"+CleartextMessage.text);
+            var body = yaml.safeLoad(CleartextMessage.text);
+            var realPath = body.email + ".keyinfo"
+            fs.exists(realPath, function (exists) {
+				if (exists) {
+                    var oldkeyinfo = yaml.safeLoad(fs.readFileSync(realPath,'utf8'));
+                    var oldpublicKey = openpgp.key.readArmored(oldkeyinfo.pubkey).keys[0];
+                    
+                    //openpgp.verifyClearSignedMessage(oldpublicKey,CleartextMessage).then(function(verifiedmessage){
+                    openpgp.verify({ publicKeys:[oldpublicKey], message:CleartextMessage }).then(function(verifiedmessage){
+						// success
+						//console.log("verifiedmessage.data:\n"+verifiedmessage.data+"\n");
+						
+						for (var i=0;i<verifiedmessage.signatures.length;i++)
+						{
+							console.log("\nSigner No. "+i+"  :\tkeyid:"+verifiedmessage.signatures[i].keyid.toHex() +"\tvalid:"+verifiedmessage.signatures[i].valid);
+						}
+                        
+                        fs.writeFileSync(realPath,verifiedmessage.data);
+                        
+                        res.writeHead(200, {'Content-Type':'text/html'});    // or text/x-yaml  to make client save a file
+                        res.write(realPath+" saved.");    
+                        res.end();
+					}).catch(function(error) {
+						// failure
+                        res.writeHead(401, {'Content-Type':'text/html'});    // or text/x-yaml  to make client save a file
+	                    res.write("can't find any key under this email.");    
+	                    res.end();
+						console.log("签名验证失败");
+					});
+                }else{
+                    res.writeHead(412, {'Content-Type':'text/html'});    // or text/x-yaml  to make client save a file
+			        res.write("can't find any key under this email.");    
+			        res.end();
+                    console.log("更新的密钥不存在。");
+                }
+            });
         }else if(req.method == 'GET') {
             console.log("GET");
             var pathname = url.parse(req.url).pathname;

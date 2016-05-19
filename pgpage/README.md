@@ -1,7 +1,16 @@
 ## openPGP 密钥托管
 
 ### REST API
+####keyinfo
+* name
+* id
+* email
+* salt：盐
+* pubkey：公钥
+* secpey：私钥
+
 ####POST
+
 ####PUT
 ####GET
 * 返回私钥文件
