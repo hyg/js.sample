@@ -22,7 +22,7 @@ function createandsave(url){
 	var publicKey,privateKey;
 	
 	var UserId = name + " (" + id + ") <" + email + ">" ;
-	var opt = {numBits: 512, userId: UserId, passphrase: truepassphrase};
+	var opt = {numBits: 512, userIds: UserId, passphrase: truepassphrase};
 	
 	keyinfo.name = name;
 	keyinfo.id = id;	
@@ -82,7 +82,7 @@ function changepassphrase(url){
 	var truepassphrase = SHA512.hex(salt + passphrase) ;
 
 	var success = privateKey.decrypt(truepassphrase);
-	alert(truepassphrase+"\n"+success);
+
 	if(!success){
 		throw new Error('Decrypting key with passphrase failed!');
 	}
@@ -91,36 +91,27 @@ function changepassphrase(url){
 	if (passphrase === newpassphrase || (!passphrase && !newpassphrase)) {
 		throw new Error('New and old passphrase are the same!');
 	}
-	alert("old:\n"+privateKey.armor());
-	privateKey.encrypt(newpassphrase);
-	alert("new:\n"+privateKey.armor());
-	try {
+
 		var newtruepassphrase = SHA512.hex(newsalt + newpassphrase) ;
-		alert("old:\n"+privateKey.armor());
-		//packets = privateKey.getAllKeyPackets();
-		//for (var i = 0; i < packets.length; i++) {
-		//	packets[i].encrypt(newpassphrase);
-		//}
-		privateKey.encrypt(newpassphrase);
-		alert("new:\n"+privateKey.armor());	
+		privateKey.encrypt(newtruepassphrase);
 		keyinfo.salt = newsalt;
 		keyinfo.seckey = privateKey.armor();
 		
 		var body = jsyaml.safeDump(keyinfo);
 		
-		//keyinfo = jsyaml.safeLoad(body);
-		//privateKey = openpgp.key.readArmored(keyinfo.seckey).keys[0];
-		//newsalt = keyinfo.salt;
-		//newtruepassphrase = SHA512.hex(newsalt + newpassphrase) ;
-		
 		var success = privateKey.decrypt(newtruepassphrase);
-		alert(newtruepassphrase+"\n"+success);
 		if(!success){
 			throw new Error('Decrypting key with passphrase failed!');
 		}
-				
-		openpgp.signClearMessage(privateKey,body).then(function(pgpMessage){
-			// success
+
+		//var message = openpgp.message.fromText(body);
+		//var pgpMessage = message.sign(privateKey);
+		options = {
+			data: body,     // parse encrypted bytes
+			privateKeys: privateKey,                 // for signing
+			armor: true,
+		};
+		openpgp.sign(options).then(function (pgpMessage) {
 			var xmlhttp=getajaxHttp();
 			xmlhttp.onreadystatechange=function(){
 				if(xmlhttp.readyState==4){
@@ -128,17 +119,8 @@ function changepassphrase(url){
 				}
 			};
 			xmlhttp.open("put",url,true);
-			xmlhttp.send(pgpMessage);
-		}).catch(function(error) {
-			// failure
-			alert("签名失败");
-		});		
-	} catch (e) {
-		throw new Error('Setting new passphrase failed!');
-	}
-	
-	
-	
+			xmlhttp.send(pgpMessage.data);
+		});
 }
 			
 function randomString(len) {
