@@ -12,7 +12,8 @@
 		<script>
 			window.onload = init;
 			function init() {
-				var xmlhttp = getkey("http://127.0.0.1:747/");
+				var xmlhttp = getkey("");
+				//var xmlhttp = getkey("http://127.0.0.1:747/");
 				var httpres = document.getElementById("httpres");
 				if(xmlhttp.status == 200){
 					keyinfo = jsyaml.safeLoad(xmlhttp.responseText);
