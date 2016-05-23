@@ -82,7 +82,9 @@ var server = http.createServer(function (req, res) {
             console.log("GET");
             var pathname = url.parse(req.url).pathname;
 			var realPath = pathname.substring(1);
+            var suffix =/\.[^\.]+/.exec(realPath);
 			console.log(realPath);
+            console.log(suffix);
             // read the userid
             // read the key
             // encoding and respond
@@ -100,7 +102,12 @@ var server = http.createServer(function (req, res) {
 							res.end();    
 						} else {
 							//console.log(file);
-							res.writeHead(200, {'Content-Type':'text/html'});    // or text/x-yaml  to make client save a file
+                            if(suffix == ".css"){
+                                res.writeHead(200, {'Content-Type':'text/css'});
+                            }else{
+                                res.writeHead(200, {'Content-Type':'text/html'});    // or text/x-yaml  to make client save a file    
+                            }
+							
 							res.write(file, "binary");    
 							res.end();    
 						}

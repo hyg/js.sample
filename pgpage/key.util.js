@@ -40,13 +40,11 @@ function createandsave(url){
 		
 		
 		var xmlhttp=getajaxHttp();
-		xmlhttp.onreadystatechange=function(){
-			if(xmlhttp.readyState==4){
-				alert("xmlhttp.status:\n"+xmlhttp.status+"\nxmlhttp.responseText:\n"+xmlhttp.responseText);
-			}
-		};
-		xmlhttp.open("post",url,true);
+
+		xmlhttp.open("post",url,false);
 		xmlhttp.send(body);
+		
+		return xmlhttp;
 	});
 }
 
@@ -57,21 +55,19 @@ function getkey(url){
 	var path = url + email + ".keyinfo" ;
 	xmlhttp.open("get",path,false);
 	xmlhttp.send(email);
-
-	if(xmlhttp.status == 200){
-		keyinfo = jsyaml.safeLoad(xmlhttp.responseText);
-		alert("密钥获取成功\n\n"+"xmlhttp.status:\n"+xmlhttp.status+"\nxmlhttp.responseText:\n"+xmlhttp.responseText);
-	}else{
-		alert("密钥获取失败\n\n"+"xmlhttp.status:\n"+xmlhttp.status+"\nxmlhttp.responseText:\n"+xmlhttp.responseText);
-	}
 	
-	return keyinfo;
+	return xmlhttp;
 }
 
-function changepassphrase(url){
+function changepassphrase(url,callback){
 	var SHA512 = new Hashes.SHA512;
 	
-	var keyinfo = getkey(url);
+	var xmlhttp = getkey(url);
+	if(xmlhttp.status == 200){
+		keyinfo = jsyaml.safeLoad(xmlhttp.responseText);
+	}else{
+		return;
+	}
 
 	var passphrase = prompt('请输入旧口令:');
 	
@@ -84,6 +80,7 @@ function changepassphrase(url){
 	var success = privateKey.decrypt(truepassphrase);
 
 	if(!success){
+		//alert("私钥解密失败。");
 		throw new Error('Decrypting key with passphrase failed!');
 	}
 
@@ -104,22 +101,18 @@ function changepassphrase(url){
 			throw new Error('Decrypting key with passphrase failed!');
 		}
 
-		//var message = openpgp.message.fromText(body);
-		//var pgpMessage = message.sign(privateKey);
 		options = {
 			data: body,     // parse encrypted bytes
 			privateKeys: privateKey,                 // for signing
 			armor: true,
 		};
 		openpgp.sign(options).then(function (pgpMessage) {
-			var xmlhttp=getajaxHttp();
-			xmlhttp.onreadystatechange=function(){
-				if(xmlhttp.readyState==4){
-					alert("xmlhttp.status:\n"+xmlhttp.status+"\nxmlhttp.responseText:\n"+xmlhttp.responseText);
-				}
-			};
-			xmlhttp.open("put",url,true);
-			xmlhttp.send(pgpMessage.data);
+			var ajax=getajaxHttp();
+
+			ajax.open("put",url,false);
+			ajax.send(pgpMessage.data);
+
+			callback(ajax);
 		});
 }
 			

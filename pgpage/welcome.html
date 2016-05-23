@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-cn">
 	<head>
-		<title>创建密钥</title>
+		<title>测试页</title>
 		<link rel="stylesheet" type="text/css" href="/sidebar.css" />
 		<link rel="stylesheet" type="text/css" href="/pure-min.css" />
 		<script src="js-yaml.min.js"></script>
@@ -10,28 +10,15 @@
 		<script src="key.util.js"></script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<script>
-			window.onload = init;
-			function init() {
-				var xmlhttp = createandsave("http://127.0.0.1:747/");
-				var httpres = document.getElementById("httpres");
-				if(xmlhttp.status == 200){
-					httpres.innerHTML = "创建密钥成功<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
-				}else{
-					httpres.innerHTML = "创建密钥失败<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
-				}
-			}
-			
- 		</script>
+		</script>
 	</head>
 	<body>
 	<!--content begin-->
 		<div class="header" align="center">
-			<h1>创建密钥</h1>
+			<h1>欢迎</h1>
 			<h2>密钥托管范例</h2>
 			<hr>
 		</div>
-		<p id="httpres">httpres
-		</p>
 	<!--content end-->
 		<div class="nav">
 			<div class="home">
@@ -39,7 +26,7 @@
 			</div>
 			<div class="sidebar">
 				<ul>
-					<li onclick="window.location.href='welcome.html'">Home</li>
+					<li onclick="window.location.href='\welcome.html'">Home</li>
 					<li class="devider"></li>
 					<li onclick="window.location.href='create.html'">创建密钥</li>
 					<li onclick="window.location.href='getkey.html'">获取密钥</li>

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-cn">
 	<head>
-		<title>创建密钥</title>
+		<title>修改口令</title>
 		<link rel="stylesheet" type="text/css" href="/sidebar.css" />
 		<link rel="stylesheet" type="text/css" href="/pure-min.css" />
 		<script src="js-yaml.min.js"></script>
@@ -12,12 +12,17 @@
 		<script>
 			window.onload = init;
 			function init() {
-				var xmlhttp = createandsave("http://127.0.0.1:747/");
+				var xmlhttp = changepassphrase("http://127.0.0.1:747/",finish);
+				
+			}
+			
+			function finish(xmlhttp){
 				var httpres = document.getElementById("httpres");
 				if(xmlhttp.status == 200){
-					httpres.innerHTML = "创建密钥成功<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
+					keyinfo = jsyaml.safeLoad(xmlhttp.responseText);
+					httpres.innerHTML = "修改口令成功<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
 				}else{
-					httpres.innerHTML = "创建密钥失败<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
+					httpres.innerHTML = "修改口令失败<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
 				}
 			}
 			
@@ -26,7 +31,7 @@
 	<body>
 	<!--content begin-->
 		<div class="header" align="center">
-			<h1>创建密钥</h1>
+			<h1>修改口令</h1>
 			<h2>密钥托管范例</h2>
 			<hr>
 		</div>
