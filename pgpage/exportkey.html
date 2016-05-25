@@ -14,15 +14,14 @@
 			window.onload = init;
 			function init() {
 				var xmlhttp = getkey("");
-				//var xmlhttp = getkey("http://127.0.0.1:747/");
 				var httpres = document.getElementById("httpres");
+				
 				if(xmlhttp.status == 200){
 					keyinfo = jsyaml.safeLoad(xmlhttp.responseText);
-					var pubkey = new Blob([keyinfo.pubkey], {type: "text/plain;charset=utf-8"});
-					var seckey = new Blob([keyinfo.seckey], {type: "text/plain;charset=utf-8"});
-					saveAs(pubkey,"nor."+keyinfo.id+".pub")
-					saveAs(seckey,"nor."+keyinfo.id+".sec")
-					httpres.innerHTML = "密钥导出成功<br\><br\>文件名:<br\>"+"nor."+keyinfo.id+".pub"+"<br\>nor."+keyinfo.id+".sec<br\><br\>请记录保存路径，以免遗忘。";
+					
+					var keyyaml = new Blob([xmlhttp.responseText], {type: "text/plain;charset=utf-8"});
+					saveAs(keyyaml,"nor."+keyinfo.id+".keyinfo");
+					httpres.innerHTML = "密钥导出成功<br\><br\>文件名:nor."+keyinfo.id+".keyinfo<br\>请记录保存路径，以免遗忘。" + "<a href=\"huangyg@mars22.com.keyinfo\" download=\"nor.keyinfo\" >keyinfo<\a>";
 				}else{
 					httpres.innerHTML = "密钥导出失败<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
 				}

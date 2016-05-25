@@ -11,8 +11,63 @@
 		<script src="key.util.js"></script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<script>
+			function readkeyV0_1(){
+				var pubkeyfile = document.getElementById("pubkeyfile").files[0];
+				var seckeyfile = document.getElementById("seckeyfile").files[0];
+				
+				if(!pubkeyfile){
+					alert(" public key file invaid.");
+					return;
+				}
+				
+				if(!seckeyfile){
+					alert(" private key file invaid.");
+					return;
+				}
+				
+				var pubreader = new FileReader();
+				var secreader = new FileReader();
+				var pubkey,seckey;
+				pubreader.readAsText(pubkeyfile,'utf-8');
+				pubreader.onload = function (e) {
+					pubkey = this.result;
+					secreader.readAsText(seckeyfile,'utf-8');
+				};
+				secreader.onload = function (e) {
+					seckey = this.result;
+					var xmlhttp = importkeyV0_1(pubkey,seckey,"");
+					var httpres = document.getElementById("httpres");
+					if(xmlhttp.status == 200){
+						httpres.innerHTML = "导入密钥成功<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
+					}else{
+						httpres.innerHTML = "导入密钥失败<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
+					}
+				};
 
-			
+			}
+			function readkeyV0_2(){
+				var keyinfofile = document.getElementById("keyinfofile").files[0];
+				
+				if(!keyinfofile){
+					alert(" key file invaid.");
+					return;
+				}
+				
+				var keyreader = new FileReader();
+				keyreader.readAsText(keyinfofile,'utf-8');
+				keyreader.onload = function (e) {
+					//keyyaml = this.result;
+					keyinfo = jsyaml.safeLoad(this.result);
+					var xmlhttp = postkey(keyinfo,"");
+					var httpres = document.getElementById("httpres");
+					if(xmlhttp.status == 200){
+						httpres.innerHTML = "导入密钥成功<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
+					}else{
+						httpres.innerHTML = "导入密钥失败<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
+					}
+				};
+
+			}
 			
  		</script>
 	</head>
@@ -23,7 +78,13 @@
 			<h2>密钥托管范例</h2>
 			<hr>
 		</div>
-		<p id="httpres">等真的有人导入再说。
+		<p id="httpres">
+			公钥文件：<input type="file" name="pubkeyfile" id="pubkeyfile" /> <br/> 
+			私钥文件：<input type="file" name="seckeyfile" id="seckeyfile" />  <br/> 
+			<input type="button" value="导入V0.1密钥" id="importV0_1" onclick="readkeyV0_1();"/>
+			<br/> <br/> 
+			密钥文件：<input type="file" name="keyinfofile" id="keyinfofile" />  <br/> 
+			<input type="button" value="导入V0.2密钥" id="importV0_2" onclick="readkeyV0_2();"/>
 		</p>
 	<!--content end-->
 		<div class="nav">

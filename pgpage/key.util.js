@@ -36,16 +36,52 @@ function createandsave(url){
 		
 		keyinfo.pubkey = key.publicKeyArmored;
 		keyinfo.seckey = key.privateKeyArmored;
-		var body = jsyaml.safeDump(keyinfo);
 		
-		
-		var xmlhttp=getajaxHttp();
-
-		xmlhttp.open("post",url,false);
-		xmlhttp.send(body);
-		
-		return xmlhttp;
+		return postkey(keyinfo,url);
 	});
+}
+
+function importkeyV0_1(pubkey,seckey,url){
+	var name = prompt('请输入姓名:');
+	var id = prompt('请输入ID:');
+	var email = prompt('请输入Email:');
+	var passphrase = prompt('请输入旧口令:');
+	
+	var newsalt = randomString(128);
+	var SHA512 = new Hashes.SHA512;
+	keyinfo.name = name;
+	keyinfo.id = id;	
+	keyinfo.email = email;
+	keyinfo.salt = newsalt;
+	
+	var publicKey = openpgp.key.readArmored(pubkey).keys[0];
+	keyinfo.pubkey = publicKey.armor();
+	
+	var privateKey = openpgp.key.readArmored(seckey).keys[0];
+	var success = privateKey.decrypt(passphrase);
+
+	if(!success){
+		//alert("私钥解密失败。");
+		throw new Error('Decrypting key with passphrase failed!');
+	}
+
+	var newpassphrase = prompt('准备更换密钥口令，请输入新口令');
+	var newtruepassphrase = SHA512.hex(newsalt + newpassphrase) ;
+	privateKey.encrypt(newtruepassphrase);
+	keyinfo.seckey = privateKey.armor();
+	
+	return postkey(keyinfo,url);
+}
+
+function postkey(keyinfo,url){
+	var body = jsyaml.safeDump(keyinfo);
+	
+	var xmlhttp=getajaxHttp();
+
+	xmlhttp.open("post",url,false);
+	xmlhttp.send(body);
+	
+	return xmlhttp;
 }
 
 function getkey(url){
