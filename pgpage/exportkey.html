@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="zh-cn">
 	<head>
-		<title>获取密钥</title>
+		<title>导出密钥</title>
 		<link rel="stylesheet" type="text/css" href="/sidebar.css" />
 		<link rel="stylesheet" type="text/css" href="/pure-min.css" />
 		<script src="js-yaml.min.js"></script>
 		<script src="hashes.min.js"></script>
 		<script src="openpgp.min.js"></script>
+		<script src="FileSaver.min.js"></script>
 		<script src="key.util.js"></script>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<script>
@@ -17,18 +18,23 @@
 				var httpres = document.getElementById("httpres");
 				if(xmlhttp.status == 200){
 					keyinfo = jsyaml.safeLoad(xmlhttp.responseText);
-					httpres.innerHTML = "密钥获取成功<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
+					var pubkey = new Blob([keyinfo.pubkey], {type: "text/plain;charset=utf-8"});
+					var seckey = new Blob([keyinfo.seckey], {type: "text/plain;charset=utf-8"});
+					saveAs(pubkey,"nor."+keyinfo.id+".pub")
+					saveAs(seckey,"nor."+keyinfo.id+".sec")
+					httpres.innerHTML = "密钥导出成功<br\><br\>文件名:<br\>"+"nor."+keyinfo.id+".pub"+"<br\>nor."+keyinfo.id+".sec<br\><br\>请记录保存路径，以免遗忘。";
 				}else{
-					httpres.innerHTML = "密钥获取失败<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
+					httpres.innerHTML = "密钥导出失败<br\><br\>xmlhttp.status:<br\>"+xmlhttp.status+"<br\><br\>xmlhttp.responseText:<br\>"+xmlhttp.responseText;
 				}
 			}
+			
 			
  		</script>
 	</head>
 	<body>
 	<!--content begin-->
 		<div class="header" align="center">
-			<h1>获取密钥</h1>
+			<h1>导出密钥</h1>
 			<h2>密钥托管范例</h2>
 			<hr>
 		</div>
@@ -39,6 +45,7 @@
 			<div class="home">
 			  <span><img src="favicon.ico"></img></span>
 			</div>
+
 			<div class="sidebar">
 				<ul>
 					<li onclick="window.location.href='welcome.html'">Home</li>
