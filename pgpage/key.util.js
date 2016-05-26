@@ -5,6 +5,7 @@
 // <script src="js-yaml.min.js"></script>
 // <script src="hashes.min.js"></script>
 // <script src="openpgp.min.js"></script>
+// <script src="FileSaver.min.js"></script>
 
 var keyinfo = new Object();
 
@@ -29,11 +30,7 @@ function createandsave(url){
 	keyinfo.email = email;
 	keyinfo.salt = salt;
 	
-	//openpgp.generateKeyPair(opt).then(function(key) {
 	openpgp.generateKey(opt).then(function(key) {
-		//publicKey = openpgp.key.readArmored(key.publicKeyArmored).keys[0];
-		//privateKey = openpgp.key.readArmored(key.privateKeyArmored).keys[0];
-		
 		keyinfo.pubkey = key.publicKeyArmored;
 		keyinfo.seckey = key.privateKeyArmored;
 		
@@ -106,50 +103,56 @@ function changepassphrase(url,callback){
 	}
 
 	var passphrase = prompt('请输入旧口令:');
-	
+	// read the old salt from keyinfo
 	var salt = keyinfo.salt;
+	// generate a new salt
 	var newsalt = randomString(128);
 	
 	var privateKey = openpgp.key.readArmored(keyinfo.seckey).keys[0];
 	var truepassphrase = SHA512.hex(salt + passphrase) ;
-
+	
+	// decrypt the private key by old passphrase
 	var success = privateKey.decrypt(truepassphrase);
 
 	if(!success){
 		//alert("私钥解密失败。");
 		throw new Error('Decrypting key with passphrase failed!');
 	}
-
+	// input a new passphrase
 	var newpassphrase = prompt('准备更换密钥口令，请输入新口令');
 	if (passphrase === newpassphrase || (!passphrase && !newpassphrase)) {
 		throw new Error('New and old passphrase are the same!');
 	}
 
-		var newtruepassphrase = SHA512.hex(newsalt + newpassphrase) ;
-		privateKey.encrypt(newtruepassphrase);
-		keyinfo.salt = newsalt;
-		keyinfo.seckey = privateKey.armor();
-		
-		var body = jsyaml.safeDump(keyinfo);
-		
-		var success = privateKey.decrypt(newtruepassphrase);
-		if(!success){
-			throw new Error('Decrypting key with passphrase failed!');
-		}
+	var newtruepassphrase = SHA512.hex(newsalt + newpassphrase) ;
+	
+	// encrypt private key by new passphrase
+	privateKey.encrypt(newtruepassphrase);
+	// update keyinfo
+	keyinfo.salt = newsalt;
+	keyinfo.seckey = privateKey.armor();
+	
+	var body = jsyaml.safeDump(keyinfo);
+	
+	var success = privateKey.decrypt(newtruepassphrase);
+	if(!success){
+		throw new Error('Decrypting key with passphrase failed!');
+	}
 
-		options = {
-			data: body,     // parse encrypted bytes
-			privateKeys: privateKey,                 // for signing
-			armor: true,
-		};
-		openpgp.sign(options).then(function (pgpMessage) {
-			var ajax=getajaxHttp();
+	// sign the keyinfo yaml
+	options = {
+		data: body,     // parse encrypted bytes
+		privateKeys: privateKey,                 // for signing
+		armor: true,
+	};
+	openpgp.sign(options).then(function (pgpMessage) {
+		var ajax=getajaxHttp();
 
-			ajax.open("put",url,false);
-			ajax.send(pgpMessage.data);
+		ajax.open("put",url,false);
+		ajax.send(pgpMessage.data);
 
-			callback(ajax);
-		});
+		callback(ajax);
+	});
 }
 			
 function randomString(len) {
