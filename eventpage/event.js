@@ -1,11 +1,14 @@
 
 //const pug = require('pug');
 const fs = require('fs');
+var c = require('child_process');
+var open = require('open'); 
 
 var time;
 var eventqueue = new Object();
 
 AddCOD("test");
+ProcessEvent("eventA");
 
 function AddCOD(url){
 	// read the source code from url
@@ -30,6 +33,8 @@ function AddEvent(time,event){
 	
 }
 
-function ProcessEvent(){
-	
+function ProcessEvent(id){
+	var CODname = 'test';
+	//c.exec("start "+CODname+".event.html","?event="+id)
+	open(CODname+".event.html?event="+id)
 }
