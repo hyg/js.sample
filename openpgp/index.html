@@ -11,8 +11,8 @@
 		var passphrase = prompt('准备创建密钥，请输入密钥口令');
 		var publicKey,privateKey;
 		var encryptTxt,signTxt;
-		var opt = {numBits: 512, userId: '测试账号 (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
-		openpgp.generateKeyPair(opt).then(function(key) {
+		var opt = {numBits: 512, userIds: '测试账号 (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
+		openpgp.generateKey(opt).then(function(key) {
 			//document.write("公钥：<br/><pre>"+key.publicKeyArmored+"</pre><br/><br/>");
 			document.write("私钥：<br/><pre>"+key.privateKeyArmored+"</pre><br/><br/>");
 			

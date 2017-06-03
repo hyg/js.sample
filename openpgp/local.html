@@ -10,8 +10,8 @@
 		var openpgp = window.openpgp;
 		var passphrase = prompt('准备创建密钥，请输入密钥口令');
 		var publicKey,privateKey;
-		var opt = {numBits: 2048, userId: '测试账号 (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
-		openpgp.generateKeyPair(opt).then(function(key) {
+		var opt = {numBits: 4096, userIds: '测试账号 (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
+		openpgp.generateKey(opt).then(function(key) {
 			var pub = new Blob([key.publicKeyArmored], {type: "text/plain;charset=utf-8"});
 			alert("Save the Publc Key");
 			saveAs(pub, "key.pub");
@@ -31,10 +31,14 @@
 				var publicKey = openpgp.key.readArmored(this.result).keys[0];
 				var plaintext = prompt("准备加密，请输入明文");
 
-				openpgp.encryptMessage(publicKey, plaintext).then(function(pgpMessage) {
+				options = {
+					data: plaintext,
+					publicKeys: publicKey,  // for encryption
+				};
+				openpgp.encrypt(options).then(function(ciphertext) {
+				pgpMessage = ciphertext.data; // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
 					// success
 					document.write("密文：<br/><pre>"+pgpMessage+"</pre><br/><br/>");
-								
 				}).catch(function(error) {
 					// failure
 					alert("加密失败！");
@@ -57,16 +61,21 @@
 				
 				if(privateKey.decrypt(passphrase)){
 					alert("decrypted！");
-		
-					openpgp.signClearMessage(privateKey,plaintext).then(function(pgpMessage){
-						// success
-						document.write("签名：<br/><pre>"+pgpMessage+"</pre><br/><br/>");
+
+					options = {
+						data: plaintext,
+						privateKeys: privateKey,
+						detached: true
+					};
+
+					openpgp.sign(options).then(function(signed) {
+						cleartext = signed.data;
+						detachedSig = signed.signature;
+						document.write("原文：<br/><pre>"+cleartext+"</pre><br/><br/><hr/>"+"签名：<br/><pre>"+detachedSig+"</pre><br/><br/>");
 						
-					}).catch(function(error) {
-						// failure
-						alert("签名失败！"+error);
-					});		
-				}				
+						alert(openpgp.cleartext.readArmored(cleartext).getText());
+					});
+				}
 			}
 			reader.readAsText(file);
 		}
