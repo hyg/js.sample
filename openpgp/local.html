@@ -9,15 +9,22 @@
 	function createkeypair(){
 		var openpgp = window.openpgp;
 		var passphrase = prompt('准备创建密钥，请输入密钥口令');
+		var name = prompt('请输入姓名');
+		var id = prompt('请输入ID');
+		var email = prompt('请输入Email');
+		var userIDs = name + " (" + id + ") <" + email + ">" ;
 		var publicKey,privateKey;
-		var opt = {numBits: 4096, userIds: '测试账号 (hyg/js.sample) <test@jssample.org>', passphrase: passphrase};
+		var opt = {numBits: 4096, userIds: userIDs, passphrase: passphrase};
 		openpgp.generateKey(opt).then(function(key) {
+			alert(key.key.primaryKey.fingerprint+ "已创建成功。");
 			var pub = new Blob([key.publicKeyArmored], {type: "text/plain;charset=utf-8"});
 			alert("Save the Publc Key");
 			saveAs(pub, "key.pub");
 			var sec = new Blob([key.privateKeyArmored], {type: "text/plain;charset=utf-8"});
 			alert("Save the Private Key");
 			saveAs(sec, "key.sec");
+			
+			
 		});
 	}
 	
