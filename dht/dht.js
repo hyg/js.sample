@@ -14,7 +14,7 @@ console.log("SHA1.hex("+str+")="+infoHash);
 
 var dht = new DHT()
 
-dht.announce(infoHash,34857) ; //dhtjs
+dht.announce(infoHash) ; //dhtjs
 
 
 dht.listen(20000, function () {
