@@ -52,7 +52,6 @@ function scanpeer(err,n){
   var client;
   for(key in peers){
     var peer = peers[key];
-    var cnt = 0 ;
     console.log('scanpeer... peer :\t' ,peer.host,':', peer.port ) ;
     
     client = new net.Socket();
@@ -65,9 +64,7 @@ function scanpeer(err,n){
     });
     client.on('error', function(err) {
         console.log('error event:\t',cnt,'\n',err);
-        if(n++ > 2){
-            client.destroy();
-        }
+        client.destroy();
     })
     
     // 为客户端添加“data”事件处理函数
@@ -77,7 +74,6 @@ function scanpeer(err,n){
       switch(data.toString()){
         case 'two':
           client.write('Let\'s X');
-          console.log('client.write: Let\'s X');
           break;
         default:
           client.destroy();
@@ -98,10 +94,10 @@ var tcpserver = net.createServer(function(sock) {
         switch(data.toString()){
             case 'one':
                 sock.write('two');
-                console.log('server: write two.');
                 break;
             default:
                 sock.write('You said "' + data + '"');
+                dht.lookup(infoHash,scanpeer);
                 break;
         }
     });
