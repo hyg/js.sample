@@ -1,10 +1,20 @@
 const net = require('net');
+const request = require('request');
 
 var Hashes = require('jshashes');
 var DHT = require('bittorrent-dht'); // see https://github.com/webtorrent/bittorrent-dht
 
+var natip ;
+request('http://api.ipify.org', function (error, response, body) {
+  //console.log('error:', error); // Print the error if one occurred
+  //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  //console.log('body:', body); // Print the HTML for the Google homepage.
+  natip = body;
+});
+
 var SHA1 = new Hashes.SHA1;
-var str = "cognize" ;
+var str = "Let's X test." ;
+//var str = "cognize" ;
 var infoHash = SHA1.hex(str);
 //infoHash = 'e3811b9539cacff680e418124272177c47477157' ;
 
@@ -12,39 +22,51 @@ console.log("SHA1.hex(\""+str+"\")="+infoHash);
 // SHA1.hex(str)=31d82293d8e05b4b6d4828e068d43ab2900a4b26
 // SHA1.b64(str)=Mdgik9jgW0ttSCjgaNQ6spAKSyY=
 
-
 var dht = new DHT()
+var peers ;
+
+dht.on('ready', function () { 
+  var addr = dht.address() ;
+  console.log('ready... dht.address() return:\t' + addr.family + '\t' + addr.address + ':' + addr.port) ;
+  dht.announce(infoHash) ; //dhtjs 34857
+  console.log('dht.announce(infoHash) ; //dhtjs 34857\t',infoHash) ;
+  tcpserver.listen(addr.port,addr.address)
+  console.log('tcpserver.listen(addr.port,addr.address)\t',addr.port,addr.address) ;
+  dht.lookup(infoHash,scanpeer);
+  console.log('dht.lookup(infoHash);\t',infoHash) ;
+  peers = new Object();
+})
 
 dht.on('peer', function (peer, Hash, from) {
   console.log('found potential peer ' + peer.host + ':' + peer.port + ' through ' + from.address + ':' + from.port + '\tHash : ' + Hash.toString('hex'));
 
   //var addr = dht.address() ;
   //console.log('dht.address() return:\n' + addr.address + '\n' + addr.family + '\n' + addr.port) ;
-})
-//dht.on('node', function (node) { 
-  //console.log(' found a new node \t');
-  //console.log(node );
-//})
-dht.on('listening', function () { 
-  var addr = dht.address() ;
-  console.log('listening... dht.address() return:\n' + addr.address + '\n' + addr.family + '\n' + addr.port) ;
+  if(peer.host != natip){
+    peers[peer.host+':'+peer.port] = peer ;
+  }
 })
 
-dht.on('ready', function () { 
-  var addr = dht.address() ;
-  console.log('ready... dht.address() return:\n' + addr.address + '\n' + addr.family + '\n' + addr.port) ;
-  dht.announce(infoHash) ; //dhtjs 34857
-  
-  tcpserver.listen(addr.port,addr.address)
-})
-
-dht.on('warning', function (err) { 
-    console.log('warning | err:' ,err) ;
-})
-
-// find peers for the given torrent info hash
-dht.lookup(infoHash);
-
+function scanpeer(err,n){
+  console.log('scanpeer... :\t' , err,'\t',n ) ;
+  var client = new net.Socket();
+  for(key in peers){
+    var peer = peers[key];
+    console.log('scanpeer... peer :\t' ,peer.host,':', peer.port ) ;
+    client.connect(peer.port , peer.host, function() {
+      console.log('CONNECTED TO: ' + peer.host + ':' + peer.port);
+      // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
+      client.write('Let\'s X');
+    });
+    // 为客户端添加“data”事件处理函数
+    // data是服务器发回的数据
+    client.on('data', function(data) {
+      console.log('DATA: ' + data);
+      // 完全关闭连接
+      client.destroy();
+    });
+  }
+}
 
 var tcpserver = net.createServer(function(sock) {
    console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
