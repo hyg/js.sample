@@ -74,7 +74,7 @@ function scanpeer(err,n){
     // data是服务器发回的数据
     client.on('data', function(data) {
       console.log('DATA: ' + data);
-      switch(data){
+      switch(data.toString()){
         case 'two':
           client.write('Let\'s X');
           console.log('client.write: Let\'s X');
@@ -95,7 +95,7 @@ var tcpserver = net.createServer(function(sock) {
         console.log('DATA ' + sock.remoteAddress + ': ' + data);
         // 回发该数据，客户端将收到来自服务端的数据
         
-        switch(data){
+        switch(data.toString()){
             case 'one':
                 sock.write('two');
                 console.log('server: write two.');
