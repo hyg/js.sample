@@ -58,7 +58,8 @@ function scanpeer(err,n){
     client.connect(peer.port , peer.host, function() {
       console.log('CONNECTED TO: ' + peer.host + ':' + peer.port);
       // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
-      client.write('Let\'s X');
+      //client.write('Let\'s X');
+      client.write('one');
     });
     client.on('error', function(err) {
         console.log('error event:\t',err);
@@ -69,8 +70,14 @@ function scanpeer(err,n){
     // data是服务器发回的数据
     client.on('data', function(data) {
       console.log('DATA: ' + data);
-      // 完全关闭连接
-      client.destroy();
+        switch(data){
+            case 'two':
+                sock.write('Let\'s X');
+                break;
+            default:
+                client.destroy();
+                break;
+        }
     });
   }
 }
@@ -82,12 +89,19 @@ var tcpserver = net.createServer(function(sock) {
     sock.on('data', function(data) {
         console.log('DATA ' + sock.remoteAddress + ': ' + data);
         // 回发该数据，客户端将收到来自服务端的数据
-        sock.write('You said "' + data + '"');
+        
+        switch(data){
+            case 'one':
+                sock.write('two');
+                break;
+            default:
+                sock.write('You said "' + data + '"');
+                break;
+        }
     });
 
     // 为这个socket实例添加一个"close"事件处理函数
     sock.on('close', function(data) {
-        console.log('CLOSED: ' +
-            sock.remoteAddress + ' ' + sock.remotePort);
+        console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
     });
 })
