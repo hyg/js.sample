@@ -52,12 +52,13 @@ function scanpeer(err,n){
   
   for(key in peers){
     var peer = peers[key];
-    console.log('scanpeer... peer :\t' ,peer.host,':', peer.port ) ;
+    //console.log('scanpeer... peer :\t' ,peer.host,':', peer.port ) ;
     tcpclient(peer.port,peer.host);
   }
 }
 
 function tcpclient(port,host){
+  console.log('tcpclient(port,host) :\t' ,host,':', port ) ;
   var client = new net.Socket();
   client.connect(port ,host, function() {
     console.log('CONNECTED TO: ' + host + ':' + port);
@@ -99,7 +100,6 @@ var tcpserver = net.createServer(function(sock) {
                 break;
             default:
                 sock.write('You said "' + data + '"');
-                tcpclient(sock.remotePort,sock.remoteAddress);
                 break;
         }
     });
@@ -107,5 +107,6 @@ var tcpserver = net.createServer(function(sock) {
     // 为这个socket实例添加一个"close"事件处理函数
     sock.on('close', function(data) {
         console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
+        tcpclient(sock.remotePort,sock.remoteAddress);
     });
 })
