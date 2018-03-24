@@ -49,37 +49,40 @@ dht.on('peer', function (peer, Hash, from) {
 
 function scanpeer(err,n){
   console.log('scanpeer... :\t' , err,'\t',n ) ;
-  var client;
+  
   for(key in peers){
     var peer = peers[key];
     console.log('scanpeer... peer :\t' ,peer.host,':', peer.port ) ;
-    
-    client = new net.Socket();
-    client.connect(peer.port , peer.host, function() {
-      console.log('CONNECTED TO: ' + peer.host + ':' + peer.port);
-      // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
-      //client.write('Let\'s X');
-      client.write('one');
-    });
-    client.on('error', function(err) {
-        console.log('error event:\t',err);
-        client.destroy();
-    })
-    
-    // 为客户端添加“data”事件处理函数
-    // data是服务器发回的数据
-    client.on('data', function(data) {
-      console.log('DATA: ' + data);
-      switch(data.toString()){
-        case 'two':
-          client.write('Let\'s X');
-          break;
-        default:
-          client.destroy();
-          break;
-        }
-    });
+    tcpclient(peer.port,peer.host);
   }
+}
+
+function tcpclient(port,host){
+  var client = new net.Socket();
+  client.connect(port ,host, function() {
+    console.log('CONNECTED TO: ' + host + ':' + port);
+    // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
+    //client.write('Let\'s X');
+    client.write('one');
+  });
+  client.on('error', function(err) {
+      console.log('error event:\t',err);
+      //client.destroy();
+  })
+  
+  // 为客户端添加“data”事件处理函数
+  // data是服务器发回的数据
+  client.on('data', function(data) {
+    console.log('DATA: ' + data);
+    switch(data.toString()){
+      case 'two':
+        client.write('Let\'s X');
+        break;
+      default:
+        client.destroy();
+        break;
+      }
+  });
 }
 
 var tcpserver = net.createServer(function(sock) {
@@ -96,7 +99,7 @@ var tcpserver = net.createServer(function(sock) {
                 break;
             default:
                 sock.write('You said "' + data + '"');
-                dht.lookup(infoHash,scanpeer);
+                tcpclient(sock.remotePort,sock.remoteAddress);
                 break;
         }
     });
