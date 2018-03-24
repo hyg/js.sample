@@ -52,6 +52,7 @@ function scanpeer(err,n){
   var client;
   for(key in peers){
     var peer = peers[key];
+    var cnt = 0 ;
     console.log('scanpeer... peer :\t' ,peer.host,':', peer.port ) ;
     
     client = new net.Socket();
@@ -60,23 +61,27 @@ function scanpeer(err,n){
       // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
       //client.write('Let\'s X');
       client.write('one');
+      console.log('client: write one.');
     });
     client.on('error', function(err) {
-        console.log('error event:\t',err);
-        client.destroy();
+        console.log('error event:\t',cnt,'\n',err);
+        if(n++ > 2){
+            client.destroy();
+        }
     })
     
     // 为客户端添加“data”事件处理函数
     // data是服务器发回的数据
     client.on('data', function(data) {
       console.log('DATA: ' + data);
-        switch(data){
-            case 'two':
-                sock.write('Let\'s X');
-                break;
-            default:
-                client.destroy();
-                break;
+      switch(data){
+        case 'two':
+          client.write('Let\'s X');
+          console.log('client.write: Let\'s X');
+          break;
+        default:
+          client.destroy();
+          break;
         }
     });
   }
@@ -93,6 +98,7 @@ var tcpserver = net.createServer(function(sock) {
         switch(data){
             case 'one':
                 sock.write('two');
+                console.log('server: write two.');
                 break;
             default:
                 sock.write('You said "' + data + '"');
