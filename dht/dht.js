@@ -56,14 +56,15 @@ function scanpeer(err,n){
     
     try
     {
-        client.connect(peer.port , peer.host, function() {
-          console.log('CONNECTED TO: ' + peer.host + ':' + peer.port);
-          // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
-          client.write('Let\'s X');
-        });
+      client.connect(peer.port , peer.host, function() {
+        console.log('CONNECTED TO: ' + peer.host + ':' + peer.port);
+        // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
+        client.write('Let\'s X');
+      });
     }
     catch (e)
     { 
+      console.log(e.name + ": " + e.message);
     }
     
     // 为客户端添加“data”事件处理函数
