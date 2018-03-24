@@ -54,18 +54,14 @@ function scanpeer(err,n){
     var peer = peers[key];
     console.log('scanpeer... peer :\t' ,peer.host,':', peer.port ) ;
     
-    try
-    {
-      client.connect(peer.port , peer.host, function() {
-        console.log('CONNECTED TO: ' + peer.host + ':' + peer.port);
-        // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
-        client.write('Let\'s X');
-      });
-    }
-    catch (e)
-    { 
-      console.log(e.name + ": " + e.message);
-    }
+    client.connect(peer.port , peer.host, function() {
+      console.log('CONNECTED TO: ' + peer.host + ':' + peer.port);
+      // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
+      client.write('Let\'s X');
+    });
+    client.on('error', function(err) {
+        console.log('error event:\t',err);
+    })
     
     // 为客户端添加“data”事件处理函数
     // data是服务器发回的数据
