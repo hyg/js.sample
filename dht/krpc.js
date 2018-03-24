@@ -4,7 +4,7 @@ var rpc = krpc()
 var Hashes = require('jshashes');
 
 var SHA1 = new Hashes.SHA1;
-var str = "cognize" ;
+var str = "Let's X test." ;
 var infoHash = SHA1.hex(str);
  
 var target = new Buffer(infoHash, 'hex')
@@ -36,15 +36,13 @@ function visit (res, peer) {
   var peers = res.r.values ? parsePeers(res.r.values) : []
   if (peers.length) {
     console.log('count peers:', peers.length)
-    rpc.queryAll(peers, {q: 'X'}, onreply,function(err, numberOfReplies){
-      console.log('queryAll | err:',err)
-      console.log('queryAll | numberOfReplies:',numberOfReplies)
-    })
   }
 
-  console.log('visit | res: ',res)
-  console.log('visit | peer: ',peer)
-  console.log('visit | peers: ',peers)
+  console.log('visit | res.r.nodes: ',res.r.nodes)
+  console.log('visit | res.r.values: ',res.r.values)
+  console.log('visit | parsePeers: \n',parsePeers(res.r.values))
+  //console.log('visit | peer: ',peer)
+  //console.log('visit | peers: ',peers)
 }
 
 function onreply(reply,node){

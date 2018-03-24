@@ -53,26 +53,15 @@ function scanpeer(err,n){
   for(key in peers){
     var peer = peers[key];
     //console.log('scanpeer... peer :\t' ,peer.host,':', peer.port ) ;
-    tcpclient(peer.port,peer.host);
+    tcpconn(peer.port,peer.host);
   }
 }
 
-function tcpclient(port,host){
-  console.log('tcpclient(port,host) :\t' ,host,':', port ) ;
-  var client = new net.Socket();
-  client.connect(port ,host, function() {
-    console.log('CONNECTED TO: ' + host + ':' + port);
-    // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
-    //client.write('Let\'s X');
-    client.write('one');
-  });
-  client.on('error', function(err) {
-      console.log('error event:\t',err);
-      //client.destroy();
-  })
-  
-  // 为客户端添加“data”事件处理函数
-  // data是服务器发回的数据
+function tcpconn(port,host){
+  console.log('tcpconn(port,host) :\t' ,host,':', port ) ;
+  var client = net.createConnection(port,host);
+  console.log('Socket created.');
+
   client.on('data', function(data) {
     console.log('DATA: ' + data);
     switch(data.toString()){
@@ -83,6 +72,14 @@ function tcpclient(port,host){
         client.destroy();
         break;
       }
+  }).on('connect', function() {
+    console.log('CONNECTED TO: ' + host + ':' + port);
+    client.write('one');
+  }).on('end', function() {
+    console.log('DONE');
+  }).on('error', function(err) {
+      console.log('error event:\t',err);
+      //client.destroy();
   });
 }
 
@@ -107,6 +104,6 @@ var tcpserver = net.createServer(function(sock) {
     // 为这个socket实例添加一个"close"事件处理函数
     sock.on('close', function(data) {
         console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
-        tcpclient(sock.remotePort,sock.remoteAddress);
+        tcpconn(sock.remotePort,sock.remoteAddress);
     });
 })
