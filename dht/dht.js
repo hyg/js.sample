@@ -1,3 +1,4 @@
+const net = require('net');
 
 var Hashes = require('jshashes');
 var DHT = require('bittorrent-dht'); // see https://github.com/webtorrent/bittorrent-dht
@@ -32,9 +33,32 @@ dht.on('listening', function () {
 dht.on('ready', function () { 
   var addr = dht.address() ;
   console.log('ready... dht.address() return:\n' + addr.address + '\n' + addr.family + '\n' + addr.port) ;
+  dht.announce(infoHash) ; //dhtjs 34857
+  
+  tcpserver.listen(addr.port,addr.address)
+})
+
+dht.on('warning', function (err) { 
+    console.log('warning | err:' ,err) ;
 })
 
 // find peers for the given torrent info hash
 dht.lookup(infoHash);
-dht.announce(infoHash,34857) ; //dhtjs
 
+
+var tcpserver = net.createServer(function(sock) {
+   console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
+   
+    // 为这个socket实例添加一个"data"事件处理函数
+    sock.on('data', function(data) {
+        console.log('DATA ' + sock.remoteAddress + ': ' + data);
+        // 回发该数据，客户端将收到来自服务端的数据
+        sock.write('You said "' + data + '"');
+    });
+
+    // 为这个socket实例添加一个"close"事件处理函数
+    sock.on('close', function(data) {
+        console.log('CLOSED: ' +
+            sock.remoteAddress + ' ' + sock.remotePort);
+    });
+})

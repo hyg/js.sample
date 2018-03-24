@@ -22,6 +22,7 @@ dht.on('peer', function (peer, Hash, from) {
   var options = {
 	  hostname: peer.host,
 	  port: peer.port,
+      //port: 53879,
 	  method: 'GET',
 	  headers: {
 		'Content-Type': 'application/x-yaml'
@@ -42,14 +43,13 @@ dht.on('peer', function (peer, Hash, from) {
 })
 
 dht.on('ready', function () { 
-  dht.announce(infoHash,34857) ; //dhtjs
+  dht.announce(infoHash) ; //dhtjs 34857
   var addr = dht.address() ;
   console.log('ready... dht.address() return:\n' + addr.address + '\n' + addr.family + '\n' + addr.port) ;
 })
 
 // find peers for the given torrent info hash
 dht.lookup(infoHash);
-//dht.announce(infoHash,34857) ; //dhtjs
 
 var server = http.createServer(function (req, res) {
 	var chunk = ""; 
@@ -77,36 +77,5 @@ var server = http.createServer(function (req, res) {
 		}
     })
 });
-server.listen(53879);  // letsX 
+server.listen(53879);  // letsX  53879
 
-
-function sent(item,method,callback){
-	var itemyaml = yaml.safeDump(item);
-	var options = {
-	  hostname: config.server.url,
-	  port: config.server.port,
-	  method: 'POST',
-	  headers: {
-		'Content-Type': 'application/x-yaml'
-	  }
-	};
-	
-	console.log("sending account to server...\n");
-
-	var req = http.request(options, function(res) {
-	  //console.log('STATUS: ' + res.statusCode);
-	  //console.log('HEADERS: ' + JSON.stringify(res.headers));
-	  res.setEncoding('utf8');
-
-	  res.on('data', function (chunk) {
-		console.log('response BODY: ' + chunk);
-		if (typeof(callback) != "undefined") {
-			callback(chunk);
-		}
-		emitter.emit("postsync");
-	  });
-	});
-	
-	req.write(itemyaml);
-	req.end();
-}
