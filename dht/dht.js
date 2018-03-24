@@ -60,10 +60,9 @@ function scanpeer(err,n){
       // 建立连接后立即向服务器发送数据，服务器将收到这些数据 
       //client.write('Let\'s X');
       client.write('one');
-      console.log('client: write one.');
     });
     client.on('error', function(err) {
-        console.log('error event:\t',cnt,'\n',err);
+        console.log('error event:\t',err);
         client.destroy();
     })
     
