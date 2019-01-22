@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8"> 
+	<script src="FileSaver.min.js"></script>
+	<!-- or https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -->
+	<script src="openpgp.min.3.js"></script>
+	<script>
+	function encryptReadPubKey() {
+        var file = document.getElementById("encryptPubKey").files[0];
+		var reader = new FileReader();
+		reader.onload = function() {
+            var armorpubkey = document.getElementById("armorpubkey");
+            armorpubkey.textContent = this.result;
+		}
+        
+        reader.readAsText(file);
+	}
+    
+    function encrypt(){
+        var plaintext = prompt("准备加密，请输入明文");
+        var armorfile = document.getElementById("armorpubkey");
+        var encryptedtext = document.getElementById("encryptedtext");
+        var openpgp = window.openpgp;
+        openpgp.key.readArmored(armorpubkey.textContent).then(function(pubkey){
+            var options = {
+                message: openpgp.message.fromText(plaintext),       // input as Message object
+                publicKeys: pubkey.keys // for encryption
+            };
+            openpgp.encrypt(options).then(function(ciphertext){
+                
+                encrypted = ciphertext.data // '-----BEGIN PGP MESSAGE ... END PGP MESSAGE-----'
+                encryptedtext.textContent = encrypted;
+            }, function(error) {
+                alert(error);
+            });
+            
+        });
+        
+    }
+	
+	</script>
+  </head>
+  <body>
+    <hr/>
+    <br/>
+	<label>加密 | 读取公钥文件</label><br/>
+	<input type="file" id="encryptPubKey" value="读取公钥文件" multiple="" onchange="encryptReadPubKey()"/>
+    <input type="button" id="encrypt" value="加密" onclick="encrypt()"/>
+	<br/>
+    
+    <pre>
+    公钥：
+    <p id="armorpubkey"></p>
+    <p id="armorseckey"></p>
+    密文：
+    <p id="encryptedtext"></p>
+    </pre><br/><br/>
+  
+  </body>
+</html>

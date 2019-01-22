@@ -93,7 +93,7 @@
 				document.write("明文是：<br/><pre>"+plaintext+"</pre><br/><br/>");
 			}).catch(function(error) {
 				// failure
-				alert("解密失败！");
+				alert("解密失败！"); 
 			});
 			
 			openpgp.verifyClearSignedMessage(publicKey,signTxt).then(function(verifiedmessage){
