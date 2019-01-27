@@ -52,6 +52,27 @@
         });
         
     }
+    
+    async function encrypt1(){
+        var plaintext = prompt("准备加密，请输入明文");
+        var armorpubkey = document.getElementById("armorpubkey");
+        var plain = document.getElementById("plain");
+        var encrypted = document.getElementById("encrypted");
+        
+        plain.textContent = plaintext;
+
+        var openpgp = window.openpgp;
+        var pubkey = await openpgp.key.readArmored(armorpubkey.textContent);
+        var options = {
+            message: openpgp.message.fromText(plaintext),       // input as Message object
+            publicKeys: pubkey.keys // for encryption
+        };
+        openpgp.encrypt(options).then(function(ciphertext){
+            encrypted.textContent = ciphertext.data;
+        }, function(error) {
+            alert(error);
+        });
+    }
 	
     function decrypt(){
         var armorseckey = document.getElementById("armorseckey");
@@ -89,7 +110,7 @@
     <br/>
 	<label>加密 | 读取公钥文件</label><br/>
 	<input type="file" id="encryptPubKey" value="读取公钥文件" multiple="" onchange="ReadPubKey()"/>
-    <input type="button" id="encrypt" value="加密" onclick="encrypt()"/><br/>
+    <input type="button" id="encrypt" value="加密" onclick="encrypt1()"/><br/>
     <input type="file" id="encryptSecKey" value="读取私钥文件" multiple="" onchange="ReadSecKey()"/>
     <input type="button" id="decrypt" value="解密" onclick="decrypt()"/>
 	<br/>
