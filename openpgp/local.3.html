@@ -6,13 +6,14 @@
 	<!-- or https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -->
 	<script src="openpgp.min.3.js"></script>
 	<script>
+    var armorpubkey,armorseckey;
+    var pubkey,seckey;
+    
 	function ReadPubKey() {
         var file = document.getElementById("encryptPubKey").files[0];
 		var reader = new FileReader();
 		reader.onload = function() {
-            //document.write("公钥：<br/><pre>"+this.result+"</pre><br/><br/>");
-            var armorpubkey = document.getElementById("armorpubkey");
-            armorpubkey.textContent = this.result;
+            armorpubkey = this.result;
 		}
         
         reader.readAsText(file);
@@ -22,48 +23,22 @@
         var file = document.getElementById("encryptSecKey").files[0];
 		var reader = new FileReader();
 		reader.onload = function() {
-            var armorseckey = document.getElementById("armorseckey");
-            armorseckey.textContent = this.result;
+            armorseckey = this.result;
 		}
         
         reader.readAsText(file);
 	}
     
-    function encrypt(){
+    async function encrypt(){
         var plaintext = prompt("准备加密，请输入明文");
-        var armorpubkey = document.getElementById("armorpubkey");
         var plain = document.getElementById("plain");
         var encrypted = document.getElementById("encrypted");
         
         plain.textContent = plaintext;
 
         var openpgp = window.openpgp;
-        openpgp.key.readArmored(armorpubkey.textContent).then(function(pubkey){
-            var options = {
-                message: openpgp.message.fromText(plaintext),       // input as Message object
-                publicKeys: pubkey.keys // for encryption
-            };
-            openpgp.encrypt(options).then(function(ciphertext){
-                encrypted.textContent = ciphertext.data;
-            }, function(error) {
-                alert(error);
-            });
-            
-        });
-        
-    }
-    
-    async function encrypt1(){
-        var plaintext = prompt("准备加密，请输入明文");
-        var armorpubkey = document.getElementById("armorpubkey");
-        var plain = document.getElementById("plain");
-        var encrypted = document.getElementById("encrypted");
-        
-        plain.textContent = plaintext;
-
-        var openpgp = window.openpgp;
-        var pubkey = await openpgp.key.readArmored(armorpubkey.textContent);
-        var options = {
+        pubkey = await openpgp.key.readArmored(armorpubkey);
+        const options = {
             message: openpgp.message.fromText(plaintext),       // input as Message object
             publicKeys: pubkey.keys // for encryption
         };
@@ -74,32 +49,24 @@
         });
     }
 	
-    function decrypt(){
-        var armorseckey = document.getElementById("armorseckey");
+    async function decrypt(){
         var plain = document.getElementById("plain");
         var encrypted = document.getElementById("encrypted");
 
         var openpgp = window.openpgp;
-        openpgp.key.readArmored(armorseckey.textContent).then(function(seckeys){
-            var passphrase = prompt("准备解密，请输入密钥口令");
-            var seckey = seckeys.keys[0];
-
-            seckey.decrypt(passphrase).then(function(){
-                openpgp.message.readArmored(encrypted.textContent).then(function(encryptedtext){
-                    const options = {
-                        message: encryptedtext ,    // parse armored message
-                        privateKeys: seckey                                 // for decryption
-                    }
-                    openpgp.decrypt(options).then(function(text){
-                        alert(text.data);
-                    }, function(error) {
-                        alert(error);
-                    });
-                });
-            },function(error) {
-                alert(error);
-            });
-            
+        seckey = await openpgp.key.readArmored(armorseckey);
+        let seckeyObj = seckey.keys[0];
+        let passphrase = prompt("准备解密，请输入密钥口令");
+        await seckeyObj.decrypt(passphrase)
+        var encryptedtext = await openpgp.message.readArmored(encrypted.textContent)
+        const options = {
+            message: encryptedtext ,    // parse armored message
+            privateKeys: [seckeyObj]                                 // for decryption
+        }
+        openpgp.decrypt(options).then(function(text){
+            alert(text.data);
+        }, function(error) {
+            alert(error);
         });
     }
     
@@ -110,14 +77,12 @@
     <br/>
 	<label>加密 | 读取公钥文件</label><br/>
 	<input type="file" id="encryptPubKey" value="读取公钥文件" multiple="" onchange="ReadPubKey()"/>
-    <input type="button" id="encrypt" value="加密" onclick="encrypt1()"/><br/>
+    <input type="button" id="encrypt" value="加密" onclick="encrypt()"/><br/>
     <input type="file" id="encryptSecKey" value="读取私钥文件" multiple="" onchange="ReadSecKey()"/>
     <input type="button" id="decrypt" value="解密" onclick="decrypt()"/>
 	<br/>
     
     <pre>
-    <p id="armorpubkey"></p>
-    <p id="armorseckey"></p>
     <p id="plain"></p>
     <p id="encrypted"></p>
     <p id="sig"></p>
