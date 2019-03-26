@@ -8,6 +8,27 @@
 	<script>
     var armorpubkey,armorseckey;
     var pubkey,seckey;
+	function createkeypair(){
+		var openpgp = window.openpgp;
+		var passphrase = prompt('准备创建密钥，请输入密钥口令');
+		var name = prompt('请输入姓名');
+		var id = prompt('请输入ID');
+		var email = prompt('请输入Email');
+		var userIDs = name + " (" + id + ") <" + email + ">" ;
+		var publicKey,privateKey;
+		var opt = {numBits: 4096, userIds: userIDs, passphrase: passphrase};
+		openpgp.generateKey(opt).then(function(key) {
+			alert(key.key.primaryKey.fingerprint+ "已创建成功。");
+			var pub = new Blob([key.publicKeyArmored], {type: "text/plain;charset=utf-8"});
+			alert("Save the Publc Key");
+			saveAs(pub, "key.pub");
+			var sec = new Blob([key.privateKeyArmored], {type: "text/plain;charset=utf-8"});
+			alert("Save the Private Key");
+			saveAs(sec, "key.sec");
+			
+			
+		});
+	}
     
 	function ReadPubKey() {
         var file = document.getElementById("encryptPubKey").files[0];
@@ -57,8 +78,8 @@
         seckey = await openpgp.key.readArmored(armorseckey);
         let seckeyObj = seckey.keys[0];
         let passphrase = prompt("准备解密，请输入密钥口令");
-        await seckeyObj.decrypt(passphrase)
-        var encryptedtext = await openpgp.message.readArmored(encrypted.textContent)
+        await seckeyObj.decrypt(passphrase);
+        var encryptedtext = await openpgp.message.readArmored(encrypted.textContent);
         const options = {
             message: encryptedtext ,    // parse armored message
             privateKeys: [seckeyObj]                                 // for decryption
@@ -70,17 +91,62 @@
         });
     }
     
+    async function signit(){
+        var plain = document.getElementById("plain");
+        var sig = document.getElementById("sig");
+        var openpgp = window.openpgp;
+        
+        seckey = await openpgp.key.readArmored(armorseckey);
+        let seckeyObj = seckey.keys[0];
+        let passphrase = prompt("准备解密，请输入密钥口令");
+        await seckeyObj.decrypt(passphrase);
+        
+        options = {
+            message: openpgp.cleartext.fromText(plain.textContent), // CleartextMessage or Message object
+            privateKeys: [seckeyObj]                             // for signing
+        };
+        openpgp.sign(options).then(function(signed) {
+            sig.textContent = signed.data; // '-----BEGIN PGP SIGNED MESSAGE ... END PGP SIGNATURE-----'
+        }, function(error) {
+            alert(error);
+        });
+    }
+    
+
+    async function verifyit(){
+        var sig = document.getElementById("sig");
+        var openpgp = window.openpgp;
+
+        options = {
+            message: await openpgp.cleartext.readArmored(sig.textContent), // parse armored message
+            publicKeys: (await openpgp.key.readArmored(armorpubkey)).keys // for verification
+        };
+
+        openpgp.verify(options).then(function(verified) {
+            var validity = verified.signatures[0].valid; // true
+            if (validity) {
+                alert('signed by key id ' + verified.signatures[0].keyid.toHex());
+            }
+        }, function(error) {
+            alert(error);
+        });
+    }
+    
 	</script>
   </head>
   <body>
     <hr/>
-    <br/>
+    <input type="button" id="createkey" value="创建密钥" onclick="createkeypair()"></input>
+	<br/>
+    <hr/>
 	<label>加密 | 读取公钥文件</label><br/>
 	<input type="file" id="encryptPubKey" value="读取公钥文件" multiple="" onchange="ReadPubKey()"/>
-    <input type="button" id="encrypt" value="加密" onclick="encrypt()"/><br/>
+    <input type="button" id="encrypt" value="加密" onclick="encrypt()"/>
+    <input type="button" id="verifyit" value="验证" onclick="verifyit()"/><br/>
     <input type="file" id="encryptSecKey" value="读取私钥文件" multiple="" onchange="ReadSecKey()"/>
     <input type="button" id="decrypt" value="解密" onclick="decrypt()"/>
-	<br/>
+    <input type="button" id="signit" value="签名" onclick="signit()"/>
+	<br/><hr/>
     
     <pre>
     <p id="plain"></p>
