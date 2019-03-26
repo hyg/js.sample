@@ -51,12 +51,12 @@
 	}
     
     async function encrypt(){
-        var plaintext = prompt("准备加密，请输入明文");
+        var inputtext = document.getElementById("inputtext");
+        var plaintext = inputtext.value;
         var plain = document.getElementById("plain");
-        var encrypted = document.getElementById("encrypted");
-        
         plain.textContent = plaintext;
-
+        
+        var encrypted = document.getElementById("encrypted");
         var openpgp = window.openpgp;
         pubkey = await openpgp.key.readArmored(armorpubkey);
         const options = {
@@ -92,7 +92,7 @@
     }
     
     async function signit(){
-        var plain = document.getElementById("plain");
+        var inputtext = document.getElementById("inputtext");
         var sig = document.getElementById("sig");
         var openpgp = window.openpgp;
         
@@ -102,7 +102,7 @@
         await seckeyObj.decrypt(passphrase);
         
         options = {
-            message: openpgp.cleartext.fromText(plain.textContent), // CleartextMessage or Message object
+            message: openpgp.cleartext.fromText(inputtext.value), // CleartextMessage or Message object
             privateKeys: [seckeyObj]                             // for signing
         };
         openpgp.sign(options).then(function(signed) {
@@ -112,7 +112,6 @@
         });
     }
     
-
     async function verifyit(){
         var sig = document.getElementById("sig");
         var openpgp = window.openpgp;
@@ -147,6 +146,8 @@
     <input type="button" id="decrypt" value="解密" onclick="decrypt()"/>
     <input type="button" id="signit" value="签名" onclick="signit()"/>
 	<br/><hr/>
+    <textarea cols="40" rows="16" id="inputtext"></textarea>
+    <hr/>
     
     <pre>
     <p id="plain"></p>
