@@ -114,17 +114,24 @@
     
     async function verifyit(){
         var sig = document.getElementById("sig");
+        var inputtext = document.getElementById("inputtext");
+        var sigtext = sig.textContent;
+        if(sig.textContent.length == 0){
+            sig.textContent = inputtext.value;
+        }
+
         var openpgp = window.openpgp;
 
         options = {
             message: await openpgp.cleartext.readArmored(sig.textContent), // parse armored message
             publicKeys: (await openpgp.key.readArmored(armorpubkey)).keys // for verification
         };
-
+        
+        
         openpgp.verify(options).then(function(verified) {
             var validity = verified.signatures[0].valid; // true
             if (validity) {
-                alert('signed by key id ' + verified.signatures[0].keyid.toHex());
+                alert('signed by key id ' + verified.signatures[0].keyid.toHex() + '\nsigned in date ' + verified.signatures[0].signature.packets[0].created);
             }
         }, function(error) {
             alert(error);
