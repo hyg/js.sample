@@ -100,7 +100,7 @@
         let seckeyObj = seckey.keys[0];
         let passphrase = prompt("准备解密，请输入密钥口令");
         await seckeyObj.decrypt(passphrase);
-        
+
         options = {
             message: openpgp.cleartext.fromText(inputtext.value), // CleartextMessage or Message object
             privateKeys: [seckeyObj]                             // for signing

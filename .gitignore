@@ -9,3 +9,7 @@
 /eventpage/node_modules
 /dht/node_modules
 /rdf/node_modules
+/dht/package-lock.json
+/protocollabs/node_modules
+/protocollabs/package-lock.json
+/rdf/package-lock.json
