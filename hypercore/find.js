@@ -17,5 +17,5 @@ swarm.on('connection', (socket, details) => {
   console.log('new connection!', details)
 
   // you can now use the socket as a stream, eg:
-  // process.stdin.pipe(socket).pipe(process.stdout)
+  process.stdin.pipe(socket).pipe(process.stdout)
 })

@@ -15,3 +15,5 @@
 /rdf/package-lock.json
 /dat/node_modules
 /dat/download
+/hypercore/node_modules
+/hypercore/put
