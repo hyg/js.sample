@@ -1,13 +1,15 @@
-var Dat = require('dat-node')
+const SDK = require('dat-sdk')
 
-// 1. Tell Dat where to download the files
-Dat('download/PSMD', {
-  // 2. Tell Dat what link I want
-  //key: 'adc78b18e36e0944e7dd7e77074ac083a49a0e837ddfbb1b0d43cbe06782f7a8' // (a 64 character hash from above)
-  key: '1a2c14495c5228d5441b2c5077db471e553e6a3b20c665eb1bcb00f4ca94da63'
-}, function (err, dat) {
-  if (err) throw err
+const sdk = await SDK();
+const {
+	Hypercore,
+	Hyperdrive,
+	resolveName,
+	close
+} = sdk
 
-  // 3. Join the network & download (files are automatically downloaded)
-  dat.joinNetwork()
-})
+const SOME_URL = 'dat://0a9e202b8055721bd2bc93b3c9bbc03efdbda9cfee91f01a123fdeaadeba303e/'
+
+const someArchive = Hyperdrive(SOME_URL)
+
+console.log(await someArchive.readdir('/'))
