@@ -17,3 +17,5 @@
 /dat/download
 /hypercore/node_modules
 /hypercore/put
+/pdf-parse/node_modules
+/pdf2json/node_modules
