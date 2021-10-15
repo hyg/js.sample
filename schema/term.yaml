@@ -1,0 +1,16 @@
+readme: 责权利或事件处理程序。
+type: thing
+attribute: 
+  - name: content
+    type: thing
+    readme: 条款内容。
+  - name: update
+    type: termset
+    readme: 修订程序。
+update:
+  - maker: huangyg@mars22.com
+
+
+md: 
+1. 该规则使违约方无法获益。
+1. 该规则使守约方无须维权。

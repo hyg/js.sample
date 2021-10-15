@@ -1,0 +1,16 @@
+readme: 由一组规则定义的有限责任主体，拥有独立的权利。当违反规则时自动清算。
+type: entity
+attribute: 
+  - name: regular
+    type: termset
+    readme: 本主体的行为准则。其他方可以独立使用，可以判定行为记录是否合规。
+  - name: clearing
+    type: termset
+    readme: 本主体回避，由其他方负责清算。
+update:
+  - maker: huangyg@mars22.com
+
+
+md: 
+1. 该规则使违约方无法获益。
+1. 该规则使守约方无须维权。
