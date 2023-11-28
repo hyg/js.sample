@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8"> 
+	<script src="FileSaver.min.js"></script>
+    <script src="xlsx.full.min.js"></script>
+	<!-- or https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -->
+	<!-- or https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js -->
+	<script>
+
+    var wb;
+
+    function ReadExcelFile(){
+        var file = document.getElementById("readExcelFile").files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            /* e.target.result is an ArrayBuffer */
+            wb = XLSX.read(e.target.result);
+            Show(wb);
+        };
+        reader.readAsArrayBuffer(file);
+    }
+
+    function Show(workbook){
+        var first_sheet = workbook.Sheets[workbook.SheetNames[0]];
+        var raw_data = XLSX.utils.sheet_to_json(first_sheet, {header: 1});
+
+        alert(raw_data[0]);
+        var exceltable = document.getElementById("exceltable");
+        exceltable.textContent = raw_data[0];
+
+        var newwb = XLSX.utils.book_new();
+        var worksheet = XLSX.utils.json_to_sheet(raw_data[0]);
+        XLSX.utils.book_append_sheet(newwb, worksheet, "testsheet");
+        XLSX.writeFile(newwb, "test.xlsx", { compression: true });
+    }
+
+    async function WriteExcelFile(wb){
+        /*const url = "https://gitee.com/hyg/raw/raw/master/food/d.20150401.yaml";
+        const raw_data = await (await fetch(url)).json();*/
+
+        var raw_data={
+            "sites": [
+            { "name":"菜鸟教程" , "url":"www.runoob.com" }, 
+            { "name":"google" , "url":"www.google.com" }, 
+            { "name":"微博" , "url":"www.weibo.com" }
+            ]
+        };
+
+        var newwb = XLSX.utils.book_new();
+        var worksheet = XLSX.utils.json_to_sheet(raw_data["sites"]);
+        XLSX.utils.book_append_sheet(newwb, worksheet, "testsheet");
+        XLSX.writeFile(newwb, "test.xlsx", { compression: true });
+    }
+    
+	</script>
+  </head>
+  <body>
+    <hr/>
+    <input type="file" id="readExcelFile" value="读取excel文件" multiple="" onchange="ReadExcelFile()"/>
+    <input type="button" id="writeExcelFile" value="写入excel文件" onclick="WriteExcelFile()"/>
+ 
+    <hr/>
+    
+    <pre>
+    <p id="exceltable"></p>
+    </pre><br/><br/>
+  
+  </body>
+</html>
