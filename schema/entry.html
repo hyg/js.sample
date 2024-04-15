@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="FileSaver.min.js"></script>
+    <!-- or https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -->
+    <script type="text/javascript" src="yaml.js"></script>
+
+    <script>
+        var inyaml, outyaml, outyamltext;
+
+        function ReadYamlFile() {
+            var file = document.getElementById("yamlfile").files[0];
+
+            var reader = new FileReader();
+            reader.onload = function () {
+                outyamltext = this.result;
+                outyaml = YAML.parse(outyamltext);
+
+                if (outyaml.hasOwnProperty('html')) {
+                    var newButton = document.createElement("button");
+                    newButton.id = file.name + ".entry";
+                    newButton.innerHTML = file.name + "详情";
+                    newButton.value = outyamltext;
+                    newButton.onclick = function () {
+                        window.open(outyaml.html + "?obj=" + file.name);
+                    };
+                    var bottons = document.getElementById("bottons");
+                    bottons.appendChild(newButton);
+                    /*
+                    var nextpage = document.getElementById("nextpage");
+                    nextpage.href = outyaml.html + "?obj=" + file.name;
+                    nextpage.innerText = "详情";
+
+                    var exp = new Date();
+                    exp.setDate(exp.getDate() + 24 * 60 * 60 * 1000);
+                    var str = outyaml.html + '.init=' + outyamltext + ";expires=" + exp.toGMTString() + ";path=" + outyaml.html;
+                    var str1 = outyaml.html + '.init=' + file.name + ";expires=" + exp.toGMTString() + ";path=" + outyaml.html;
+                    document.cookie = str1;
+                    */
+                }
+            }
+
+            reader.readAsText(file);
+        }
+    </script>
+</head>
+
+<body>
+    <hr />
+    <br />
+    <input type="file" id="yamlfile" value="读取yaml文件" multiple="" onchange="ReadYamlFile()" />
+    <a id="nextpage"></a>
+    <p id="bottons"></p>
+    <br />
+    <hr />
+
+</body>
+
+</html>

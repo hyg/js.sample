@@ -1,0 +1,47 @@
+data: demo data
+html: demo.html
+
+error:
+  - name: 20
+  - name: 21
+  - name: 30
+  - name: 31
+  - name: 32
+  - name: 33
+  - name: 34
+  - name: 42
+  - name: 43
+code:
+  - name: 20
+  - name: 21
+  - name: 30
+    dependencies:
+    - name: 20
+  - name: 31
+    dependencies:
+    - name: 20
+    - name: 30
+  - name: 32
+    dependencies:
+    - name: 20
+    - name: 30
+  - name: 33
+    dependencies:
+    - name: 20
+    - name: 30
+  - name: 34
+    dependencies:
+    - name: 20
+    - name: 30
+  - name: 42
+    dependencies:
+    - name: 31
+    - name: 32
+    - name: 33
+    - name: 34
+  - name: 43
+    dependencies:
+    - name: 31
+    - name: 32
+    - name: 33
+    - name: 34

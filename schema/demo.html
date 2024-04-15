@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript" src="yaml.js"></script>
+	<script>
+		window.onload = function () {
+			/*
+			var pa = document.cookie.split("&");
+			var s = new Object();
+			for (var i = 0; i < pa.length; i++) {
+				s[pa[i].split("=")[0]] = pa[i].split("=")[1];
+			}
+			alert("cookie:"+s["demo.html.init"]);
+			*/
+		}
+
+		function load() {
+			var obj = getParams("obj");
+			alert("urlparam:" + obj);
+			var id1 = obj + ".entry";
+			var id = "yamlfile";
+			alert("id:" + id);
+			alert(window.opener);
+			var entrybutton = window.opener.document.getElementById(id);
+			if (entrybutton == undefined) {
+				alert("entrybutton undefined.");
+			} else {
+				alert("entrybutton:" + entrybutton);
+			}
+		}
+
+		function getParams(name, href) {
+			var href = href || window.location.href,
+				value = '';
+
+			if (name) {
+				var reg = new RegExp(name + '=([^&]*)', 'g');
+				href.replace(reg, function ($0, $1) {
+					value = decodeURI($1);
+				});
+			} else {
+				value = {};
+				var reg = /\b(\w+)=([^\/&]*)/g;
+				href.replace(reg, function ($0, $1, $2) {
+					value[$1] = decodeURI($2);
+				});
+			}
+			return value;
+		};
+	</script>
+</head>
+
+<body>
+	<input type="button" id="load" value="load"" onclick=" load()" />
+</body>
+
+</html>
