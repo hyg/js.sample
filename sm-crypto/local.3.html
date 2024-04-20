@@ -7,8 +7,9 @@
     <!-- or https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -->
     <script src="sm2.js"></script>
     <script>
-        var armorpubkey, armorseckey;
+        //var armorpubkey, armorseckey;
         var pubkey, seckey;
+        
         function createkeypair() {
             let keypair = sm2.generateKeyPairHex();
             //alert(keypair);
@@ -20,9 +21,9 @@
             // 默认生成公钥 130 位太长，可以压缩公钥到 66 位
             let compressedpubkey = sm2.compressPublicKeyHex(pubkey) // compressedpubkey 和 pubkey 等价
             //alert(compressedpubkey);
-            if(sm2.comparePublicKeyHex(pubkey, compressedpubkey)){
+            if (sm2.comparePublicKeyHex(pubkey, compressedpubkey)) {
                 //alert("compare pass");
-            }else{
+            } else {
                 alert("compare fail")
             } // 判断公钥是否等价
 
@@ -31,17 +32,25 @@
             //let keypair2 = sm2.generateKeyPairHex('123123123123123')
             //let keypair3 = sm2.generateKeyPairHex(256, SecureRandom)
 
-            let verifyResult = sm2.verifyPublicKey(pubkey) // 验证公钥
-            alert(verifyResult);
-            verifyResult = sm2.verifyPublicKey(compressedpubkey) // 验证公钥
-            alert(verifyResult);
+            //let verifyResult = sm2.verifyPublicKey(pubkey) // 验证公钥
+            //alert(verifyResult);
+            //verifyResult = sm2.verifyPublicKey(compressedpubkey) // 验证公钥
+            //alert(verifyResult);
+
+            var pub = new Blob([pubkey], { type: "text/plain;charset=utf-8" });
+            alert("Save the Publc Key:\n" + pubkey);
+            saveAs(pub, "key.pub");
+
+            var sec = new Blob([seckey], { type: "text/plain;charset=utf-8" });
+            alert("Save the Private Key:\n" + seckey);
+            saveAs(sec, "key.sec");
         }
 
         function ReadPubKey() {
             var file = document.getElementById("encryptPubKey").files[0];
             var reader = new FileReader();
             reader.onload = function () {
-                armorpubkey = this.result;
+                pubkey = this.result;
             }
 
             reader.readAsText(file);
@@ -51,7 +60,7 @@
             var file = document.getElementById("encryptSecKey").files[0];
             var reader = new FileReader();
             reader.onload = function () {
-                armorseckey = this.result;
+                seckey = this.result;
             }
 
             reader.readAsText(file);
@@ -63,18 +72,13 @@
             var plain = document.getElementById("plain");
             plain.textContent = plaintext;
 
+            const cipherMode = 1 // 1 - C1C3C2，0 - C1C2C3，默认为1
+
             var encrypted = document.getElementById("encrypted");
-            var openpgp = window.openpgp;
-            pubkey = await openpgp.key.readArmored(armorpubkey);
-            const options = {
-                message: openpgp.message.fromText(plaintext),       // input as Message object
-                pubkeys: pubkey.keys // for encryption
-            };
-            openpgp.encrypt(options).then(function (ciphertext) {
-                encrypted.textContent = ciphertext.data;
-            }, function (error) {
-                alert(error);
-            });
+            var encryptData = sm2.doEncrypt(plaintext, pubKey,cipherMode); // 加密结果
+            alert(encryptData);
+
+            encrypted.textContent = encryptData;
         }
 
         async function decrypt() {
