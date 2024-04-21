@@ -9,7 +9,7 @@
     <script>
         //var armorpubkey, armorseckey;
         var pubkey, seckey;
-        
+
         function createkeypair() {
             let keypair = sm2.generateKeyPairHex();
             //alert(keypair);
@@ -67,15 +67,23 @@
         }
 
         async function encrypt() {
+
+
+            let publicKey = "045101ff59e3e5b25ce549a3b5d20431c8c33afeb4128b94787b9e6acd6c457a87a51ddba7c730057e1340df4e0d07d7846ecfe1dae2279fa5c3898ad78acb9bdd";
+            let cipherMode = 0; // 1 - C1C3C2，0 - C1C2C3，默认为1
+            let encryptData = sm2.doEncrypt(msg, publicKey, cipherMode)
+            console.log('encryptData', encryptData);
+
+
             var inputtext = document.getElementById("inputtext");
             var plaintext = inputtext.value;
             var plain = document.getElementById("plain");
             plain.textContent = plaintext;
 
-            const cipherMode = 1 // 1 - C1C3C2，0 - C1C2C3，默认为1
+            cipherMode = 1 // 1 - C1C3C2，0 - C1C2C3，默认为1
 
             var encrypted = document.getElementById("encrypted");
-            var encryptData = sm2.doEncrypt(plaintext, pubKey,cipherMode); // 加密结果
+            encryptData = sm2.doEncrypt(plaintext, pubKey, cipherMode); // 加密结果
             alert(encryptData);
 
             encrypted.textContent = encryptData;

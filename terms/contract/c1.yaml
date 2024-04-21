@@ -1,0 +1,9 @@
+type: contract
+verion: 0.1
+decoder: c.js
+role:
+- roleinterm: <r1>
+  roleincontract: 甲方
+- roleinterm: <r2>
+  roleincontract: 乙方
+comment: |+

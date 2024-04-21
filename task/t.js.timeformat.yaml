@@ -1,0 +1,17 @@
+name: js.timeformat
+id: wmok2KU3
+parent id: ao2lLpI
+start: 2024-04-16
+dependencies:
+path: /note/task
+readme: |
+  从日期时间输出、解析字符串。
+  YYYY-MM-DD hh:mm:ss格式首先要支持。
+step:
+  - time: 
+    name:
+    status:
+    readme: |
+log:
+  - time:
+    text: |

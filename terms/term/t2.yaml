@@ -1,0 +1,9 @@
+type: term
+verion: 0.1
+decoder: t.js
+role:
+- <r1>
+- <r2>
+text: |+
+
+comment: |+
