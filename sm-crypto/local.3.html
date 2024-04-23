@@ -11,6 +11,7 @@
         var pubkey, seckey;
 
         function createkeypair() {
+            alert("enter createkeypair");
             let keypair = sm2.generateKeyPairHex();
             //alert(keypair);
             pubkey = keypair.publicKey // 公钥
@@ -19,13 +20,13 @@
             //alert(seckey);
 
             // 默认生成公钥 130 位太长，可以压缩公钥到 66 位
-            let compressedpubkey = sm2.compressPublicKeyHex(pubkey) // compressedpubkey 和 pubkey 等价
+            //let compressedpubkey = sm2.compressPublicKeyHex(pubkey) // compressedpubkey 和 pubkey 等价
             //alert(compressedpubkey);
-            if (sm2.comparePublicKeyHex(pubkey, compressedpubkey)) {
-                //alert("compare pass");
-            } else {
-                alert("compare fail")
-            } // 判断公钥是否等价
+            //if (sm2.comparePublicKeyHex(pubkey, compressedpubkey)) {
+            //alert("compare pass");
+            //} else {
+            //    alert("compare fail")
+            //} // 判断公钥是否等价
 
             // 自定义随机数，参数会直接透传给 jsbn 库的 BigInteger 构造器
             // 注意：开发者使用自定义随机数，需要自行确保传入的随机数符合密码学安全
@@ -37,11 +38,12 @@
             //verifyResult = sm2.verifyPublicKey(compressedpubkey) // 验证公钥
             //alert(verifyResult);
 
-            var pub = new Blob([pubkey], { type: "text/plain;charset=utf-8" });
+            //var pub = new Blob([pubkey], { type: "text/plain;charset=utf-8" });
+            //alert(typeof (pubkey));
             alert("Save the Publc Key:\n" + pubkey);
             saveAs(pub, "key.pub");
 
-            var sec = new Blob([seckey], { type: "text/plain;charset=utf-8" });
+            //var sec = new Blob([seckey], { type: "text/plain;charset=utf-8" });
             alert("Save the Private Key:\n" + seckey);
             saveAs(sec, "key.sec");
         }
@@ -67,24 +69,16 @@
         }
 
         async function encrypt() {
-
-
-            let publicKey = "045101ff59e3e5b25ce549a3b5d20431c8c33afeb4128b94787b9e6acd6c457a87a51ddba7c730057e1340df4e0d07d7846ecfe1dae2279fa5c3898ad78acb9bdd";
-            let cipherMode = 0; // 1 - C1C3C2，0 - C1C2C3，默认为1
-            let encryptData = sm2.doEncrypt(msg, publicKey, cipherMode)
-            console.log('encryptData', encryptData);
-
-
             var inputtext = document.getElementById("inputtext");
-            var plaintext = inputtext.value;
+            var plaintext = inputtext.value.toString();
             var plain = document.getElementById("plain");
             plain.textContent = plaintext;
 
-            cipherMode = 1 // 1 - C1C3C2，0 - C1C2C3，默认为1
+            var cipherMode = 1 // 1 - C1C3C2，0 - C1C2C3，默认为1
 
             var encrypted = document.getElementById("encrypted");
-            encryptData = sm2.doEncrypt(plaintext, pubKey, cipherMode); // 加密结果
-            alert(encryptData);
+            var encryptData = sm2.doEncrypt(plaintext, pubkey); // 加密结果
+            alert("encryptData" + encryptData);
 
             encrypted.textContent = encryptData;
         }
@@ -93,68 +87,30 @@
             var plain = document.getElementById("plain");
             var encrypted = document.getElementById("encrypted");
 
-            var openpgp = window.openpgp;
-            seckey = await openpgp.key.readArmored(armorseckey);
-            let seckeyObj = seckey.keys[0];
-            let passphrase = prompt("准备解密，请输入密钥口令");
-            await seckeyObj.decrypt(passphrase);
-            var encryptedtext = await openpgp.message.readArmored(encrypted.textContent);
-            const options = {
-                message: encryptedtext,    // parse armored message
-                seckeys: [seckeyObj]                                 // for decryption
-            }
-            openpgp.decrypt(options).then(function (text) {
-                alert(text.data);
-            }, function (error) {
-                alert(error);
-            });
+            var encryptData = encrypted.textContent;
+            let decryptData = sm2.doDecrypt(encryptData, seckey);
+            alert("decryptData" + decryptData);
+
         }
 
         async function signit() {
             var inputtext = document.getElementById("inputtext");
             var sig = document.getElementById("sig");
-            var openpgp = window.openpgp;
 
-            seckey = await openpgp.key.readArmored(armorseckey);
-            let seckeyObj = seckey.keys[0];
-            let passphrase = prompt("准备解密，请输入密钥口令");
-            await seckeyObj.decrypt(passphrase);
-
-            options = {
-                message: openpgp.cleartext.fromText(inputtext.value), // CleartextMessage or Message object
-                seckeys: [seckeyObj]                             // for signing
-            };
-            openpgp.sign(options).then(function (signed) {
-                sig.textContent = signed.data; // '-----BEGIN PGP SIGNED MESSAGE ... END PGP SIGNATURE-----'
-            }, function (error) {
-                alert(error);
-            });
+            let msg = inputtext.value;
+            let sigValueHex = sm2.doSignature(msg, seckey) // 签名
+            //let verifyResult = sm2.doVerifySignature(msg, sigValueHex, publicKey) // 验签结果
+            sig.textContent = sigValueHex;
         }
 
         async function verifyit() {
             var sig = document.getElementById("sig");
             var inputtext = document.getElementById("inputtext");
-            var sigtext = sig.textContent;
-            if (sig.textContent.length == 0) {
-                sig.textContent = inputtext.value;
-            }
+            var sigValueHex = sig.textContent;
+            let msg = inputtext.value;
+            let verifyResult = sm2.doVerifySignature(msg, sigValueHex, pubkey) // 验签结果
 
-            var openpgp = window.openpgp;
-
-            options = {
-                message: await openpgp.cleartext.readArmored(sig.textContent), // parse armored message
-                pubkeys: (await openpgp.key.readArmored(armorpubkey)).keys // for verification
-            };
-
-
-            openpgp.verify(options).then(function (verified) {
-                var validity = verified.signatures[0].valid; // true
-                if (validity) {
-                    alert('signed by key id ' + verified.signatures[0].keyid.toHex() + '\nsigned in date ' + verified.signatures[0].signature.packets[0].created);
-                }
-            }, function (error) {
-                alert(error);
-            });
+            alert("meg:\n"+msg+"\nsig:\n"+sigValueHex+"\nresult:"+verifyResult);
         }
 
     </script>
