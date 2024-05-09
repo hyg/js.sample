@@ -18,7 +18,9 @@
 		function getTextFileFromURL(url) {
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function () {
+				alert(xmlhttp.readyState);
 				alert(xmlhttp.status);
+				alert(xmlhttp.responseText);
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					var text = xmlhttp.responseText;
 					document.getElementById('daylog').innerHTML = text;
