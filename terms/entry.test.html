@@ -21,7 +21,7 @@
 				alert(xmlhttp.status);
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 					var text = xmlhttp.responseText;
-					document.getElementById('daylog').innerHTML = marked.parse(text);
+					document.getElementById('daylog').innerHTML = text;
 				}
 			};
 			xmlhttp.open("GET", url, true);
