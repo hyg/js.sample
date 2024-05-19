@@ -2,6 +2,7 @@
   "dependencies": {
     "@xmpp/client": "^0.13.1",
     "imap": "^0.8.19",
-    "mailparser": "^3.7.1"
+    "mailparser": "^3.7.1",
+    "nodemailer": "^6.9.13"
   }
 }
