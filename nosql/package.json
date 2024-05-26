@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "neo4j-driver": "^5.20.0",
+    "quick-yaml.db": "^1.2.2",
     "redis": "^4.6.14"
   }
 }
