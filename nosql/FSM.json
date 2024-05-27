@@ -1,0 +1,18 @@
+{
+    "init": "s1",
+    "current": "s1",
+    "status": {"s1":1,"s2":2,"s3":3,"s4":4,"s5":5},
+    "event": {"ea": "a","eb": "b"},
+    "relation": [
+        {"from":"s1","event":"ea","to":"s2"},
+        {"from":"s2","event":"ea","to":"s3"},
+        {"from":"s3","event":"ea","to":"s4"},
+        {"from":"s4","event":"ea","to":"s5"},
+        {"from":"s5","event":"ea","to":"s1"},
+        {"from":"s1","event":"eb","to":"s3"},
+        {"from":"s3","event":"eb","to":"s5"},
+        {"from":"s5","event":"eb","to":"s2"},
+        {"from":"s2","event":"eb","to":"s4"},
+        {"from":"s4","event":"eb","to":"s1"}
+        ]
+}

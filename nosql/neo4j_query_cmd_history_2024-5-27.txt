@@ -1,0 +1,499 @@
+MATCH p=()-[:event]->() RETURN p LIMIT 25;
+
+MATCH (n:status) RETURN n LIMIT 25;
+
+MATCH (:status{id:1})-[:event{id:"a"}]->(n:status) RETURN n.id;
+
+MATCH (:status{id:1})-[r:event]-{1,5}(:status{id:4}) RETURN r;
+
+MATCH p=shortestPath((:status{id:1})-[:event*1..5]->(:status{id:4})) RETURN p;
+
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1)-[:event{id:"a"}]->(s2)
+CREATE (s2)-[:event{id:"a"}]->(s3)
+CREATE (s3)-[:event{id:"a"}]->(s4)
+CREATE (s4)-[:event{id:"a"}]->(s5)
+CREATE (s5)-[:event{id:"a"}]->(s1)
+CREATE (s1)-[:event{id:"b"}]->(s3)
+CREATE (s3)-[:event{id:"b"}]->(s5)
+CREATE (s5)-[:event{id:"b"}]->(s2)
+CREATE (s2)-[:event{id:"b"}]->(s4)
+CREATE (s4)-[:event{id:"b"}]->(s1);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1)-[:event{id:"a"}]->(s2)
+CREATE (s2)-[:event{id:"a"}]->(s3)
+CREATE (s3)-[:event{id:"a"}]->(s4)
+CREATE (s4)-[:event{id:"a"}]->(s5)
+CREATE (s5)-[:event{id:"a"}]->(s1)
+CREATE (s1)-[:event{id:"b"}]->(s3)
+CREATE (s3)-[:event{id:"b"}]->(s5)
+CREATE (s5)-[:event{id:"b"}]->(s2)
+CREATE (s2)-[:event{id:"b"}]->(s4)
+CREATE (s4)-[:event{id:"b"}]->(s1);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1)-[:event{id:"a"}]->(s2)
+CREATE (s2)-[:event{id:"a"}]->(s3)
+CREATE (s3)-[:event{id:"a"}]->(s4)
+CREATE (s4)-[:event{id:"a"}]->(s5)
+CREATE (s5)-[:event{id:"a"}]->(s1)
+CREATE (s1)-[:event{id:"b"}]->(s3)
+CREATE (s3)-[:event{id:"b"}]->(s5)
+CREATE (s5)-[:event{id:"b"}]->(s2)
+CREATE (s2)-[:event{id:"b"}]->(s4)
+CREATE (s4)-[:event{id:"b"}]->(s1);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1)-[:event{id:"a"}]->(s2)
+CREATE (s2)-[:event{id:"a"}]->(s3)
+CREATE (s3)-[:event{id:"a"}]->(s4)
+CREATE (s4)-[:event{id:"a"}]->(s5)
+CREATE (s5)-[:event{id:"a"}]->(s1)
+CREATE (s1)-[:event{id:"b"}]->(s3)
+CREATE (s3)-[:event{id:"b"}]->(s5)
+CREATE (s5)-[:event{id:"b"}]->(s2)
+CREATE (s2)-[:event{id:"b"}]->(s4)
+CREATE (s4)-[:event{id:"b"}]->(s1);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1)-[:event{id:"a"}]->(s2)
+CREATE (s2)-[:event{id:"a"}]->(s3)
+CREATE (s3)-[:event{id:"a"}]->(s4)
+CREATE (s4)-[:event{id:"a"}]->(s5)
+CREATE (s5)-[:event{id:"a"}]->(s1)
+CREATE (s1)-[:event{id:"b"}]->(s3)
+CREATE (s3)-[:event{id:"b"}]->(s5)
+CREATE (s5)-[:event{id:"b"}]->(s2)
+CREATE (s2)-[:event{id:"b"}]->(s4)
+CREATE (s4)-[:event{id:"b"}]->(s1);
+
+MATCH p=shortestPath((:status{id:1})-[:event*1..5]->(:status{id:4})) RETURN p;
+
+MATCH (n) DETACH DELETE n;
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1)-[:event{id:"a"}]->(s2)
+CREATE (s2)-[:event{id:"a"}]->(s3)
+CREATE (s3)-[:event{id:"a"}]->(s4)
+CREATE (s4)-[:event{id:"a"}]->(s5)
+CREATE (s5)-[:event{id:"a"}]->(s1)
+CREATE (s1)-[:event{id:"b"}]->(s3)
+CREATE (s3)-[:event{id:"b"}]->(s5)
+CREATE (s5)-[:event{id:"b"}]->(s2)
+CREATE (s2)-[:event{id:"b"}]->(s4)
+CREATE (s4)-[:event{id:"b"}]->(s1);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}),()-[ra:event{id:"a"}]->(),()-[rb:event{id:"b"}]->()
+CREATE (s1)-[:event{id:"a"}]->(s2)
+CREATE (s2)-[:event{id:"a"}]->(s3)
+CREATE (s3)-[:event{id:"a"}]->(s4)
+CREATE (s4)-[:event{id:"a"}]->(s5)
+CREATE (s5)-[:event{id:"a"}]->(s1)
+CREATE (s1)-[:event{id:"b"}]->(s3)
+CREATE (s3)-[:event{id:"b"}]->(s5)
+CREATE (s5)-[:event{id:"b"}]->(s2)
+CREATE (s2)-[:event{id:"b"}]->(s4)
+CREATE (s4)-[:event{id:"b"}]->(s1);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}),()-[ra:event{id:"a"}]->(),()-[rb:event{id:"b"}]->()
+CREATE (s1)-[:event{id:"a"}]->(s2)
+CREATE (s2)-[:event{id:"a"}]->(s3)
+CREATE (s3)-[:event{id:"a"}]->(s4)
+CREATE (s4)-[:event{id:"a"}]->(s5)
+CREATE (s5)-[:event{id:"a"}]->(s1);
+
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}),()-[ra:event{id:"a"}]->(),()-[rb:event{id:"b"}]->()
+CREATE (s1)-[:event{id:"a"}]->(s2)
+CREATE (s2)-[:event{id:"a"}]->(s3);
+
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}),()-[ra:event{id:"a"}]->(),()-[rb:event{id:"b"}]->()
+CREATE (s1)-[:event{id:"a"]->(s2)
+CREATE (s2)-[:event{id:"a"]->(s3);
+
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}),()-[ra:event{id:"a"}]->(),()-[rb:event{id:"b"}]->()
+CREATE (s1)-[ra]->(s2)
+CREATE (s2)-[ra]->(s3);
+
+MATCH (n) DETACH DELETE n;
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1) -[:event{id:"a"}]-> (s2);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1) -[:event{id:"a"}]-> (s2);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}) RETURN s1,s2,s3,s4,s5
+CREATE (s1) -[:event{id:"a"}]-> (s2)
+CREATE p2=((s2) -[:event{id:"a"}]-> (s3))
+CREATE p3=((s3) -[:event{id:"a"}]-> (s4))
+CREATE p4=((s4) -[:event{id:"a"}]-> (s5))
+CREATE p5=((s5) -[:event{id:"a"}]-> (s1))
+CREATE q1=((s1) -[:event{id:"b"}]-> (s3))
+CREATE q2=((s3) -[:event{id:"b"}]-> (s5))
+CREATE q3=((s5) -[:event{id:"b"}]-> (s2))
+CREATE q4=((s2) -[:event{id:"b"}]-> (s4))
+CREATE q5=((s4) -[:event{id:"b"}]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}) RETURN s1,s2,s3,s4,s5
+CREATE (s1) -[:event{id:"a"}]-> (s2)
+CREATE p2=((s2) -[:event{id:"a"}]-> (s3))
+CREATE p3=((s3) -[:event{id:"a"}]-> (s4))
+CREATE p4=((s4) -[:event{id:"a"}]-> (s5))
+CREATE p5=((s5) -[:event{id:"a"}]-> (s1))
+CREATE q1=((s1) -[:event{id:"b"}]-> (s3))
+CREATE q2=((s3) -[:event{id:"b"}]-> (s5))
+CREATE q3=((s5) -[:event{id:"b"}]-> (s2))
+CREATE q4=((s2) -[:event{id:"b"}]-> (s4))
+CREATE q5=((s4) -[:event{id:"b"}]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1) -[:event{id:"a"}]-> (s2);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5});
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1) -[:event{id:"a"}]-> (s2)
+CREATE p2=((s2) -[:event{id:"a"}]-> (s3))
+CREATE p3=((s3) -[:event{id:"a"}]-> (s4))
+CREATE p4=((s4) -[:event{id:"a"}]-> (s5))
+CREATE p5=((s5) -[:event{id:"a"}]-> (s1))
+CREATE q1=((s1) -[:event{id:"b"}]-> (s3))
+CREATE q2=((s3) -[:event{id:"b"}]-> (s5))
+CREATE q3=((s5) -[:event{id:"b"}]-> (s2))
+CREATE q4=((s2) -[:event{id:"b"}]-> (s4))
+CREATE q5=((s4) -[:event{id:"b"}]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}),
+(s1) -[:event{id:"a"}]-> (s2),
+p2=((s2) -[:event{id:"a"}]-> (s3)),
+p3=((s3) -[:event{id:"a"}]-> (s4)),
+p4=((s4) -[:event{id:"a"}]-> (s5)),
+p5=((s5) -[:event{id:"a"}]-> (s1)),
+q1=((s1) -[:event{id:"b"}]-> (s3)),
+q2=((s3) -[:event{id:"b"}]-> (s5)),
+q3=((s5) -[:event{id:"b"}]-> (s2)),
+q4=((s2) -[:event{id:"b"}]-> (s4)),
+q5=((s4) -[:event{id:"b"}]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}),
+(s1) -[ra:event{id:"a"}]-> (s2),
+p2=((s2) -[ra]-> (s3)),
+p3=((s3) -[ra]-> (s4)),
+p4=((s4) -[ra]-> (s5)),
+p5=((s5) -[ra]-> (s1)),
+q1=((s1) -[rb:event{id:"b"}]-> (s3)),
+q2=((s3) -[rb]-> (s5)),
+q3=((s5) -[rb]-> (s2)),
+q4=((s2) -[rb]-> (s4)),
+q5=((s4) -[rb]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}),
+p1=((s1) -[ra:event{id:"a"}]-> (s2)),
+p2=((s2) -[ra]-> (s3)),
+p3=((s3) -[ra]-> (s4)),
+p4=((s4) -[ra]-> (s5)),
+p5=((s5) -[ra]-> (s1)),
+q1=((s1) -[rb:event{id:"b"}]-> (s3)),
+q2=((s3) -[rb]-> (s5)),
+q3=((s5) -[rb]-> (s2)),
+q4=((s2) -[rb]-> (s4)),
+q5=((s4) -[rb]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5}),
+p1=((s1) -[ra:event{id:"a"}]-> (s2))
+CREATE p2=((s2) -[ra]-> (s3))
+CREATE p3=((s3) -[ra]-> (s4))
+CREATE p4=((s4) -[ra]-> (s5))
+CREATE p5=((s5) -[ra]-> (s1))
+CREATE q1=((s1) -[rb:event{id:"b"}]-> (s3))
+CREATE q2=((s3) -[rb]-> (s5))
+CREATE q3=((s5) -[rb]-> (s2))
+CREATE q4=((s2) -[rb]-> (s4))
+CREATE q5=((s4) -[rb]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE p1=((s1) -[ra:event{id:"a"}]-> (s2))
+CREATE p2=((s2) -[ra]-> (s3))
+CREATE p3=((s3) -[ra]-> (s4))
+CREATE p4=((s4) -[ra]-> (s5))
+CREATE p5=((s5) -[ra]-> (s1))
+CREATE q1=((s1) -[rb:event{id:"b"}]-> (s3))
+CREATE q2=((s3) -[rb]-> (s5))
+CREATE q3=((s5) -[rb]-> (s2))
+CREATE q4=((s2) -[rb]-> (s4))
+CREATE q5=((s4) -[rb]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE p1=((s1) -[ra:event{id:"a"}]-> (s2))
+CREATE p2=((s2) -[ra]-> (s3))
+CREATE p3=((s3) -[ra]-> (s4))
+CREATE p4=((s4) -[ra]-> (s5))
+CREATE p5=((s5) -[ra]-> (s1))
+CREATE (s1) -[rb:event{id:"b"}]-> (s3)
+CREATE q2=((s3) -[rb]-> (s5))
+CREATE q3=((s5) -[rb]-> (s2))
+CREATE q4=((s2) -[rb]-> (s4))
+CREATE q5=((s4) -[rb]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1) -[ra:event{id:"a"}]-> (s2)
+CREATE p2=((s2) -[ra]-> (s3))
+CREATE p3=((s3) -[ra]-> (s4))
+CREATE p4=((s4) -[ra]-> (s5))
+CREATE p5=((s5) -[ra]-> (s1))
+CREATE (s1) -[rb:event{id:"b"}]-> (s3)
+CREATE q2=((s3) -[rb]-> (s5))
+CREATE q3=((s5) -[rb]-> (s2))
+CREATE q4=((s2) -[rb]-> (s4))
+CREATE q5=((s4) -[rb]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}),(s2:status{id:2}),(s3:status{id:3}),(s4:status{id:4}),(s5:status{id:5})
+CREATE (s1) -[ra:event{id:"a"}]-> (s2)
+CREATE p2=((s2) -[ra]-> (s3))
+CREATE p3=((s3) -[ra]-> (s4))
+CREATE p4=((s4) -[ra]-> (s5))
+CREATE p5=((s5) -[ra]-> (s1))
+CREATE q1=((s1) -[rb:event{id:"b"}]-> (s3))
+CREATE q2=((s3) -[rb]-> (s5))
+CREATE q3=((s5) -[rb]-> (s2))
+CREATE q4=((s2) -[rb]-> (s4))
+CREATE q5=((s4) -[rb]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE p1=((s1:status {id:1}) -[ra:event{id:"a"}]-> (s2:status{id:2}))
+CREATE p2=((s2) -[ra]-> (s3:status{id:3}))
+CREATE p3=((s3) -[ra]-> (s4:status{id:4}))
+CREATE p4=((s4) -[ra]-> (s5:status{id:5}))
+CREATE p5=((s5) -[ra]-> (s1))
+CREATE q1=((s1) -[rb:event{id:"b"}]-> (s3))
+CREATE q2=((s3) -[rb]-> (s5))
+CREATE q3=((s5) -[rb]-> (s2))
+CREATE q4=((s2) -[rb]-> (s4))
+CREATE q5=((s4) -[rb]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}) -[ra:event{id:"a"}]-> (s2:status{id:2})
+CREATE p2=((s2) -[ra]-> (s3:status{id:3}))
+CREATE p3=((s3) -[ra]-> (s4:status{id:4}))
+CREATE p4=((s4) -[ra]-> (s5:status{id:5}))
+CREATE p5=((s5) -[ra]-> (s1))
+CREATE q1=((s1) -[rb:event{id:"b"}]-> (s3))
+CREATE q2=((s3) -[rb]-> (s5))
+CREATE q3=((s5) -[rb]-> (s2))
+CREATE q4=((s2) -[rb]-> (s4))
+CREATE q5=((s4) -[rb]-> (s1));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}) -[ra:event{id:"a"}]-> (s2:status{id:2})
+CREATE p2=((s2) -[ra]-> (s3:status{id:3}))
+CREATE p3=((s3:status) -[ra:event]-> (s4:status{id:4}))
+CREATE p4=((s4:status) -[ra:event]-> (s5:status{id:5}))
+CREATE p5=((s5:status) -[ra:event]-> (s1:status))
+CREATE q1=((s1:status) -[rb:event{id:"b"}]-> (s3:status))
+CREATE q2=((s3:status) -[rb:event]-> (s5:status))
+CREATE q3=((s5:status) -[rb:event]-> (s2:status))
+CREATE q4=((s2:status) -[rb:event]-> (s4:status))
+CREATE q5=((s4:status) -[rb:event]-> (s1:status));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}) -[ra:event{id:"a"}]-> (s2:status{id:2})
+CREATE p2=((s2:status) -[ra]-> (s3:status{id:3}))
+CREATE p3=((s3:status) -[ra:event]-> (s4:status{id:4}))
+CREATE p4=((s4:status) -[ra:event]-> (s5:status{id:5}))
+CREATE p5=((s5:status) -[ra:event]-> (s1:status))
+CREATE q1=((s1:status) -[rb:event{id:"b"}]-> (s3:status))
+CREATE q2=((s3:status) -[rb:event]-> (s5:status))
+CREATE q3=((s5:status) -[rb:event]-> (s2:status))
+CREATE q4=((s2:status) -[rb:event]-> (s4:status))
+CREATE q5=((s4:status) -[rb:event]-> (s1:status));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}) -[ra:event{id:"a"}]-> (s2:status{id:2})
+CREATE p2=((s2:status) -[ra]-> (s3:status{id:3}))
+CREATE p3=((s3:status) -[ra:event]-> (s4:status{id:4}))
+CREATE p4=((s4:status) -[ra:event]-> (s5:status{id:5}))
+CREATE p5=((s5:status) -[ra:event]-> (s1:status))
+CREATE q1=((s1:status) -[rb:event]-> (s3:status))
+CREATE q2=((s3:status) -[rb:event]-> (s5:status))
+CREATE q3=((s5:status) -[rb:event]-> (s2:status))
+CREATE q4=((s2:status) -[rb:event]-> (s4:status))
+CREATE q5=((s4:status) -[rb:event]-> (s1:status));
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}) -[ra:event{id:"a"}]-> (s2:status{id:2})
+CREATE p2=((s2:status) -[ra]-> (s3:status{id:3}))
+CREATE (s3:status) -[ra:event]-> (s4:status{id:4})
+CREATE (s4:status) -[ra:event]-> (s5:status{id:5})
+CREATE (s5:status) -[ra:event]-> (s1:status)
+CREATE (s1:status) -[rb:event]-> (s3:status)
+CREATE (s3:status) -[rb:event]-> (s5:status)
+CREATE (s5:status) -[rb:event]-> (s2:status)
+CREATE (s2:status) -[rb:event]-> (s4:status)
+CREATE (s4:status) -[rb:event]-> (s1:status);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}) -[ra:event{id:"a"}]-> (s2:status{id:2})-[ra]-> (s3:status{id:3})
+CREATE (s3:status) -[ra:event]-> (s4:status{id:4})
+CREATE (s4:status) -[ra:event]-> (s5:status{id:5})
+CREATE (s5:status) -[ra:event]-> (s1:status)
+CREATE (s1:status) -[rb:event]-> (s3:status)
+CREATE (s3:status) -[rb:event]-> (s5:status)
+CREATE (s5:status) -[rb:event]-> (s2:status)
+CREATE (s2:status) -[rb:event]-> (s4:status)
+CREATE (s4:status) -[rb:event]-> (s1:status);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}) -[ra:event{id:"a"}]-> (s2:status{id:2})
+CREATE (s2:status) -[ra]-> (s3:status{id:3})
+CREATE (s3:status) -[ra:event]-> (s4:status{id:4})
+CREATE (s4:status) -[ra:event]-> (s5:status{id:5})
+CREATE (s5:status) -[ra:event]-> (s1:status)
+CREATE (s1:status) -[rb:event]-> (s3:status)
+CREATE (s3:status) -[rb:event]-> (s5:status)
+CREATE (s5:status) -[rb:event]-> (s2:status)
+CREATE (s2:status) -[rb:event]-> (s4:status)
+CREATE (s4:status) -[rb:event]-> (s1:status);
+
+MATCH (n) DETACH DELETE n
+CREATE (s1:status {id:1}) -[ra:event{id:"a"}]-> (s2:status{id:2})
+CREATE (s2:status) -[ra:event]-> (s3:status{id:3})
+CREATE (s3:status) -[ra:event]-> (s4:status{id:4})
+CREATE (s4:status) -[ra:event]-> (s5:status{id:5})
+CREATE (s5:status) -[ra:event]-> (s1:status)
+CREATE (s1:status) -[rb:event]-> (s3:status)
+CREATE (s3:status) -[rb:event]-> (s5:status)
+CREATE (s5:status) -[rb:event]-> (s2:status)
+CREATE (s2:status) -[rb:event]-> (s4:status)
+CREATE (s4:status) -[rb:event]-> (s1:status);
+
+MATCH (n:status) RETURN n LIMIT 25;
+
+MATCH (:status{id:1})-[r:event]-{1,5}(:status{id:4}) RETURN r;
+
+MATCH p=shortestPath((:status{id:1})-[:event*1..10]->(:status{id:4})) RETURN p;
+
+MATCH p=shortestPath((:status{id:1})-[:event*1..10]->(:status{id:4})) RETURN p;
+
+MATCH p=shortestPath((:status{id:1})-[:event*1..10]->(:status{id:2})) RETURN p;
+
+MATCH p=shortestPath((:status{id:1})-[:event*3..10]->(:status{id:2})) RETURN p;
+
+MATCH p=shortestPath((:status{id:1})-[:event*1..5]->(:status{id:2})) RETURN p;
+
+MATCH p=shortestPath((:status{id:1})-[:event*1..5]->(:status{id:5})) RETURN p;
+
+MATCH p=shortestPath((:status{id:1})-[:event*1..5]->(:status{id:3})) RETURN p;
+
+MATCH p=shortestPath((:status{id:1})-[:event*1..5]->(:status{id:4})) RETURN p;
+
+MATCH p=shortestPath(:status{id:1})-[:event*1..5]->(:status{id:4}) RETURN p;
+
+MATCH (:status{id:1})-[:event{id:"a"}]->(n:status) RETURN n.id;
+
+MATCH (n:Category) RETURN n LIMIT 25;
+
+CREATE (:status {id:1}) -[:event{id:"a"}]-> (:status{id:2})
+CREATE (:status {id:2}) -[:event{id:"a"}]-> (:status{id:3})
+CREATE (:status {id:3}) -[:event{id:"a"}]-> (:status{id:4})
+CREATE (:status {id:4}) -[:event{id:"a"}]-> (:status{id:5})
+CREATE (:status {id:5}) -[:event{id:"a"}]-> (:status{id:1})
+CREATE (:status {id:1}) -[:event{id:"b"}]-> (:status{id:3})
+CREATE (:status {id:3}) -[:event{id:"b"}]-> (:status{id:5})
+CREATE (:status {id:5}) -[:event{id:"b"}]-> (:status{id:2})
+CREATE (:status {id:2}) -[:event{id:"b"}]-> (:status{id:4})
+CREATE (:status {id:4}) -[:event{id:"b"}]-> (:status{id:1});
+
+CREATE (:status {id:1}) -[:event{id:a}]-> (:status{id:2})
+CREATE (:status {id:2}) -[:event{id:a}]-> (:status{id:3})
+CREATE (:status {id:3}) -[:event{id:a}]-> (:status{id:4})
+CREATE (:status {id:4}) -[:event{id:a}]-> (:status{id:5})
+CREATE (:status {id:5}) -[:event{id:a}]-> (:status{id:1})
+CREATE (:status {id:1}) -[:event{id:b}]-> (:status{id:3})
+CREATE (:status {id:3}) -[:event{id:b}]-> (:status{id:5})
+CREATE (:status {id:5}) -[:event{id:b}]-> (:status{id:2})
+CREATE (:status {id:2}) -[:event{id:b}]-> (:status{id:4})
+CREATE (:status {id:4}) -[:event{id:b}]-> (:status{id:1});
+
+MATCH (n) DETACH DELETE n;
+
+MATCH (n) DETACH DELETE n;
+
+MATCH (cust:Customer)-[:PURCHASED]->(:Order)-[o:ORDERS]->(p:Product),
+      (p)-[:PART_OF]->(c:Category {categoryName:'Produce'})
+RETURN cust.contactName as CustomerName,
+       sum(o.quantity) AS TotalProductsPurchased;
+
+MATCH path=(c:Customer)-[:PURCHASED]->()-[:ORDERS]->(:Product)<-[:SUPPLIES]-(:Supplier)
+WHERE c.companyName = 'Blauer See Delikatessen'
+RETURN path;
+
+MATCH (n:Product)<-[r:SUPPLIES]-(s:Supplier {id:62})
+RETURN n,r,s
+LIMIT 50;
+
+MATCH (n:Product)<-[r:SUPPLIES]-(s:Supplier {id:62})
+RETURN n,r,s
+LIMIT 25;
+
+MATCH (n:Product)<-[r:SUPPLIES]-(s:Supplier {id:61})
+RETURN n,r,s
+LIMIT 25;
+
+MATCH (n:Product)<-[r:SUPPLIES]-(s:Supplier {id=61})
+RETURN n,r,s
+LIMIT 25;
+
+MATCH (n:Product)<-[r:SUPPLIES]-(s:Supplier {id:61})
+RETURN n,r,s
+LIMIT 25;
+
+MATCH (n:Product)<-[r:SUPPLIES]-(s:Supplier)
+RETURN n,r,s
+LIMIT 25;
+
+MATCH (n:Product) RETURN n LIMIT 25;
+
+MATCH (n:term) RETURN n LIMIT 25;
+
+MATCH (n:term) RETURN n LIMIT 25;
+
+MATCH (n:term) RETURN n LIMIT 25;
+
+MATCH (n:term) RETURN n LIMIT 25;
+
+MATCH (n) DETACH DELETE n;
+
+MATCH (n) DETACH DELETE n;
+
+MATCH (n) DETACH DELETE n;
+
+MERGE (index:term {id : "4b12ac08"}) RETURN index.name AS name;
+
+MATCH (n:term) RETURN n LIMIT 25;
+
+CREATE (n:term {name:'入门目录202404151600-3',id:'4b12ac08',readme:'\n      - \"可行\"是指：\n        - 方案的内容完整、准确、无二义性，具备相关岗位普通资质的人员可以自行阅读、使用。\n        - 在独立的第三方实施，可以按预期的比率产生预期的效果。\n       - 注意判断：成员下意识地把自己的工作特殊化、隐蔽化。'});
+
+CREATE (n:term {name:'入门目录202404151600-3',id:'4b12ac08',interface:{<term.4b12ac08.term.1>:"附件21",<term.4b12ac08.url.1>:"<a href=\"mailto:huangyg@mars22.com?subject=其他可行方案&body=name: 入门目录202404151600-3%0D%0Aid: 4b12ac08%0D%0A---请勿修改以上内容 从下一行开始写您的方案---%0D%0A\">发送电子邮件</a>​"},readme:'\n      - \"可行\"是指：\n        - 方案的内容完整、准确、无二义性，具备相关岗位普通资质的人员可以自行阅读、使用。\n        - 在独立的第三方实施，可以按预期的比率产生预期的效果。\n       - 注意判断：成员下意识地把自己的工作特殊化、隐蔽化。',item:[0:{localid:'',text:'\n          如果有其它可行方案请<term.4b12ac08.url.1>，我将按照<term.4b12ac08.term.1>核实。'}]});
