@@ -1,4 +1,9 @@
 {
+  "name": "huangyg-nosql",
+  "version": "1.0.0",
+  "description": "my samples about nosql",
+  "main": "neo4j.js",
+  
   "dependencies": {
     "jssm": "^5.98.2",
     "level": "^8.0.1",
