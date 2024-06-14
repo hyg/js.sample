@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "globby": "^14.0.1",
+    "isomorphic-git": "^1.25.10"
+  }
+}
