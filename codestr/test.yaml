@@ -3,4 +3,5 @@ item:
   30: 30str
   60: 60str
   195: 195str
-code: ./test.mjs
+mjs: ./test.mjs
+js: ./test.js
