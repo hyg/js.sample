@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "peerjs": "^1.4.2"
+  }
+}

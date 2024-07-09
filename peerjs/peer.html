@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="UTF-8">
+	<title>peerjs test 1</title>
+	<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+	<script>
+		var peer = new Peer("my-test-web-1");
+
+		peer.on('open', function (id) {
+			console.log('My peer ID is: ' + id);
+			//let peerid = prompt("请输入对方的id", "bc10b2ac-99be-48e6-99c6-2af662a3436e");
+			let peerid = "my-test-web-2";
+			var conn = peer.connect(peerid);
+
+			// on open will be launch when you successfully connect to PeerServer
+			conn.on('open', function () {
+				// here you have conn.id
+				conn.send('hi!');
+				//console.log('conn.id is: ' + conn.id);
+			});
+
+			conn.on('data', function (data) {
+				// Will print 'hi!'
+				console.log(data);
+				//console.log('conn.id is: ' + conn.id);
+				conn.send('My peer ID is: ' + peer.id)
+			});
+
+		});
+
+		peer.on('connection', function (conn) {
+			conn.on('data', function (data) {
+				// Will print 'hi!'
+				console.log(data);
+				//console.log('conn.id is: ' + conn.id);
+				conn.send('My peer ID is: ' + peer.id)
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div id="draft"></div>
+	<br /><br />
+	<hr /><br /><br />
+</body>
+
+</html>
