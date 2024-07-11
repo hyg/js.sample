@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="UTF-8">
+	<title>raw data page</title>
+
+	<script>
+		var dataurl = "http://www.eshian.com/yyss/1064.html";
+		
+
+		window.onload = function () {
+			getTextFileFromURL(dataurl, "data");
+		}
+
+		function getTextFileFromURL(url, id) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function () {
+				alert("xmlhttp.readyState: "+xmlhttp.readyState);
+				alert("xmlhttp.status: "+xmlhttp.status);
+				alert("xmlhttp.responseText: "+xmlhttp.responseText);
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					var text = xmlhttp.responseText;
+					document.getElementById(id).innerHTML = text;
+				}
+			};
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();
+		}
+	</script>
+</head>
+
+<body>
+	<div id="data"></div>
+	<hr /><br /><br />
+</body>
+
+</html>

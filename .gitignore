@@ -1,4 +1,6 @@
 node_modules/
+.dat/
+core/
 config.js
 /quniu/local/dev.yaml
 /qiniu/server/dev.yaml

@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "dependencies": {
+    "dat-node": "^4.0.1",
+    "dat-sdk": "^2.8.1",
+    "hyper-sdk": "^5.0.0",
+    "hypercore": "^10.37.10"
+  }
+}
