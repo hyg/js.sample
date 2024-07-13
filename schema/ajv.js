@@ -1,3 +1,4 @@
+const fs = require('fs');
 const yaml = require('js-yaml');
 const Ajv = require("ajv")
 const ajv = new Ajv() // options can be passed, e.g. {allErrors: true}
