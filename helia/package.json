@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@orbitdb/core": "^2.2.0",
+    "libp2p": "^1.8.1"
+  }
+}
