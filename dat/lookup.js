@@ -1,5 +1,5 @@
 import Hypercore from "hypercore";
-import Hyperswarm from'hyperswarm';
+import Hyperswarm from 'hyperswarm';
 
 const core = new Hypercore('./clone', process.argv[2])
 
@@ -11,7 +11,7 @@ async function start () {
   console.log("core.id: ",core.id);
   console.log("core.key: ",core.key);
   console.log("core:",core);
-  
+
   const swarm = new Hyperswarm()
   swarm.on('connection', socket => core.replicate(socket))
   swarm.join(core.discoveryKey, { server: false, client: true })
