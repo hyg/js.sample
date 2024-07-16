@@ -2,6 +2,8 @@
   "type": "module",
   "dependencies": {
     "@orbitdb/core": "^2.2.0",
+    "hypercore": "^10.37.10",
+    "hyperswarm": "^4.8.0",
     "libp2p": "^1.8.1"
   }
 }

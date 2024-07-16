@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ajv/8.17.1/ajv7.min.js"></script>
+    <script>
+        const schema = {
+            type: "object",
+            properties: {
+                foo: { type: "integer" },
+                bar: { type: "string" }
+            },
+            required: ["foo"],
+            additionalProperties: false
+        };
+        const data = {
+            foo: 1,
+            bar: "abc"
+        };
+        window.onload = function () {
+            const Ajv = window.ajv7;
+            const ajv = new Ajv();
+
+            var validate = ajv.compile(schema);
+            const valid = validate(data);
+            if (valid) {
+                document.getElementById("result").innerHTML = "pass";
+            } else {
+                document.getElementById("result").innerHTML = validate.errors;
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <hr />
+    <br />
+    <div id="result"></div>
+    <hr />
+    <br />
+</body>
+
+</html>
