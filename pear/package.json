@@ -1,0 +1,24 @@
+{
+  "name": "psmd-node",
+  "main": "index.js",
+  "type": "module",
+  "pear": {
+    "name": "psmd-node",
+    "type": "terminal"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "brittle": "^3.0.0"
+  },
+  "scripts": {
+    "dev": "pear dev",
+    "test": "brittle test/*.test.js"
+  },
+  "dependencies": {
+    "b4a": "^1.6.6",
+    "bare-readline": "^1.0.5",
+    "bare-tty": "^3.4.0",
+    "hypercore-crypto": "^3.4.2",
+    "hyperswarm": "^4.8.0"
+  }
+}
