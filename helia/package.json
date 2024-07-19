@@ -2,6 +2,7 @@
   "type": "module",
   "dependencies": {
     "@helia/ipns": "^7.2.2",
+    "@helia/json": "^3.0.4",
     "@helia/unixfs": "^3.0.6",
     "@libp2p/keychain": "^4.1.2",
     "@orbitdb/core": "^2.2.0",
@@ -9,6 +10,7 @@
     "hypercore": "^10.37.10",
     "hyperswarm": "^4.8.0",
     "ipns": "^9.1.0",
-    "libp2p": "^1.8.1"
+    "libp2p": "^1.8.1",
+    "multiformats": "^13.1.3"
   }
 }
