@@ -1,0 +1,122 @@
+{
+    "$defs": {
+        "Errorrelation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "errorid": {
+                    "type": "string"
+                },
+                "map": {
+                    "items": {
+                        "$ref": "#/$defs/Placeholder"
+                    },
+                    "type": "array"
+                },
+                "percent": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "title": "Errorrelation",
+            "type": "object"
+        },
+        "Placeholder": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "holder": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            },
+            "title": "Placeholder",
+            "type": "object"
+        },
+        "Term": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "depend": {
+                    "type": "string"
+                },
+                "effect": {
+                    "type": "string"
+                },
+                "event": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "interface": {
+                    "items": {
+                        "$ref": "#/$defs/Placeholder"
+                    },
+                    "type": "array"
+                },
+                "item": {
+                    "items": {
+                        "$ref": "#/$defs/Termitem"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "readme": {
+                    "type": "string"
+                },
+                "together": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "Term",
+            "type": "object"
+        },
+        "Termitem": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "localid": {
+                    "type": "string"
+                },
+                "map": {
+                    "items": {
+                        "$ref": "#/$defs/Placeholder"
+                    },
+                    "type": "array"
+                },
+                "readme": {
+                    "type": "string"
+                },
+                "termid": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                },
+                "upgradeby": {
+                    "type": "string"
+                }
+            },
+            "title": "Termitem",
+            "type": "object"
+        }
+    },
+    "$id": "https://raw.githubusercontent.com/hyg/ego/vat/data/term",
+    "additionalProperties": true,
+    "title": "term",
+    "type": "object"
+}

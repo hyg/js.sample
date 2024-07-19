@@ -1,0 +1,60 @@
+id: https://raw.githubusercontent.com/hyg/ego/vat/data/term
+name: term
+prefixes:
+  linkml: https://w3id.org/linkml/
+  task: https://raw.githubusercontent.com/hyg/ego/vat/data/term
+  ORCID: https://orcid.org/
+imports:
+  - linkml:types
+default_range: string
+default_prefix: term
+
+classes:
+  term:
+    attributes:
+      id:
+        identifier: true 
+      name:
+        required: true
+      interface:
+        multivalued: true
+        inlined: true
+        inlined_as_list: false
+        range: placeholder
+      item:
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        range: termitem
+      readme:
+      depend:
+      together:
+      effect:
+      event:
+      action:
+  placeholder:
+    attributes:
+      holder:
+      value:
+  termitem:
+    attributes:
+      localid:
+      text:
+      termid:
+      map:
+        multivalued: true
+        inlined: true
+        inlined_as_list: false
+        range: placeholder
+      readme:
+      upgradeby:
+  errorrelation:
+    attributes:
+      errorid:
+      percent:
+      map:
+        multivalued: true
+        inlined: true
+        inlined_as_list: false
+        range: placeholder
+      text:
