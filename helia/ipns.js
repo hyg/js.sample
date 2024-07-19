@@ -4,8 +4,8 @@ import { unixfs } from '@helia/unixfs'
 
 const helia = await createHelia()
 console.log("helia:",helia)
-const start = await helia.start()
-console.log("start:",start)
+//const start = await helia.start()
+//console.log("start:",start)
 
 const name = ipns(helia)
 console.log("name:",name)
@@ -32,5 +32,12 @@ await name.publish(peerId, cid)
 // resolve the name
 const result = await name.resolve(peerId)
 console.log("result:",result)
-
 console.info(result.cid, result.path)
+
+for await (const buf of fs.cat(cid)) {
+  console.info('cat bu cid:',buf)
+}
+
+for await (const buf of fs.cat(result.cid)) {
+  console.info('cat by result.cid:',buf)
+}
