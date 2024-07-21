@@ -1,0 +1,12 @@
+name: schema
+id: df0ad6e4
+parent id: 1cJ9sN
+start: 2024-10-50T00:00:00+08:00
+status: crit
+dependencies:
+readme: >
+  - data -> schema 迭代机制
+log: |
+  - D:\huangyg\git\js.sample\schema\README.md is  level 1: manifest text
+  - D:\huangyg\git\js.sample\schema\schema.md is level 1: manifest law v0
+  - D:\huangyg\git\js.sample\schema\schema.js is level 1: manifest code v0

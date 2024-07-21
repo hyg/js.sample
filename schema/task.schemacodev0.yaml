@@ -1,0 +1,14 @@
+name: schemacodev0
+id: 7c3cc8eb
+parent id: df0ad6e4
+start: 2024-10-50T00:00:00+08:00
+status: crit
+dependencies:
+readme: >
+  manifest code v0 of task schema
+log: |
+  - D:\huangyg\git\js.sample\schema\README.md is  level 1: manifest text
+  - D:\huangyg\git\js.sample\schema\schema.md is level 1: manifest law v0
+  - D:\huangyg\git\js.sample\schema\schema.js is level 1: manifest code v0
+    - make task: D:\huangyg\git\js.sample\schema\task.schemacodev0.yaml
+    - D:\huangyg\git\js.sample\schema\schema.js
