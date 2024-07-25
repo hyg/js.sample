@@ -6,6 +6,74 @@ function log(...s) {
     console.log(...s);
 }
 
+const objfilename = "./fsmobj.yaml";
+const fpmmetadata = {
+    init: "s0",
+    s: {
+        s0: "state 0",
+        s1: "state 1",
+        s2: "state 2",
+        s3: "state 3"
+    },
+    e: {
+        e0: "event 0",
+        e1: "event 1",
+        e2: "event 2"
+    },
+    a: {
+        a0: function (obj) {
+            log("action 0");
+        },
+        a1: function (obj) {
+            log("action 1");
+        },
+        a2: function (obj) {
+            log("action 2");
+        }
+    },
+    F: function (obj, event) {
+        log("state: %s\tevent: %s", obj.s, event);
+        if ((obj.s == "s0") & (event = "e0")) {
+            this.a0(obj);
+            this.a1(obj);
+            obj.s = "s1";
+        } else if ((obj.s == "s0") & (event = "e1")) {
+            this.a2(obj);
+            obj.s = "s2";
+        } else if ((obj.s == "s1") & (event = "e1")) {
+            this.a1(obj);
+            obj.s = "s3";
+        } else if ((obj.s == "s2") & (event = "e1")) {
+            this.a2(obj);
+            obj.s = "s3";
+        } else if ((obj.s == "s3") & (event = "e0")) {
+            module.exports.release(obj);
+        } else if ((obj.s == "s3") & (event = "e1")) {
+            this.a1(obj);
+            obj.s = "s0";
+        } else if ((obj.s == "s3") & (event = "e2")) {
+            this.a2(obj);
+            obj.s = "s3";
+        }else {
+            log("do nothing.")
+        }
+    }
+}
+
 module.exports = {
-    
+    init: function (id, parent) {
+
+    },
+    save: function (obj) {
+
+    },
+    load: function () {
+
+    },
+    event: function (obj, event) {
+
+    },
+    release: function () {
+
+    }
 }

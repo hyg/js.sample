@@ -7,7 +7,7 @@ function log(...s) {
     console.log(...s);
 }
 
-const objfilename = "./obj.yaml";
+const objfilename = "./fpmobj.yaml";
 const fpmmetadata = {
     init: "p0",
     p: {    
@@ -47,6 +47,8 @@ const fpmmetadata = {
 
 module.exports = {
     debug: true,
+    active: false,
+    parent: null,
     init: function(id){
         var obj = new Object();
         obj.p = fpmmetadata.init;

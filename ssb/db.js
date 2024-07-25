@@ -1,6 +1,10 @@
 const SecretStack = require('secret-stack')
 const caps = require('ssb-caps')
 
+console.log(caps) // JSON object: {shs, sign}
+console.log(caps.shs) // this is a string to be interpreted as base64
+console.log(caps.sign) // this is so far null
+
 const sbot = SecretStack({ caps })
   .use(require('ssb-db2'))
   .call(null, { path: './' })
