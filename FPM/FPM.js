@@ -24,19 +24,19 @@ const fpmmetadata = {
         e5: "effect e"
     },
     F: function(obj){
-        if((obj.p == "p0") &(obj.log)){
+        if((obj.p == "p0") &&(obj.log)){
             obj.p = "p1";
             return "e1";
-        }else if((obj.p == "p1") &(obj.log)){
+        }else if((obj.p == "p1") &&(obj.log)){
             obj.p = "p2";
             return "e2";
-        }else if((obj.p == "p1") &(!obj.log)){
+        }else if((obj.p == "p1") &&(!obj.log)){
             obj.p = "p3";
             return "e3";
-        }else if((obj.p == "p3") &(obj.log)){
+        }else if((obj.p == "p3") &&(obj.log)){
             obj.p = "p4";
             return "e4";
-        }else if((obj.p == "p4") &(obj.log)){
+        }else if((obj.p == "p4") &&(obj.log)){
             obj.p = "p0";
             return "e5";
         }else{
@@ -62,7 +62,7 @@ module.exports = {
     joint: function(id1,id2,termid){
 
     },
-    spilit: function(obj,data){
+    split: function(obj,data){
 
     },
     save:function(obj){
