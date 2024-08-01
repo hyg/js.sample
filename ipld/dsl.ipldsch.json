@@ -1,0 +1,28 @@
+{
+  "types": {
+    "SimpleStruct": {
+      "struct": {
+        "fields": {
+          "foo": {
+            "type": "Int"
+          },
+          "bar": {
+            "type": "Bool"
+          },
+          "baz": {
+            "type": "String"
+          }
+        },
+        "representation": {
+          "map": {}
+        }
+      }
+    },
+    "MyMap": {
+      "map": {
+        "keyType": "String",
+        "valueType": "SimpleStruct"
+      }
+    }
+  }
+}

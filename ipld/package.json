@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@ipld/schema": "^5.0.0"
+  }
+}
