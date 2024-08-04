@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
-    "@ipld/schema": "^5.0.0"
+    "@ipld/schema": "^5.0.0",
+    "js-yaml": "^4.1.0"
   }
 }

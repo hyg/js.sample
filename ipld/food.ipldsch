@@ -1,0 +1,15 @@
+type foodlog struct{
+    date Int
+    food [logitem]
+    water [logitem]
+    med [logitem]
+    log String
+    comment String
+} representation map
+
+type logitem struct{
+    time Int
+    name String
+    amount Float
+    unit String
+}representation map

@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "dids": "^5.0.2",
+    "key-did-provider-ed25519": "^4.0.2",
+    "key-did-resolver": "^4.0.0"
+  }
+}
