@@ -1,6 +1,7 @@
 var yaml = require('js-yaml');
 const FPM = require('./FPM.js');
-const FSM = require('./FSM.js');
+//const FSM = require('./FSM.js');
+import { FSM } from './FSM';
 
 const { Command } = require('commander');
 var program = new Command();
@@ -129,7 +130,9 @@ FSMcmd
     .description('FSM测试，功能不定。')
     .action((data) => {
         log("test:", data);
-        fsmobj=FSM.load();
+        var f = new FSM();
+        f.debug = true;
+        console.log("FSMt test, f.debug:",f.debug);
     });
 
 program.parse();
