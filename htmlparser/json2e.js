@@ -33,7 +33,7 @@ function parseeshian(table) {
             //console.log("j: %d\nitem:", j, item);
             if (item.th != null) {
                 key = item.th;
-            } else if (item.td != null) {
+            } else if ((item.td != null)&&(item.td != "—")) {
                 value = item.td;
                 data[key] = value;
                 //console.log("key: %s\t value: %s", key, value);
