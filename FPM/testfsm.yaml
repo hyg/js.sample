@@ -1,0 +1,13 @@
+name: testfsm
+init: s0
+state:
+  s0: "state 0"
+  s1: "state 1"
+  s2: "state 2"
+  s3: "state 3"
+event:
+  e0: "event 0"
+  e1: "event 1"
+  e2: "event 2"
+action:
+  
