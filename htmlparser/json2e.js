@@ -5,7 +5,7 @@ const args = process.argv.slice(2);
 const jsonfilename = args[0];
 const data = JSON.parse(fs.readFileSync(jsonfilename, 'utf8'));
 
-const NRVpath = "../../raw/food/NRV.202409b.yaml";
+const NRVpath = "../../raw/food/NRV.202410a.yaml";
 const DRIspath = "../../raw/food/DRIs.DRIforChina2023.yaml";
 
 function log(...s) {

@@ -1,0 +1,17 @@
+id: 1
+name: vat
+manifest:
+  - manifest: free
+    tag: v0.1
+    path: .\vat.v0.1.md
+  - manifest: code
+    tag: v0.1
+    path: .\vat.v0.1.js
+  - manifest: free
+    tag: v0.2
+    vat: vat
+    data: .\vat.yaml
+event:
+  - tofree
+  - tolaw
+  - tocode
