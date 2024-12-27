@@ -134,7 +134,8 @@ function makefoodyaml(data){
 
     for(var name in datamap){
         //log("name:",name);
-        if((data[name] != null)&(data[name]!= "-")){
+        //log("data[name]:[%s]",data[name]);
+        if((data[name] != null)&(data[name]!= undefined)&(data[name]!= "-")&(data[name]!= "—")&(data[name]!= "…")&(data[name]!= 0)){
             //log("datamap[%s]:",name,datamap[name]);
             //log("datamap[%s].unit:",name,datamap[name].unit);
             //log("DRIs.element[datamap[%s].key]:",name,DRIs.element[datamap[name].key]);
