@@ -18,12 +18,12 @@ var commitmsg = `- 10:00~13:59	js: [git sample](#20250312100000)
 - 14:00~14:29	raw: [复习五元庄第四式](#20250312140000)
 - 14:30~14:59	raw: [复习五元庄第五式](#20250312143000)
 - 16:00~16:59	learn: [graphsync protocol](#20250312160000)`;
-gitstep("D:\\huangyg\\git\\blog",commitmsg);
-gitstep("D:\\huangyg\\git\\draft",commitmsg);
-gitstep("D:\\huangyg\\git\\ego",commitmsg);
-gitstep("D:\\huangyg\\git\\js.sample",commitmsg);
+gitstep("D:\\huangyg\\git\\blog",commitmsg,"all");
+gitstep("D:\\huangyg\\git\\draft",commitmsg,"gitee");
+gitstep("D:\\huangyg\\git\\ego",commitmsg,"all");
+gitstep("D:\\huangyg\\git\\js.sample",commitmsg,"all");
 
-async function gitstep(path,msg){
+async function gitstep(path,msg,remote){
       let statusSummary = null;
    try {
       statusSummary = await simpleGit(path).status();
@@ -36,7 +36,7 @@ async function gitstep(path,msg){
       .env('GIT_SSH_COMMAND', GIT_SSH_COMMAND)
       .add('./*')
       .commit(msg)
-      .push('all', 'master')
+      .push(remote, 'master')
       .then((data) => {
          console.log('success:',path,"\n",data);
       })
