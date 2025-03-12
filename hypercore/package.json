@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "hypercore": "^11.0.44",
+    "nanoassert": "^2.0.0"
+  }
+}

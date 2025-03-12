@@ -32,7 +32,7 @@ async function gitstep(path,msg){
    }
    if(statusSummary.files != []){
       console.log("file changed:",statusSummary.files);
-      simpleGit(path,{autocrlf:false})
+      simpleGit(path,{ config: ['core.autocrlf=false'] })
       .env('GIT_SSH_COMMAND', GIT_SSH_COMMAND)
       .add('./*')
       .commit(msg)

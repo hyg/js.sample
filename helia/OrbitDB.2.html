@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>IPFS in the Browser via Helia</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@orbitdb/core@2.5.0/dist/orbitdb.min.js"></script>
+    <script src="https://unpkg.com/helia@5.2.1/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/libp2p@2.7.4/dist/index.min.js"></script>
+    <script nomodule>
+      alert('Your browser does not support importing ESM modules')
+    </script>
+    <script>
+      const libp2p = await createLibp2p({ /* Libp2p options */ })
+      const ipfs = await createHelia({ libp2p }) // Helia is required for storage and network
+      const orbitdb = await createOrbitDB({ ipfs })
+      const theirdb = await orbitdb.open('/orbitdb/zdpuAuK3BHpS7NvMBivynypqciYCuy2UW77XYBPUYRnLjnw13')
+      for await (let record of theirdb.iterator()) {
+        alert(record)
+      }
+  </script>
+  </head>
+  <body>
+
+  </body>
+  <style>
+    #runningLog span {
+      display: block;
+    }
+  </style>
+
+</html>

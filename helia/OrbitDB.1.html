@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>IPFS in the Browser via Helia</title>
+
+  <script src="orbitdb.min.js"></script>
+  <script src="helia.min.js"></script>
+  <script src="libp2p.min.js"></script>
+  <script>
+    alert('hi');
+    init();
+    async function init(params) {
+      const libp2p = await createLibp2p({});
+      alert(libp2p);
+      const ipfs = await createHelia({ libp2p });
+      const orbitdb = await createOrbitDB({ ipfs });
+      const mydb = await orbitdb.open('mydb');
+      alert(mydb.address);
+      alert("hello world!");
+    }
+  </script>
+</head>
+
+<body>
+
+</body </html>

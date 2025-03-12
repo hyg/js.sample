@@ -11,10 +11,10 @@ const obj = {
     c: 'string'
   }
 }
-
+//console.log("CID:", CID.parse('QmaozNR7DZHQK1ZcU9p7QdrshMvXqWK6gpu5rmrkPdT3L4'))
 let data = encode(obj)
 console.log("data:",data)
 let decoded = decode(data)
 console.log("decoded:",decoded)
-decoded.y[0] // 2
-CID.asCID(decoded.z.a) // cid instance
+console.log("decoded.y[0]",decoded.y[0]) // 2
+console.log("CID.asCID(decoded.z.a):",CID.asCID(decoded.z.a)) // cid instance
