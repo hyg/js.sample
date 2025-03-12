@@ -30,7 +30,7 @@ async function gitstep(path,msg,remote){
    } catch (e) {
       // handle the error
    }
-   if(statusSummary.files != []){
+   if(statusSummary.files.length){
       console.log("file changed:",statusSummary.files);
       simpleGit(path,{ config: ['core.autocrlf=false'] })
       .env('GIT_SSH_COMMAND', GIT_SSH_COMMAND)
