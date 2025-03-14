@@ -5,7 +5,7 @@ import { CID } from 'multiformats/cid'
 import { json } from '@helia/json'
 
 const helia = await createHelia()
-console.log("helia:",helia)
+//console.log("helia:",helia)
 
 // store some data to publish
 /*
@@ -20,14 +20,17 @@ for await (const buf of fs.cat(cid)) {
 */
 
 const name = ipns(helia)
-console.log("name:",name)
+//console.log("name:",name)
 const j = json(helia)
-console.log("j:",j)
+//console.log("j:",j)
 
 //const cid = CID.parse("bafzbeiedgxvd4c6sudmqrwoswe5kc3dqlopkqmcyidzosq6nntdqejwv7e")
 //const peerId = await j.get(cid)
-//const peerId = "QmbXWLrgz3rciF9rqGf59i6iKPmy3fdPNSFXTiYhYAK66W"
-const peerId = await helia.libp2p.services.keychain.exportPeerId("my-key")
+
+//const peerId = "Qmb34yqGKZWknCPdT2SEqT91BP6eTxNYkavkkmdveu7ZsF";
+//const addr =  CID.parse("bafkreifzjut3te2nhyekklss27nh3k72ysco7y32koao5eei66wof36n5e")
+//const peerId = await j.get(addr)
+const peerId = ipns.name.("Qmb34yqGKZWknCPdT2SEqT91BP6eTxNYkavkkmdveu7ZsF")
 console.log("peerId:",peerId)
 
 const result = await name.resolve(peerId)

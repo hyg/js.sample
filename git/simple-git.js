@@ -14,10 +14,10 @@ async function status(workingDir) {
 // using the async function
 //status("D:\\huangyg\\git\\raw").then((status) => console.log(status));
 
-var commitmsg = `- 10:00~13:59	js: [git sample](#20250312100000)
-- 14:00~14:29	raw: [复习五元庄第四式](#20250312140000)
-- 14:30~14:59	raw: [复习五元庄第五式](#20250312143000)
-- 16:00~16:59	learn: [graphsync protocol](#20250312160000)`;
+var commitmsg = `- 11:57~17:16	learn: [Secure ScuttleButt](#20250314115700)
+- 14:00~14:00	raw: [复习五元庄第六式](#20250314140000)
+- 14:30~14:30	raw: [复习五元庄第七式](#20250314143000)
+- 16:00~16:00	js: [learn Orbitdb](#20250314160000)`;
 gitstep("D:\\huangyg\\git\\blog",commitmsg,"all",'master');
 gitstep("D:\\huangyg\\git\\draft",commitmsg,"gitee",'master');
 gitstep("D:\\huangyg\\git\\ego",commitmsg,"all",'vat');
