@@ -1,5 +1,5 @@
-2025/03/04-16:20:54.518 f110 Recovering log #3
-2025/03/04-16:20:54.518 f110 Level-0 table #5: started
-2025/03/04-16:20:54.528 f110 Level-0 table #5: 357 bytes OK
-2025/03/04-16:20:54.528 f110 Delete type=0 #3
-2025/03/04-16:20:54.528 f110 Delete type=3 #2
+2025/03/16-17:00:34.568 e50c Recovering log #6
+2025/03/16-17:00:34.569 e50c Level-0 table #8: started
+2025/03/16-17:00:34.573 e50c Level-0 table #8: 357 bytes OK
+2025/03/16-17:00:34.579 e50c Delete type=0 #6
+2025/03/16-17:00:34.579 e50c Delete type=3 #4
