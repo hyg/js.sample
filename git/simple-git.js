@@ -14,7 +14,7 @@ async function status(workingDir) {
 // using the async function
 //status("D:\\huangyg\\git\\raw").then((status) => console.log(status));
 
-var commitmsg = `准备合拢。`;
+var commitmsg = `- 16:00~16:59	js: [js class](#20250320160000)`;
 gitstep("D:\\huangyg\\git\\blog",commitmsg,"all",'master');
 gitstep("D:\\huangyg\\git\\draft",commitmsg,"gitee",'master');
 gitstep("D:\\huangyg\\git\\ego",commitmsg,"all",'vat');
