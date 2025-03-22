@@ -14,7 +14,9 @@ async function status(workingDir) {
 // using the async function
 //status("D:\\huangyg\\git\\raw").then((status) => console.log(status));
 
-var commitmsg = `- 16:00~18:59	js: [js class](#20250321160000)`;
+var commitmsg = `- 09:30~12:29	ego: [新版基础模型](#20250322093000)
+- 14:00~15:29	ego: [新版实时手稿](#20250322140000)
+- 16:00~16:00	js: [js class](#20250322160000)`;
 gitstep("D:\\huangyg\\git\\blog",commitmsg,"all",'master');
 gitstep("D:\\huangyg\\git\\draft",commitmsg,"gitee",'master');
 gitstep("D:\\huangyg\\git\\ego",commitmsg,"all",'vat');
