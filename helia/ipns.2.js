@@ -30,7 +30,7 @@ const j = json(helia)
 //const peerId = "Qmb34yqGKZWknCPdT2SEqT91BP6eTxNYkavkkmdveu7ZsF";
 //const addr =  CID.parse("bafkreifzjut3te2nhyekklss27nh3k72ysco7y32koao5eei66wof36n5e")
 //const peerId = await j.get(addr)
-const peerId = ipns.name("Qmb34yqGKZWknCPdT2SEqT91BP6eTxNYkavkkmdveu7ZsF")
+//const peerId = ipns.name("Qmb34yqGKZWknCPdT2SEqT91BP6eTxNYkavkkmdveu7ZsF")
 console.log("peerId:",peerId)
 
 const result = await name.resolve(peerId)
