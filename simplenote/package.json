@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "simplenote": "^0.0.2",
+    "simplenote-sync": "^0.0.2"
+  }
+}

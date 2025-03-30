@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "gist": "^0.2.0",
+    "gist-box": "^0.3.1"
+  }
+}
