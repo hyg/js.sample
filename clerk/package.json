@@ -1,0 +1,6 @@
+{
+  "type": "module" ,
+  "dependencies": {
+    "@clerk/clerk-js": "^5.63.5"
+  }
+}
