@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "json-query": "^2.2.2"
+  }
+}
