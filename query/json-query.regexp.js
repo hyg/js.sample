@@ -30,7 +30,7 @@ function loadAER(year) {
     var voucherfolder = "../../ego/data/voucher/" + year;
     fs.readdirSync(voucherfolder).forEach(file => {
         if (file.substr(0, 4) == "AER.") {
-            var AER = yaml.load(fs.readFileSync(voucherfolder + "/" + file, 'utf8'), { schema: yaml.FAILSAFE_SCHEMA });
+            var AER = yaml.load(fs.readFileSync(voucherfolder + "/" + file, 'utf8'), { schema: yaml.CORE_SCHEMA});
             AERmap[file] = AER;
         }
     });
