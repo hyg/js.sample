@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "@jsonquerylang/jsonquery": "^5.0.3",
     "js-yaml": "^4.1.0",
-    "json-query": "^2.2.2"
+    "json-query": "^2.2.2",
+    "lodash": "^4.17.21"
   }
 }
