@@ -13,15 +13,15 @@ var yaml = require('js-yaml');
 } */
 
 function loadAER(year) {
-    var AERmap = new Object();
-    var voucherfolder = "../../ego/data/voucher/" + year;
-    fs.readdirSync(voucherfolder).forEach(file => {
-        if (file.substr(0, 4) == "AER.") {
-            var AER = yaml.load(fs.readFileSync(voucherfolder + "/" + file, 'utf8'), { schema: yaml.CORE_SCHEMA });
-            AERmap[file] = AER;
-        }
-    });
-    return AERmap;
+  var AERmap = new Object();
+  var voucherfolder = "../../ego/data/voucher/" + year;
+  fs.readdirSync(voucherfolder).forEach(file => {
+    if (file.substr(0, 4) == "AER.") {
+      var AER = yaml.load(fs.readFileSync(voucherfolder + "/" + file, 'utf8'), { schema: yaml.CORE_SCHEMA });
+      AERmap[file] = AER;
+    }
+  });
+  return AERmap;
 }
 var AERmap = loadAER(2025);
 
@@ -55,4 +55,15 @@ result = jsonquery(AERmap, `
   values()
     | filter((.date > "2025-05-13") and (.date < "2025-05-15"))
   `);
-console.log(yaml.dump(result));
+//console.log(yaml.dump(result));
+
+try {
+  result = jsonquery(AERmap, `
+  values() 
+    | filter(substring(.date,0,7) == "2025-04")
+  `)
+} catch (err) {
+  console.log(err.jsonquery);
+}
+
+  console.table(result);

@@ -25,7 +25,7 @@ var users = [
     { 'user': 'pebbles', 'age': 1, 'active': true }
 ];
 
-var result = _.filter(users, function (o) { return o.active; });
+var result = _.filter(users, function (o) { return !o.active; });
 // => objects for ['fred']
 
 // The `_.matches` iteratee shorthand.
@@ -48,13 +48,30 @@ var AERmap = loadAER(2025);
 const date1 = new Date('2025-05-13');
 const date2 = new Date('2025-05-15');
 
-result = _.filter(AERmap,function (o) { 
+result = _.filter(AERmap, function (o) {
     const date = new Date(o.date);
-    if (date > date1 & date < date2){
-        return o; 
+    if (date > date1 & date < date2) {
+        return o;
     }
-}); 
+});
 
+const str1 = '2025-05-15';
+const str2 = '2025-05-18';
+
+result = _.filter(AERmap, function (o) {
+    if (o.date > str1 & o.date < str2) {
+        return o;
+    }
+});
+
+result = _.filter(AERmap, ['date', str1]);
+//console.log(result);
 //result = _.chain(users).value();
-
+//log(_.inRange("16","17","18"));
+// result = _.chain(users).gte('age', 30).value(); 
+//log(_.gte("2025-05-14","2025-05-15"));
+result = _(AERmap)
+    .filter(o => o.date > str1 & o.date < str2)
+    .value();
+//log(_.split('2025-05-15','-',2))
 log(yaml.dump(result));
