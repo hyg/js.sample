@@ -7,4 +7,6 @@ function log(...s) {
 }
 
 term.init();
-log(yaml.dump(term.metadata));
+//log(yaml.dump(term.metadata));
+log("%o",term.metadata);
+term.metadata.code["1.e1"]();
