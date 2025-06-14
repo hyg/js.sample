@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "esm": "^3.2.25",
     "js-yaml": "^4.1.0"
   }
 }
