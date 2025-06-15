@@ -8,5 +8,12 @@ function log(...s) {
 
 term.init();
 //log(yaml.dump(term.metadata));
-log("%o",term.metadata);
-term.metadata.code["1.e1"]();
+//log("%o",term.metadata);
+term.code["1.e1"]();
+term.code["1.e2"]();
+term.code["1.e2"]();
+term.code["1.e2"]();
+term.code["2.e10"]();
+term.code["2.e10"]();
+term.code["1.e2"]();
+//log("%o",term.metadata);

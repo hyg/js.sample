@@ -1,58 +1,61 @@
 
-module.exports = {
-    metadata: {
+exports.metadata = {
         id: "111111",
         name: "term1",
-        text: "term1 text",
-        readme: "term1 readme",
-        env: {
+        readme: "term1 readme"};
+exports.text =  "term1 text";
+
+exports.env = {
         	rule: ["r0","r1","r2"],
         	event: ["e0","e1","e2"],
         	state: ["s0","s1","s2"],
         	action: ["a0","a1","a2"],
         	asset: []
-        },
-        code: {
-        	state: "s0",
+        };
+
+var state = "s0";
+exports.code = {
         	e0: function(){
-        		this.state = "s0";	
+                console.log("enter e0. state=",state);
+        		 state = "s0";	
         	},
         	e1: function(){
-        		console.log("enter e1");
-        		this.state = "s1";
+        		console.log("enter e1. state=",state);
+        		 state = "s1";
         		//console.log("%o",this);
-        		this.a1("r0");
+        		 a1("r0");
         	},
         	e2: function(){
+                console.log("enter e2. state=",state);
         		var ret ;
-        		switch(this.state){
+        		switch( state){
         			case "s0":
-        				this.state = "s1";
-        				this.a0("r0");
-        				this.a2("r1");
+        				 state = "s1";
+        				 a0("r0");
+        				 a2("r1");
         				break;
         			case "s1":
-        			     this.state = "s2";
-        			     this.a1("r0");
-        			     this.a0("r1");
+        			      state = "s2";
+        			      a1("r0");
+        			      a0("r1");
         			     break;
         			case "s2":
-        				this.state = "s0";
-        				this.a0("r0");
-        				this.a1("r1");
+        				 state = "s0";
+        				 a0("r0");
+        				 a1("r1");
         			    break;
         		}
         		return ret;
-        	},
-        	a0: function(rule){
+        	}
+        };
+
+        	function a0(rule){
         		console.log(rule+": action a0.");
-       		},
-        	a1: function(rule){
+       		};
+            
+        	function a1(rule){
            		console.log(rule+": action a1.");
-           	},
-	        a2: function(rule){
+           	};
+	        function a2(rule){
 	        	console.log(rule+": action a2.");
-           	}
-        }
-    }
-}
+           	};
