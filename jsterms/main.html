@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="UTF-8">
+	<script src="term1.html.js"></script>
+	<script>
+		alert(metadata);
+		function event1() {
+			//code.e1();
+		}
+		function event2() {
+			//code.e2();
+		}
+	</script>
+	<script type="module">
+		import * as term1 from './term1.mjs';
+		alert(term1.env);
+		let btn1 = document.getElementById("event 1");
+		let btn2 = document.getElementById("event 2");
+		btn1.addEventListener("click", function () {
+			code.e1();
+			term1.code.e1();
+		}
+		);
+		btn2.addEventListener("click", function () {
+			code.e2();
+			term1.code.e2();
+		}
+		);
+	</script>
+</head>
+
+<body>
+	<input type="button" id="event 1" value="event 1" onclick="event1()"></input>
+	<input type="button" id="event 2" value="event 2" onclick="event2()"></input>
+	<br />
+</body>
+
+</html>
