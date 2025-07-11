@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="bundle12.js"></script>
+    <script>
+        var term = require('term');
+        console.log("%o", term);
+        term.init();
+
+        function event1() {
+            term.code["1.e1"]();
+            term.code["2.e10"]();
+        }
+        function event2() {
+            term.code["1.e2"]();
+            term.code["2.e11"]();
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" id="event 1" value="event 1" onclick="event1()"></input>
+    <input type="button" id="event 2" value="event 2" onclick="event2()"></input>
+    <br />
+</body>
+
+</html>
