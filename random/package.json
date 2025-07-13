@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "axios": "^1.9.0"
+    "axios": "^1.9.0",
+    "rdrand-lite": "^1.4.12",
+    "trng": "^0.0.1"
   }
 }
