@@ -212,8 +212,8 @@ const str2 = "2025-05-17";
 - red
 - 19.95
 */
-result = jp.query(Object.values(AERmap), '$[?(@.date> "2025-05-10" && @.date< "2025-05-16")]');
-
+//result = jp.query(Object.values(AERmap), '$[?(@.date> "2025-05-10" && @.date< "2025-05-16")]');
+result = jp.query(Object.values(AERmap), '$[?(@.date.match("2025-06"))]');
 
 log(yaml.dump(result));
 //console.table(result);  

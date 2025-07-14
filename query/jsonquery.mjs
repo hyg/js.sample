@@ -66,4 +66,14 @@ try {
   console.log(err.jsonquery);
 }
 
-  console.table(result);
+/* 
+try {
+  result = jsonquery(AERmap, `
+  values() 
+    | filter(.date.match("2025-06"))
+  `)
+} catch (err) {
+  console.log("err: %o",err.jsonquery);
+} */
+console.log(result);
+console.table(result);
