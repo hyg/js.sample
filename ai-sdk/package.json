@@ -1,0 +1,8 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@ai-sdk/deepseek": "^0.2.15",
+    "@ai-sdk/mistral": "^1.2.8",
+    "ai": "^4.3.18"
+  }
+}
