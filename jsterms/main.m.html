@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+    </script>
+    <script type="module">
+        import * as term1 from './term1.mjs';
+        //alert(term1.env);
+        import * as term2 from './term2.mjs';
+        //alert(term2.env);
+        var term = term1;
+
+        let btn1 = document.getElementById("event 1");
+        let btn2 = document.getElementById("event 2");
+        btn1.addEventListener("click", function () {
+            //code.e1();
+            //term.code.e1();
+
+            var str = "term.code." + term.env.event[0] + "()";
+            alert(str);
+            eval(str);
+            turn(term1)
+        }
+        );
+        btn2.addEventListener("click", function () {
+            //code.e2();
+            var str = "term.code." + term.env.event[1] + "()";
+            alert(str);
+            eval(str);
+            //term.code.e2();
+            turn(term2);
+        }
+        );
+
+        function turn(fsm) {
+            console.log("enter turn:",fsm);
+            term = fsm;
+            var div = document.getElementById("event");
+            while (div.firstChild) {
+                div.removeChild(div.firstChild);
+            }
+
+            for (var i in term.env.event) {
+                var event = term.env.event[i];
+                console.log("add:", event);
+
+                var button = document.createElement("button");
+                button.innerHTML = event;
+                button.addEventListener("click", function () {
+                    var str = "term.code." + event + "()";
+                    //alert(str);
+                    eval(str);
+                    //term.code.e2();
+                    console.log("fsm:",term.metadata.name);
+                    if (term.metadata.name == "term1") {
+                        turn(term2);
+                    }else if (term.metadata.name == "term2") {
+                        turn(term1);
+                    }
+                }
+                );
+                div.appendChild(button);
+
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="event">
+        <input type="button" id="event 1" value="event 1"></input>
+        <input type="button" id="event 2" value="event 2"></input>
+    </div>
+    <br />
+</body>
+
+</html>
