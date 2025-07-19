@@ -1,0 +1,30 @@
+{
+  "name": "jami-startup-bot",
+  "version": "1.0.0",
+  "description": "Jami聊天机器人 - 创业筹备会议",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "dbus-next": "^0.10.2",
+    "dotenv": "^16.3.1",
+    "lodash": "^4.17.21",
+    "uuid": "^9.0.1",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "jami",
+    "chatbot",
+    "startup",
+    "meeting"
+  ],
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>食品安全查询系统_食品安全技术服务平台-食安通官网</title>
+<link rel="stylesheet" href="/css/style.css">
+<style type="text/css">
+.err {
+	text-align: center;
+	padding-top: 2em;
+	padding-bottom: 2em;
+	background-color: #daf1f5;
+}
+</style>
+<!--[if IE 8]> 
+    <link rel="stylesheet" type="text/css" href="/css/ie8.hack.css" />
+    <![endif]-->
+<!-- SCRIPT -->
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<!-- HEADER -->
+	<div class="header">
+		<div class="top-line warp-outer">
+			
+
+
+
+
+
+<script type="text/javascript">
+	/* 百度推广  */
+	var _hmt = _hmt || [];
+	/*(function() {
+		var hm = document.createElement("script");
+		hm.src = "https://hm.baidu.com/hm.js?45e883a2828739c24ed6025739ec9fae";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();*/
+	/* end  */
+	function noPermiss() {
+		$('#messageLogin').modal('show');
+		$('#messageTip').html('没有权限，请登录！！');
+		return;
+	}
+
+	function loginOutfn() {
+		var url = "/sat/login/logout";
+		$.ajax({
+			type : "post",
+			url : url,
+			dataType : 'json',
+			data : {
+				_json : -1
+			},
+			success : function(json) {
+				//用户名密码验证通过
+				if (json["success"]) {
+					window.location.reload();
+				} else {
+				}
+
+			}
+		});
+	}
+</script>
+<script type="text/javascript">
+	function tostandard() {
+		window
+				.open(
+						"/sat/standard/standardlist/0",
+						"_blank");
+	}
+	function changeColor() {
+		var color = "#f00|#0f0|#00f|#880|#808|#088|yellow|green|blue|gray";
+		color = color.split("|");
+		$(".blink").css("color", color[parseInt(Math.random() * color.length)]);
+	}
+	setInterval("changeColor()", 500);
+</script>
+<style type="text/css">
+.blink {
+	vertical-align: super;
+	color: #F00;
+	font-size: 10px !important;
+}
+</style>
+<div class="container">
+	<ul class="list-inline pull-left">
+		<li class="hidden-xs"><a href="/" class="home" looyu_bound="1"><span class="glyphicon glyphicon-home"></span> 食安通首页</a></li>
+		<li><a href="/sat/home/toapppage" class="phone" looyu_bound="1"><span class="glyphicon glyphicon-phone"></span>
+				手机客户端</a></li>
+		<li class="hidden-sm hidden-xs">食品安全查询系统</li>
+		<li class="hidden-sm hidden-xs pc-numberP">客服：18911660316（微信同号）</li>
+		<li role="presentation" class="phone-numberP" style="display: none;"><a role="menuitem" tabindex="-1" href="/sat/correction/index" looyu_bound="1">意见反馈</a></li>
+		
+	</ul>
+	<div class="nav nav-pills" role="tablist">
+		<div class="dropdown pull-right">
+			<a id="drop" class="user-link visible-xs dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" looyu_bound="1">
+				<span class="glyphicon glyphicon-user"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="drop">
+				
+					
+					
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="/sat/login/index" looyu_bound="1">登录</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="/sat/register/LXMjAyNS0wNy0xOQ==
+/index" looyu_bound="1">注册</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="noPermiss()" looyu_bound="1">标准收藏</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="/sat/correction/index" looyu_bound="1">意见反馈</a></li>
+					
+				
+				
+				
+
+				
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- 领取粽子-start -->
+
+<!-- 领取粽子-end -->
+
+<div id="messageLogin" class="modal fade in bs-example-modal-sm mymodal modal-alert" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-box">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">系统提示</h4>
+				</div>
+				<div class="modal-body" id="messageTip"></div>
+				<div class="modal-footer">
+					<a class="btn btn-modal" href="/sat/login/index" looyu_bound="1">登录</a>
+					<!--<button type="button" class="btn btn-modal" data-dismiss="modal">再看看</button>-->
+					<a class="default-coles" href="javascript:;" data-dismiss="modal" looyu_bound="1">再看看</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="messageModel" class="modal fade in bs-example-modal-sm mymodal" style="z-index: 9999" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-box">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">×</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">系统提示</h4>
+				</div>
+				<div class="modal-body" id="message"></div>
+				<div class="modal-footer">
+					<button id="close" type="button" class="btn btn-modal" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <script>
+	(function() {
+		$('button.receive-close').click(function(event) {
+			event.stopPropagation();
+			$(this).parent('.receive-zz').hide();
+		})
+	})();
+	(function() {
+		$('.sbox-f').addClass('swing animated');
+		$("button").click(function(event) {
+			event.stopPropagation();
+			$(this).parent('.sbox-f').hide();
+		});
+
+		$('button.receive-close').click(function(event) {
+			event.stopPropagation();
+			$(this).parent('.receive-zz').hide();
+		})
+	})();
+</script> -->
+
+		</div>
+		<div class="clearfix"></div>
+		<div class="top-nav warp-outer">
+			
+
+<div class="container">
+	<div class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a href="/" class="navbar-brand" looyu_bound="1"> <img src="/images/logo.png" alt="食品安全查询系统_食品安全技术服务平台-食安通官网">
+				</a>
+			</div>
+			<div class="navbar-collapse collapse" id="navbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/" looyu_bound="1">首页</a></li>
+					<li><a href="/sat/home/introduce" target="_blank" looyu_bound="1">关于我们</a></li>
+					<li><a href="/sat/home/media" target="_blank" looyu_bound="1">媒体中心</a></li>
+					<li><a href="/sat/home/scheme" target="_blank" looyu_bound="1">解决方案</a></li>
+					<li><a href="/sat/home/answer" target="_blank" looyu_bound="1">问答天地</a></li>
+					
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+		</div>
+	</div>
+
+	<!-- ARTICLE -->
+	<div class="err">
+		<img src="/images/500.gif" alt="500">
+	</div>
+
+	<!-- FOOTER -->
+	
+<!--版权说明-->
+<!-- <div class="link">
+	<div class="container">
+		<div class="footer-state">
+			版权声明：未经食安通书面许可，任何人不得盗链、抄袭本网站功能及资源，更不得用于商业目的。否则，食安通将依法追究其法律责任。 
+			版权声明：未经我公司书面授权，任何单位及个人不得使用本网站功能及资源用于从事商业活动，否则，我司将追究其法律责任。
+		</div>
+		<div class="clearfix"></div>
+	</div>
+</div>-->
+<!-- FOOTER -->
+<div class="footer">
+	<div class="container">
+		<div class="foot-logo pull-left hidden-xs">
+			<img src="/images/logo-bottom.png" alt="食品安全查询系统_食品安全技术服务平台-食安通官网">
+		</div>
+		<div class="foot-info pull-left hidden-xs">
+			<div class="li-inline">
+				<span><a href="/sat/home/introduce" looyu_bound="1">关于我们</a></span><i>|</i>
+				<span><a href="/sat/home/contactus" looyu_bound="1">联系我们</a></span><i>|</i>
+				<span><a href="/sat/home/disclaimer" looyu_bound="1">网站声明</a></span><i>|</i>
+				<span><a href="/sat/home/team" looyu_bound="1">专家团队</a></span><i>|</i>
+				<span><a href="/sat/home/cooperation" looyu_bound="1">共建单位</a></span><i>|</i>
+				<span><a href="/sat/home/shianbao" looyu_bound="1">食安宝</a></span>
+			</div>
+			<div>
+				<span>公司名称：<i>北京智云达科技股份有限公司</i></span>
+			</div>
+			<div>
+				<span>电话 : 18911660316</span> <span>邮箱：wjz_public@163.com</span>
+			</div>
+			<div>
+				<span>公司地址：<i>北京市海淀区知春路132号</i></span>
+			</div>
+			
+			<!-- <div>
+				<span>技术支持 :</span>
+				<script language="javascript" type="text/javascript"
+					src="//js.users.51.la/19161105.js"></script>
+				<noscript>
+					<a href="//www.51.la/?19161105" target="_blank"><img
+						alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;"
+						src="//img.users.51.la/19161105.asp" style="border: none" /></a>
+				</noscript> -->
+				<!-- 360 -->
+				<!--<script type="text/javascript">
+					var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://"
+							: " http://");
+					document
+							.write(unescape("%3Cscript src='"
+									+ _bdhmProtocol
+									+ "hm.baidu.com/h.js%3Ffd540e193a5c4f0b04c640ccb812f17c' type='text/javascript'%3E%3C/script%3E"));
+				</script> -->
+				<!-- 360 -->
+				<!--<script type="text/javascript" src="//s.union.360.cn/181391.js"
+					async defer></script>
+			</div> -->
+		</div>
+		<div class="pull-right foot-img-box">
+			<div class="foot-img">
+				<img src="/images/erweima1.png" alt="扫码关注食安通官微公众号">
+			</div>
+			
+			<div class="foot-img">
+				<img src="/images/zs-wps.png" alt="给食安通赞赏">
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- talk99 -->
+	<script type="text/javascript" charset="utf-8" src="//op.jiain.net/10031053/10120159.js"></script><link rel="stylesheet" type="text/css" href="//aux.soperson.com/2025/looyu.f7bf1efc8b105c9c95d249e08b3cceda.css"><script type="text/javascript" src="//aux.soperson.com/2025/looyu.389f7bf20595eccd5b8111df2a409f58.js" charset="utf-8"></script>
+	
+	
+<!-- talk99 -->
+
+<div id="doyoo_monitor"></div><div id="doyoo_share"></div></body></html>

@@ -102,62 +102,62 @@
       "银行存款": {
         "name": "银行存款",
         "openingBalance": -4769.56,
-        "closingBalance": -445.68,
-        "change": 4323.88
+        "closingBalance": -5215.240000000001,
+        "change": -445.6800000000003
       },
       "现金": {
         "name": "现金",
         "openingBalance": 3491.5200000000004,
-        "closingBalance": 21480.129999999997,
-        "change": 17988.609999999997
+        "closingBalance": 24971.649999999998,
+        "change": 21480.129999999997
       },
       "微信零钱": {
         "name": "微信零钱",
         "openingBalance": 3491.5200000000004,
-        "closingBalance": 21480.129999999997,
-        "change": 17988.609999999997
+        "closingBalance": 24971.649999999998,
+        "change": 21480.129999999997
       },
       "raw": {
         "name": "raw",
         "openingBalance": 2853.2099999999996,
-        "closingBalance": 870.9799999999999,
-        "change": -1982.2299999999996
+        "closingBalance": 3724.189999999999,
+        "change": 870.9799999999996
       },
       "raw.food": {
         "name": "raw.food",
         "openingBalance": 786.7299999999999,
-        "closingBalance": 615.98,
-        "change": -170.7499999999999
+        "closingBalance": 1402.7100000000003,
+        "change": 615.9800000000004
       },
       "raw.med": {
         "name": "raw.med",
         "openingBalance": 173.17,
-        "closingBalance": 43.04,
-        "change": -130.13
+        "closingBalance": 216.20999999999998,
+        "change": 43.03999999999999
       },
       "raw.site": {
         "name": "raw.site",
         "openingBalance": 1884.43,
-        "closingBalance": 171,
-        "change": -1713.43
+        "closingBalance": 2055.4300000000003,
+        "change": 171.00000000000023
       },
       "raw.site.bj1": {
         "name": "raw.site.bj1",
         "openingBalance": 883.9300000000001,
-        "closingBalance": 171,
-        "change": -712.9300000000001
+        "closingBalance": 1054.93,
+        "change": 171
       },
       "raw.site.wz": {
         "name": "raw.site.wz",
         "openingBalance": 1000.5,
-        "closingBalance": 0,
-        "change": -1000.5
+        "closingBalance": 1000.5,
+        "change": 0
       },
       "raw.fun": {
         "name": "raw.fun",
         "openingBalance": 8.88,
-        "closingBalance": 0,
-        "change": -8.88
+        "closingBalance": 8.88,
+        "change": 0
       },
       "raw.shell": {
         "name": "raw.shell",
@@ -168,20 +168,20 @@
       "donation": {
         "name": "donation",
         "openingBalance": -2910.16,
-        "closingBalance": -22445.43,
-        "change": -19535.27
+        "closingBalance": -25355.59,
+        "change": -22445.43
       },
       "donation.parent": {
         "name": "donation.parent",
         "openingBalance": -2967.75,
-        "closingBalance": -22459.4,
-        "change": -19491.65
+        "closingBalance": -25427.15,
+        "change": -22459.4
       },
       "donation.younger": {
         "name": "donation.younger",
         "openingBalance": 57.59,
-        "closingBalance": 0,
-        "change": -57.59
+        "closingBalance": 57.59,
+        "change": 0
       },
       "donation.else": {
         "name": "donation.else",
@@ -192,14 +192,14 @@
       "PSMD": {
         "name": "PSMD",
         "openingBalance": 1038.99,
-        "closingBalance": 0,
-        "change": -1038.99
+        "closingBalance": 1038.99,
+        "change": 0
       },
       "xuemen": {
         "name": "xuemen",
         "openingBalance": 296,
-        "closingBalance": 540,
-        "change": 244
+        "closingBalance": 836,
+        "change": 540
       }
     }
   },
@@ -209,81 +209,105 @@
     "subjects": {
       "银行存款": {
         "name": "银行存款",
-        "openingBalance": -445.68,
-        "closingBalance": -630.51,
-        "change": -184.82999999999998
+        "openingBalance": -5215.240000000001,
+        "closingBalance": -5845.750000000002,
+        "change": -630.5100000000011
       },
       "现金": {
         "name": "现金",
-        "openingBalance": 21480.129999999997,
-        "closingBalance": -1057.85,
-        "change": -22537.979999999996
+        "openingBalance": 24971.649999999998,
+        "closingBalance": 23913.799999999996,
+        "change": -1057.8500000000022
       },
       "微信零钱": {
         "name": "微信零钱",
-        "openingBalance": 21480.129999999997,
-        "closingBalance": -1057.85,
-        "change": -22537.979999999996
+        "openingBalance": 24971.649999999998,
+        "closingBalance": 23913.799999999996,
+        "change": -1057.8500000000022
       },
       "raw": {
         "name": "raw",
-        "openingBalance": 870.9799999999999,
-        "closingBalance": 1574.0200000000004,
-        "change": 703.0400000000005
+        "openingBalance": 3724.189999999999,
+        "closingBalance": 5298.209999999999,
+        "change": 1574.02
       },
       "raw.food": {
         "name": "raw.food",
-        "openingBalance": 615.98,
-        "closingBalance": 466.18999999999994,
-        "change": -149.79000000000008
+        "openingBalance": 1402.7100000000003,
+        "closingBalance": 1868.9000000000005,
+        "change": 466.1900000000003
       },
       "raw.med": {
         "name": "raw.med",
-        "openingBalance": 43.04,
-        "closingBalance": 960.9499999999999,
-        "change": 917.91
+        "openingBalance": 216.20999999999998,
+        "closingBalance": 1177.16,
+        "change": 960.95
       },
       "raw.site": {
         "name": "raw.site",
-        "openingBalance": 171,
-        "closingBalance": 146.88,
-        "change": -24.120000000000005
+        "openingBalance": 2055.4300000000003,
+        "closingBalance": 2202.3100000000004,
+        "change": 146.8800000000001
       },
       "raw.site.bj1": {
         "name": "raw.site.bj1",
-        "openingBalance": 171,
-        "closingBalance": 146.88,
-        "change": -24.120000000000005
+        "openingBalance": 1054.93,
+        "closingBalance": 1201.8100000000002,
+        "change": 146.8800000000001
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
       },
       "raw.shell": {
         "name": "raw.shell",
         "openingBalance": 40.96,
-        "closingBalance": 0,
-        "change": -40.96
+        "closingBalance": 40.96,
+        "change": 0
       },
       "donation": {
         "name": "donation",
-        "openingBalance": -22445.43,
-        "closingBalance": 114.34,
-        "change": 22559.77
+        "openingBalance": -25355.59,
+        "closingBalance": -25241.25,
+        "change": 114.34000000000015
       },
       "donation.parent": {
         "name": "donation.parent",
-        "openingBalance": -22459.4,
-        "closingBalance": 114.34,
-        "change": 22573.74
+        "openingBalance": -25427.15,
+        "closingBalance": -25312.81,
+        "change": 114.34000000000015
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
       },
       "donation.else": {
         "name": "donation.else",
         "openingBalance": 13.97,
-        "closingBalance": 0,
-        "change": -13.97
+        "closingBalance": 13.97,
+        "change": 0
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
       },
       "xuemen": {
         "name": "xuemen",
-        "openingBalance": 540,
-        "closingBalance": 0,
-        "change": -540
+        "openingBalance": 836,
+        "closingBalance": 836,
+        "change": 0
       }
     }
   },
@@ -293,51 +317,69 @@
     "subjects": {
       "银行存款": {
         "name": "银行存款",
-        "openingBalance": -630.51,
-        "closingBalance": -7011.680000000006,
-        "change": -6381.1700000000055
+        "openingBalance": -5845.750000000002,
+        "closingBalance": -12857.430000000002,
+        "change": -7011.68
       },
       "现金": {
         "name": "现金",
-        "openingBalance": -1057.85,
-        "closingBalance": -27300.059999999998,
-        "change": -26242.21
+        "openingBalance": 23913.799999999996,
+        "closingBalance": -3386.2600000000043,
+        "change": -27300.06
       },
       "微信零钱": {
         "name": "微信零钱",
-        "openingBalance": -1057.85,
-        "closingBalance": -27300.059999999998,
-        "change": -26242.21
+        "openingBalance": 23913.799999999996,
+        "closingBalance": -3386.2600000000043,
+        "change": -27300.06
       },
       "raw": {
         "name": "raw",
-        "openingBalance": 1574.0200000000004,
-        "closingBalance": 28083.43,
-        "change": 26509.41
+        "openingBalance": 5298.209999999999,
+        "closingBalance": 33381.64,
+        "change": 28083.43
       },
       "raw.food": {
         "name": "raw.food",
-        "openingBalance": 466.18999999999994,
-        "closingBalance": 851.49,
-        "change": 385.30000000000007
+        "openingBalance": 1868.9000000000005,
+        "closingBalance": 2720.3900000000003,
+        "change": 851.4899999999998
       },
       "raw.med": {
         "name": "raw.med",
-        "openingBalance": 960.9499999999999,
-        "closingBalance": 49.88,
-        "change": -911.0699999999999
+        "openingBalance": 1177.16,
+        "closingBalance": 1227.0400000000002,
+        "change": 49.88000000000011
       },
       "raw.site": {
         "name": "raw.site",
-        "openingBalance": 146.88,
-        "closingBalance": 27163.4,
-        "change": 27016.52
+        "openingBalance": 2202.3100000000004,
+        "closingBalance": 29365.710000000003,
+        "change": 27163.4
       },
       "raw.site.bj1": {
         "name": "raw.site.bj1",
-        "openingBalance": 146.88,
-        "closingBalance": 27163.4,
-        "change": 27016.52
+        "openingBalance": 1201.8100000000002,
+        "closingBalance": 28365.210000000003,
+        "change": 27163.4
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
+      },
+      "raw.shell": {
+        "name": "raw.shell",
+        "openingBalance": 40.96,
+        "closingBalance": 40.96,
+        "change": 0
       },
       "raw.supply": {
         "name": "raw.supply",
@@ -347,26 +389,38 @@
       },
       "donation": {
         "name": "donation",
-        "openingBalance": 114.34,
-        "closingBalance": 428.31,
-        "change": 313.97
+        "openingBalance": -25241.25,
+        "closingBalance": -24812.94,
+        "change": 428.3100000000013
       },
       "donation.parent": {
         "name": "donation.parent",
-        "openingBalance": 114.34,
-        "closingBalance": 371.31,
-        "change": 256.97
+        "openingBalance": -25312.81,
+        "closingBalance": -24941.5,
+        "change": 371.3100000000013
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
       },
       "donation.else": {
         "name": "donation.else",
-        "openingBalance": 0,
-        "closingBalance": 57,
+        "openingBalance": 13.97,
+        "closingBalance": 70.97,
         "change": 57
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
       },
       "xuemen": {
         "name": "xuemen",
-        "openingBalance": 0,
-        "closingBalance": 5800,
+        "openingBalance": 836,
+        "closingBalance": 6636,
         "change": 5800
       }
     }
@@ -377,57 +431,75 @@
     "subjects": {
       "银行存款": {
         "name": "银行存款",
-        "openingBalance": -7011.680000000006,
-        "closingBalance": -2128.9799999999996,
-        "change": 4882.700000000006
+        "openingBalance": -12857.430000000002,
+        "closingBalance": -14986.41,
+        "change": -2128.9799999999977
       },
       "现金": {
         "name": "现金",
-        "openingBalance": -27300.059999999998,
-        "closingBalance": 982.6499999999997,
-        "change": 28282.71
+        "openingBalance": -3386.2600000000043,
+        "closingBalance": -2403.6100000000038,
+        "change": 982.6500000000005
       },
       "微信零钱": {
         "name": "微信零钱",
-        "openingBalance": -27300.059999999998,
-        "closingBalance": 982.6499999999997,
-        "change": 28282.71
+        "openingBalance": -3386.2600000000043,
+        "closingBalance": -2403.6100000000038,
+        "change": 982.6500000000005
       },
       "raw": {
         "name": "raw",
-        "openingBalance": 28083.43,
-        "closingBalance": 1785.6700000000005,
-        "change": -26297.76
+        "openingBalance": 33381.64,
+        "closingBalance": 35167.31000000001,
+        "change": 1785.6700000000128
       },
       "raw.food": {
         "name": "raw.food",
-        "openingBalance": 851.49,
-        "closingBalance": 882.8899999999999,
-        "change": 31.399999999999864
+        "openingBalance": 2720.3900000000003,
+        "closingBalance": 3603.2799999999997,
+        "change": 882.8899999999994
       },
       "raw.med": {
         "name": "raw.med",
-        "openingBalance": 49.88,
-        "closingBalance": 113.97,
-        "change": 64.09
+        "openingBalance": 1227.0400000000002,
+        "closingBalance": 1341.0100000000002,
+        "change": 113.97000000000003
       },
       "raw.site": {
         "name": "raw.site",
-        "openingBalance": 27163.4,
-        "closingBalance": 767.6700000000001,
-        "change": -26395.730000000003
+        "openingBalance": 29365.710000000003,
+        "closingBalance": 30133.380000000005,
+        "change": 767.6700000000019
       },
       "raw.site.bj1": {
         "name": "raw.site.bj1",
-        "openingBalance": 27163.4,
-        "closingBalance": 767.6700000000001,
-        "change": -26395.730000000003
+        "openingBalance": 28365.210000000003,
+        "closingBalance": 29132.880000000005,
+        "change": 767.6700000000019
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
+      },
+      "raw.shell": {
+        "name": "raw.shell",
+        "openingBalance": 40.96,
+        "closingBalance": 40.96,
+        "change": 0
       },
       "raw.supply": {
         "name": "raw.supply",
         "openingBalance": 18.66,
-        "closingBalance": 21.14,
-        "change": 2.4800000000000004
+        "closingBalance": 39.800000000000004,
+        "change": 21.140000000000004
       },
       "ego": {
         "name": "ego",
@@ -443,27 +515,39 @@
       },
       "donation": {
         "name": "donation",
-        "openingBalance": 428.31,
-        "closingBalance": -1973.02,
-        "change": -2401.33
+        "openingBalance": -24812.94,
+        "closingBalance": -26785.96,
+        "change": -1973.0200000000004
       },
       "donation.parent": {
         "name": "donation.parent",
-        "openingBalance": 371.31,
-        "closingBalance": -1973.02,
-        "change": -2344.33
+        "openingBalance": -24941.5,
+        "closingBalance": -26914.52,
+        "change": -1973.0200000000004
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
       },
       "donation.else": {
         "name": "donation.else",
-        "openingBalance": 57,
-        "closingBalance": 0,
-        "change": -57
+        "openingBalance": 70.97,
+        "closingBalance": 70.97,
+        "change": 0
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
       },
       "xuemen": {
         "name": "xuemen",
-        "openingBalance": 5800,
-        "closingBalance": 1238.68,
-        "change": -4561.32
+        "openingBalance": 6636,
+        "closingBalance": 7874.68,
+        "change": 1238.6800000000003
       }
     }
   },
@@ -473,93 +557,123 @@
     "subjects": {
       "银行存款": {
         "name": "银行存款",
-        "openingBalance": -2128.9799999999996,
-        "closingBalance": -1023.7699999999999,
-        "change": 1105.2099999999996
+        "openingBalance": -14986.41,
+        "closingBalance": -16010.180000000004,
+        "change": -1023.7700000000041
       },
       "现金": {
         "name": "现金",
-        "openingBalance": 982.6499999999997,
-        "closingBalance": 880.4799999999998,
-        "change": -102.16999999999996
+        "openingBalance": -2403.6100000000038,
+        "closingBalance": -1523.1300000000035,
+        "change": 880.4800000000002
       },
       "微信零钱": {
         "name": "微信零钱",
-        "openingBalance": 982.6499999999997,
-        "closingBalance": 880.4799999999998,
-        "change": -102.16999999999996
+        "openingBalance": -2403.6100000000038,
+        "closingBalance": -1523.1300000000035,
+        "change": 880.4800000000002
       },
       "raw": {
         "name": "raw",
-        "openingBalance": 1785.6700000000005,
-        "closingBalance": 1568.28,
-        "change": -217.39000000000055
+        "openingBalance": 35167.31000000001,
+        "closingBalance": 36735.59000000002,
+        "change": 1568.280000000006
       },
       "raw.food": {
         "name": "raw.food",
-        "openingBalance": 882.8899999999999,
-        "closingBalance": 775.5899999999999,
-        "change": -107.29999999999995
+        "openingBalance": 3603.2799999999997,
+        "closingBalance": 4378.869999999999,
+        "change": 775.5899999999992
       },
       "raw.med": {
         "name": "raw.med",
-        "openingBalance": 113.97,
-        "closingBalance": 634,
-        "change": 520.03
+        "openingBalance": 1341.0100000000002,
+        "closingBalance": 1975.0100000000002,
+        "change": 634
       },
       "raw.site": {
         "name": "raw.site",
-        "openingBalance": 767.6700000000001,
-        "closingBalance": 55,
-        "change": -712.6700000000001
+        "openingBalance": 30133.380000000005,
+        "closingBalance": 30188.380000000005,
+        "change": 55
       },
       "raw.site.bj1": {
         "name": "raw.site.bj1",
-        "openingBalance": 767.6700000000001,
-        "closingBalance": 55,
-        "change": -712.6700000000001
+        "openingBalance": 29132.880000000005,
+        "closingBalance": 29187.880000000005,
+        "change": 55
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
       },
       "raw.shell": {
         "name": "raw.shell",
-        "openingBalance": 0,
-        "closingBalance": 87.03,
+        "openingBalance": 40.96,
+        "closingBalance": 127.99000000000001,
         "change": 87.03
       },
       "raw.supply": {
         "name": "raw.supply",
-        "openingBalance": 21.14,
-        "closingBalance": 16.66,
-        "change": -4.48
+        "openingBalance": 39.800000000000004,
+        "closingBalance": 56.46000000000001,
+        "change": 16.660000000000004
       },
       "ego": {
         "name": "ego",
         "openingBalance": 95,
-        "closingBalance": 223,
-        "change": 128
+        "closingBalance": 318,
+        "change": 223
       },
       "ego.it": {
         "name": "ego.it",
         "openingBalance": 95,
-        "closingBalance": 223,
-        "change": 128
+        "closingBalance": 318,
+        "change": 223
       },
       "donation": {
         "name": "donation",
-        "openingBalance": -1973.02,
-        "closingBalance": -1775.99,
-        "change": 197.02999999999997
+        "openingBalance": -26785.96,
+        "closingBalance": -28561.95,
+        "change": -1775.9900000000016
       },
       "donation.parent": {
         "name": "donation.parent",
-        "openingBalance": -1973.02,
-        "closingBalance": -1775.99,
-        "change": 197.02999999999997
+        "openingBalance": -26914.52,
+        "closingBalance": -28690.510000000002,
+        "change": -1775.9900000000016
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
+      },
+      "donation.else": {
+        "name": "donation.else",
+        "openingBalance": 70.97,
+        "closingBalance": 70.97,
+        "change": 0
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
       },
       "xuemen": {
         "name": "xuemen",
-        "openingBalance": 1238.68,
-        "closingBalance": 128,
-        "change": -1110.68
+        "openingBalance": 7874.68,
+        "closingBalance": 8002.68,
+        "change": 128
       }
     }
   },
@@ -569,93 +683,123 @@
     "subjects": {
       "银行存款": {
         "name": "银行存款",
-        "openingBalance": -1023.7699999999999,
-        "closingBalance": -374.46000000000004,
-        "change": 649.3099999999998
+        "openingBalance": -16010.180000000004,
+        "closingBalance": -16384.64,
+        "change": -374.4599999999955
       },
       "现金": {
         "name": "现金",
-        "openingBalance": 880.4799999999998,
-        "closingBalance": 1770.34,
-        "change": 889.8600000000001
+        "openingBalance": -1523.1300000000035,
+        "closingBalance": 247.2099999999965,
+        "change": 1770.3400000000001
       },
       "微信零钱": {
         "name": "微信零钱",
-        "openingBalance": 880.4799999999998,
-        "closingBalance": 1770.34,
-        "change": 889.8600000000001
+        "openingBalance": -1523.1300000000035,
+        "closingBalance": 247.2099999999965,
+        "change": 1770.3400000000001
       },
       "raw": {
         "name": "raw",
-        "openingBalance": 1568.28,
-        "closingBalance": 573.23,
-        "change": -995.05
+        "openingBalance": 36735.59000000002,
+        "closingBalance": 37308.820000000014,
+        "change": 573.2299999999959
       },
       "raw.food": {
         "name": "raw.food",
-        "openingBalance": 775.5899999999999,
-        "closingBalance": 393.05,
-        "change": -382.5399999999999
+        "openingBalance": 4378.869999999999,
+        "closingBalance": 4771.920000000001,
+        "change": 393.050000000002
       },
       "raw.med": {
         "name": "raw.med",
-        "openingBalance": 634,
-        "closingBalance": 17.67,
-        "change": -616.33
+        "openingBalance": 1975.0100000000002,
+        "closingBalance": 1992.6800000000003,
+        "change": 17.670000000000073
       },
       "raw.site": {
         "name": "raw.site",
-        "openingBalance": 55,
-        "closingBalance": 141,
-        "change": 86
+        "openingBalance": 30188.380000000005,
+        "closingBalance": 30329.380000000005,
+        "change": 141
       },
       "raw.site.bj1": {
         "name": "raw.site.bj1",
-        "openingBalance": 55,
-        "closingBalance": 141,
-        "change": 86
+        "openingBalance": 29187.880000000005,
+        "closingBalance": 29328.880000000005,
+        "change": 141
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
       },
       "raw.shell": {
         "name": "raw.shell",
-        "openingBalance": 87.03,
-        "closingBalance": 21.51,
-        "change": -65.52
+        "openingBalance": 127.99000000000001,
+        "closingBalance": 149.5,
+        "change": 21.50999999999999
       },
       "raw.supply": {
         "name": "raw.supply",
-        "openingBalance": 16.66,
-        "closingBalance": 0,
-        "change": -16.66
+        "openingBalance": 56.46000000000001,
+        "closingBalance": 56.46000000000001,
+        "change": 0
       },
       "ego": {
         "name": "ego",
-        "openingBalance": 223,
-        "closingBalance": 0,
-        "change": -223
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
       },
       "ego.it": {
         "name": "ego.it",
-        "openingBalance": 223,
-        "closingBalance": 0,
-        "change": -223
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
       },
       "donation": {
         "name": "donation",
-        "openingBalance": -1775.99,
-        "closingBalance": -1969.11,
-        "change": -193.1199999999999
+        "openingBalance": -28561.95,
+        "closingBalance": -30531.06,
+        "change": -1969.1100000000006
       },
       "donation.parent": {
         "name": "donation.parent",
-        "openingBalance": -1775.99,
-        "closingBalance": -1969.11,
-        "change": -193.1199999999999
+        "openingBalance": -28690.510000000002,
+        "closingBalance": -30659.620000000003,
+        "change": -1969.1100000000006
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
+      },
+      "donation.else": {
+        "name": "donation.else",
+        "openingBalance": 70.97,
+        "closingBalance": 70.97,
+        "change": 0
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
       },
       "xuemen": {
         "name": "xuemen",
-        "openingBalance": 128,
-        "closingBalance": 0,
-        "change": -128
+        "openingBalance": 8002.68,
+        "closingBalance": 8002.68,
+        "change": 0
       }
     }
   },
@@ -665,90 +809,628 @@
     "subjects": {
       "银行存款": {
         "name": "银行存款",
-        "openingBalance": -374.46000000000004,
-        "closingBalance": 0,
-        "change": 374.46000000000004
+        "openingBalance": -16384.64,
+        "closingBalance": -16384.64,
+        "change": 0
       },
       "现金": {
         "name": "现金",
-        "openingBalance": 1770.34,
-        "closingBalance": 0,
-        "change": -1770.34
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
       },
       "微信零钱": {
         "name": "微信零钱",
-        "openingBalance": 1770.34,
-        "closingBalance": 0,
-        "change": -1770.34
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
       },
       "raw": {
         "name": "raw",
-        "openingBalance": 573.23,
-        "closingBalance": 0,
-        "change": -573.23
+        "openingBalance": 37308.820000000014,
+        "closingBalance": 37308.820000000014,
+        "change": 0
       },
       "raw.food": {
         "name": "raw.food",
-        "openingBalance": 393.05,
-        "closingBalance": 0,
-        "change": -393.05
+        "openingBalance": 4771.920000000001,
+        "closingBalance": 4771.920000000001,
+        "change": 0
       },
       "raw.med": {
         "name": "raw.med",
-        "openingBalance": 17.67,
-        "closingBalance": 0,
-        "change": -17.67
+        "openingBalance": 1992.6800000000003,
+        "closingBalance": 1992.6800000000003,
+        "change": 0
       },
       "raw.site": {
         "name": "raw.site",
-        "openingBalance": 141,
-        "closingBalance": 0,
-        "change": -141
+        "openingBalance": 30329.380000000005,
+        "closingBalance": 30329.380000000005,
+        "change": 0
       },
       "raw.site.bj1": {
         "name": "raw.site.bj1",
-        "openingBalance": 141,
-        "closingBalance": 0,
-        "change": -141
+        "openingBalance": 29328.880000000005,
+        "closingBalance": 29328.880000000005,
+        "change": 0
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
       },
       "raw.shell": {
         "name": "raw.shell",
-        "openingBalance": 21.51,
-        "closingBalance": 0,
-        "change": -21.51
+        "openingBalance": 149.5,
+        "closingBalance": 149.5,
+        "change": 0
+      },
+      "raw.supply": {
+        "name": "raw.supply",
+        "openingBalance": 56.46000000000001,
+        "closingBalance": 56.46000000000001,
+        "change": 0
+      },
+      "ego": {
+        "name": "ego",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
+      },
+      "ego.it": {
+        "name": "ego.it",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
       },
       "donation": {
         "name": "donation",
-        "openingBalance": -1969.11,
-        "closingBalance": 0,
-        "change": 1969.11
+        "openingBalance": -30531.06,
+        "closingBalance": -30531.06,
+        "change": 0
       },
       "donation.parent": {
         "name": "donation.parent",
-        "openingBalance": -1969.11,
-        "closingBalance": 0,
-        "change": 1969.11
+        "openingBalance": -30659.620000000003,
+        "closingBalance": -30659.620000000003,
+        "change": 0
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
+      },
+      "donation.else": {
+        "name": "donation.else",
+        "openingBalance": 70.97,
+        "closingBalance": 70.97,
+        "change": 0
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
+      },
+      "xuemen": {
+        "name": "xuemen",
+        "openingBalance": 8002.68,
+        "closingBalance": 8002.68,
+        "change": 0
       }
     }
   },
   {
     "year": 2025,
     "month": 9,
-    "subjects": {}
+    "subjects": {
+      "银行存款": {
+        "name": "银行存款",
+        "openingBalance": -16384.64,
+        "closingBalance": -16384.64,
+        "change": 0
+      },
+      "现金": {
+        "name": "现金",
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
+      },
+      "微信零钱": {
+        "name": "微信零钱",
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
+      },
+      "raw": {
+        "name": "raw",
+        "openingBalance": 37308.820000000014,
+        "closingBalance": 37308.820000000014,
+        "change": 0
+      },
+      "raw.food": {
+        "name": "raw.food",
+        "openingBalance": 4771.920000000001,
+        "closingBalance": 4771.920000000001,
+        "change": 0
+      },
+      "raw.med": {
+        "name": "raw.med",
+        "openingBalance": 1992.6800000000003,
+        "closingBalance": 1992.6800000000003,
+        "change": 0
+      },
+      "raw.site": {
+        "name": "raw.site",
+        "openingBalance": 30329.380000000005,
+        "closingBalance": 30329.380000000005,
+        "change": 0
+      },
+      "raw.site.bj1": {
+        "name": "raw.site.bj1",
+        "openingBalance": 29328.880000000005,
+        "closingBalance": 29328.880000000005,
+        "change": 0
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
+      },
+      "raw.shell": {
+        "name": "raw.shell",
+        "openingBalance": 149.5,
+        "closingBalance": 149.5,
+        "change": 0
+      },
+      "raw.supply": {
+        "name": "raw.supply",
+        "openingBalance": 56.46000000000001,
+        "closingBalance": 56.46000000000001,
+        "change": 0
+      },
+      "ego": {
+        "name": "ego",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
+      },
+      "ego.it": {
+        "name": "ego.it",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
+      },
+      "donation": {
+        "name": "donation",
+        "openingBalance": -30531.06,
+        "closingBalance": -30531.06,
+        "change": 0
+      },
+      "donation.parent": {
+        "name": "donation.parent",
+        "openingBalance": -30659.620000000003,
+        "closingBalance": -30659.620000000003,
+        "change": 0
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
+      },
+      "donation.else": {
+        "name": "donation.else",
+        "openingBalance": 70.97,
+        "closingBalance": 70.97,
+        "change": 0
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
+      },
+      "xuemen": {
+        "name": "xuemen",
+        "openingBalance": 8002.68,
+        "closingBalance": 8002.68,
+        "change": 0
+      }
+    }
   },
   {
     "year": 2025,
     "month": 10,
-    "subjects": {}
+    "subjects": {
+      "银行存款": {
+        "name": "银行存款",
+        "openingBalance": -16384.64,
+        "closingBalance": -16384.64,
+        "change": 0
+      },
+      "现金": {
+        "name": "现金",
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
+      },
+      "微信零钱": {
+        "name": "微信零钱",
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
+      },
+      "raw": {
+        "name": "raw",
+        "openingBalance": 37308.820000000014,
+        "closingBalance": 37308.820000000014,
+        "change": 0
+      },
+      "raw.food": {
+        "name": "raw.food",
+        "openingBalance": 4771.920000000001,
+        "closingBalance": 4771.920000000001,
+        "change": 0
+      },
+      "raw.med": {
+        "name": "raw.med",
+        "openingBalance": 1992.6800000000003,
+        "closingBalance": 1992.6800000000003,
+        "change": 0
+      },
+      "raw.site": {
+        "name": "raw.site",
+        "openingBalance": 30329.380000000005,
+        "closingBalance": 30329.380000000005,
+        "change": 0
+      },
+      "raw.site.bj1": {
+        "name": "raw.site.bj1",
+        "openingBalance": 29328.880000000005,
+        "closingBalance": 29328.880000000005,
+        "change": 0
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
+      },
+      "raw.shell": {
+        "name": "raw.shell",
+        "openingBalance": 149.5,
+        "closingBalance": 149.5,
+        "change": 0
+      },
+      "raw.supply": {
+        "name": "raw.supply",
+        "openingBalance": 56.46000000000001,
+        "closingBalance": 56.46000000000001,
+        "change": 0
+      },
+      "ego": {
+        "name": "ego",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
+      },
+      "ego.it": {
+        "name": "ego.it",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
+      },
+      "donation": {
+        "name": "donation",
+        "openingBalance": -30531.06,
+        "closingBalance": -30531.06,
+        "change": 0
+      },
+      "donation.parent": {
+        "name": "donation.parent",
+        "openingBalance": -30659.620000000003,
+        "closingBalance": -30659.620000000003,
+        "change": 0
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
+      },
+      "donation.else": {
+        "name": "donation.else",
+        "openingBalance": 70.97,
+        "closingBalance": 70.97,
+        "change": 0
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
+      },
+      "xuemen": {
+        "name": "xuemen",
+        "openingBalance": 8002.68,
+        "closingBalance": 8002.68,
+        "change": 0
+      }
+    }
   },
   {
     "year": 2025,
     "month": 11,
-    "subjects": {}
+    "subjects": {
+      "银行存款": {
+        "name": "银行存款",
+        "openingBalance": -16384.64,
+        "closingBalance": -16384.64,
+        "change": 0
+      },
+      "现金": {
+        "name": "现金",
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
+      },
+      "微信零钱": {
+        "name": "微信零钱",
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
+      },
+      "raw": {
+        "name": "raw",
+        "openingBalance": 37308.820000000014,
+        "closingBalance": 37308.820000000014,
+        "change": 0
+      },
+      "raw.food": {
+        "name": "raw.food",
+        "openingBalance": 4771.920000000001,
+        "closingBalance": 4771.920000000001,
+        "change": 0
+      },
+      "raw.med": {
+        "name": "raw.med",
+        "openingBalance": 1992.6800000000003,
+        "closingBalance": 1992.6800000000003,
+        "change": 0
+      },
+      "raw.site": {
+        "name": "raw.site",
+        "openingBalance": 30329.380000000005,
+        "closingBalance": 30329.380000000005,
+        "change": 0
+      },
+      "raw.site.bj1": {
+        "name": "raw.site.bj1",
+        "openingBalance": 29328.880000000005,
+        "closingBalance": 29328.880000000005,
+        "change": 0
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
+      },
+      "raw.shell": {
+        "name": "raw.shell",
+        "openingBalance": 149.5,
+        "closingBalance": 149.5,
+        "change": 0
+      },
+      "raw.supply": {
+        "name": "raw.supply",
+        "openingBalance": 56.46000000000001,
+        "closingBalance": 56.46000000000001,
+        "change": 0
+      },
+      "ego": {
+        "name": "ego",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
+      },
+      "ego.it": {
+        "name": "ego.it",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
+      },
+      "donation": {
+        "name": "donation",
+        "openingBalance": -30531.06,
+        "closingBalance": -30531.06,
+        "change": 0
+      },
+      "donation.parent": {
+        "name": "donation.parent",
+        "openingBalance": -30659.620000000003,
+        "closingBalance": -30659.620000000003,
+        "change": 0
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
+      },
+      "donation.else": {
+        "name": "donation.else",
+        "openingBalance": 70.97,
+        "closingBalance": 70.97,
+        "change": 0
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
+      },
+      "xuemen": {
+        "name": "xuemen",
+        "openingBalance": 8002.68,
+        "closingBalance": 8002.68,
+        "change": 0
+      }
+    }
   },
   {
     "year": 2025,
     "month": 12,
-    "subjects": {}
+    "subjects": {
+      "银行存款": {
+        "name": "银行存款",
+        "openingBalance": -16384.64,
+        "closingBalance": -16384.64,
+        "change": 0
+      },
+      "现金": {
+        "name": "现金",
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
+      },
+      "微信零钱": {
+        "name": "微信零钱",
+        "openingBalance": 247.2099999999965,
+        "closingBalance": 247.2099999999965,
+        "change": 0
+      },
+      "raw": {
+        "name": "raw",
+        "openingBalance": 37308.820000000014,
+        "closingBalance": 37308.820000000014,
+        "change": 0
+      },
+      "raw.food": {
+        "name": "raw.food",
+        "openingBalance": 4771.920000000001,
+        "closingBalance": 4771.920000000001,
+        "change": 0
+      },
+      "raw.med": {
+        "name": "raw.med",
+        "openingBalance": 1992.6800000000003,
+        "closingBalance": 1992.6800000000003,
+        "change": 0
+      },
+      "raw.site": {
+        "name": "raw.site",
+        "openingBalance": 30329.380000000005,
+        "closingBalance": 30329.380000000005,
+        "change": 0
+      },
+      "raw.site.bj1": {
+        "name": "raw.site.bj1",
+        "openingBalance": 29328.880000000005,
+        "closingBalance": 29328.880000000005,
+        "change": 0
+      },
+      "raw.site.wz": {
+        "name": "raw.site.wz",
+        "openingBalance": 1000.5,
+        "closingBalance": 1000.5,
+        "change": 0
+      },
+      "raw.fun": {
+        "name": "raw.fun",
+        "openingBalance": 8.88,
+        "closingBalance": 8.88,
+        "change": 0
+      },
+      "raw.shell": {
+        "name": "raw.shell",
+        "openingBalance": 149.5,
+        "closingBalance": 149.5,
+        "change": 0
+      },
+      "raw.supply": {
+        "name": "raw.supply",
+        "openingBalance": 56.46000000000001,
+        "closingBalance": 56.46000000000001,
+        "change": 0
+      },
+      "ego": {
+        "name": "ego",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
+      },
+      "ego.it": {
+        "name": "ego.it",
+        "openingBalance": 318,
+        "closingBalance": 318,
+        "change": 0
+      },
+      "donation": {
+        "name": "donation",
+        "openingBalance": -30531.06,
+        "closingBalance": -30531.06,
+        "change": 0
+      },
+      "donation.parent": {
+        "name": "donation.parent",
+        "openingBalance": -30659.620000000003,
+        "closingBalance": -30659.620000000003,
+        "change": 0
+      },
+      "donation.younger": {
+        "name": "donation.younger",
+        "openingBalance": 57.59,
+        "closingBalance": 57.59,
+        "change": 0
+      },
+      "donation.else": {
+        "name": "donation.else",
+        "openingBalance": 70.97,
+        "closingBalance": 70.97,
+        "change": 0
+      },
+      "PSMD": {
+        "name": "PSMD",
+        "openingBalance": 1038.99,
+        "closingBalance": 1038.99,
+        "change": 0
+      },
+      "xuemen": {
+        "name": "xuemen",
+        "openingBalance": 8002.68,
+        "closingBalance": 8002.68,
+        "change": 0
+      }
+    }
   }
 ]
