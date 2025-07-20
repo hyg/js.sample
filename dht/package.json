@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bittorrent-dht": "^11.0.10",
+    "magnet-uri": "^7.0.7"
+  }
+}

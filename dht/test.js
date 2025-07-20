@@ -1,0 +1,1 @@
+require('dgram').createSocket('udp4').send(Buffer.alloc(0), 6881, 'router.bittorrent.com');

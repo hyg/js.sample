@@ -3,7 +3,7 @@ var DHT = require('bittorrent-dht'); // see https://github.com/webtorrent/bittor
 
 var SHA1 = new Hashes.SHA1;
 var str = "31d82293d8e05b4b6d4828e068d43ab2900a4b26" ;
-var infoHash = SHA1.hex(str);
+var infoHash = SHA1.hex(str); //58c5d8483c4e7d19b86d1351d6cf89b9ae232400
 
 console.log("SHA1.hex(\""+str+"\")="+infoHash);
 

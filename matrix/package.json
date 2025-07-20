@@ -1,0 +1,14 @@
+{
+    "name": "matrix-mcp-bot",
+    "version": "1.0.0",
+    "description": "Matrix聊天机器人，使用本地MCP服务器提供信息",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js"
+    },
+    "dependencies": {
+        "axios": "^1.6.0",
+        "dotenv": "^16.3.1",
+        "matrix-js-sdk": "^26.0.0"
+    }
+}
