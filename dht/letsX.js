@@ -1,4 +1,3 @@
-var DHT = require('bittorrent-dht')
 var Hashes = require('jshashes');
 var DHT = require('bittorrent-dht'); // see https://github.com/webtorrent/bittorrent-dht
 
@@ -21,8 +20,8 @@ dht.on('ready', function () {
   var addr = dht.address() ;
   console.log('ready... dht.address() return:\t' + typeof addr + addr.family + '\t' + addr.address + ':' + addr.port) ;
   
-  console.log('socket info | dht._rpc : \t',dht._prc) ;
-  console.log('socket info | dht._rpc.socket : \t',dht._prc.socket) ;
+  //console.log('socket info | dht._rpc : \t',dht._prc) ;
+  //console.log('socket info | dht._rpc.socket : \t',dht._prc.socket) ;
   
   
   dht.announce(infoHash) ; //dhtjs 34857
