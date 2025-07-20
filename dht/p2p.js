@@ -40,6 +40,7 @@ const INTERVAL_LOOKUP = 60 * 1000;
 setInterval(() => dht.announce(secretHash), INTERVAL_ANNOUNCE);
 setInterval(() => dht.lookup(secretHash, (err, peers) => {
     if (err) return console.error(err);
-    console.log('发现 peer:%O', peers);
+    console.log('发现 peer: %s , %O', typeof peers,peers);
+    //peers.forEach(p => console.log('peer ->', p.host, p.port));
     // peers = [{ host, port }, ...]
 }), INTERVAL_LOOKUP);
