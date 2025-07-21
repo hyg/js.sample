@@ -49,25 +49,26 @@ try {
     server.listen(20000, () => {
         console.log('服务器正在监听 20000 端口');
     });
+
+
+    // 创建客户端并连接到服务器
+    const client = net.createConnection(19113, "221.218.141.220", () => {
+        console.log('已连接到服务器');
+        client.write('这里是笔记本节点'); // 向服务器发送数据
+    });
+
+    // 接收服务器数据
+    client.on('data', (data) => {
+        console.log(`收到服务器数据: ${data}`);
+        client.end(); // 断开连接
+    });
+
+    client.on('end', () => {
+        console.log('已断开与服务器的连接');
+    });
 } catch (err) {
-    console.log("server error:",err);
+    console.log("server error:", err);
 }
-
-// 创建客户端并连接到服务器
-const client = net.createConnection(19113,"221.218.141.220", () => {
-    console.log('已连接到服务器');
-    client.write('这里是笔记本节点'); // 向服务器发送数据
-});
-
-// 接收服务器数据
-client.on('data', (data) => {
-    console.log(`收到服务器数据: ${data}`);
-    client.end(); // 断开连接
-});
-
-client.on('end', () => {
-    console.log('已断开与服务器的连接');
-});
 
 var secretHash = "58c5d8483c4e7d19b86d1351d6cf89b9ae232400";
 
