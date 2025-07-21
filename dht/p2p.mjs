@@ -1,8 +1,40 @@
 import DHT from 'bittorrent-dht'
-import magnet from 'magnet-uri'
-import net from "net";
+import dgram from 'dgram';
+//const DHT   = require('bittorrent-dht');
 
-const dht = new DHT()
+const socket = dgram.createSocket('udp4');
+const dht    = new DHT({ socket });   // 让 DHT 复用 socket
+
+socket.on('message', (msg, rinfo) => {
+  // DHT 消息都以固定 4 字节 magic 开头：
+  const isDHT = msg.length >= 4 && ['d1:a', 'd2:i', 'd1:q', 'd1:r', 'd1:e'].some(
+    m => msg.slice(0, 4).toString().startsWith(m)
+  );
+  console.log(`udp server received data: ${msg} from ${rinfo.address}:${rinfo.port}`)
+
+  if (isDHT) {
+    // 把消息交给 bittorrent-dht
+    //dht.onmessage(msg, rinfo);
+    console.log("由DHT处理");
+  } else {
+    // 你的业务协议
+    handleAppMessage(msg, rinfo);
+  }
+});
+
+socket.on('error', function (err) {
+    console.log('some error on udp server.')
+    udp_server.close();
+})
+
+// 监听端口
+socket.on('listening', function () {
+    console.log('udp server linstening 20000.');
+    var strmsg = "笔记本开始监听..."; 
+    socket.send(strmsg, 0, strmsg.length, 29113, "221.218.141.220"); //将接收到的消息返回给客户端
+    socket.send(strmsg, 0, strmsg.length, 19113, "221.218.141.220"); //将接收到的消息返回给客户端
+    socket.send(strmsg, 0, strmsg.length, 20000, "115.28.214.237"); //将接收到的消息返回给客户端
+})
 
 dht.listen(20000, function () {
     console.log('now listening')
@@ -28,51 +60,9 @@ dht.on('ready', function () {
     console.log('ready');
 })
 
-// 创建 TCP 服务器
-const server = net.createServer((socket) => {
-    console.log('客户端已连接');
-
-    // 接收客户端数据
-    socket.on('data', (data) => {
-        console.log(`收到数据: ${data}`);
-        socket.write(`服务器收到: ${data}`); // 向客户端发送数据
-    });
-
-    // 客户端断开连接
-    socket.on('end', () => {
-        console.log('客户端已断开连接');
-    });
-});
-
-try {
-    // 监听 3000 端口
-    server.listen(20000, () => {
-        console.log('服务器正在监听 20000 端口');
-    });
-
-
-    // 创建客户端并连接到服务器
-    const client = net.createConnection(19113, "221.218.141.220", () => {
-        console.log('已连接到服务器');
-        client.write('这里是笔记本节点'); // 向服务器发送数据
-    });
-
-    // 接收服务器数据
-    client.on('data', (data) => {
-        console.log(`收到服务器数据: ${data}`);
-        client.end(); // 断开连接
-    });
-
-    client.on('end', () => {
-        console.log('已断开与服务器的连接');
-    });
-} catch (err) {
-    console.log("server error:", err);
-}
-
 var secretHash = "58c5d8483c4e7d19b86d1351d6cf89b9ae232400";
 
-const INTERVAL_ANNOUNCE = 60 * 1000;
+const INTERVAL_ANNOUNCE = 30 * 1000;
 const INTERVAL_LOOKUP = 60 * 1000;
 
 setInterval(() => dht.announce(secretHash), INTERVAL_ANNOUNCE);
@@ -83,3 +73,7 @@ setInterval(() => dht.lookup(secretHash, (err, peers) => {
     // peers = [{ host, port }, ...]
 }), INTERVAL_LOOKUP);
 
+function handleAppMessage(msg, rinfo){
+    var strmsg = "笔记本收到"+msg;
+    socket.send(strmsg, 0, strmsg.length, rinfo.port, rinfo.address); //将接收到的消息返回给客户端
+}
