@@ -101,7 +101,9 @@ dht.listen(20000, function () {
 })
 
 dht.on('peer', function (peer, infoHash, from) {
-    console.log('found potential peer ' + peer.host + ':' + peer.port + ' through ' + from.address + ':' + from.port)
+    console.log('found potential peer ' + infoHash + peer.host + ':' + peer.port + ' through ' + from.address + ':' + from.port);
+    var strmsg = "笔记本发现你了。";
+    socket.send(strmsg, 0, strmsg.length, peer.port, peer.host );
 })
 
 dht.on('node', function (node) {
@@ -122,8 +124,8 @@ dht.on('ready', function () {
 
 var secretHash = "58c5d8483c4e7d19b86d1351d6cf89b9ae232400";
 
-const INTERVAL_ANNOUNCE = 30 * 1000;
-const INTERVAL_LOOKUP = 60 * 1000;
+const INTERVAL_ANNOUNCE = 20 * 1000;
+const INTERVAL_LOOKUP = 20 * 1000;
 
 setInterval(() => dht.announce(secretHash), INTERVAL_ANNOUNCE);
 setInterval(() => dht.lookup(secretHash, (err, peers) => {
