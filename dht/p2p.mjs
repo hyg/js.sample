@@ -124,10 +124,12 @@ dht.on('ready', function () {
 
 var secretHash = "58c5d8483c4e7d19b86d1351d6cf89b9ae232400";
 
-const INTERVAL_ANNOUNCE = 20 * 1000;
+const INTERVAL_ANNOUNCE = 30 * 1000;
 const INTERVAL_LOOKUP = 20 * 1000;
 
-setInterval(() => dht.announce(secretHash), INTERVAL_ANNOUNCE);
+setInterval(() => dht.announce(secretHash,(err)=>{
+    if (err) console.error("announce",err);
+}), INTERVAL_ANNOUNCE);
 setInterval(() => dht.lookup(secretHash, (err, peers) => {
     if (err) return console.error(err);
     console.log('发现 peer: %s , %O', typeof peers, peers);
@@ -136,6 +138,8 @@ setInterval(() => dht.lookup(secretHash, (err, peers) => {
 }), INTERVAL_LOOKUP);
 
 function handleAppMessage(msg, rinfo) {
-    var strmsg = "笔记本收到" + msg;
-    socket.send(strmsg, 0, strmsg.length, rinfo.port, rinfo.address); //将接收到的消息返回给客户端
+    if(!msg.startsWith("笔记本收到")){
+        var strmsg = "笔记本收到" + msg;
+        socket.send(strmsg, 0, strmsg.length, rinfo.port, rinfo.address); //将接收到的消息返回给客户端
+    }
 }

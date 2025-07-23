@@ -1,0 +1,47 @@
+{
+  "name": "p2p-node",
+  "version": "1.0.0",
+  "description": "A simple yet powerful P2P node library for building distributed applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/**/*.test.js",
+    "start:chat": "node examples/chat.js",
+    "start:file-sharing": "node examples/file-sharing.js",
+    "lint": "eslint lib/**/*.js examples/**/*.js"
+  },
+  "keywords": [
+    "p2p",
+    "peer-to-peer",
+    "dht",
+    "nat",
+    "upnp",
+    "nat-pmp",
+    "distributed",
+    "networking"
+  ],
+  "author": "CodeBuddy",
+  "license": "MIT",
+  "dependencies": {
+    "bittorrent-dht": "^10.0.7",
+    "debug": "^4.3.4",
+    "default-gateway": "^4.2.0",
+    "ip": "^2.0.1",
+    "nat-pmp": "^1.0.0",
+    "nat-upnp": "^1.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "mocha": "^10.2.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/p2p-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/username/p2p-node/issues"
+  },
+  "homepage": "https://github.com/username/p2p-node#readme"
+}

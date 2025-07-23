@@ -12,7 +12,25 @@ class ConfigManager {
         dhtPort: 6881,
         natTraversal: true,
         maxConnections: 50,
-        connectionTimeout: 30000
+        connectionTimeout: 30000,
+        stunServers: [
+          // Global STUN servers (may have accessibility issues in China)
+          'stun.l.google.com:19302',
+          'stun1.l.google.com:19302',
+          'stun.stunprotocol.org:3478',
+          // China-friendly STUN servers (better accessibility in China)
+          'stun.qq.com:3478',
+          'stun.syncthing.net:3478',
+          'stun.cloudflare.com:3478'
+        ],
+        turnServers: [
+          // Example TURN server configuration:
+          // {
+          //   url: 'turn:your-turn-server.com:3478',
+          //   username: 'your-username',
+          //   credential: 'your-password'
+          // }
+        ]
       },
       security: {
         encryption: true,
