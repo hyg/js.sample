@@ -77,22 +77,60 @@ const BOOTSTRAPS = [
 const dht = new DHT({ bootstrap: BOOTSTRAPS });   // 让 DHT 复用 socket
 //const dht = new DHT({ socket });   // 让 DHT 复用 socket
 
+var bfirst = true;
+dht.on('newListener', (event, listener) => {
+    console.log("new listener: ", event, listener.length, listener);
+    if (event === 'message') {
+        // 让库后面再绑定的监听器排在最前
+        //const list = socket.rawListeners('message');
+        //console.log("list.length:",list.length);
+        if (bfirst) {
+            bfirst = false;
+            //console.log("bfirst:",bfirst)
+            //const dhtHandler = listener;
+            //socket.removeAllListeners('message');
+            //socket.removeAllListeners('newListener');
+            dht.on('message', function mymessagelistener(msg, rinfo) {
+                // 过滤：DHT 报文首字节一定是 0x64
+                console.log(`dht received data: ${msg} from ${rinfo.address}:${rinfo.port}`)
+                //const isDHT = msg.length && msg[0] === 0x64;
+                //buf.slice(0,4).toString()==='d1:a'（更严谨）。
+                const isDHT = msg.length >= 4 && ['d1:a', 'd2:i', 'd1:q', 'd1:r', 'd1:e'].some(m => msg.slice(0, 4).toString().startsWith(m));
+                if (isDHT) {
+                    console.log("由DHT处理");
+                    listener(msg, rinfo);   // 给 DHT
+                } else handleAppMessage(msg, rinfo);   // 给业务
+            });
+        }
+    }
+    var list = dht.rawListeners('message');
+    console.log("end list:", list.length, list);
+    if (list.length > 1) {
+        dht.removeListener('message', dht.rawListeners('message')[1]);
+    }
+});
+
 dht.listen(20000, function () {
     console.log('dht listening 20000')
 })
+
+dht.on("message",handleAppMessage);
 
 dht.on('peer', function (peer, infoHash, from) {
     console.log('found potential peer ' + infoHash + peer.host + ':' + peer.port + ' through ' + from.address + ':' + from.port);
     var strmsg = "笔记本发现你了。";
     socket.send(strmsg, peer.port, peer.host, (err) => {
-        if (err) console.log("socket.send error:", err);
-        console.log('peer event Message sent');
+        if (err) {
+            console.log("socket.send error:", err);
+        } else {
+            console.log('peer event Message sent to', peer);
+        }
     });
 })
 
 dht.on('node', function (node) {
     console.log('found node: %O ', node);
-    console.log("nodes:", dht.toJSON().nodes);
+    //console.log("nodes:", dht.toJSON().nodes);
 })
 
 dht.on('warning', function (err) {
@@ -104,7 +142,7 @@ dht.on('error', function (err) {
 })
 
 dht.on('ready', function () {
-    console.log('ready');
+    console.log('ready');/* 
     var list = dht.rawListeners('message');
     console.log("dht message list:",list.length,list);
     if(list.length == 1){
@@ -121,7 +159,7 @@ dht.on('ready', function () {
                 dhtHandler(msg, rinfo);   // 给 DHT
             }else handleAppMessage(msg, rinfo);   // 给业务
         });
-    }
+    } */
 });
 
 var secretHash = "58c5d8483c4e7d19b86d1351d6cf89b9ae232400";
@@ -149,11 +187,14 @@ setInterval(() => dht.lookup(secretHash, (err, peers) => {
 
 function handleAppMessage(msg, rinfo) {
     console.log("messge event:", msg, rinfo);
-    if (!msg.toString().startsWith("笔记本:")) {
+    if (!msg.toString().startsWith("笔记本")) {
         var strmsg = "笔记本:" + msg;
         socket.send(strmsg, rinfo.port, rinfo.address, (err) => {
-            if (err) console.log("socket.send error:", err);
-            console.log('message event Message sent');
+            if (err) {
+                console.log("socket.send error:", err);
+            } else {
+                console.log('message event Message sent to', rinfo);
+            }
         });
     }
 }
