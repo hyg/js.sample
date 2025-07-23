@@ -52,20 +52,6 @@ socket.on('newListener', (event,listener) => {
         socket.removeListener('message',socket.rawListeners('message')[1]);
     }
 }); */
-
-const dht = new DHT();   // 让 DHT 复用 socket
-//const dht = new DHT({ socket });   // 让 DHT 复用 socket
-//console.log("socket: %O",socket);
-//console.log("dht: %O",dht);
-console.log("before addnode(), nodes:", dht.toJSON().nodes)
-//dht.addNode("router.bittorrent.com",6881);
-/* dht.addNode({host:"router.bittorrent.com",port:6881});
-dht.addNode({host:"dht.transmissionbt.com",port:6881});
-dht.addNode({host:"router.utorrent.com",port:6881});
-dht.addNode({host:"ns-1.x-fins.com",port:6969});
-dht.addNode({host:"tracker.vanitycore.co",port:6881});
-console.log("after addnode(), nodes:",dht.toJSON().nodes);
- */
 const BOOTSTRAPS = [
     { host: '34.197.35.250', port: 6880 },
     { host: '72.46.58.63', port: 51413 },
@@ -87,17 +73,21 @@ const BOOTSTRAPS = [
     { host: '185.145.245.121', port: 8656 },
     { host: '52.201.45.189', port: 6880 }
 ];
-BOOTSTRAPS.forEach(([host, port]) => dht.addNode(host, port));
+
+const dht = new DHT({ bootstrap: BOOTSTRAPS });   // 让 DHT 复用 socket
+//const dht = new DHT({ socket });   // 让 DHT 复用 socket
+
 dht.listen(20000, function () {
     console.log('dht listening 20000')
 })
 
-dht.on('message', handleAppMessage);
-
 dht.on('peer', function (peer, infoHash, from) {
     console.log('found potential peer ' + infoHash + peer.host + ':' + peer.port + ' through ' + from.address + ':' + from.port);
     var strmsg = "笔记本发现你了。";
-    socket.send(strmsg, 0, strmsg.length, peer.port, peer.host);
+    socket.send(strmsg, peer.port, peer.host, (err) => {
+        if (err) console.log("socket.send error:", err);
+        console.log('peer event Message sent');
+    });
 })
 
 dht.on('node', function (node) {
@@ -115,15 +105,24 @@ dht.on('error', function (err) {
 
 dht.on('ready', function () {
     console.log('ready');
-    console.log("nodes:", dht.toJSON().nodes);
-    dht.addNode({ host: "router.bittorrent.com", port: 6881 });
-    dht.addNode({ host: "dht.transmissionbt.com", port: 6881 });
-    dht.addNode({ host: "router.utorrent.com", port: 6881 });
-    dht.addNode({ host: "ns-1.x-fins.com", port: 6969 });
-    dht.addNode({ host: "tracker.vanitycore.co", port: 6881 });
-    console.log("after addnode(), nodes:", dht.toJSON().nodes);
-
-})
+    var list = dht.rawListeners('message');
+    console.log("dht message list:",list.length,list);
+    if(list.length == 1){
+        const dhtHandler = list[0];
+        dht.removeAllListeners('message');
+        dht.on('message', function mymessagelistener(msg, rinfo){
+            // 过滤：DHT 报文首字节一定是 0x64
+            console.log(`dht received data: ${msg} from ${rinfo.address}:${rinfo.port}`)
+            //const isDHT = msg.length && msg[0] === 0x64;
+            //buf.slice(0,4).toString()==='d1:a'（更严谨）。
+            const isDHT = msg.length >= 4 && ['d1:a', 'd2:i', 'd1:q', 'd1:r', 'd1:e'].some(m => msg.slice(0, 4).toString().startsWith(m));
+            if (isDHT) {
+                console.log("由DHT处理");
+                dhtHandler(msg, rinfo);   // 给 DHT
+            }else handleAppMessage(msg, rinfo);   // 给业务
+        });
+    }
+});
 
 var secretHash = "58c5d8483c4e7d19b86d1351d6cf89b9ae232400";
 
@@ -133,13 +132,14 @@ const INTERVAL_LOOKUP = 20 * 1000;
 setInterval(() => dht.announce(secretHash, (err) => {
     if (err && err.message.includes('No nodes to query')) {
         // 重新 bootstrap 并延迟重试
-        BOOTSTRAPS.forEach(([h, p]) => dht.addNode(h, p));
-      } else if (err) {
+        BOOTSTRAPS.forEach((node) => dht.addNode(node));
+    } else if (err) {
         console.error('announce error:', err);
-      } else {
+    } else {
         console.log('announce ok');
-      }
+    }
 }), INTERVAL_ANNOUNCE);
+
 setInterval(() => dht.lookup(secretHash, (err, peers) => {
     if (err) return console.error(err);
     console.log('发现 peer: %s , %O', typeof peers, peers);
@@ -151,6 +151,9 @@ function handleAppMessage(msg, rinfo) {
     console.log("messge event:", msg, rinfo);
     if (!msg.toString().startsWith("笔记本:")) {
         var strmsg = "笔记本:" + msg;
-        socket.send(strmsg, 0, strmsg.length, rinfo.port, rinfo.address); //将接收到的消息返回给客户端
+        socket.send(strmsg, rinfo.port, rinfo.address, (err) => {
+            if (err) console.log("socket.send error:", err);
+            console.log('message event Message sent');
+        });
     }
 }
