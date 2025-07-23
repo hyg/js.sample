@@ -19,7 +19,11 @@ class P2PNode {
     };
     
     this.nodeManager = new NodeManager(mergedOptions);
-    this.natManager = new NATManager(mergedOptions);
+    this.natManager = new NATManager({
+      ...mergedOptions,
+      stunServers: mergedOptions.stunServers || this.config.network.stunServers,
+      turnServers: mergedOptions.turnServers || this.config.network.turnServers
+    });
     this.cryptoManager = new CryptoManager(mergedOptions);
     this.fileTransfer = new FileTransfer(this.nodeManager, mergedOptions);
     this.networkMonitor = new NetworkMonitor(this.nodeManager);
@@ -61,8 +65,8 @@ class P2PNode {
         });
       }
 
-      // 启动节点管理器
-      await this.nodeManager.start();
+      // 启动节点管理器，传入NAT管理器
+      await this.nodeManager.start(this.natManager);
       
       console.log(`✓ P2P Node started! Node ID: ${this.cryptoManager.getNodeId().substring(0, 8)}...`);
       console.log('\n=== Features Enabled ===');
@@ -164,6 +168,14 @@ class P2PNode {
           this.showStats();
           break;
 
+        case 'stun':
+          await this.handleStunTest();
+          break;
+          
+        case 'nat':
+          await this.handleNatDetection();
+          break;
+          
         case 'config':
           await this.handleConfig(args);
           break;
@@ -192,6 +204,7 @@ Network:
   peers              - List discovered peers
   status             - Show node status
   stats              - Show network statistics
+  nat                - Perform comprehensive NAT type detection
 
 Messaging:
   send \<message\>      - Send message to all peers
@@ -205,6 +218,7 @@ Configuration:
   config show         - Show current configuration
   config get \<path\>   - Get configuration value
   config set \<path\> \<value\> - Set configuration value
+  stun                - Test STUN server connectivity
 
 System:
   quit/exit           - Stop the node and exit
@@ -329,6 +343,58 @@ System:
     console.log(`Latency: ${stats.latency.average || 'N/A'}ms average`);
   }
 
+  async handleStunTest() {
+    console.log('\n=== Testing STUN Servers ===');
+    try {
+      const results = await this.natManager.testSTUNServers();
+      
+      console.log('\nSTUN Server Test Results:');
+      results.forEach((result, index) => {
+        if (result.success) {
+          console.log(`  ${index + 1}. ✓ ${result.server} - ${result.latency}ms - Public IP: ${result.publicIP}`);
+        } else {
+          console.log(`  ${index + 1}. ✗ ${result.server} - Failed: ${result.error}`);
+        }
+      });
+      
+      const successful = results.filter(r => r.success).length;
+      console.log(`\nSuccessful connections: ${successful}/${results.length}`);
+    } catch (error) {
+      console.error('STUN test failed:', error.message);
+    }
+  }
+  
+  async handleNatDetection() {
+    console.log('\n=== Performing NAT Type Detection ===');
+    try {
+      const natInfo = await this.natManager.determineNATType(true); // Force refresh
+      
+      console.log('\nNAT Detection Results:');
+      console.log(`  NAT Type: ${natInfo.natType}`);
+      console.log(`  Mapping Behavior: ${natInfo.natMappingBehavior}`);
+      console.log(`  Filtering Behavior: ${natInfo.natFilteringBehavior}`);
+      
+      if (natInfo.details) {
+        console.log('\n  Details:');
+        if (natInfo.details.test1) {
+          console.log(`    Public IP: ${natInfo.details.test1.mappedIP}:${natInfo.details.test1.mappedPort}`);
+          console.log(`    Local IP: ${natInfo.details.test1.sourceIP}:${natInfo.details.test1.sourcePort}`);
+        }
+      }
+      
+      // Show connection recommendations
+      const strategy = this.natManager['_recommendConnectionStrategy'](natInfo);
+      console.log(`\n  Recommended Connection Strategy: ${strategy}`);
+      
+      // Show TURN requirement
+      const needsTurn = this.natManager.shouldUseTURN();
+      console.log(`  TURN Relay Needed: ${needsTurn ? 'Yes' : 'No'}`);
+      
+    } catch (error) {
+      console.error('NAT detection failed:', error.message);
+    }
+  }
+  
   async handleConfig(args) {
     const [subcommand, path, ...valueParts] = args;
     const value = valueParts.join(' ');

@@ -6,7 +6,11 @@
 
 - **DHT网络发现**：使用Bittorrent DHT协议发现其他节点
 - **双协议支持**：同时支持TCP和UDP通信
-- **NAT穿透**：通过DHT发现公网地址，支持NAT穿透
+- **高级NAT穿透**：
+  - 全面的NAT类型检测（开放网络、全锥型、受限锥型、端口受限锥型、对称型）
+  - RFC 3489/5780兼容的STUN实现
+  - 智能TURN中继决策
+  - UPnP支持自动端口映射
 - **节点管理**：自动发现和维护节点列表
 - **应用层通信**：简单的消息广播和点对点通信
 
@@ -38,6 +42,8 @@ npm start -- --magnet "magnet:?xt=urn:btih:your-custom-hash"
 - `peers` - 显示发现的节点列表
 - `send <message>` - 向所有节点发送聊天消息
 - `status` - 显示当前节点状态
+- `nat` - 执行全面的NAT类型检测
+- `stun` - 测试STUN服务器连接性
 - `quit` - 停止节点
 
 ### 示例会话
@@ -148,7 +154,24 @@ npm run dev
 
 # 运行测试
 npm test
+
+# 运行NAT检测测试
+npm run nat-test
+
+# 运行NAT检测示例
+npm run nat-example
 ```
+
+### NAT检测功能
+
+本软件现在包含全面的NAT类型检测功能：
+
+- **五种NAT类型识别**：开放网络、全锥型、受限锥型、端口受限锥型、对称型
+- **RFC兼容实现**：遵循RFC 3489/5780标准
+- **智能连接策略**：根据NAT类型推荐最佳连接方式
+- **TURN中继决策**：自动判断是否需要TURN中继
+
+详细信息请参阅 [NAT-DETECTION.md](NAT-DETECTION.md) 文件。
 
 ## 许可证
 

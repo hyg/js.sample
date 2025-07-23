@@ -7,6 +7,8 @@
     "start": "node src/index.js",
     "dev": "node --inspect src/index.js",
     "test": "node test/test.js",
+    "nat-test": "node test/nat-detection-test.js",
+    "nat-example": "node examples/nat-detection-example.js",
     "demo": "node simple-demo.js",
     "quick": "node quick-start.js"
   },

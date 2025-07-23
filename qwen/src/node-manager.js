@@ -20,7 +20,7 @@ class NodeManager extends EventEmitter {
     this.isRunning = false;
   }
 
-  async start() {
+  async start(natManager = null) {
     try {
       console.log('Starting P2P node...');
       
@@ -52,6 +52,33 @@ class NodeManager extends EventEmitter {
         dht: this.dhtDiscovery.getPublicAddress()
       };
       
+      // If we have a NAT manager, enhance our address information
+      if (natManager) {
+        // Try to get public IP via STUN if UPnP failed
+        const publicIP = await natManager.getExternalIP();
+        const natInfo = await natManager.determineNATType();
+        
+        if (publicIP) {
+          // Update our addresses with public IP information
+          this.publicAddress = {
+            tcp: { address: publicIP, port: tcpAddr.port },
+            udp: { address: publicIP, port: udpAddr.port },
+            dht: { address: publicIP, port: this.options.dhtPort || 6881 }
+          };
+          
+          console.log(`Public IP determined via STUN: ${publicIP}`);
+          console.log(`NAT Type: ${natInfo.natType}`);
+          console.log(`NAT Mapping Behavior: ${natInfo.natMappingBehavior}`);
+          console.log(`NAT Filtering Behavior: ${natInfo.natFilteringBehavior}`);
+        }
+        
+        // Check if we need TURN relay
+        if (natManager.shouldUseTURN()) {
+          console.log('TURN relay may be needed for connectivity based on NAT type');
+          // In a full implementation, we would allocate TURN relay here
+        }
+      }
+      
       // 设置事件监听
       this.setupEventHandlers();
       
@@ -61,6 +88,9 @@ class NodeManager extends EventEmitter {
       this.isRunning = true;
       console.log('P2P node started successfully');
       console.log('Local addresses:', this.localAddress);
+      if (this.publicAddress) {
+        console.log('Public addresses:', this.publicAddress);
+      }
       
     } catch (error) {
       console.error('Failed to start node:', error);
