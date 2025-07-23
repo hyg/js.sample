@@ -1,0 +1,36 @@
+{
+  "network": {
+    "magnetUri": "magnet:?xt=urn:btih:1234567890123456789012345678901234567890",
+    "tcpPort": 0,
+    "udpPort": 0,
+    "dhtPort": 6881,
+    "natTraversal": true,
+    "maxConnections": 50,
+    "connectionTimeout": 30000
+  },
+  "security": {
+    "encryption": true,
+    "authRequired": false,
+    "trustedNodes": [],
+    "sharedSecret": "default-shared-secret-change-me"
+  },
+  "fileTransfer": {
+    "enabled": true,
+    "sharedDir": "./shared",
+    "tempDir": "./temp",
+    "maxConcurrentTransfers": 5,
+    "chunkSize": 65536,
+    "maxFileSize": 104857600
+  },
+  "monitoring": {
+    "enabled": true,
+    "logLevel": "info",
+    "statsInterval": 5000,
+    "historyRetention": 86400000
+  },
+  "discovery": {
+    "broadcastInterval": 30000,
+    "nodeTimeout": 300000,
+    "maxDiscoveryNodes": 100
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(mkdir -p shared temp)",
+      "Bash(npm run:*)",
+      "Bash(npm start:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)"
+    ],
+    "deny": []
+  }
+}
