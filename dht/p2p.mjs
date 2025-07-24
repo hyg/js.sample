@@ -1,4 +1,5 @@
-import DHT from 'bittorrent-dht'
+import DHT from 'bittorrent-dht';
+import bencode from 'bencode';
 /* import dgram from 'dgram';
 
 const socket = dgram.createSocket('udp4');
@@ -152,7 +153,7 @@ dht.listen(20000, function () {
 dht.on('peer', function (peer, infoHash, from) {
     console.log('found potential peer ' + infoHash.toString() + peer.host + ':' + peer.port + ' through ' + from.address + ':' + from.port);
     var strmsg = "笔记本发现你了。";
-    dht._rpc.socket.socket.send(peer,strmsg,(err) => {
+    dht._rpc.socket.socket.send(strmsg, peer.port, peer.host, (err) => {
         if (err) {
             console.log("socket.send error:", err);
         } else {
@@ -191,7 +192,8 @@ dht.on('ready', function () {
         dht._rpc.socket.socket.removeAllListeners('message');
         dht._rpc.socket.socket.on('message', function mymessagelistener(msg, rinfo) {
             // 过滤：DHT 报文首字节一定是 0x64
-            console.log(`dht._rpc.socket.socket received data: ${msg} from ${rinfo.address}:${rinfo.port}`)
+            var message = bencode.decode(msg);
+            console.log(`dht._rpc.socket.socket received data: ${message} from ${rinfo.address}:${rinfo.port}`)
             //const isDHT = msg.length && msg[0] === 0x64;
             //buf.slice(0,4).toString()==='d1:a'（更严谨）。
             const isDHT = msg.length >= 4 && ['d1:a', 'd2:i', 'd1:q', 'd1:r', 'd1:e'].some(m => msg.slice(0, 4).toString().startsWith(m));
@@ -201,6 +203,8 @@ dht.on('ready', function () {
             } else handleAppMessage(msg, rinfo);   // 给业务
         });
     }
+    list = dht._rpc.socket.socket.rawListeners('message');
+    console.log("ready end list:", list.length, list);
 });
 
 var secretHash = "58c5d8483c4e7d19b86d1351d6cf89b9ae232400";
@@ -230,8 +234,7 @@ function handleAppMessage(msg, rinfo) {
     console.log("messge event:", msg.toString(), rinfo);
     if (!msg.toString().startsWith("笔记本")) {
         var strmsg = "笔记本:" + msg;
-        dht._rpc.socket.socket.send
-        socket.send(strmsg, rinfo.port, rinfo.address, (err) => {
+        dht._rpc.socket.socket.send(strmsg, rinfo.port, rinfo.address, (err) => {
             if (err) {
                 console.log("socket.send error:", err);
             } else {
