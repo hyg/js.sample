@@ -1,6 +1,8 @@
 import DHT from 'bittorrent-dht';
 import bencode from 'bencode';
-/* import dgram from 'dgram';
+
+/* 复用socket时启用这段
+import dgram from 'dgram';
 
 const socket = dgram.createSocket('udp4');
 socket.bind(30000, () => {
@@ -10,49 +12,14 @@ socket.bind(30000, () => {
 socket.on('listening', function () {
     console.log('socket listening event.');
     //var strmsg = "笔记本开始监听...";
-    //socket.send(strmsg, 0, strmsg.length, 29113, "221.218.141.220"); //将接收到的消息返回给客户端
-    //socket.send(strmsg, 0, strmsg.length, 9080, "221.218.141.220"); //将接收到的消息返回给客户端
     //socket.send(strmsg, 0, strmsg.length, 30000, "115.28.214.237"); //将接收到的消息返回给客户端
 })
 
 socket.on('error', function (err) {
     console.log('some error on udp server.')
     socket.close();
-});
-
-socket.on('message', handleAppMessage); */
-/*var bfirst = true ;
-socket.on('newListener', (event,listener) => {
-    console.log("new listener: ",event,listener.length,listener);
-    if (event === 'message') {
-        // 让库后面再绑定的监听器排在最前
-        //const list = socket.rawListeners('message');
-        //console.log("list.length:",list.length);
-        if (bfirst) {
-            bfirst = false;
-            //console.log("bfirst:",bfirst)
-            //const dhtHandler = listener;
-            //socket.removeAllListeners('message');
-            //socket.removeAllListeners('newListener');
-            socket.on('message', function mymessagelistener(msg, rinfo){
-                // 过滤：DHT 报文首字节一定是 0x64
-                console.log(`udp server received data: ${msg} from ${rinfo.address}:${rinfo.port}`)
-                //const isDHT = msg.length && msg[0] === 0x64;
-                //buf.slice(0,4).toString()==='d1:a'（更严谨）。
-                const isDHT = msg.length >= 4 && ['d1:a', 'd2:i', 'd1:q', 'd1:r', 'd1:e'].some(m => msg.slice(0, 4).toString().startsWith(m));
-                if (isDHT) {
-                    console.log("由DHT处理");
-                    listener(msg, rinfo);   // 给 DHT
-                }else handleAppMessage(msg, rinfo);   // 给业务
-            });
-        }
-    }
-    var list = socket.rawListeners('message');
-    console.log("end list:",list.length,list);
-    if(list.length > 1){
-        socket.removeListener('message',socket.rawListeners('message')[1]);
-    }
 }); */
+
 const BOOTSTRAPS = [
     { host: '34.197.35.250', port: 6880 },
     { host: '72.46.58.63', port: 51413 },
@@ -76,97 +43,22 @@ const BOOTSTRAPS = [
 ];
 
 const dht = new DHT({ bootstrap: BOOTSTRAPS });   // 让 DHT 复用 socket
-//const dht = new DHT({ socket });   // 让 DHT 复用 socket
-
-/* var bfirst = true;
-dht.on('newListener', (event, listener) => {
-    console.log("new listener: ", event, listener.length, listener);
-    if (event === 'message') {
-        // 让库后面再绑定的监听器排在最前
-        //const list = socket.rawListeners('message');
-        //console.log("list.length:",list.length);
-        if (bfirst) {
-            bfirst = false;
-            //console.log("bfirst:",bfirst)
-            //const dhtHandler = listener;
-            //dht.removeAllListeners('message');
-            //socket.removeAllListeners('newListener');
-            dht.on('message', function mymessagelistener(msg, rinfo) {
-                // 过滤：DHT 报文首字节一定是 0x64
-                console.log(`dht received data: ${msg} from ${rinfo.address}:${rinfo.port}`)
-                //const isDHT = msg.length && msg[0] === 0x64;
-                //buf.slice(0,4).toString()==='d1:a'（更严谨）。
-                const isDHT = msg.length >= 4 && ['d1:a', 'd2:i', 'd1:q', 'd1:r', 'd1:e'].some(m => msg.slice(0, 4).toString().startsWith(m));
-                if (isDHT) {
-                    console.log("由DHT处理");
-                    listener(msg, rinfo);   // 给 DHT
-                } else handleAppMessage(msg, rinfo);   // 给业务
-            });
-        }
-    }
-    var list = dht.rawListeners('message');
-    console.log("end list:", list.length, list);
-    if (list.length > 1) {
-        dht.removeListener('message', dht.rawListeners('message')[1]);
-    }
-}); */
-
-/* var bfirst = true;
-dht._rpc.socket.socket.on('newListener', (event, listener) => {
-    console.log("new listener: ", event, listener.length, listener);
-    if (event === 'message') {
-        // 让库后面再绑定的监听器排在最前
-        //const list = socket.rawListeners('message');
-        //console.log("list.length:",list.length);
-        if (bfirst) {
-            bfirst = false;
-            //console.log("bfirst:",bfirst)
-            //const dhtHandler = listener;
-            //dht.removeAllListeners('message');
-            //socket.removeAllListeners('newListener');
-            dht._rpc.socket.socket.on('message', function mymessagelistener(msg, rinfo) {
-                // 过滤：DHT 报文首字节一定是 0x64
-                console.log(`dht._rpc.socket.socket received data: ${msg} from ${rinfo.address}:${rinfo.port}`)
-                //const isDHT = msg.length && msg[0] === 0x64;
-                //buf.slice(0,4).toString()==='d1:a'（更严谨）。
-                const isDHT = msg.length >= 4 && ['d1:a', 'd2:i', 'd1:q', 'd1:r', 'd1:e'].some(m => msg.slice(0, 4).toString().startsWith(m));
-                if (isDHT) {
-                    console.log("由DHT处理");
-                    listener(msg, rinfo);   // 给 DHT
-                } else handleAppMessage(msg, rinfo);   // 给业务
-            });
-        }
-    }
-    var list = dht._rpc.socket.socket.rawListeners('message');
-    console.log("end list:", list.length, list);
-    if (list.length > 1) {
-        dht._rpc.socket.socket.removeListener('message', dht.rawListeners('message')[1]);
-    }
-}); */
+//const dht = new DHT({ "socket":socket,bootstrap: BOOTSTRAPS });   // 复用socket时启用这段
 
 dht.listen(20000, function () {
     console.log('dht listening 20000')
 })
 
-//dht.on("message",handleAppMessage);
-
 dht.on('peer', function (peer, infoHash, from) {
     console.log('found potential peer ' + infoHash.toString() + peer.host + ':' + peer.port + ' through ' + from.address + ':' + from.port);
     var strmsg = "笔记本发现你了。";
-    dht._rpc.socket.socket.send(strmsg, peer.port, peer.host, (err) => {
+    dht._rpc.socket.socket.send(strmsg, peer.port, peer.host, (err) => { // 复用socket时，可以直接用socket代替下面所有的dht._rpc.socket.socket
         if (err) {
             console.log("socket.send error:", err);
         } else {
             console.log('peer event Message sent to', peer);
         }
     });
-    /* socket.send(strmsg, peer.port, peer.host, (err) => {
-        if (err) {
-            console.log("socket.send error:", err);
-        } else {
-            console.log('peer event Message sent to', peer);
-        }
-    }); */
 })
 
 dht.on('node', function (node) {
@@ -174,13 +66,13 @@ dht.on('node', function (node) {
     //console.log("nodes:", dht.toJSON().nodes);
 })
 
-/* dht.on('warning', function (err) {
+dht.on('warning', function (err) {
     console.log('warning: %O ', err);
 })
 
 dht.on('error', function (err) {
     console.log('error: %O ', err);
-}) */
+})
 
 dht.on('ready', function () {
     console.log('ready');
@@ -226,8 +118,6 @@ setInterval(() => dht.announce(secretHash, (err) => {
 setInterval(() => dht.lookup(secretHash, (err, peers) => {
     if (err) return console.error(err);
     console.log('发现 peer: %s , %O', typeof peers, peers);
-    //peers.forEach(p => console.log('peer ->', p.host, p.port));
-    // peers = [{ host, port }, ...]
 }), INTERVAL_LOOKUP);
 
 function handleAppMessage(msg, rinfo) {

@@ -79,3 +79,5 @@ dht.on('peer', ({ host: peerIP, port: peerPort }) => {
     socket.send(chunk, 0, chunk.length, port, address); // 先广播给自己端口
   });
 });
+
+// announce会触发lookup？第一批节点如果没有相同软件的节点，就错过了。应该连续lookup。
