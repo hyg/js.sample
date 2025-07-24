@@ -192,13 +192,13 @@ dht.on('ready', function () {
         dht._rpc.socket.socket.removeAllListeners('message');
         dht._rpc.socket.socket.on('message', function mymessagelistener(msg, rinfo) {
             // 过滤：DHT 报文首字节一定是 0x64
-            var message = bencode.decode(msg);
-            console.log(`dht._rpc.socket.socket received data: ${message} from ${rinfo.address}:${rinfo.port}`)
+            console.log(`dht._rpc.socket.socket received data: ${msg} from ${rinfo.address}:${rinfo.port}`)
             //const isDHT = msg.length && msg[0] === 0x64;
             //buf.slice(0,4).toString()==='d1:a'（更严谨）。
             const isDHT = msg.length >= 4 && ['d1:a', 'd2:i', 'd1:q', 'd1:r', 'd1:e'].some(m => msg.slice(0, 4).toString().startsWith(m));
             if (isDHT) {
-                console.log("由DHT处理");
+                var message = bencode.decode(msg);
+                console.log("由DHT处理: %O",message);
                 dhtHandler(msg, rinfo);   // 给 DHT
             } else handleAppMessage(msg, rinfo);   // 给业务
         });
