@@ -1,0 +1,14 @@
+{
+  "name": "p2p-node-app",
+  "version": "1.0.0",
+  "description": "P2P Node Application for Windows",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.7.2"
+  }
+}
