@@ -1,13 +1,9 @@
-import OpenAI from "openai";
+import { Mistral } from '@mistralai/mistralai';
 import { createInterface } from 'readline/promises';
 import 'dotenv/config';
-const openai = new OpenAI(
-    {
-        // 若没有配置环境变量，请用百炼API Key将下行替换为：apiKey: "sk-xxx",
-        apiKey: process.env.API_KEY,
-        baseURL: process.env.BASE_URL
-    }
-);
+
+const apiKey = process.env.MISTRAL_API_KEY;
+const client = new Mistral({apiKey: apiKey});
 
 var tools = [{
     "type": "function",
@@ -26,15 +22,15 @@ var tools = [{
 
 async function getResponse(messages) {
     try {
-        const completion = await openai.chat.completions.create({
+        const completion = await client.chat.complete({
             // 模型列表：https://help.aliyun.com/zh/model-studio/getting-started/models
-            model: "qwen-max",
+            model: "mistral-large-latest",
             tools: tools,
             tool_choice: { "type": "function", "function": { "name": "submit_profile" } },
             messages: messages,
         });
-        console.log("completion:%O", completion);
-        console.log("message:%O", completion.choices[0].message);
+        //console.log("completion:%O", completion);
+        //console.log("message:%O", completion.choices[0].message);
 
         const call = completion.choices[0].message.tool_calls?.[0];
         if (call && call.function.name === 'submit_profile') {

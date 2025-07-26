@@ -9,42 +9,16 @@ const openai = new OpenAI(
     }
 );
 
-var tools = [{
-    "type": "function",
-    "function": {
-        "name": "submit_profile",
-        "description": "仅供系统内部调用，用于提交心理侧写结果。",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "profile": { "type": "object" }
-            },
-            "required": ["profile"]
-        }
-    }
-}]
-
 async function getResponse(messages) {
     try {
         const completion = await openai.chat.completions.create({
             // 模型列表：https://help.aliyun.com/zh/model-studio/getting-started/models
-            model: "qwen-max",
-            tools: tools,
-            tool_choice: { "type": "function", "function": { "name": "submit_profile" } },
+            //model: "qwen-max",
+            model: "Moonshot-Kimi-K2-Instruct",
             messages: messages,
         });
-        console.log("completion:%O", completion);
-        console.log("message:%O", completion.choices[0].message);
-
-        const call = completion.choices[0].message.tool_calls?.[0];
-        if (call && call.function.name === 'submit_profile') {
-            const args = JSON.parse(call.function.arguments); // ← 关键一步
-            const profile = args.profile;
-            console.log("侧写结果:\n", profile);
-            return "我已了解您的工作标准";
-        } else {
-            return completion.choices[0].message.content;
-        }
+        //console.log("completion:%O", completion);
+        return completion.choices[0].message.content;
     } catch (error) {
         console.error("Error fetching response:", error);
         throw error;  // 重新抛出异常以便上层处理
@@ -56,7 +30,7 @@ const messages = [
     {
         "role": "system",
         "content": `
-你是一位资深社会调查员，同时拥有心理医生的资质。擅长通过普通对话进行任务侧写。一个筹备中的公司正在发起筹备会议，委托你在会前按照以下附件20~34的工作标准，对会议成员进行鉴别。对话过程可以跟随用户的语言风格进行，内容方面不需要按照附件的次序，不要把注释写在 content 字段中。注意观察用户的情绪和避讳，不需要使用附件的文字。当你认为充分了解用户、继续对话没有必要时，调用submit_profile这个tool，结果以json格式写入参数中。要求对附件20~34逐一做出鉴定，无法判断的部分也注明。
+你是一位资深社会调查员，同时拥有心理医生的资质。擅长通过普通对话进行任务侧写。一个筹备中的公司正在发起筹备会议，委托你在会前按照以下附件20~34的工作标准，对会议成员进行鉴别。对话以普通的会务安排为表面理由，最好不要让用户感觉到这是一次心理侧写。对话过程应该跟随用户的语言风格进行，可以主动引导话题但不需要按照附件的次序，覆盖尽可能多附件条款，不要把注释写在 content 字段中。注意观察用户的情绪和避讳，尽量不要使用附件的文字和序号。当你认为充分了解用户、继续对话没有必要时，回复以‘我已了解您的工作标准’开头，然后以json格式写出侧写结果。要求对附件20~34逐一做出鉴定，无法判断的部分也注明。
 附件的正文：
 附件20. 对于已发生的行为，按照以下方式之一进行核实：
 附件20.1. 提供完整、连续、不可删改的记录；
