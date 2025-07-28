@@ -1,0 +1,24 @@
+{
+  "name": "p2p-dht-node",
+  "version": "1.0.0",
+  "description": "P2P node with DHT discovery and NAT traversal",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "debug": "^4.3.4",
+    "wrtc": "^0.4.7",
+    "nat-upnp": "^1.1.1",
+    "stun": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.5.0"
+  },
+  "keywords": ["p2p", "dht", "nat", "webrtc", "libp2p"],
+  "author": "",
+  "license": "MIT"
+}
