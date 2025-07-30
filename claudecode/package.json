@@ -1,0 +1,27 @@
+{
+  "name": "multi-turn-dialogue-tool",
+  "version": "1.0.0",
+  "description": "多轮对话工具，支持NER、RE和递归分析",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --inspect index.js"
+  },
+  "dependencies": {
+    "@mistralai/mistralai": "^1.7.5",
+    "axios": "^1.6.0",
+    "colors": "^1.4.0",
+    "dotenv": "^17.2.1",
+    "openai": "^5.10.2",
+    "readline-sync": "^1.4.10"
+  },
+  "keywords": [
+    "dialogue",
+    "ner",
+    "re",
+    "mistral",
+    "openai"
+  ],
+  "author": "",
+  "license": "MIT"
+}

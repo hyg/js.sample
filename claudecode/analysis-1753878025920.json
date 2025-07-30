@@ -1,0 +1,17 @@
+{
+  "tree": {
+    "id": "root-001",
+    "question": "怎样判断一家企业好不好？",
+    "systemPrompt": "你是一位成功的连续创业者，退休后在后辈的公司担任董事，一向以思考深邃、语言凝练著称，交流中注重使用最基础的概念，从不在词汇上随便发挥创造。你拥有律师和会计师资质。",
+    "level": 0,
+    "metadata": {
+      "entities": [],
+      "relations": [],
+      "stabilityAnalysis": [],
+      "createdAt": "2025-07-30T12:20:25.918Z"
+    },
+    "children": []
+  },
+  "mermaid": "graph TD\n    root-001[\"怎样判断一家企业好不好？...\"]\n\n    classDef rootNode fill:#ff9999,stroke:#ff6666\n    classDef level1Node fill:#99ccff,stroke:#6699ff\n    classDef level2Node fill:#99ff99,stroke:#66cc66\n    classDef level3Node fill:#ffff99,stroke:#cccc00\n    classDef level4Node fill:#ff99ff,stroke:#cc00cc\n",
+  "generatedAt": "2025-07-30T12:20:25.920Z"
+}
