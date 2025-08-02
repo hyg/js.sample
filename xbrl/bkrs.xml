@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xbrl xmlns="http://www.xbrl.org/2003/instance" xmlns:bkrs="http://xbrl.mof.gov.cn/taxonomy/2023-12-31/bkrs" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:iso4217="http://www.xbrl.org/2003/iso4217" xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.xbrl.org/2003/linkbase http://www.xbrl.org/2003/xbrl-linkbase-2003-12-31.xsd">
+  <link:schemaRef xlink:type="simple" xlink:href="bkrs_entry_point_2023-12-31.xsd"/>
+  <context id="c1">
+    <entity>
+      <identifier scheme="http://xbrl.mof.gov.cn">C1030311000455</identifier>
+    </entity>
+    <period>
+      <instant>2021-08-31</instant>
+    </period>
+  </context>
+  <unit id="u1">
+    <measure>iso4217:CNY</measure>
+  </unit>
+  <bkrs:IdentificationCodeOfIssuer contextRef="c1">C1030311000455</bkrs:IdentificationCodeOfIssuer>
+  <bkrs:NumberOfBankBranch contextRef="c1">001</bkrs:NumberOfBankBranch>
+  <bkrs:Currency contextRef="c1">CNY</bkrs:Currency>
+  <bkrs:CustomerSettlementBankAccount contextRef="c1">62XX000000010001</bkrs:CustomerSettlementBankAccount>
+  <bkrs:NameOfCustomerAccount contextRef="c1">ABC公司</bkrs:NameOfCustomerAccount>
+  <bkrs:CodeOfBankCustomer contextRef="c1">A123456</bkrs:CodeOfBankCustomer>
+  <bkrs:YearOfBankReconciliationStatement contextRef="c1">2021</bkrs:YearOfBankReconciliationStatement>
+  <bkrs:MonthOfBankReconciliationStatement contextRef="c1">08</bkrs:MonthOfBankReconciliationStatement>
+  <bkrs:PrintTimes contextRef="c1">1</bkrs:PrintTimes>
+  <bkrs:PrintDate contextRef="c1">2021-08-31</bkrs:PrintDate>
+  <bkrs:InformationOfReconcileDetailsTuple>
+    <bkrs:DateOfBookkeeping contextRef="c1">2021-08-03</bkrs:DateOfBookkeeping>
+    <bkrs:TypesOfBusinessProducts contextRef="c1">转账</bkrs:TypesOfBusinessProducts>
+    <bkrs:BusinessSerialNumber contextRef="c1">XXXXXXXXX1</bkrs:BusinessSerialNumber>
+    <bkrs:TypeOfSourceDocument contextRef="c1">支票</bkrs:TypeOfSourceDocument>
+    <bkrs:NumberOfSourceDocument contextRef="c1">0987654321</bkrs:NumberOfSourceDocument>
+    <bkrs:NotesOfBankElectronicReceipt contextRef="c1">转账业务</bkrs:NotesOfBankElectronicReceipt>
+    <bkrs:IdentificationOfCreditOrDebit contextRef="c1">0</bkrs:IdentificationOfCreditOrDebit>
+    <bkrs:TransactionAmount contextRef="c1" unitRef="u1" decimals="2">15177.33</bkrs:TransactionAmount>
+    <bkrs:DebitOrCreditOfBalance contextRef="c1">1</bkrs:DebitOrCreditOfBalance>
+    <bkrs:AccountBalance contextRef="c1" unitRef="u1" decimals="2">95445.32</bkrs:AccountBalance>
+    <bkrs:TransactionCode contextRef="c1">42062</bkrs:TransactionCode>
+    <bkrs:AccountOfCounterparty contextRef="c1">62XX000200020002</bkrs:AccountOfCounterparty>
+    <bkrs:NameOfCounterparty contextRef="c1">DEF公司</bkrs:NameOfCounterparty>
+    <bkrs:DepositoryBankOfCounterparty contextRef="c1">XX银行北京分行</bkrs:DepositoryBankOfCounterparty>
+    <bkrs:Bookkeeper contextRef="c1">08971</bkrs:Bookkeeper>
+    <bkrs:TimeOfBookkeeping contextRef="c1">08:34:23</bkrs:TimeOfBookkeeping>
+    <bkrs:JournalAccountOfBookkeeping contextRef="c1">XX交易记录</bkrs:JournalAccountOfBookkeeping>
+    <bkrs:NumberOfBankElectronicReceipt contextRef="c1">202108039029660024300000000001</bkrs:NumberOfBankElectronicReceipt>
+  </bkrs:InformationOfReconcileDetailsTuple>
+  <bkrs:InformationOfReconcileDetailsTuple>
+    <bkrs:DateOfBookkeeping contextRef="c1">2021-08-15</bkrs:DateOfBookkeeping>
+    <bkrs:TypesOfBusinessProducts contextRef="c1">转账</bkrs:TypesOfBusinessProducts>
+    <bkrs:BusinessSerialNumber contextRef="c1">XXXXXXXXX1</bkrs:BusinessSerialNumber>
+    <bkrs:TypeOfSourceDocument contextRef="c1">支票</bkrs:TypeOfSourceDocument>
+    <bkrs:NumberOfSourceDocument contextRef="c1">1234567890</bkrs:NumberOfSourceDocument>
+    <bkrs:NotesOfBankElectronicReceipt contextRef="c1">转账业务</bkrs:NotesOfBankElectronicReceipt>
+    <bkrs:IdentificationOfCreditOrDebit contextRef="c1">1</bkrs:IdentificationOfCreditOrDebit>
+    <bkrs:TransactionAmount contextRef="c1" unitRef="u1" decimals="2">156.22</bkrs:TransactionAmount>
+    <bkrs:DebitOrCreditOfBalance contextRef="c1">1</bkrs:DebitOrCreditOfBalance>
+    <bkrs:AccountBalance contextRef="c1" unitRef="u1" decimals="2">95601.54</bkrs:AccountBalance>
+    <bkrs:TransactionCode contextRef="c1">42063</bkrs:TransactionCode>
+    <bkrs:AccountOfCounterparty contextRef="c1">62XX000300030003</bkrs:AccountOfCounterparty>
+    <bkrs:NameOfCounterparty contextRef="c1">OPQ公司</bkrs:NameOfCounterparty>
+    <bkrs:DepositoryBankOfCounterparty contextRef="c1">XX银行朝阳支行</bkrs:DepositoryBankOfCounterparty>
+    <bkrs:Bookkeeper contextRef="c1">06587</bkrs:Bookkeeper>
+    <bkrs:TimeOfBookkeeping contextRef="c1">15:34:24</bkrs:TimeOfBookkeeping>
+    <bkrs:JournalAccountOfBookkeeping contextRef="c1">XX交易记录</bkrs:JournalAccountOfBookkeeping>
+    <bkrs:NumberOfBankElectronicReceipt contextRef="c1">202108157549660024300000000001</bkrs:NumberOfBankElectronicReceipt>
+  </bkrs:InformationOfReconcileDetailsTuple>
+  <bkrs:AccountBalanceAtTheEndOfReconciliationCycleAmount contextRef="c1" unitRef="u1" decimals="2">95601.54</bkrs:AccountBalanceAtTheEndOfReconciliationCycleAmount>
+  <bkrs:AvailableBalanceAtTheEndOfReconciliationCycleAmount contextRef="c1" unitRef="u1" decimals="2">95601.54</bkrs:AvailableBalanceAtTheEndOfReconciliationCycleAmount>
+</xbrl>

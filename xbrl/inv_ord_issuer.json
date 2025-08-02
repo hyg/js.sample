@@ -1,0 +1,15 @@
+{
+  "invOrdIssuer": {
+    "invoiceCode": "12345678",
+    "invoiceNumber": "12345678",
+    "invoiceDate": "\"2023-01-01\"",
+    "sellerName": "示例销售方",
+    "sellerTaxCode": "123456789012345",
+    "buyerName": "示例购买方",
+    "buyerTaxCode": "123456789012345",
+    "amount": "100.00",
+    "taxAmount": "13.00",
+    "totalAmount": "113.00",
+    "remarks": "示例备注"
+  }
+}
