@@ -236,6 +236,24 @@
             margin-bottom: 5px;
             color: #4a5568;
         }
+        .manual-step {
+            background: #fff7e6;
+            border: 1px solid #fed7b0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .manual-step h3 {
+            color: #d97706;
+            margin-bottom: 10px;
+        }
+        .manual-step ol {
+            margin-left: 20px;
+        }
+        .manual-step li {
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body>
@@ -283,6 +301,21 @@
             <div class="debug-log">
                 <h4>调试日志:</h4>
                 <div id="debugLog"></div>
+            </div>
+            <div class="manual-step">
+                <h3>手动连接步骤：</h3>
+                <ol>
+                    <li>确保双方都打开了相同的URL参数页面</li>
+                    <li>如果连接失败，请刷新页面重试</li>
+                    <li>如果仍然无法连接，请尝试以下方法：
+                        <ul>
+                            <li>使用不同的浏览器</li>
+                            <li>检查防火墙设置</li>
+                            <li>确保网络允许P2P连接</li>
+                            <li>尝试使用VPN连接</li>
+                        </ul>
+                    </li>
+                </ol>
             </div>
         </div>
     </div>
