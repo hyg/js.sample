@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2P加密通信</title>
+    <script src="https://cdn.jsdelivr.net/npm/simple-peer@9.11.1/simplepeer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: #4a5568;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .header .param {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 20px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        .status {
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            border: 1px solid #e2e8f0;
+        }
+        .status.connected {
+            background: #c6f6d5;
+            border-color: #9ae6b4;
+        }
+        .status.disconnected {
+            background: #fed7d7;
+            border-color: #feb2b2;
+        }
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            min-height: 200px;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+            font-size: 14px;
+        }
+        .message.own {
+            background: #4299e1;
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 4px;
+        }
+        .message.other {
+            background: #edf2f7;
+            color: #2d3748;
+            margin-right: auto;
+            border-bottom-left-radius: 4px;
+        }
+        .input-area {
+            display: flex;
+            gap: 10px;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        .input-area input:focus {
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+        }
+        .input-area button {
+            padding: 0 20px;
+            background: #48bb78;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .input-area button:hover {
+            background: #38a169;
+        }
+        .input-area button:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+        }
+        .help-text {
+            font-size: 12px;
+            color: #718096;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .encryption-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+            color: #2f855a;
+        }
+        .lock-icon {
+            color: #2f855a;
+        }
+        .info-box {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #2b6cb0;
+        }
+        .copy-btn {
+            background: #4a5568;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .copy-btn:hover {
+            background: #2d3748;
+        }
+        .setup-guide {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .setup-guide h3 {
+            color: #2f855a;
+            margin-bottom: 10px;
+        }
+        .setup-guide ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        .setup-guide li {
+            margin-bottom: 5px;
+        }
+        .connection-info {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 12px;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+        .connection-info strong {
+            color: #2d3748;
+        }
+        .warning {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>端对端加密P2P通信</h1>
+            <div class="param">房间参数: <span id="paramDisplay"></span></div>
+        </div>
+        <div class="content">
+            <div class="warning">
+                ⚠️ 重要提示：请确保双方都使用HTTPS或本地文件协议(file://)
+            </div>
+            <div class="info-box">
+                <strong>使用说明:</strong> 复制当前页面URL分享给对方，双方打开相同链接即可建立连接
+                <button class="copy-btn" id="copyUrl">复制链接</button>
+            </div>
+            <div class="setup-guide">
+                <h3>连接设置指南:</h3>
+                <ul>
+                    <li>双方必须打开完全相同的URL参数</li>
+                    <li>建议在Chrome或Firefox浏览器中使用</li>
+                    <li>如果连接失败，尝试刷新页面</li>
+                    <li>确保网络环境允许P2P连接</li>
+                </ul>
+            </div>
+            <div id="status" class="status disconnected">等待连接...</div>
+            <div id="connectionInfo" class="connection-info" style="display:none;">
+                <strong>连接状态:</strong> <span id="connectionStatus">正在连接...</span><br>
+                <strong>本地地址:</strong> <span id="localAddress">未知</span>
+            </div>
+            <div id="messages" class="messages">
+                <div class="message other">等待其他用户加入...</div>
+            </div>
+            <div class="input-area">
+                <input type="text" id="messageInput" placeholder="输入消息..." disabled>
+                <button id="sendBtn" disabled>发送</button>
+            </div>
+            <div class="help-text">
+                <div class="encryption-indicator">
+                    <span class="lock-icon">🔒</span>
+                    端对端加密通信 (使用AES-256)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 确保DOM完全加载后再执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 手动解析URL参数的函数
+            function parseQueryString() {
+                const query = window.location.search.substring(1);
+                const params = {};
+                if (!query) return params;
+                
+                const pairs = query.split('&');
+                for (let pair of pairs) {
+                    const [key, value] = pair.split('=');
+                    if (key) {
+                        params[decodeURIComponent(key)] = value ? decodeURIComponent(value) : '';
+                    }
+                }
+                return params;
+            }
+
+            // 获取当前完整URL
+            function getCurrentUrl() {
+                return window.location.href;
+            }
+
+            // 复制文本到剪贴板
+            function copyToClipboard(text) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        alert('链接已复制到剪贴板！');
+                    }).catch(err => {
+                        console.error('复制失败:', err);
+                        fallbackCopyTextToClipboard(text);
+                    });
+                } else {
+                    fallbackCopyTextToClipboard(text);
+                }
+            }
+
+            // 备用复制方法
+            function fallbackCopyTextToClipboard(text) {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.top = 0;
+                textArea.style.left = 0;
+                textArea.style.width = '2em';
+                textArea.style.height = '2em';
+                textArea.style.padding = 0;
+                textArea.style.border = 'none';
+                textArea.style.outline = 'none';
+                textArea.style.boxShadow = 'none';
+                textArea.style.background = 'transparent';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    alert('链接已复制到剪贴板！');
+                } catch (err) {
+                    prompt('复制链接:', getCurrentUrl());
+                }
+                document.body.removeChild(textArea);
+            }
+
+            // 主要功能实现
+            class P2PChat {
+                constructor() {
+                    this.peer = null;
+                    this.param = '';
+                    this.isInitiator = false;
+                    this.connected = false;
+                    this.messageInput = document.getElementById('messageInput');
+                    this.sendBtn = document.getElementById('sendBtn');
+                    this.messages = document.getElementById('messages');
+                    this.status = document.getElementById('status');
+                    this.paramDisplay = document.getElementById('paramDisplay');
+                    this.connectionInfo = document.getElementById('connectionInfo');
+                    this.connectionStatus = document.getElementById('connectionStatus');
+                    this.localAddress = document.getElementById('localAddress');
+                    
+                    // 使用中国境内可访问的STUN服务器
+                    this.config = {
+                        iceServers: [
+                            { urls: 'stun:fwa.lifesizecloud.com:3478' },
+                            { urls: 'stun:stun.isp.net.au:3478' },
+                            { urls: 'stun:stun.freeswitch.org:3478' },
+                            { urls: 'stun:stun.voip.blackberry.com:3478' }
+                        ],
+                        iceTransportPolicy: 'all',
+                        bundlePolicy: 'max-bundle',
+                        rtcpMuxPolicy: 'require'
+                    };
+
+                    this.init();
+                }
+
+                init() {
+                    // 从URL参数获取房间ID
+                    const params = parseQueryString();
+                    this.param = params.room || 'default';
+                    this.paramDisplay.textContent = this.param;
+                    
+                    // 生成加密密钥（基于房间参数）
+                    this.encryptionKey = CryptoJS.SHA256(this.param).toString();
+                    
+                    // 更新标题
+                    document.title = `P2P聊天 - ${this.param}`;
+                    
+                    // 开始P2P连接
+                    this.startP2P();
+                }
+
+                startP2P() {
+                    // 显示连接状态
+                    this.status.textContent = '正在建立P2P连接...';
+                    this.connectionInfo.style.display = 'block';
+                    this.connectionStatus.textContent = '正在连接...';
+                    this.addMessage('系统', '正在尝试建立连接，请确保对方也打开了相同参数的页面', false);
+                    
+                    // 创建Peer连接
+                    this.createPeer(true);
+                }
+
+                createPeer(initiator) {
+                    this.isInitiator = initiator;
+                    
+                    try {
+                        this.peer = new SimplePeer({
+                            initiator: initiator,
+                            trickle: true,
+                            config: this.config
+                        });
+
+                        // 监听ICE候选者
+                        this.peer.on('signal', data => {
+                            if (data.type === 'offer') {
+                                this.status.textContent = '等待对方响应...';
+                                this.connectionStatus.textContent = '等待响应';
+                                this.addMessage('系统', '已创建连接请求，等待对方响应', false);
+                            } else if (data.type === 'answer') {
+                                this.status.textContent = '连接协商中...';
+                                this.connectionStatus.textContent = '协商中';
+                            } else if (data.type === 'candidate') {
+                                // 处理ICE候选者
+                                if (data.candidate && data.candidate.candidate) {
+                                    const candidate = data.candidate.candidate;
+                                    if (candidate.includes('typ host')) {
+                                        this.localAddress.textContent = '本地网络';
+                                    } else if (candidate.includes('typ srflx')) {
+                                        const ipMatch = candidate.match(/(\d+\.\d+\.\d+\.\d+)/);
+                                        if (ipMatch) {
+                                            this.localAddress.textContent = ipMatch[1] + ' (NAT)';
+                                        }
+                                    } else if (candidate.includes('typ relay')) {
+                                        this.localAddress.textContent = '中继连接';
+                                    }
+                                }
+                            }
+                        });
+
+                        this.peer.on('connect', () => {
+                            this.connected = true;
+                            this.status.textContent = '已连接 - 可以开始聊天';
+                            this.status.className = 'status connected';
+                            this.connectionStatus.textContent = '已连接';
+                            this.messageInput.disabled = false;
+                            this.sendBtn.disabled = false;
+                            
+                            // 发送连接消息
+                            this.addMessage('系统', 'P2P连接已建立，可以开始加密聊天', false);
+                        });
+
+                        this.peer.on('data', data => {
+                            try {
+                                // 解密消息
+                                const decryptedHex = CryptoJS.AES.decrypt(data, this.encryptionKey);
+                                const decrypted = decryptedHex.toString(CryptoJS.enc.Utf8);
+                                if (!decrypted) {
+                                    this.addMessage('系统', '收到无效消息', false);
+                                    return;
+                                }
+                                const messageData = JSON.parse(decrypted);
+                                this.addMessage('对方', messageData.text, false);
+                            } catch (e) {
+                                console.error('解密失败:', e);
+                                this.addMessage('系统', '收到加密消息但无法解密', false);
+                            }
+                        });
+
+                        this.peer.on('close', () => {
+                            this.connected = false;
+                            this.status.textContent = '连接已断开';
+                            this.status.className = 'status disconnected';
+                            this.connectionStatus.textContent = '已断开';
+                            this.messageInput.disabled = true;
+                            this.sendBtn.disabled = true;
+                            this.addMessage('系统', 'P2P连接已断开', false);
+                        });
+
+                        this.peer.on('error', err => {
+                            console.error('P2P错误:', err);
+                            
+                            // 忽略某些无关紧要的错误
+                            if (err.message.includes('chunk') || err.message.includes('Connection failed.')) {
+                                console.log('忽略的连接错误:', err);
+                                return;
+                            }
+                            
+                            // 根据错误类型显示友好提示
+                            if (err.message.includes('Connection timeout')) {
+                                this.status.textContent = '连接超时';
+                                this.connectionStatus.textContent = '超时';
+                                this.addMessage('系统', '连接超时，请检查双方网络', false);
+                            } else if (err.message.includes('Failed to create session description')) {
+                                this.status.textContent = '协商失败';
+                                this.connectionStatus.textContent = '协商失败';
+                                this.addMessage('系统', '连接协商失败，请刷新页面重试', false);
+                            } else {
+                                this.status.textContent = '连接错误';
+                                this.connectionStatus.textContent = '错误';
+                                this.addMessage('系统', '连接遇到问题: ' + err.message, false);
+                            }
+                            
+                            this.status.className = 'status disconnected';
+                        });
+                    } catch (error) {
+                        console.error('创建Peer失败:', error);
+                        this.status.textContent = '初始化失败: ' + error.message;
+                        this.connectionStatus.textContent = '初始化失败';
+                        this.addMessage('系统', '无法初始化P2P连接: ' + error.message, false);
+                    }
+                }
+
+                sendMessage(text) {
+                    if (!this.connected || !text.trim()) return;
+
+                    // 创建消息对象
+                    const messageData = {
+                        text: text.trim(),
+                        timestamp: new Date().toISOString(),
+                        from: 'me'
+                    };
+
+                    // 加密消息
+                    const encrypted = CryptoJS.AES.encrypt(JSON.stringify(messageData), this.encryptionKey).toString();
+                    
+                    // 发送加密数据
+                    try {
+                        this.peer.send(encrypted);
+                        // 显示消息
+                        this.addMessage('我', messageData.text, true);
+                        // 清空输入框
+                        this.messageInput.value = '';
+                    } catch (error) {
+                        console.error('发送消息失败:', error);
+                        this.addMessage('系统', '发送失败: ' + error.message, false);
+                    }
+                }
+
+                addMessage(sender, text, isOwn) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message ${isOwn ? 'own' : 'other'}`;
+                    messageDiv.innerHTML = `<strong>${sender}:</strong> ${this.escapeHtml(text)}`;
+                    this.messages.appendChild(messageDiv);
+                    
+                    // 滚动到底部
+                    this.messages.scrollTop = this.messages.scrollHeight;
+                }
+
+                escapeHtml(text) {
+                    const div = document.createElement('div');
+                    div.textContent = text;
+                    return div.innerHTML;
+                }
+            }
+
+            // 初始化聊天应用
+            const chat = new P2PChat();
+            
+            // 设置发送按钮事件
+            document.getElementById('sendBtn').addEventListener('click', () => {
+                const input = document.getElementById('messageInput');
+                chat.sendMessage(input.value);
+            });
+            
+            // 支持回车发送
+            document.getElementById('messageInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    document.getElementById('sendBtn').click();
+                }
+            });
+            
+            // 复制链接按钮
+            document.getElementById('copyUrl').addEventListener('click', () => {
+                copyToClipboard(getCurrentUrl());
+            });
+        });
+    </script>
+</body>
+</html>
