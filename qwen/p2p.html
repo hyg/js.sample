@@ -207,6 +207,35 @@
             margin-bottom: 15px;
             border: 1px solid #ffeaa7;
         }
+        .retry-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .retry-btn:hover {
+            background: #c53030;
+        }
+        .debug-log {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 12px;
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        .debug-log h4 {
+            margin-bottom: 5px;
+            color: #4a5568;
+        }
     </style>
 </head>
 <body>
@@ -249,6 +278,11 @@
                     <span class="lock-icon">🔒</span>
                     端对端加密通信 (使用AES-256)
                 </div>
+            </div>
+            <button id="retryBtn" class="retry-btn" style="display:none;">重新连接</button>
+            <div class="debug-log">
+                <h4>调试日志:</h4>
+                <div id="debugLog"></div>
             </div>
         </div>
     </div>
@@ -317,6 +351,16 @@
                 document.body.removeChild(textArea);
             }
 
+            // 添加调试日志
+            function logDebug(message) {
+                console.log(`[DEBUG] ${new Date().toLocaleTimeString()}: ${message}`);
+                const debugLog = document.getElementById('debugLog');
+                const logEntry = document.createElement('div');
+                logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+                debugLog.appendChild(logEntry);
+                debugLog.scrollTop = debugLog.scrollHeight;
+            }
+
             // 主要功能实现
             class P2PChat {
                 constructor() {
@@ -332,8 +376,9 @@
                     this.connectionInfo = document.getElementById('connectionInfo');
                     this.connectionStatus = document.getElementById('connectionStatus');
                     this.localAddress = document.getElementById('localAddress');
+                    this.retryBtn = document.getElementById('retryBtn');
                     
-                    // 使用中国境内可访问的STUN服务器
+                    // 使用指定的STUN服务器
                     this.config = {
                         iceServers: [
                             { urls: 'stun:fwa.lifesizecloud.com:3478' },
@@ -350,6 +395,7 @@
                 }
 
                 init() {
+                    logDebug('开始初始化P2P聊天...');
                     // 从URL参数获取房间ID
                     const params = parseQueryString();
                     this.param = params.room || 'default';
@@ -361,11 +407,15 @@
                     // 更新标题
                     document.title = `P2P聊天 - ${this.param}`;
                     
+                    logDebug(`房间参数: ${this.param}`);
+                    logDebug(`加密密钥生成完成`);
+                    
                     // 开始P2P连接
                     this.startP2P();
                 }
 
                 startP2P() {
+                    logDebug('开始建立P2P连接...');
                     // 显示连接状态
                     this.status.textContent = '正在建立P2P连接...';
                     this.connectionInfo.style.display = 'block';
@@ -377,25 +427,35 @@
                 }
 
                 createPeer(initiator) {
+                    logDebug(`创建Peer连接，initiator=${initiator}`);
                     this.isInitiator = initiator;
                     
                     try {
+                        logDebug('准备创建SimplePeer实例...');
                         this.peer = new SimplePeer({
                             initiator: initiator,
                             trickle: true,
-                            config: this.config
+                            config: this.config,
+                            // 添加超时设置
+                            timeout: 30000
                         });
+                        
+                        logDebug('SimplePeer实例创建成功');
 
-                        // 监听ICE候选者
+                        // 监听各种事件
                         this.peer.on('signal', data => {
+                            logDebug(`收到信令数据: ${JSON.stringify(data)}`);
                             if (data.type === 'offer') {
                                 this.status.textContent = '等待对方响应...';
                                 this.connectionStatus.textContent = '等待响应';
                                 this.addMessage('系统', '已创建连接请求，等待对方响应', false);
+                                logDebug('发送了offer信号');
                             } else if (data.type === 'answer') {
                                 this.status.textContent = '连接协商中...';
                                 this.connectionStatus.textContent = '协商中';
+                                logDebug('收到了answer信号');
                             } else if (data.type === 'candidate') {
+                                logDebug(`收到ICE候选者: ${data.candidate?.candidate || '无候选者'}`);
                                 // 处理ICE候选者
                                 if (data.candidate && data.candidate.candidate) {
                                     const candidate = data.candidate.candidate;
@@ -414,18 +474,21 @@
                         });
 
                         this.peer.on('connect', () => {
+                            logDebug('连接建立成功');
                             this.connected = true;
                             this.status.textContent = '已连接 - 可以开始聊天';
                             this.status.className = 'status connected';
                             this.connectionStatus.textContent = '已连接';
                             this.messageInput.disabled = false;
                             this.sendBtn.disabled = false;
+                            this.retryBtn.style.display = 'none';
                             
                             // 发送连接消息
                             this.addMessage('系统', 'P2P连接已建立，可以开始加密聊天', false);
                         });
 
                         this.peer.on('data', data => {
+                            logDebug('收到数据消息');
                             try {
                                 // 解密消息
                                 const decryptedHex = CryptoJS.AES.decrypt(data, this.encryptionKey);
@@ -438,11 +501,13 @@
                                 this.addMessage('对方', messageData.text, false);
                             } catch (e) {
                                 console.error('解密失败:', e);
+                                logDebug(`解密失败: ${e.message}`);
                                 this.addMessage('系统', '收到加密消息但无法解密', false);
                             }
                         });
 
                         this.peer.on('close', () => {
+                            logDebug('连接关闭');
                             this.connected = false;
                             this.status.textContent = '连接已断开';
                             this.status.className = 'status disconnected';
@@ -450,14 +515,16 @@
                             this.messageInput.disabled = true;
                             this.sendBtn.disabled = true;
                             this.addMessage('系统', 'P2P连接已断开', false);
+                            this.retryBtn.style.display = 'block';
                         });
 
                         this.peer.on('error', err => {
+                            logDebug(`发生错误: ${err.message}`);
                             console.error('P2P错误:', err);
                             
                             // 忽略某些无关紧要的错误
                             if (err.message.includes('chunk') || err.message.includes('Connection failed.')) {
-                                console.log('忽略的连接错误:', err);
+                                logDebug('忽略的连接错误');
                                 return;
                             }
                             
@@ -466,23 +533,30 @@
                                 this.status.textContent = '连接超时';
                                 this.connectionStatus.textContent = '超时';
                                 this.addMessage('系统', '连接超时，请检查双方网络', false);
+                                this.retryBtn.style.display = 'block';
                             } else if (err.message.includes('Failed to create session description')) {
                                 this.status.textContent = '协商失败';
                                 this.connectionStatus.textContent = '协商失败';
                                 this.addMessage('系统', '连接协商失败，请刷新页面重试', false);
+                                this.retryBtn.style.display = 'block';
                             } else {
                                 this.status.textContent = '连接错误';
                                 this.connectionStatus.textContent = '错误';
                                 this.addMessage('系统', '连接遇到问题: ' + err.message, false);
+                                this.retryBtn.style.display = 'block';
                             }
                             
                             this.status.className = 'status disconnected';
                         });
+                        
+                        logDebug('事件监听器已设置');
                     } catch (error) {
+                        logDebug(`创建Peer失败: ${error.message}`);
                         console.error('创建Peer失败:', error);
                         this.status.textContent = '初始化失败: ' + error.message;
                         this.connectionStatus.textContent = '初始化失败';
                         this.addMessage('系统', '无法初始化P2P连接: ' + error.message, false);
+                        this.retryBtn.style.display = 'block';
                     }
                 }
 
@@ -501,12 +575,14 @@
                     
                     // 发送加密数据
                     try {
+                        logDebug('发送加密消息');
                         this.peer.send(encrypted);
                         // 显示消息
                         this.addMessage('我', messageData.text, true);
                         // 清空输入框
                         this.messageInput.value = '';
                     } catch (error) {
+                        logDebug(`发送消息失败: ${error.message}`);
                         console.error('发送消息失败:', error);
                         this.addMessage('系统', '发送失败: ' + error.message, false);
                     }
@@ -526,6 +602,25 @@
                     const div = document.createElement('div');
                     div.textContent = text;
                     return div.innerHTML;
+                }
+                
+                // 重新连接方法
+                reconnect() {
+                    logDebug('开始重新连接...');
+                    this.status.textContent = '正在重新连接...';
+                    this.connectionStatus.textContent = '重新连接中...';
+                    this.retryBtn.style.display = 'none';
+                    this.addMessage('系统', '正在重新建立连接...', false);
+                    
+                    // 销毁旧连接
+                    if (this.peer) {
+                        this.peer.destroy();
+                    }
+                    
+                    // 重新创建连接
+                    setTimeout(() => {
+                        this.createPeer(true);
+                    }, 1000);
                 }
             }
 
@@ -548,6 +643,11 @@
             // 复制链接按钮
             document.getElementById('copyUrl').addEventListener('click', () => {
                 copyToClipboard(getCurrentUrl());
+            });
+            
+            // 重新连接按钮
+            document.getElementById('retryBtn').addEventListener('click', () => {
+                chat.reconnect();
             });
         });
     </script>
