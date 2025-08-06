@@ -1,114 +1,211 @@
-# 使用示例
+# P2P DHT Node Examples
 
-## 1. 配置中转服务器
+This document provides examples of how to use the `p2p-dht-node` library.
 
-在`src/config.js`中配置合适的第三方中转服务器：
+## Basic Node Startup
+
+To start a basic node that joins the DHT network:
 
 ```javascript
-{
-  // 中转服务器配置（使用已存在的第三方服务器）
-  relayServer: {
-    // 服务器URL (在中国大陆可访问的服务器)
-    url: 'wss://third-party-relay.example.com',
-    // 如果需要认证
-    token: null
-  }
-}
+// example1_basic_node.js
+const P2PNode = require('./lib/p2pNode'); // Adjust path as necessary
+
+const node = new P2PNode({
+  // Configuration options
+  port: 6881, // Port to listen on
+  bootstrapNodes: [
+    // List of known DHT bootstrap nodes
+    { host: 'router.bittorrent.com', port: 6881 },
+    { host: 'router.utorrent.com', port: 6881 }
+    // Add more if needed
+  ]
+});
+
+node.start()
+  .then(() => {
+    console.log(`Node started and listening on port ${node.port}`);
+    console.log(`Node ID: ${node.nodeId.toString('hex')}`);
+  })
+  .catch(err => {
+    console.error('Failed to start node:', err);
+  });
+
+// Gracefully shut down on Ctrl+C
+process.on('SIGINT', async () => {
+  console.log('Shutting down node...');
+  await node.stop();
+  console.log('Node stopped.');
+  process.exit(0);
+});
 ```
 
-## 2. 启动P2P节点
-
-在不同的机器上运行：
-
+Run this example with:
 ```bash
-npm start
+node example1_basic_node.js
 ```
 
-每个节点会：
+## Discovering and Connecting to Peers
 
-1. 初始化NAT穿透（如果可用）
-2. 启动DHT客户端
-3. 启动TCP监听服务器
-4. 连接到配置的第三方中转服务器
-5. 定期通过DHT查找其他节点
-
-## 3. 观察日志
-
-节点启动后会显示类似以下的日志：
-
-```
-NAT客户端初始化成功
-DHT节点监听在端口 6881
-TCP服务器监听在端口 56789
-连接到中转服务器成功
-节点启动成功: abc123...
-```
-
-## 4. 节点发现和连接
-
-节点会定期通过DHT协议查找其他节点，并尝试建立直接连接。
-
-当发现新节点时会显示：
-```
-发现新节点: 192.168.1.100:56790
-```
-
-当成功连接到节点时会显示：
-```
-连接到节点 192.168.1.100:56790 成功
-```
-
-## 5. 停止节点
-
-按Ctrl+C可以优雅地停止节点，程序会自动清理资源。
-
-## 配置说明
-
-### 修改监听端口
-
-在`src/config.js`中修改：
+This example demonstrates how to discover peers for a specific topic and initiate a connection.
 
 ```javascript
-{
-  // DHT配置
-  dht: {
-    port: 6881  // 修改DHT端口
-  },
-  
-  // 节点配置
-  node: {
-    port: 0  // 0表示随机分配，可以指定固定端口
+// example2_discover_and_connect.js
+const P2PNode = require('./lib/p2pNode');
+
+const TOPIC = 'my_shared_topic'; // Shared identifier for discovery
+
+const node = new P2PNode({
+  port: 6882,
+  bootstrapNodes: [
+    { host: 'router.bittorrent.com', port: 6881 },
+    { host: 'router.utorrent.com', port: 6881 }
+  ]
+});
+
+async function run() {
+  try {
+    await node.start();
+    console.log(`Node started on port ${node.port}`);
+
+    // Announce this node for the topic
+    node.announce(TOPIC);
+    console.log(`Announced presence for topic: ${TOPIC}`);
+
+    // Listen for new peers discovered for the topic
+    node.on('peer', (peerInfo, discoveredTopic) => {
+        if (discoveredTopic === TOPIC) {
+            console.log(`Discovered peer for topic '${TOPIC}': ${peerInfo.host}:${peerInfo.port}`);
+            // Attempt to connect to the discovered peer
+            node.connectToPeer(peerInfo)
+                .then(() => {
+                    console.log(`Connected to peer ${peerInfo.host}:${peerInfo.port}`);
+                    // You can now send messages using node.sendMessage
+                })
+                .catch(err => {
+                    console.error(`Failed to connect to peer ${peerInfo.host}:${peerInfo.port}:`, err.message);
+                });
+        }
+    });
+
+    // Listen for incoming connections
+    node.on('connection', (connection) => {
+        console.log(`New connection established from ${connection.remoteAddress}:${connection.remotePort}`);
+        // Handle incoming data
+        connection.on('data', (data) => {
+            console.log(`Received message: ${data.toString()}`);
+            // Echo the message back
+            connection.write(`Echo: ${data}`);
+        });
+
+        connection.on('close', () => {
+            console.log('Connection closed');
+        });
+    });
+
+    console.log(`Searching for peers for topic: ${TOPIC}...`);
+    // The 'peer' event listener above will handle discoveries
+
+  } catch (err) {
+    console.error('Error running node:', err);
   }
 }
+
+run();
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  console.log('Shutting down node...');
+  await node.stop();
+  console.log('Node stopped.');
+  process.exit(0);
+});
 ```
 
-### 配置第三方中转服务器
+Run this example with:
+```bash
+node example2_discover_and_connect.js
+```
+
+## Sending Encrypted Messages
+
+Once a connection is established, you can send encrypted messages.
 
 ```javascript
-{
-  // 中转服务器配置（使用已存在的第三方服务器）
-  relayServer: {
-    // 服务器URL (在中国大陆可访问的服务器)
-    url: 'wss://your-relay-server.com',
-    // 如果需要认证
-    token: 'your-token-here'
+// example3_send_message.js
+const P2PNode = require('./lib/p2pNode');
+
+const TOPIC = 'my_secure_topic';
+const MESSAGE_TO_SEND = 'Hello, secure P2P world!';
+
+const node = new P2PNode({
+  port: 6883,
+  bootstrapNodes: [
+    { host: 'router.bittorrent.com', port: 6881 }
+  ]
+});
+
+let connectedPeerConnection = null;
+
+async function run() {
+  try {
+    await node.start();
+    console.log(`Node started on port ${node.port}`);
+    node.announce(TOPIC);
+
+    node.on('peer', async (peerInfo, topic) => {
+      if (topic === TOPIC && !connectedPeerConnection) {
+        console.log(`Discovered peer for topic '${TOPIC}': ${peerInfo.host}:${peerInfo.port}`);
+        try {
+          connectedPeerConnection = await node.connectToPeer(peerInfo);
+          console.log(`Connected to peer ${peerInfo.host}:${peerInfo.port}`);
+
+          // Send a message after a short delay to ensure handshake is complete
+          setTimeout(() => {
+            node.sendMessage(connectedPeerConnection, MESSAGE_TO_SEND)
+              .then(() => console.log(`Sent message: ${MESSAGE_TO_SEND}`))
+              .catch(err => console.error('Failed to send message:', err));
+          }, 1000); // 1 second delay
+
+        } catch (err) {
+          console.error(`Failed to connect to peer ${peerInfo.host}:${peerInfo.port}:`, err.message);
+        }
+      }
+    });
+
+    node.on('connection', (connection) => {
+      console.log(`New connection from ${connection.remoteAddress}:${connection.remotePort}`);
+      connection.on('data', (data) => {
+        console.log(`Received (decrypted) message: ${data.toString()}`);
+      });
+    });
+
+    console.log(`Searching for peers for topic: ${TOPIC}...`);
+
+  } catch (err) {
+    console.error('Error running node:', err);
   }
 }
+
+run();
+
+process.on('SIGINT', async () => {
+  console.log('Shutting down node...');
+  await node.stop();
+  console.log('Node stopped.');
+  process.exit(0);
+});
 ```
 
-### 在没有NAT的环境中运行
+Run this example with:
+```bash
+node example3_send_message.js
+```
 
-如果在没有UPnP路由器的环境中运行，NAT穿透会自动跳过，节点仍然可以通过中转服务器工作。
+## Putting It All Together
 
-### 在DHT网络中没有其他节点
+These examples provide a foundation. A complete application would involve:
 
-如果DHT网络中没有其他节点，节点发现功能会暂时无法工作，但不会影响程序运行。当有其他节点上线时，会自动发现并连接。
-
-## 中国大陆可用的中转服务器选项
-
-1. **阿里云公共DNS** - 可作为DHT引导节点
-2. **腾讯云CDN节点** - 部分支持WebSocket
-3. **公共BitTorrent DHT节点** - 如router.bittorrent.com
-4. **自建中转服务器** - 在云服务商部署
-
-注意：在生产环境中，请使用稳定可靠的第三方中转服务器。
+1.  Defining a clear message protocol (e.g., JSON-RPC over the encrypted channel).
+2.  Implementing robust error handling and reconnection logic.
+3.  Managing peer lists and connection states.
+4.  Potentially integrating with a more sophisticated DHT or using additional discovery mechanisms.

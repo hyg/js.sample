@@ -1,25 +1,17 @@
 {
   "name": "p2p-dht-node",
   "version": "1.0.0",
-  "main": "src/client.js",
+  "description": "A P2P DHT node for NAT traversal and direct communication",
+  "main": "index.js",
   "scripts": {
-    "start": "node src/client.js",
-    "node": "node src/client.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "p2p",
-    "dht",
-    "nat",
-    "webrtc"
-  ],
-  "author": "",
-  "license": "ISC",
-  "description": "A P2P node application using DHT protocol for NAT traversal",
+  "keywords": ["p2p", "dht", "nat", "webrtc", "peer-to-peer"],
+  "author": "Your Name",
+  "license": "MIT",
   "dependencies": {
-    "bittorrent-dht": "^10.0.0",
-    "kademlia-dht": "^0.1.0",
-    "nat-upnp": "^1.1.1",
-    "ws": "^8.18.3"
+    "socket.io-client": "^4.0.0",
+    "simple-peer": "^9.11.0"
   }
 }

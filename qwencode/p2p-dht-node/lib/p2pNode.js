@@ -1,12 +1,11 @@
-// src/node.js
+// lib/p2pNode.js
+
 const DHT = require('bittorrent-dht');
 const dgram = require('dgram');
 const crypto = require('crypto');
 const sodium = require('sodium-native');
 const EventEmitter = require('events');
 const fs = require('fs').promises;
-const StunClient = require('../lib/stunClient');
-const ConnectionManager = require('../lib/connectionManager');
 
 /**
  * A P2P Node that uses a DHT for discovery and establishes encrypted direct connections.
@@ -22,7 +21,6 @@ class P2PNode extends EventEmitter {
    * @param {boolean} [options.enableEncryption=true] - Enable end-to-end encryption.
    * @param {string} [options.identityFile=null] - Path to file for persistent identity.
    * @param {Array} [options.stunServers=[]] - List of STUN servers.
-   * @param {string} [options.signalingServerUrl='http://localhost:3000'] - URL of signaling server.
    */
   constructor(options = {}) {
     super();
@@ -31,8 +29,7 @@ class P2PNode extends EventEmitter {
     this.enableEncryption = options.enableEncryption !== false; // Default true
     this.identityFile = options.identityFile || null;
     this.stunServers = options.stunServers || [];
-    this.signalingServerUrl = options.signalingServerUrl || 'http://localhost:3000';
-    
+
     // Generate or load Node ID
     this.nodeId = options.nodeId ? Buffer.from(options.nodeId, 'hex') : null;
     if (!this.nodeId) {
@@ -44,16 +41,9 @@ class P2PNode extends EventEmitter {
     this.peers = new Map(); // Map of connected peers
     this.pendingConnections = new Map(); // Map of ongoing connection attempts
     this.isRunning = false;
-    this.publicAddress = null;
 
     // Encryption keys (simplified for example)
     this.keyPair = null;
-    
-    // Connection manager for handling P2P connections
-    this.connectionManager = new ConnectionManager(this);
-    
-    // Signaling server connection
-    this.socket = null;
   }
 
   /**
@@ -103,16 +93,11 @@ class P2PNode extends EventEmitter {
     });
 
     // Start the DHT
-    this.dht.listen();
+    // Note: The 'ready' event will be emitted once bootstrapping is complete.
+    this.dht.listen(); // This is typically called implicitly by DHT constructor if socket is provided
 
-    // Get our public address for NAT traversal
-    await this._getPublicAddress();
-    
     this.isRunning = true;
     console.log(`P2P Node started with ID: ${this.nodeId.toString('hex')}`);
-    
-    // Connect to the signaling server for connection establishment
-    await this._connectToSignalingServer();
   }
 
   /**
@@ -131,12 +116,6 @@ class P2PNode extends EventEmitter {
     if (this.udpSocket) {
       this.udpSocket.close();
     }
-    
-    // Disconnect from signaling server
-    if (this.socket) {
-      this.socket.disconnect();
-    }
-
     this.isRunning = false;
     console.log('P2P Node stopped');
   }
@@ -172,130 +151,6 @@ class P2PNode extends EventEmitter {
     }
     const topicBuffer = Buffer.isBuffer(topic) ? topic : Buffer.from(topic);
     this.dht.lookup(topicBuffer, callback);
-  }
-
-  /**
-   * Gets the public IP address and port using STUN servers.
-   * This is important for NAT traversal.
-   */
-  async _getPublicAddress() {
-    if (!this.stunServers || this.stunServers.length === 0) {
-      console.warn('No STUN servers configured. NAT traversal may be limited.');
-      return;
-    }
-
-    // Try each STUN server until we get a valid response
-    for (const server of this.stunServers) {
-      try {
-        const stunClient = new StunClient({
-          stunHost: server.urls.split(':')[1].replace('//', ''),
-          stunPort: parseInt(server.urls.split(':')[2]),
-          timeout: 5000
-        });
-        
-        const addr = await stunClient.getMappedAddress();
-        this.publicAddress = addr;
-        console.log(`Public address detected: ${addr.ip}:${addr.port}`);
-        return addr;
-      } catch (err) {
-        console.warn(`Failed to get public address from ${server.urls}:`, err.message);
-      }
-    }
-    
-    console.warn('Could not determine public address via STUN servers.');
-    return null;
-  }
-
-  /**
-   * Connects to the signaling server for connection establishment.
-   */
-  async _connectToSignalingServer() {
-    try {
-      // This is a simplified version - in practice, you'd use a more robust
-      // WebSocket or Socket.IO client here
-      const io = require('socket.io-client');
-      this.socket = io(this.signalingServerUrl);
-      
-      this.socket.on('connect', () => {
-        console.log('Connected to signaling server');
-        // Register with the signaling server
-        this.socket.emit('register', { nodeId: this.nodeId.toString('hex') });
-        this.emit('signalingConnected');
-      });
-      
-      this.socket.on('disconnect', () => {
-        console.log('Disconnected from signaling server');
-        this.emit('signalingDisconnected');
-      });
-      
-      // Handle offers from other nodes
-      this.socket.on('offer', async (data) => {
-        console.log('Received offer from:', data.from);
-        // In a real implementation, you'd pass this to the connection manager
-        // For now, we'll handle the connection establishment here
-        await this._handleOffer(data);
-      });
-      
-      // Handle answers from other nodes
-      this.socket.on('answer', (data) => {
-        console.log('Received answer from:', data.nodeId);
-        // In a real implementation, this would be processed by the connection manager
-        this._handleAnswer(data);
-      });
-      
-      // Handle ICE candidates (if trickle ICE is used in the future)
-      this.socket.on('candidate', (data) => {
-        console.log('Received ICE candidate from:', data.from);
-        // In a real implementation, this would be processed by the connection manager
-        this._handleCandidate(data);
-      });
-      
-      // Wait for connection to be established (timeout after 10 seconds)
-      await new Promise((resolve, reject) => {
-        const timeout = setTimeout(() => {
-          reject(new Error('Signaling server connection timeout'));
-        }, 10000);
-        
-        this.once('signalingConnected', () => {
-          clearTimeout(timeout);
-          resolve();
-        });
-      });
-    } catch (err) {
-      console.error('Failed to connect to signaling server:', err);
-      this.emit('error', err);
-    }
-  }
-
-  /**
-   * Internal method to handle an incoming offer from another node.
-   * @private
-   */
-  async _handleOffer(data) {
-    // In a real implementation, this would delegate to the connection manager
-    console.log('Handling offer from:', data.from);
-    
-    // For demo purposes, we'll simulate sending an answer
-    // In real world, this would create a SimplePeer connection
-    console.log(`Sending answer to ${data.from}`);
-  }
-
-  /**
-   * Internal method to handle an incoming answer from another node.
-   * @private
-   */
-  _handleAnswer(data) {
-    console.log('Handling answer from:', data.nodeId);
-    // In a real implementation, this would complete the connection setup
-  }
-
-  /**
-   * Internal method to handle an incoming ICE candidate.
-   * @private
-   */
-  _handleCandidate(data) {
-    console.log('Handling candidate from:', data.from);
-    // In a real implementation, this would be used for NAT traversal
   }
 
   /**
@@ -349,11 +204,31 @@ class P2PNode extends EventEmitter {
    * @private
    */
   _handleUdpMessage(msg, rinfo) {
-    // Pass the message to the connection manager to handle connection-related messages
-    this.connectionManager.handleMessage(msg, rinfo);
-    
-    // Messages not handled by connection manager are DHT messages
-    // which are handled automatically by the DHT instance
+    // This is a simplified check. In practice, you'd inspect the packet
+    // structure or use a multiplexer.
+    // For bittorrent-dht, it usually handles messages internally.
+    // We'll assume all messages not handled by DHT are for the app layer.
+
+    // A simple way to distinguish (example only):
+    // If message starts with a specific prefix, it's for our app.
+    if (msg[0] === 0x01 && msg[1] === 0x02) { // Example app prefix
+        this._handleAppMessage(msg.slice(2), rinfo); // Remove prefix
+    }
+    // Otherwise, it's likely a DHT message and will be handled by the DHT instance
+    // which is listening on the same socket.
+  }
+
+  /**
+   * Handles application-layer messages received via UDP.
+   * @param {Buffer} msg - The application message buffer.
+   * @param {Object} rinfo - Remote address info.
+   * @private
+   */
+  _handleAppMessage(msg, rinfo) {
+    console.log(`App message received from ${rinfo.address}:${rinfo.port}`);
+    // Here you would implement your application protocol
+    // Parse the message, potentially decrypt it, and emit events.
+    this.emit('appMessage', msg, rinfo);
   }
 
   /**
@@ -371,12 +246,46 @@ class P2PNode extends EventEmitter {
 
   /**
    * Connects to a discovered peer.
+   * This is a simplified placeholder. Real implementation would involve
+   * NAT traversal logic (e.g., STUN, hole punching) and setting up
+   * an encrypted stream.
    * @param {Object} peerInfo - Object containing host and port of the peer.
    * @returns {Promise<Object>} A promise that resolves with a connection object.
    */
   async connectToPeer(peerInfo) {
-    // Delegate to the connection manager
-    return this.connectionManager.connectToPeer(peerInfo);
+     // This is a non-trivial part. A full implementation would:
+     // 1. Determine if peer is behind NAT (using STUN or DHT observations).
+     // 2. If both are behind NAT, attempt hole punching.
+     // 3. Once a direct UDP "connection" is established, perform a handshake.
+     // 4. Set up an encrypted duplex stream over the UDP socket for this peer.
+     // For this example, we'll just simulate a connection object.
+
+     console.log(`Attempting to connect to peer ${peerInfo.host}:${peerInfo.port}...`);
+     // Simulate a connection process
+     return new Promise((resolve, reject) => {
+         // Simulate success/failure
+         setTimeout(() => {
+             if (Math.random() > 0.2) { // 80% chance of "success"
+                 const mockConnection = {
+                     remoteAddress: peerInfo.host,
+                     remotePort: peerInfo.port,
+                     // In a real implementation, this would be a Duplex stream
+                     // wrapping the UDP socket for this specific peer,
+                     // with encryption applied.
+                     write: (data) => {
+                         console.log(`Sending data to ${peerInfo.host}:${peerInfo.port}:`, data.toString());
+                         // In a real implementation, encrypt 'data' and send via this.udpSocket
+                         // to peerInfo.host:peerInfo.port
+                     }
+                 };
+                 this.peers.set(`${peerInfo.host}:${peerInfo.port}`, mockConnection);
+                 this.emit('connection', mockConnection); // Emit when connected
+                 resolve(mockConnection);
+             } else {
+                 reject(new Error('Connection attempt failed'));
+             }
+         }, 1000); // Simulate network delay
+     });
   }
 
   /**
@@ -385,7 +294,11 @@ class P2PNode extends EventEmitter {
    * @param {string|Buffer} message - The message to send.
    */
   async sendMessage(connection, message) {
-    // In a real implementation, this would go through the connection manager
+    if (!this.peers.has(`${connection.remoteAddress}:${connection.remotePort}`)) {
+        throw new Error('Not connected to this peer');
+    }
+    // In a real implementation, 'message' would be encrypted before
+    // being sent via the connection's underlying mechanism.
     connection.write(message);
   }
 }

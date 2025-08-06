@@ -1,99 +1,52 @@
 # P2P DHT Node
 
-一个基于DHT协议的P2P节点软件，支持NAT穿透和最小化服务器依赖的通信。
+This is a Node.js application that allows users behind NATs in different LANs to discover and communicate with each other directly, without relying on a central server for the actual data transfer. The connection establishment phase can utilize existing servers within China for signaling.
 
-## 功能特点
+## Features
 
-1. 每个节点运行在不同的局域网内，支持NAT穿透
-2. 使用DHT协议发布和发现节点公网地址
-3. 使用已存在的第三方中转服务器建立初始连接（在中国大陆可用）
-4. 建立连接后直接P2P通信，最小化服务器依赖
+*   **NAT Traversal:** Enables direct communication between nodes behind different NATs.
+*   **Serverless Communication:** Once a connection is established, communication is direct and encrypted, without any server dependency.
+*   **Signaling Support:** Can use existing servers for the initial connection setup (signaling).
 
-## 安装
+## Getting Started
 
-```bash
-npm install
-```
+### Prerequisites
 
-## 使用方法
+*   Node.js installed on your system.
 
-### 启动P2P节点
+### Installation
 
-```bash
-npm start
-# 或
-npm run node
-```
+1. Clone or download this repository.
+2. Navigate to the project directory in your terminal.
+3. Run `npm install` to install the required dependencies.
 
-## 架构说明
+### Usage
 
-### 组件
+1. Modify the `SIGNALING_SERVER_URL` in `index.js` to point to your actual signaling server.
+2. Run `npm start` to start the node.
 
-1. **DHT模块** (`src/dht.js`) - 使用BitTorrent DHT协议进行节点发现
-2. **NAT穿透模块** (`src/nat.js`) - 使用UPnP/PMP进行端口映射
-3. **节点模块** (`src/node.js`) - 核心P2P节点功能
-4. **客户端** (`src/client.js`) - 程序入口
+## Implementation Details
 
-### 工作流程
+This project uses Socket.IO for signaling and `simple-peer` for WebRTC data channel communication.
 
-1. 节点启动时会:
-   - 初始化NAT穿透
-   - 启动DHT客户端
-   - 启动TCP监听服务器
-   - 连接到第三方中转服务器进行注册
+### Key Components
 
-2. 节点发现:
-   - 定期通过DHT协议查找其他节点
-   - 尝试直接TCP连接到发现的节点
+1.  **Signaling Client (`socket.io-client`)**: Connects to the signaling server to exchange connection information (offers, answers, ICE candidates) with other nodes.
+2.  **WebRTC Peer (`simple-peer`)**: Handles the creation and management of the RTCPeerConnection, enabling direct data transfer between nodes once a connection is established via the signaling server.
 
-3. 通信:
-   - 节点间通过TCP直接通信
-   - 所有通信内容和时间都控制在最小知情范围内
+### How it Works
 
-## 配置
+1.  **Registration**: When a node starts, it connects to the signaling server and registers its unique `nodeId`.
+2.  **Connection Initiation**: To connect to another node, a node sends an "offer" message to the target `nodeId` via the signaling server.
+3.  **Offer Handling**: The target node receives the offer, creates an "answer", and sends it back to the initiating node via the signaling server.
+4.  **Connection Establishment**: Both nodes use the exchanged offer and answer to establish a direct WebRTC data channel.
+5.  **Data Transfer**: Once the data channel is open, nodes can send and receive data directly without any server involvement.
 
-配置文件位于 `src/config.js`:
+### API
 
-- `dht.port`: DHT协议端口 (默认6881)
-- `relayServer.url`: 第三方中转服务器URL
-- `node.port`: 节点监听端口 (0表示随机分配)
+*   `connectToNode(targetNodeId)`: Initiates a connection to another node identified by `targetNodeId`.
+*   `sendData(data)`: Sends data to the currently connected peer.
 
-## 部署说明
+### Example
 
-### 节点
-
-节点可以在任何支持Node.js的环境中运行，包括位于NAT后的局域网环境。
-
-节点会自动连接到配置中指定的第三方中转服务器，用于初始连接建立。
-
-### 第三方中转服务器
-
-本软件设计为使用已存在的第三方中转服务器，而非自建服务器。在中国大陆可访问的中转服务器包括：
-
-1. 公共BitTorrent DHT引导节点
-2. WebRTC信令服务器
-3. 其他P2P网络的中转服务
-
-在`src/config.js`中配置合适的服务器URL。
-
-## 隐私保护
-
-- 节点间的直接通信不经过服务器
-- 通信时间和内容长度信息被最小化
-- 只有必要的节点信息会通过DHT网络发布
-
-## 故障排除
-
-### NAT穿透问题
-
-如果NAT穿透失败，节点仍然可以通过中转服务器进行通信。
-
-### DHT网络连接问题
-
-如果DHT网络中没有其他节点，节点发现功能可能无法正常工作。请确保网络中至少有一个其他节点在线。
-
-## 依赖说明
-
-- `bittorrent-dht`: BitTorrent DHT协议实现
-- `nat-upnp`: UPnP/NAT-PMP端口映射
-- `ws`: WebSocket客户端，用于连接中转服务器
+The `index.js` file includes commented-out example code that demonstrates how to initiate a connection and send data after a delay. You can uncomment and modify this code for testing.
