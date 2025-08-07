@@ -1,0 +1,40 @@
+{
+  "name": "graphviz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hpcc.js",
+  "dependencies": {
+    "@hpcc-js/wasm-graphviz": "^1.10.0",
+    "ansi-regex": "^6.1.0",
+    "ansi-styles": "^6.2.1",
+    "cliui": "^9.0.1",
+    "color": "^4.2.3",
+    "color-convert": "^2.0.1",
+    "color-name": "^1.1.4",
+    "color-string": "^1.9.1",
+    "detect-libc": "^2.0.4",
+    "emoji-regex": "^10.4.0",
+    "escalade": "^3.2.0",
+    "get-caller-file": "^2.0.5",
+    "get-east-asian-width": "^1.3.0",
+    "graphviz": "^0.0.9",
+    "is-arrayish": "^0.3.2",
+    "semver": "^7.7.2",
+    "sharp": "^0.34.3",
+    "simple-swizzle": "^0.2.2",
+    "string-width": "^7.2.0",
+    "strip-ansi": "^7.1.0",
+    "temp": "^0.4.0",
+    "viz.js": "^2.1.2",
+    "wrap-ansi": "^9.0.0",
+    "y18n": "^5.0.8",
+    "yargs": "^18.0.0",
+    "yargs-parser": "^22.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -16,7 +16,8 @@ function short(str) {
 app.post('/v1/messages', async (req, res) => {
   const url = 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions';
   const inBody = JSON.stringify(req.body);
-  console.log('⬅️ Claude → Proxy', short(inBody));
+  //console.log('⬅️ Claude → Proxy', short(inBody));
+  console.log('⬅️ Claude → Proxy', inBody);
 
   // 修正字段
   const outData = {
