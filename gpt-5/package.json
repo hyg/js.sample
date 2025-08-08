@@ -1,0 +1,13 @@
+{
+    "name": "p2p-dht-node",
+    "version": "0.1.0",
+    "private": true,
+    "main": "index.js",
+    "license": "MIT",
+    "dependencies": {
+        "hyperdht": "^6.0.0",
+        "hyperswarm": "^4.4.0",
+        "minimist": "^1.2.8",
+        "sodium-universal": "^3.0.4"
+    }
+}
