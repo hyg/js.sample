@@ -62,10 +62,27 @@ async function main() {
     await discovery.flushed() // 等待 announce/lookup 生效
 
     console.log('[node] joined DHT, topic =', argv.topic)
-
     swarm.on('connection', (socket, info) => {
+        const pk = socket.remotePublicKey && socket.remotePublicKey.toString('hex')
+        let addr = null
+        try {
+          // 尝试从底层 UDX 流取远端地址（在某些路径可用）
+          if (socket.rawStream && typeof socket.rawStream.remoteAddress === 'function') {
+            addr = socket.rawStream.remoteAddress()  // { host, port }
+          } else if (socket.stream && typeof socket.stream.remoteAddress === 'function') {
+            addr = socket.stream.remoteAddress()
+          }
+        } catch (e) {}
+      
+        console.log('[conn] peer connected', {
+          client: info.client,                // 我方是否发起连接
+          peerHost: info.peer && info.peer.host || null,
+          peerPort: info.peer && info.peer.port || null,
+          remoteAddr: addr,                   // 可能为 null
+          remoteKey: pk ? (pk.slice(0, 16) + '...') : null
+        })
         // socket 为端到端加密的双工流（Noise + UDP 打洞），不经服务器转发
-        console.log('[conn] peer connected from', info.peer && info.peer.host, info.peer && info.peer.port)
+        //console.log('[conn] peer connected from', info.peer && info.peer.host, info.peer && info.peer.port)
 
         // 心跳：固定周期发送填充帧，弱化时序侧信道
         const hb = setInterval(() => {

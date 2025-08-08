@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "agent-protocol": "^1.0.5"
+  }
+}
