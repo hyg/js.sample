@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>有限状态机清单系统</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header id="nav">
+    <h1>有限状态机清单系统</h1>
+    <div id="currentStateBadge">Initial</div>
+  </header>
+
+  <main>
+    <div id="tabs">
+      <button id="tabTasks" class="tab active">任务</button>
+      <button id="tabPermissions" class="tab">职权</button>
+    </div>
+
+    <section id="tasksPanel" class="panel">
+      <h2>待完成任务</h2>
+      <button class="eventBtn" data-event="clearAllTasks">清空所有任务</button>
+      <div id="availableTasks">
+        <button class="eventBtn" data-event="addTask" data-param="reviewDocuments">添加 reviewDocuments</button>
+        <button class="eventBtn" data-event="addTask" data-param="prepareReport">添加 prepareReport</button>
+        <button class="eventBtn" data-event="addTask" data-param="approveBudgets">添加 approveBudgets</button>
+      </div>
+      <ul id="taskList"></ul>
+    </section>
+
+    <section id="permissionsPanel" class="panel hidden">
+      <h2>允许的职权</h2>
+      <ul id="allowedList"></ul>
+      <h2>禁止的职权</h2>
+      <ul id="forbiddenList"></ul>
+    </section>
+  </main>
+
+  <footer id="systemEvents">
+    <h3>系统事件</h3>
+    <div id="eventButtons">
+      <!-- JS 会在这里插入按钮 -->
+    </div>
+    <ul id="eventLog"></ul>
+  </footer>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

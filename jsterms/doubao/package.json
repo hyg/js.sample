@@ -1,0 +1,20 @@
+{
+  "name": "fsm-task-manager",
+  "version": "1.0.0",
+  "description": "FSM-based task and permission management system with Web/CLI interfaces",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "readline": "^1.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

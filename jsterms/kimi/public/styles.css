@@ -1,0 +1,27 @@
+:root {
+    --color-initial: #999;
+    --color-auth: #28a745;
+    --color-manager: #007bff;
+  }
+  body { margin:0; font-family:Arial,Helvetica,sans-serif; background:#f5f5f5;}
+  header { display:flex; align-items:center; justify-content:space-between; padding:0.5rem 1rem; color:#fff; background:var(--color-initial); transition:background 0.3s;}
+  header.manager { background:var(--color-manager);}
+  header.authenticated { background:var(--color-auth);}
+  #currentStateBadge { font-weight:bold; padding:0.3rem 0.8rem; border-radius:4px; background:rgba(0,0,0,.2);}
+  #tabs { display:flex; border-bottom:1px solid #ccc;}
+  .tab { flex:1; padding:0.5rem; background:#eee; border:none; cursor:pointer;}
+  .tab.active { background:#fff; font-weight:bold;}
+  .panel { padding:1rem;}
+  .hidden { display:none;}
+  #eventLog { list-style:none; margin:0; padding:0;}
+  #eventLog li { padding:0.3rem 0; border-bottom:1px solid #eee;}
+  .eventBtn { margin:0.25rem; padding:0.4rem 0.8rem; border:none; border-radius:4px; cursor:pointer;}
+  .eventBtn:hover { filter:brightness(1.1);}
+  #availableTasks button { background:#28a745; color:#fff;}
+  #systemEvents button { background:#007bff; color:#fff;}
+  @keyframes pulse {
+    0% { transform:scale(1); }
+    50% { transform:scale(1.05); }
+    100% { transform:scale(1); }
+  }
+  .pulse { animation:pulse .4s ease-in-out;}

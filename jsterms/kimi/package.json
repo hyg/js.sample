@@ -1,0 +1,28 @@
+{
+    "name": "fsm-task-permission",
+    "version": "1.0.0",
+    "description": "基于有限状态机的任务与职权管理系统（Web + CLI）",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "cli": "node cli.js",
+        "dev": "concurrently \"npm:start\" \"npm:cli\""
+    },
+    "keywords": [
+        "fsm",
+        "task",
+        "permission",
+        "nodejs"
+    ],
+    "author": "dev-team",
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^4.1.2",
+        "chokidar": "^3.5.3",
+        "express": "^4.18.2",
+        "socket.io": "^4.7.2"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    }
+}

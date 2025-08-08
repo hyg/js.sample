@@ -1,0 +1,150 @@
+{
+  "states": {
+    "Initial": {
+      "description": "初始未登录状态",
+      "transitions": [
+        {
+          "event": "userLogin",
+          "target": "Authenticated",
+          "actions": [
+            "addPermission_viewDashboard",
+            "addPermission_viewProfile",
+            "addForbidden_approveRequests",
+            "addForbidden_manageUsers"
+          ]
+        }
+      ]
+    },
+    "Authenticated": {
+      "description": "已登录用户状态",
+      "transitions": [
+        {
+          "event": "promoteToManager",
+          "target": "Manager",
+          "actions": [
+            "removeForbidden_approveRequests",
+            "removeForbidden_manageUsers",
+            "addPermission_approveRequests",
+            "addPermission_manageUsers"
+          ]
+        },
+        {
+          "event": "userLogout",
+          "target": "Initial",
+          "actions": [
+            "clearAllTasks",
+            "clearAllPermissions",
+            "clearAllForbidden"
+          ]
+        },
+        {
+          "event": "reviewDocuments",
+          "target": "Authenticated",
+          "actions": ["addTask_reviewDocuments"]
+        },
+        {
+          "event": "prepareReport",
+          "target": "Authenticated",
+          "actions": ["addTask_prepareReport"]
+        },
+        {
+          "event": "clearAllTasks",
+          "target": "Authenticated",
+          "actions": ["clearAllTasks"]
+        },
+        {
+          "event": "viewDashboard",
+          "target": "Authenticated",
+          "actions": ["addPermission_viewDashboard"]
+        },
+        {
+          "event": "viewProfile",
+          "target": "Authenticated",
+          "actions": ["addPermission_viewProfile"]
+        },
+        {
+          "event": "exportData",
+          "target": "Authenticated",
+          "actions": ["addPermission_exportData"]
+        }
+      ]
+    },
+    "Manager": {
+      "description": "管理员状态",
+      "transitions": [
+        {
+          "event": "demoteToUser",
+          "target": "Authenticated",
+          "actions": [
+            "removePermission_approveRequests",
+            "removePermission_manageUsers",
+            "addForbidden_approveRequests",
+            "addForbidden_manageUsers"
+          ]
+        },
+        {
+          "event": "userLogout",
+          "target": "Initial",
+          "actions": [
+            "clearAllTasks",
+            "clearAllPermissions",
+            "clearAllForbidden"
+          ]
+        },
+        {
+          "event": "reviewDocuments",
+          "target": "Manager",
+          "actions": ["addTask_reviewDocuments"]
+        },
+        {
+          "event": "prepareReport",
+          "target": "Manager",
+          "actions": ["addTask_prepareReport"]
+        },
+        {
+          "event": "approveBudgets",
+          "target": "Manager",
+          "actions": ["addTask_approveBudgets"]
+        },
+        {
+          "event": "clearAllTasks",
+          "target": "Manager",
+          "actions": ["clearAllTasks"]
+        },
+        {
+          "event": "viewDashboard",
+          "target": "Manager",
+          "actions": ["addPermission_viewDashboard"]
+        },
+        {
+          "event": "viewProfile",
+          "target": "Manager",
+          "actions": ["addPermission_viewProfile"]
+        },
+        {
+          "event": "approveRequests",
+          "target": "Manager",
+          "actions": ["addPermission_approveRequests"]
+        },
+        {
+          "event": "manageUsers",
+          "target": "Manager",
+          "actions": ["addPermission_manageUsers"]
+        },
+        {
+          "event": "exportData",
+          "target": "Manager",
+          "actions": ["addPermission_exportData"]
+        }
+      ]
+    }
+  },
+  "initialState": "Initial",
+  "events": [
+    "userLogin", "userLogout",
+    "promoteToManager", "demoteToUser",
+    "reviewDocuments", "prepareReport", "approveBudgets", "clearAllTasks",
+    "viewDashboard", "viewProfile", "approveRequests", "manageUsers", "exportData"
+  ]
+}
+    

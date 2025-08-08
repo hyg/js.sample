@@ -1,0 +1,56 @@
+{
+    "initial": "Initial",
+    "states": {
+      "Initial": {
+        "description": "未登录",
+        "transitions": {
+          "userLogin": {
+            "target": "Authenticated",
+            "actions": ["addPermissions:viewDashboard,viewProfile"]
+          }
+        }
+      },
+      "Authenticated": {
+        "description": "已登录",
+        "transitions": {
+          "userLogout": {
+            "target": "Initial",
+            "actions": ["clearPermissions", "clearTasks"]
+          },
+          "promoteToManager": {
+            "target": "Manager",
+            "actions": ["movePermissions:approveRequests,manageUsers:Forbidden->Allowed"]
+          },
+          "addTask": {
+            "target": "Authenticated",
+            "actions": ["addTask:$taskName"]
+          }
+        }
+      },
+      "Manager": {
+        "description": "管理员",
+        "transitions": {
+          "userLogout": {
+            "target": "Initial",
+            "actions": ["clearPermissions", "clearTasks"]
+          },
+          "demoteToUser": {
+            "target": "Authenticated",
+            "actions": ["movePermissions:approveRequests,manageUsers:Allowed->Forbidden"]
+          },
+          "addTask": {
+            "target": "Manager",
+            "actions": ["addTask:$taskName"]
+          }
+        }
+      }
+    },
+    "events": {
+      "userLogin": { "description": "用户登录" },
+      "userLogout": { "description": "用户登出" },
+      "promoteToManager": { "description": "晋升管理员" },
+      "demoteToUser": { "description": "降级为普通用户" },
+      "addTask": { "description": "添加任务", "params": ["taskName"] },
+      "clearAllTasks": { "description": "清空所有任务" }
+    }
+  }

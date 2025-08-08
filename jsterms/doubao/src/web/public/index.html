@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>有限状态机清单系统</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        success: '#52C41A',
+                        warning: '#FAAD14',
+                        danger: '#FF4D4F',
+                        neutral: '#8C8C8C',
+                        light: '#F5F5F5',
+                        dark: '#1F2329'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .menu-active {
+                @apply bg-primary/10 text-primary border-l-4 border-primary;
+            }
+            .event-notification {
+                animation: pulse 2s infinite;
+            }
+            @keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(22, 93, 255, 0.4);
+                }
+                70% {
+                    box-shadow: 0 0 0 10px rgba(22, 93, 255, 0);
+                }
+                100% {
+                    box-shadow: 0 0 0 0 rgba(22, 93, 255, 0);
+                }
+            }
+            .fade-in {
+                animation: fadeIn 0.5s ease-in;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-cogs text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-dark">有限状态机清单系统</h1>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="text-sm text-gray-500">当前状态:</span>
+                <span id="currentState" class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
+                    加载中...
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 菜单导航 -->
+        <div class="mb-8 border-b border-gray-200">
+            <ul class="flex space-x-8">
+                <li>
+                    <button id="taskMenuBtn" class="menu-active py-4 px-1 text-sm font-medium flex items-center">
+                        <i class="fa fa-tasks mr-2"></i>任务
+                    </button>
+                </li>
+                <li>
+                    <button id="permissionMenuBtn" class="py-4 px-1 text-sm font-medium text-gray-500 hover:text-primary flex items-center">
+                        <i class="fa fa-key mr-2"></i>职权
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 任务菜单内容 -->
+        <div id="taskMenuContent" class="fade-in">
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                <h2 class="text-lg font-semibold mb-4 flex items-center">
+                    <i class="fa fa-tasks text-primary mr-2"></i>待完成任务
+                </h2>
+                
+                <div class="mb-6">
+                    <h3 class="text-sm font-medium text-gray-500 mb-3">可添加的任务</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="task-btn bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-200 flex items-center" 
+                                onclick="sendEvent('reviewDocuments')">
+                            <i class="fa fa-file-text-o mr-2"></i>reviewDocuments
+                        </button>
+                        <button class="task-btn bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-200 flex items-center" 
+                                onclick="sendEvent('prepareReport')">
+                            <i class="fa fa-file-pdf-o mr-2"></i>prepareReport
+                        </button>
+                        <button class="task-btn bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-200 flex items-center" 
+                                onclick="sendEvent('approveBudgets')">
+                            <i class="fa fa-check-square-o mr-2"></i>approveBudgets
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="text-sm font-medium text-gray-500">已添加任务</h3>
+                        <button class="text-sm text-danger hover:text-danger/80 transition duration-200 flex items-center"
+                                onclick="sendEvent('clearAllTasks')">
+                            <i class="fa fa-trash-o mr-1"></i> 清空所有
+                        </button>
+                    </div>
+                    <div id="activeTasksList" class="flex flex-wrap gap-2 min-h-[40px]">
+                        <span class="text-gray-400 italic">暂无任务</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 职权菜单内容 -->
+        <div id="permissionMenuContent" class="hidden">
+            <div class="bg-white rounded-lg shadow-sm p-6">
+                <h2 class="text-lg font-semibold mb-4 flex items-center">
+                    <i class="fa fa-key text-primary mr-2"></i>职权管理
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-3 flex items-center">
+                            <i class="fa fa-check-circle text-success mr-2"></i>允许的职权
+                        </h3>
+                        <div id="allowedPermissionsList" class="flex flex-wrap gap-2 min-h-[40px]">
+                            <span class="text-gray-400 italic">暂无允许的职权</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-sm font-medium text-gray-500 mb-3 flex items-center">
+                            <i class="fa fa-times-circle text-danger mr-2"></i>禁止的职权
+                        </h3>
+                        <div id="forbiddenPermissionsList" class="flex flex-wrap gap-2 min-h-[40px]">
+                            <span class="text-gray-400 italic">暂无禁止的职权</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 pt-6 border-t border-gray-100">
+                    <h3 class="text-sm font-medium text-gray-500 mb-3">可添加的职权</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="perm-btn bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-200 flex items-center" 
+                                onclick="sendEvent('viewDashboard')">
+                            <i class="fa fa-dashboard mr-2"></i>viewDashboard
+                        </button>
+                        <button class="perm-btn bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-200 flex items-center" 
+                                onclick="sendEvent('viewProfile')">
+                            <i class="fa fa-user mr-2"></i>viewProfile
+                        </button>
+                        <button class="perm-btn bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-200 flex items-center" 
+                                onclick="sendEvent('approveRequests')">
+                            <i class="fa fa-check mr-2"></i>approveRequests
+                        </button>
+                        <button class="perm-btn bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-200 flex items-center" 
+                                onclick="sendEvent('manageUsers')">
+                            <i class="fa fa-users mr-2"></i>manageUsers
+                        </button>
+                        <button class="perm-btn bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-md text-sm font-medium transition duration-200 flex items-center" 
+                                onclick="sendEvent('exportData')">
+                            <i class="fa fa-download mr-2"></i>exportData
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 系统事件区域（底部） -->
+    <footer class="bg-white border-t border-gray-200 mt-8">
+        <div class="container mx-auto px-4 py-6">
+            <div id="systemEventsContainer" class="mb-4">
+                <h3 class="text-sm font-semibold text-gray-500 mb-3 flex items-center">
+                    <i class="fa fa-bell text-warning mr-2"></i>系统事件
+                </h3>
+                <div id="systemEvents" class="flex flex-wrap gap-2">
+                    <!-- 系统事件按钮将动态生成 -->
+                </div>
+            </div>
+            
+            <div id="eventNotifications" class="mt-4 p-3 bg-light rounded-md max-h-32 overflow-y-auto text-sm">
+                <div class="text-gray-400 italic">事件记录将显示在这里...</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        let lastEventTime = 0;
+
+        // 菜单切换功能
+        document.getElementById('taskMenuBtn').addEventListener('click', function() {
+            document.getElementById('taskMenuContent').classList.remove('hidden');
+            document.getElementById('taskMenuContent').classList.add('fade-in');
+            document.getElementById('permissionMenuContent').classList.add('hidden');
+            document.getElementById('taskMenuBtn').classList.add('menu-active');
+            document.getElementById('taskMenuBtn').classList.remove('text-gray-500');
+            document.getElementById('permissionMenuBtn').classList.remove('menu-active');
+            document.getElementById('permissionMenuBtn').classList.add('text-gray-500');
+        });
+
+        document.getElementById('permissionMenuBtn').addEventListener('click', function() {
+            document.getElementById('permissionMenuContent').classList.remove('hidden');
+            document.getElementById('permissionMenuContent').classList.add('fade-in');
+            document.getElementById('taskMenuContent').classList.add('hidden');
+            document.getElementById('permissionMenuBtn').classList.add('menu-active');
+            document.getElementById('permissionMenuBtn').classList.remove('text-gray-500');
+            document.getElementById('taskMenuBtn').classList.remove('menu-active');
+            document.getElementById('taskMenuBtn').classList.add('text-gray-500');
+        });
+
+        // 发送事件到服务器
+        function sendEvent(eventName) {
+            socket.emit('userEvent', eventName);
+            
+            // 记录事件
+            logEvent(`发送事件: ${eventName}`);
+        }
+
+        // 记录事件并显示通知
+        function logEvent(message) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            const notificationsContainer = document.getElementById('eventNotifications');
+            
+            // 移除初始提示
+            if (notificationsContainer.querySelector('.italic')) {
+                notificationsContainer.innerHTML = '';
+            }
+            
+            // 创建事件记录元素
+            const eventElement = document.createElement('div');
+            eventElement.className = 'mb-1 pb-1 border-b border-gray-100 last:border-0 last:mb-0 last:pb-0';
+            eventElement.innerHTML = `<span class="text-gray-500">[${timeString}]</span> ${message}`;
+            
+            // 添加到容器顶部
+            notificationsContainer.prepend(eventElement);
+            
+            // 事件通知动画
+            const systemEventsContainer = document.getElementById('systemEventsContainer');
+            systemEventsContainer.classList.add('event-notification');
+            setTimeout(() => {
+                systemEventsContainer.classList.remove('event-notification');
+            }, 2000);
+            
+            lastEventTime = Date.now();
+        }
+
+        // 渲染系统事件按钮
+        function renderSystemEvents(events) {
+            const container = document.getElementById('systemEvents');
+            container.innerHTML = '';
+
+            // 筛选系统事件（排除任务和权限事件）
+            const systemEvents = events.filter(e => 
+                !['reviewDocuments', 'prepareReport', 'approveBudgets', 'clearAllTasks',
+                  'viewDashboard', 'viewProfile', 'approveRequests', 'manageUsers', 'exportData'].includes(e)
+            );
+            
+            systemEvents.forEach(eventName => {
+                const btn = document.createElement('button');
+                btn.className = 'bg-light hover:bg-gray-200 text-dark px-3 py-1.5 rounded-md text-sm transition duration-200 flex items-center';
+                btn.innerHTML = `<i class="fa fa-cog mr-1.5"></i>${eventName}`;
+                btn.onclick = () => sendEvent(eventName);
+                container.appendChild(btn);
+            });
+        }
+
+        // 处理状态更新
+        socket.on('statusUpdate', (data) => {
+            // 更新当前状态
+            const stateElement = document.getElementById('currentState');
+            stateElement.textContent = data.currentState;
+            
+            // 根据状态更改样式
+            switch(data.currentState) {
+                case 'Initial':
+                    stateElement.className = 'px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium';
+                    break;
+                case 'Authenticated':
+                    stateElement.className = 'px-3 py-1 bg-success/10 text-success rounded-full text-sm font-medium';
+                    break;
+                case 'Manager':
+                    stateElement.className = 'px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium';
+                    break;
+                default:
+                    stateElement.className = 'px-3 py-1 bg-warning/10 text-warning rounded-full text-sm font-medium';
+            }
+            
+            // 渲染系统事件
+            renderSystemEvents(data.events);
+
+            // 更新已添加任务
+            const tasksList = document.getElementById('activeTasksList');
+            if (data.lists.tasks.length > 0) {
+                tasksList.innerHTML = data.lists.tasks.map(task => `
+                    <span class="bg-light text-dark px-3 py-1 rounded-md text-sm flex items-center">
+                        <i class="fa fa-tasks mr-1.5"></i>${task}
+                    </span>
+                `).join('');
+            } else {
+                tasksList.innerHTML = '<span class="text-gray-400 italic">暂无任务</span>';
+            }
+
+            // 更新允许的职权
+            const allowedList = document.getElementById('allowedPermissionsList');
+            if (data.lists.allowedPermissions.length > 0) {
+                allowedList.innerHTML = data.lists.allowedPermissions.map(perm => `
+                    <span class="bg-success/10 text-success px-3 py-1 rounded-md text-sm flex items-center">
+                        <i class="fa fa-check mr-1.5"></i>${perm}
+                    </span>
+                `).join('');
+            } else {
+                allowedList.innerHTML = '<span class="text-gray-400 italic">暂无允许的职权</span>';
+            }
+
+            // 更新禁止的职权（灰色不可点击）
+            const forbiddenList = document.getElementById('forbiddenPermissionsList');
+            if (data.lists.forbiddenPermissions.length > 0) {
+                forbiddenList.innerHTML = data.lists.forbiddenPermissions.map(perm => `
+                    <span class="bg-gray-100 text-gray-400 px-3 py-1 rounded-md text-sm flex items-center cursor-not-allowed">
+                        <i class="fa fa-times mr-1.5"></i>${perm}
+                    </span>
+                `).join('');
+            } else {
+                forbiddenList.innerHTML = '<span class="text-gray-400 italic">暂无禁止的职权</span>';
+            }
+
+            // 记录状态更新事件
+            if (Date.now() - lastEventTime > 1000) { // 避免重复记录
+                logEvent(`状态更新: ${data.currentState}`);
+            }
+        });
+
+        // 初始化
+        window.addEventListener('load', () => {
+            logEvent('系统已启动，等待连接...');
+        });
+
+        // 连接状态记录
+        socket.on('connect', () => {
+            logEvent('已连接到服务器');
+        });
+
+        socket.on('disconnect', () => {
+            logEvent('<span class="text-danger">与服务器断开连接</span>');
+        });
+    </script>
+</body>
+</html>
+    
