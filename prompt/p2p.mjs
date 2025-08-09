@@ -4,12 +4,12 @@ export const system =`使用nodejs开发一个节点软件：
 2. 节点软件使用dht协议发布自己的公网地址，获得其它节点的公网地址，并进行通信；
 3. 只开发节点软件，不开发任何服务器端的代码。节点在建立连接时可以借助已经存在的第三方服务器，要求在中国大陆可以使用，同一方法有多个互相替换的服务器可选择；
 4. 通信时不能使用服务器，把通信时间、内容、大致内容长度、各方网址都控制在最小知情范围内。
-使用以下stun服务器：
+如果需要使用stun服务器，使用：
 { urls: 'stun:fwa.lifesizecloud.com:3478' },
 { urls: 'stun:stun.isp.net.au:3478' },
 { urls: 'stun:stun.freeswitch.org:3478' },
 { urls: 'stun:stun.voip.blackberry.com:3478' }
-使用以下dht的BOOTSTRAPS：
+如果需要使用dht的BOOTSTRAPS，使用：
     { host: '34.197.35.250', port: 6880 },
     { host: '72.46.58.63', port: 51413 },
     { host: '46.53.251.68', port: 16970 },
