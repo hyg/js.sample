@@ -1,27 +1,29 @@
 const NextcloudNoteSync = require('./nextcloud-sync');
-const fs = require('fs').promises;
+require('dotenv').config();
 
 /**
  * 主函数
- * 加载配置并启动Nextcloud笔记同步器
+ * 从环境变量加载配置并启动Nextcloud笔记同步器
  */
 async function main() {
-    // 加载配置
-    let config;
-    try {
-        const configContent = await fs.readFile('config.json', 'utf8');
-        config = JSON.parse(configContent);
-    } catch (error) {
-        console.error('读取 config.json 时出错:', error.message);
-        console.error('请创建一个 config.json 文件，包含您的Nextcloud凭据和设置。');
+    // 从环境变量获取配置
+    const nextcloudUrl = process.env.NEXTCLOUD_URL;
+    const username = process.env.NEXTCLOUD_USERNAME;
+    const password = process.env.NEXTCLOUD_PASSWORD;
+    const localNoteDir = process.env.LOCAL_NOTE_DIR || './notes';
+
+    // 验证必要的配置是否存在
+    if (!nextcloudUrl || !username || !password) {
+        console.error('缺少必要的环境变量配置');
+        console.error('请确保在 .env 文件中设置 NEXTCLOUD_URL、NEXTCLOUD_USERNAME 和 NEXTCLOUD_PASSWORD');
         process.exit(1);
     }
 
     const sync = new NextcloudNoteSync(
-        config.nextcloudUrl,
-        config.username,
-        config.password,
-        config.localNoteDir
+        nextcloudUrl,
+        username,
+        password,
+        localNoteDir
     );
 
     // 初始化同步器

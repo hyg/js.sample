@@ -16,14 +16,12 @@
 
 1. 克隆此仓库
 2. 运行 `npm install` 安装依赖
-3. 复制 `config.json.example` 为 `config.json` 并更新您的 Nextcloud 凭据：
-   ```json
-   {
-     "nextcloudUrl": "https://your-nextcloud-instance.com",
-     "username": "your-username",
-     "password": "your-app-password",
-     "localNoteDir": "./notes"
-   }
+3. 复制 `.env.example` 为 `.env` 并更新您的 Nextcloud 凭据：
+   ```env
+   NEXTCLOUD_URL=https://your-nextcloud-instance.com
+   NEXTCLOUD_USERNAME=your-username
+   NEXTCLOUD_PASSWORD=your-app-password
+   LOCAL_NOTE_DIR=./notes
    ```
 4. 使用 `node index.js` 运行工具
 
@@ -48,6 +46,7 @@
 
 - [nextcloud-node-client](https://github.com/nextcloud/nextcloud-node-client) - 用于与 Nextcloud 交互
 - [chokidar](https://github.com/paulmillr/chokidar) - 用于监控文件变化
+- [dotenv](https://github.com/motdotla/dotenv) - 用于加载环境变量
 
 ## 许可证
 
