@@ -1,1 +1,40 @@
-const NextcloudNoteSync = require('./nextcloud-sync');\nconst fs = require('fs').promises;\n\nasync function main() {\n    // Load configuration\n    let config;\n    try {\n        const configContent = await fs.readFile('config.json', 'utf8');\n        config = JSON.parse(configContent);\n    } catch (error) {\n        console.error('Error reading config.json:', error.message);\n        console.error('Please create a config.json file with your Nextcloud credentials and settings.');\n        process.exit(1);\n    }\n\n    const sync = new NextcloudNoteSync(\n        config.nextcloudUrl,\n        config.username,\n        config.password,\n        config.localNoteDir\n    );\n\n    // Initialize the sync\n    await sync.initialize();\n    console.log('Nextcloud note sync initialized');\n\n    // Handle graceful shutdown\n    process.on('SIGINT', async () => {\n        console.log('\\nShutting down...');\n        await sync.shutdown();\n        console.log('Shutdown complete');\n        process.exit(0);\n    });\n}\n\nmain().catch(console.error);
+const NextcloudNoteSync = require('./nextcloud-sync');
+const fs = require('fs').promises;
+
+/**
+ * 主函数
+ * 加载配置并启动Nextcloud笔记同步器
+ */
+async function main() {
+    // 加载配置
+    let config;
+    try {
+        const configContent = await fs.readFile('config.json', 'utf8');
+        config = JSON.parse(configContent);
+    } catch (error) {
+        console.error('读取 config.json 时出错:', error.message);
+        console.error('请创建一个 config.json 文件，包含您的Nextcloud凭据和设置。');
+        process.exit(1);
+    }
+
+    const sync = new NextcloudNoteSync(
+        config.nextcloudUrl,
+        config.username,
+        config.password,
+        config.localNoteDir
+    );
+
+    // 初始化同步器
+    await sync.initialize();
+    console.log('Nextcloud笔记同步已初始化');
+
+    // 处理优雅关闭
+    process.on('SIGINT', async () => {
+        console.log('\n正在关闭...');
+        await sync.shutdown();
+        console.log('关闭完成');
+        process.exit(0);
+    });
+}
+
+main().catch(console.error);

@@ -1,22 +1,22 @@
-# Nextcloud Note Sync
+# Nextcloud 笔记同步工具
 
-This tool automatically creates and synchronizes markdown notes with a Nextcloud server.
+此工具可自动创建 Markdown 笔记并与 Nextcloud 服务器同步。
 
-## Features
+## 功能
 
-- Creates 4 note files daily with the naming pattern `d.YYYYMMDD.XX.md`
-- Automatically uploads notes to Nextcloud and creates public read-only shares
-- Watches for local file changes and syncs updates to Nextcloud
-- On shutdown (Ctrl+C): 
-  - Removes all shares
-  - Combines notes into a daily summary file
-  - Uploads the summary to Nextcloud with a public share
+- 每天创建 4 个按日期命名的笔记文件，命名格式为 `d.YYYYMMDD.XX.md`
+- 自动将笔记上传到 Nextcloud 并创建公开只读共享
+- 监控本地文件变化并将更新同步到 Nextcloud
+- 关闭程序时 (Ctrl+C)：
+  - 移除所有共享
+  - 将笔记合并为每日摘要文件
+  - 将摘要上传到 Nextcloud 并创建公开共享
 
-## Setup
+## 设置
 
-1. Clone this repository
-2. Run `npm install` to install dependencies
-3. Copy `config.json.example` to `config.json` and update with your Nextcloud credentials:
+1. 克隆此仓库
+2. 运行 `npm install` 安装依赖
+3. 复制 `config.json.example` 为 `config.json` 并更新您的 Nextcloud 凭据：
    ```json
    {
      "nextcloudUrl": "https://your-nextcloud-instance.com",
@@ -25,30 +25,30 @@ This tool automatically creates and synchronizes markdown notes with a Nextcloud
      "localNoteDir": "./notes"
    }
    ```
-4. Run the tool with `node index.js`
+4. 使用 `node index.js` 运行工具
 
-## Usage
+## 使用方法
 
-After starting the tool, 4 note files will be created in your specified local directory with the following naming pattern:
+启动工具后，将在您指定的本地目录中创建 4 个笔记文件，命名格式如下：
 - d.YYYYMMDD.01.md
 - d.YYYYMMDD.02.md
 - d.YYYYMMDD.03.md
 - d.YYYYMMDD.04.md
 
-Each file will have a public share URL as its first line. You can share these URLs for read-only access to your notes.
+每个文件的第一行将是公开共享 URL。您可以分享这些 URL 以提供对笔记的只读访问权限。
 
-When you're done for the day, press `Ctrl+C` to shut down the tool. It will automatically:
-1. Remove all individual note shares
-2. Create a daily summary file combining all notes
-3. Upload the summary to Nextcloud
-4. Create a public share for the summary file
-5. Display the summary share URL in the console
+每天结束时，按 `Ctrl+C` 关闭工具。它将自动：
+1. 移除所有单个笔记共享
+2. 创建一个合并所有笔记的每日摘要文件
+3. 将摘要上传到 Nextcloud
+4. 为摘要文件创建公开共享
+5. 在控制台显示摘要共享 URL
 
-## Dependencies
+## 依赖
 
-- [nextcloud-node-client](https://github.com/nextcloud/nextcloud-node-client) - For interacting with Nextcloud
-- [chokidar](https://github.com/paulmillr/chokidar) - For watching file changes
+- [nextcloud-node-client](https://github.com/nextcloud/nextcloud-node-client) - 用于与 Nextcloud 交互
+- [chokidar](https://github.com/paulmillr/chokidar) - 用于监控文件变化
 
-## License
+## 许可证
 
 MIT
