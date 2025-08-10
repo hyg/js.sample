@@ -35,8 +35,25 @@ const BOOTSTRAP_NODES = [
 class P2PNode {
   constructor() {
     console.log('Initializing P2P node...');
-    this.dht = new DHT({ bootstrap: BOOTSTRAP_NODES });
+    this.nodeId = Math.random().toString(36).substring(2, 15);
+    console.log(`Node ID: ${this.nodeId}`);
+    
+    try {
+      this.dht = new DHT({ bootstrap: BOOTSTRAP_NODES });
+      console.log('DHT instance created');
+    } catch (err) {
+      console.error('Failed to create DHT instance:', err);
+      process.exit(1);
+    }
+    
     this.peers = new Map();
+    this.infoHash = null;
+    
+    this.setupDHTEvents();
+  }
+  
+  setupDHTEvents() {
+    console.log('Setting up DHT event listeners...');
     
     this.dht.on('ready', () => {
       console.log('DHT is ready');
@@ -59,22 +76,27 @@ class P2PNode {
     this.dht.on('error', (err) => {
       console.error('DHT error:', err);
     });
+    
+    this.dht.on('listening', () => {
+      console.log('DHT is listening');
+    });
   }
   
   announce() {
     // Generate a random info hash for our node
-    const infoHash = Math.random().toString(36).substring(2, 15) + 
+    this.infoHash = Math.random().toString(36).substring(2, 15) + 
                      Math.random().toString(36).substring(2, 15);
     
-    console.log(`Announcing info hash: ${infoHash}`);
+    console.log(`Announcing info hash: ${this.infoHash}`);
     
     // Announce to the DHT network
-    this.dht.announce(infoHash, { port: 6881 }, (err) => {
+    this.dht.announce(this.infoHash, { port: 6881 }, (err) => {
       if (err) {
         console.error('Announce error:', err);
         return;
       }
-      console.log(`Successfully announced info hash: ${infoHash}`);
+      console.log(`Successfully announced info hash: ${this.infoHash}`);
+      console.log('Waiting for peers...');
     });
   }
   
@@ -95,10 +117,21 @@ class P2PNode {
       return;
     }
     
+    // Don't connect to ourselves
+    if (peer.port === 6881) {
+      console.log(`Skipping connection to self: ${peerKey}`);
+      return;
+    }
+    
     // Create a new SimplePeer instance
+    console.log(`Creating SimplePeer instance for ${peerKey}`);
     const simplePeer = new Peer({
       initiator: Math.random() > 0.5, // Randomly decide who initiates
-      config: { iceServers: STUN_SERVERS }
+      config: { 
+        iceServers: STUN_SERVERS,
+        iceCandidatePoolSize: 10
+      },
+      trickle: true
     });
     
     // Store the peer
@@ -106,7 +139,7 @@ class P2PNode {
     
     // Set up event handlers
     simplePeer.on('signal', (data) => {
-      console.log('Signal data for peer:', peerKey, data);
+      console.log('Signal data for peer:', peerKey, JSON.stringify(data));
       // In a real implementation, we would send this signal data to the peer
       // through the DHT or another signaling mechanism
     });
@@ -114,7 +147,7 @@ class P2PNode {
     simplePeer.on('connect', () => {
       console.log('Connected to peer:', peerKey);
       // Send a test message
-      simplePeer.send('Hello from ' + peerKey);
+      simplePeer.send(`Hello from ${this.nodeId}`);
     });
     
     simplePeer.on('data', (data) => {
@@ -127,8 +160,17 @@ class P2PNode {
     });
     
     simplePeer.on('error', (err) => {
-      console.error('Peer connection error with:', peerKey, err);
+      console.error('Peer connection error with:', peerKey, err.message);
       this.peers.delete(peerKey);
+    });
+    
+    // Log ICE candidate events
+    simplePeer.on('iceCandidate', (candidate) => {
+      console.log('ICE candidate for peer:', peerKey, candidate);
+    });
+    
+    simplePeer.on('iceStateChange', (state) => {
+      console.log('ICE state change for peer:', peerKey, state);
     });
   }
   
@@ -137,6 +179,7 @@ class P2PNode {
     const peer = this.peers.get(peerKey);
     if (peer && peer.connected) {
       peer.send(data);
+      console.log(`Sent data to peer ${peerKey}: ${data}`);
     } else {
       console.error('Peer not connected or not found:', peerKey);
     }
@@ -144,11 +187,14 @@ class P2PNode {
   
   // Method to broadcast data to all connected peers
   broadcastData(data) {
+    let sentCount = 0;
     for (const [peerKey, peer] of this.peers.entries()) {
       if (peer.connected) {
         peer.send(data);
+        sentCount++;
       }
     }
+    console.log(`Broadcast data to ${sentCount} peers`);
   }
 }
 
@@ -159,6 +205,20 @@ const node = new P2PNode();
 // Graceful shutdown
 process.on('SIGINT', () => {
   console.log('Shutting down...');
-  node.dht.destroy();
+  if (node.dht) {
+    node.dht.destroy();
+  }
   process.exit(0);
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught exception:', err);
+  process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled promise rejection:', reason);
+  process.exit(1);
 });

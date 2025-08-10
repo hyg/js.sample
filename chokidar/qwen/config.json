@@ -1,6 +1,0 @@
-{
-  "nextcloudUrl": "https://your-nextcloud-instance.com",
-  "username": "your-username",
-  "password": "your-password",
-  "localNoteDir": "./notes"
-}

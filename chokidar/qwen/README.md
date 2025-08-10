@@ -16,7 +16,7 @@
 
 1. 克隆此仓库
 2. 运行 `npm install` 安装依赖
-3. 复制 `.env.example` 为 `.env` 并更新您的 Nextcloud 凭据：
+3. 创建 `.env` 文件并更新您的 Nextcloud 凭据：
    ```env
    NEXTCLOUD_URL=https://your-nextcloud-instance.com
    NEXTCLOUD_USERNAME=your-username
