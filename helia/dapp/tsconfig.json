@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "lib": ["ES2023", "DOM", "DOM.Iterable"],
+      "target": "ES2022",
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "strict": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "./public",
+      "rootDir": "./src"
+    },
+    "include": ["src"]
+  }

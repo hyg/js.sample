@@ -1,0 +1,18 @@
+{
+  "name": "qwen",
+  "version": "1.0.0",
+  "description": "This project implements a chatbot that uses XMTP for decentralized messaging and Qwen AI for intelligent responses.",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "ethers": "^6.15.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
