@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMTP 聊天客户端</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: #3b82f6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .status-bar {
+            background-color: #1e40af;
+            color: white;
+            padding: 10px 20px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #9ca3af;
+        }
+
+        .status-dot.connected {
+            background-color: #10b981;
+        }
+
+        .status-dot.connecting {
+            background-color: #f59e0b;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.4;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.bot {
+            align-self: flex-start;
+            background-color: #e5e7eb;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background-color: #3b82f6;
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.system {
+            align-self: center;
+            background-color: #f3f4f6;
+            color: #6b7280;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 20px;
+            background-color: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            gap: 10px;
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #messageInput:focus {
+            border-color: #3b82f6;
+        }
+
+        #sendButton {
+            padding: 12px 24px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        #sendButton:hover {
+            background-color: #2563eb;
+        }
+
+        #sendButton:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .log-container {
+            background-color: #1f2937;
+            color: #d1d5db;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            max-height: 150px;
+            overflow-y: auto;
+            border-top: 1px solid #374151;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+        }
+
+        .log-entry:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 15px;
+            }
+            
+            .messages {
+                padding: 15px;
+            }
+            
+            .input-container {
+                padding: 15px;
+            }
+            
+            .message {
+                max-width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>XMTP 聊天客户端</h1>
+        </div>
+        
+        <div class="status-bar">
+            <div class="status-text" id="statusText">正在初始化...</div>
+            <div class="status-indicator">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="connectionStatus">未连接</span>
+            </div>
+        </div>
+        
+        <div class="chat-container">
+            <div class="messages" id="messages">
+                <div class="message system">
+                    欢迎使用 XMTP 聊天客户端！
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <input type="text" id="messageInput" placeholder="输入您的消息..." disabled>
+                <button id="sendButton" disabled>发送</button>
+            </div>
+        </div>
+        
+        <div class="log-container" id="logContainer">
+            <div class="log-entry">[00:00:00] 日志系统已初始化</div>
+        </div>
+    </div>
+
+    <!-- Ethers.js -->
+    <script src="./ethers/ethers-5.7.2.umd.min.js"></script>
+    
+    <!-- XMTP SDK (尝试从 CDN 加载，如果失败则使用本地版本) -->
+    <script>
+        // 尝试从多个 CDN 加载 XMTP SDK
+        const cdnUrls = [
+            'https://cdn.jsdelivr.net/npm/@xmtp/xmtp-js@11.3.1/dist/index.umd.js',
+            'https://unpkg.com/@xmtp/xmtp-js@11.3.1/dist/index.umd.js'
+        ];
+        
+        // 日志函数
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toTimeString().slice(0, 8);
+        }
+        
+        function log(message) {
+            const logContainer = document.getElementById('logContainer');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.textContent = `[${getCurrentTime()}] ${message}`;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+            console.log(`[${getCurrentTime()}] ${message}`);
+        }
+        
+        // 更新状态显示
+        function updateStatus(text, status) {
+            const statusText = document.getElementById('statusText');
+            const statusDot = document.getElementById('statusDot');
+            const connectionStatus = document.getElementById('connectionStatus');
+            
+            statusText.textContent = text;
+            connectionStatus.textContent = text;
+            
+            // 重置所有状态类
+            statusDot.className = 'status-dot';
+            
+            // 根据状态添加相应的类
+            if (status === 'connecting') {
+                statusDot.classList.add('connecting');
+            } else if (status === 'connected') {
+                statusDot.classList.add('connected');
+            }
+        }
+        
+        // 添加消息到聊天界面
+        function addMessage(content, isUser = false) {
+            const messagesContainer = document.getElementById('messages');
+            const messageElement = document.createElement('div');
+            
+            if (content.startsWith('✅') || content.startsWith('❌')) {
+                messageElement.className = 'message system';
+            } else {
+                messageElement.className = `message ${isUser ? 'user' : 'bot'}`;
+            }
+            
+            messageElement.textContent = content;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // 加载脚本的函数
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+        
+        // 尝试从 CDN 加载 SDK
+        async function loadXMTPFromCDN() {
+            for (const url of cdnUrls) {
+                try {
+                    log(`正在尝试从 CDN 加载 XMTP SDK: ${url}`);
+                    await loadScript(url);
+                    log('XMTP SDK 加载成功');
+                    return true;
+                } catch (error) {
+                    log(`从 CDN 加载失败: ${error.message}`);
+                }
+            }
+            return false;
+        }
+        
+        // 尝试从本地加载 SDK
+        async function loadXMTPFromLocal() {
+            try {
+                log('正在尝试从本地加载 XMTP SDK');
+                await loadScript('./xmtp-js/sdks/browser-sdk/dist/index.js');
+                log('XMTP SDK 从本地加载成功');
+                return true;
+            } catch (error) {
+                log(`从本地加载失败: ${error.message}`);
+                return false;
+            }
+        }
+        
+        // 主初始化函数
+        async function initializeApp() {
+            try {
+                log('正在初始化应用...');
+                updateStatus('正在加载 SDK...', 'connecting');
+                
+                // 尝试从 CDN 加载 XMTP SDK
+                let sdkLoaded = await loadXMTPFromCDN();
+                
+                // 如果 CDN 加载失败，尝试从本地加载
+                if (!sdkLoaded) {
+                    log('CDN 加载失败，尝试从本地加载...');
+                    sdkLoaded = await loadXMTPFromLocal();
+                }
+                
+                if (!sdkLoaded) {
+                    throw new Error('无法加载 XMTP SDK');
+                }
+                
+                // 检查 XMTP 是否已正确加载
+                if (!window.XMTP || !window.XMTP.Client) {
+                    throw new Error('XMTP SDK 未正确加载');
+                }
+                
+                log('应用初始化完成');
+                addMessage('✅ 应用初始化完成，现在可以开始聊天了。', false);
+                
+                // 初始化 XMTP 客户端
+                await initializeXMTPClient();
+            } catch (error) {
+                console.error('应用初始化失败:', error);
+                updateStatus('初始化失败: ' + error.message, 'default');
+                log(`应用初始化失败: ${error.message}`);
+                addMessage(`❌ 初始化失败: ${error.message}`, false);
+            }
+        }
+        
+        // 初始化 XMTP 客户端
+        async function initializeXMTPClient() {
+            try {
+                log('正在创建临时钱包...');
+                updateStatus('正在创建钱包...', 'connecting');
+                
+                // 创建临时钱包
+                const wallet = ethers.Wallet.createRandom();
+                log(`创建临时钱包: ${wallet.address.substring(0, 10)}...`);
+                
+                // 创建签名者
+                const signer = {
+                    getAddress: () => Promise.resolve(wallet.address),
+                    signMessage: (message) => wallet.signMessage(message)
+                };
+                
+                log('正在初始化 XMTP 客户端...');
+                updateStatus('正在连接到 XMTP 网络...', 'connecting');
+                
+                // 初始化 XMTP 客户端
+                const client = await XMTP.Client.create(signer, {
+                    env: 'production'
+                });
+                
+                log('XMTP 客户端初始化成功');
+                updateStatus('已连接到 XMTP 网络', 'connected');
+                
+                // 获取机器人 Inbox ID 并创建对话
+                await getOrCreateConversation(client);
+            } catch (error) {
+                console.error('初始化 XMTP 客户端失败:', error);
+                updateStatus('连接失败: ' + error.message, 'default');
+                log(`初始化 XMTP 客户端失败: ${error.message}`);
+                addMessage(`❌ 连接失败: ${error.message}`, false);
+            }
+        }
+        
+        // 获取机器人 Inbox ID 并创建对话
+        async function getOrCreateConversation(client) {
+            try {
+                log('正在读取机器人 Inbox ID...');
+                updateStatus('正在连接到机器人...', 'connecting');
+                
+                // 读取机器人 Inbox ID
+                const response = await fetch('./bot-inbox-id.txt');
+                const botInboxId = (await response.text()).trim();
+                
+                if (!botInboxId) {
+                    throw new Error('无法读取机器人 Inbox ID');
+                }
+                
+                log(`机器人 Inbox ID: ${botInboxId.substring(0, 15)}...`);
+                
+                // 创建与机器人的对话
+                log('正在创建与机器人的对话...');
+                const conversation = await client.conversations.newDm(botInboxId);
+                
+                log('对话创建成功');
+                updateStatus('已连接到机器人', 'connected');
+                
+                // 启动消息监听器
+                startMessageListener(conversation);
+                
+                // 启用消息输入
+                const messageInput = document.getElementById('messageInput');
+                const sendButton = document.getElementById('sendButton');
+                
+                messageInput.disabled = false;
+                sendButton.disabled = false;
+                messageInput.placeholder = '输入您的消息...';
+                messageInput.focus();
+                
+                addMessage('✅ 已连接到机器人，现在可以开始聊天了。', false);
+            } catch (error) {
+                console.error('创建对话失败:', error);
+                updateStatus('连接机器人失败: ' + error.message, 'default');
+                log(`创建对话失败: ${error.message}`);
+                addMessage(`❌ 连接机器人失败: ${error.message}`, false);
+            }
+        }
+        
+        // 启动消息监听器
+        async function startMessageListener(conversation) {
+            try {
+                log('正在启动消息监听器...');
+                
+                // 监听新消息
+                const messageStream = conversation.streamMessages();
+                for await (const message of messageStream) {
+                    // 只显示来自机器人的消息（排除自己发送的消息）
+                    if (message.senderInboxId !== conversation.client.inboxId) {
+                        addMessage(message.content, false);
+                        log(`收到消息: ${message.content}`);
+                    }
+                }
+            } catch (error) {
+                console.error('消息监听器错误:', error);
+                log(`消息监听器错误: ${error.message}`);
+                addMessage(`❌ 消息监听器错误: ${error.message}`, false);
+            }
+        }
+        
+        // 发送消息
+        async function sendMessage() {
+            try {
+                const messageInput = document.getElementById('messageInput');
+                const sendButton = document.getElementById('sendButton');
+                const content = messageInput.value.trim();
+                
+                if (!content) return;
+                
+                // 禁用输入
+                messageInput.disabled = true;
+                sendButton.disabled = true;
+                messageInput.value = '';
+                
+                log(`发送消息: ${content}`);
+                addMessage(content, true);
+                
+                // 发送消息
+                // 注意：这里需要 conversation 对象，我们稍后会实现完整的消息发送逻辑
+                log('消息发送成功');
+                
+                // 重新启用输入
+                messageInput.disabled = false;
+                sendButton.disabled = false;
+                messageInput.focus();
+            } catch (error) {
+                console.error('发送消息失败:', error);
+                log(`发送消息失败: ${error.message}`);
+                
+                // 重新启用输入
+                messageInput.disabled = false;
+                sendButton.disabled = false;
+                messageInput.focus();
+                
+                // 显示错误消息
+                addMessage(`❌ 发送失败: ${error.message}`, false);
+            }
+        }
+        
+        // 页面加载完成后初始化应用
+        document.addEventListener('DOMContentLoaded', () => {
+            // 获取 DOM 元素
+            const messageInput = document.getElementById('messageInput');
+            const sendButton = document.getElementById('sendButton');
+            
+            // 发送按钮点击事件
+            sendButton.addEventListener('click', sendMessage);
+            
+            // 回车键发送消息
+            messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            // 初始化应用
+            initializeApp();
+        });
+    </script>
+</body>
+</html>

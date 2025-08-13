@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMTP 机器人对话启动器</title>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --light-bg: #f8fafc;
+            --dark-bg: #0f172a;
+            --border-color: #e2e8f0;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-title i {
+            font-size: 1.6rem;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+
+        .instructions li {
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background-color: var(--dark-bg);
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        .link-container {
+            background-color: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .link-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .bot-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: background-color 0.2s;
+            margin: 10px 0;
+        }
+
+        .bot-link:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .bot-link:active {
+            transform: translateY(1px);
+        }
+
+        .info-box {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box h3 {
+            margin-top: 0;
+            color: #92400e;
+        }
+
+        .info-box p {
+            margin-bottom: 10px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .btn-large {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin: 10px 0;
+        }
+
+        .btn-large:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .btn-large:active {
+            transform: translateY(1px);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 XMTP 机器人对话启动器</h1>
+            <p>与 AI 助手进行安全的去中心化聊天</p>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-info-circle"></i> 关于此工具</h2>
+            <p>这是一个独立的 HTML 文件，无需任何编程环境即可直接使用。它可以帮助您快速连接到指定的 XMTP 机器人进行对话。</p>
+            
+            <div class="info-box">
+                <h3>重要说明</h3>
+                <p>由于浏览器安全限制，此页面无法直接与 XMTP 网络通信。实际的聊天功能需要在 <a href="https://xmtp.chat" target="_blank">xmtp.chat</a> 网站中完成。</p>
+                <p>此工具仅用于生成正确的对话链接，让您能够快速开始与机器人对话。</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-robot"></i> 目标机器人</h2>
+            <p>您将与以下机器人进行对话：</p>
+            
+            <div class="code-block">
+                Inbox ID: a98a974c554006bf56cb8661922317b2a1bae7150be90c12586c9b42adc36045
+            </div>
+            
+            <p>这是一个已配置好的 AI 助手机器人，可以回答各种问题并与您进行对话。</p>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-link"></i> 快速开始</h2>
+            <p>点击下面的按钮直接打开与机器人的对话页面：</p>
+            
+            <div class="link-container">
+                <div class="link-title">点击下方按钮开始对话</div>
+                <a href="https://xmtp.chat/dm/a98a974c554006bf56cb8661922317b2a1bae7150be90c12586c9b42adc36045" 
+                   target="_blank" class="bot-link">
+                    <i class="fas fa-external-link-alt"></i> 打开机器人对话页面
+                </a>
+                <p>或者手动复制以下链接到浏览器地址栏：</p>
+                <div class="code-block">
+                    https://xmtp.chat/dm/a98a974c554006bf56cb8661922317b2a1bae7150be90c12586c9b42adc36045
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-book"></i> 使用指南</h2>
+            <div class="instructions">
+                <ol>
+                    <li><strong>点击上面的按钮</strong> - 这将打开 xmtp.chat 网站并自动连接到机器人</li>
+                    <li><strong>创建钱包</strong> - 首次使用时，网站会为您创建一个临时钱包</li>
+                    <li><strong>开始对话</strong> - 在聊天框中输入您的消息并发送</li>
+                    <li><strong>等待回复</strong> - 机器人会自动回复您的消息</li>
+                </ol>
+            </div>
+            
+            <div class="info-box">
+                <h3>提示</h3>
+                <p>• 消息可能需要几秒钟时间来发送和接收</p>
+                <p>• 对话历史会在页面刷新后丢失，因为使用的是临时钱包</p>
+                <p>• 如果遇到连接问题，请检查网络连接并稍后重试</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-question-circle"></i> 常见问题</h2>
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>安全吗？</h3>
+                    <p>是的，XMTP 是一个安全的去中心化消息协议，您的消息是加密传输的。</p>
+                </div>
+                
+                <div class="feature">
+                    <i class="fas fa-wallet"></i>
+                    <h3>需要钱包吗？</h3>
+                    <p>不需要。xmtp.chat 会自动为您创建一个临时钱包用于聊天。</p>
+                </div>
+                
+                <div class="feature">
+                    <i class="fas fa-sync"></i>
+                    <h3>会话持久吗？</h3>
+                    <p>不会。每次刷新页面都会创建新的临时钱包，之前的对话历史会丢失。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>XMTP 机器人对话启动器 &copy; 2025</p>
+            <p>此工具是一个独立的 HTML 文件，不收集任何用户信息。</p>
+        </div>
+    </div>
+</body>
+</html>

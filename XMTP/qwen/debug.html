@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug GroupUpdatedCodec</title>
+</head>
+<body>
+    <h1>Debug GroupUpdatedCodec</h1>
+    
+    <!-- XMTP 依赖项 -->
+    <script src="./xmtp-js/content-types/content-type-group-updated/dist/browser/index.umd.js"></script>
+    
+    <script>
+        console.log('=== Debug GroupUpdatedCodec ===');
+        console.log('contentTypeGroupUpdated:', typeof contentTypeGroupUpdated);
+        console.log('contentTypeGroupUpdated:', contentTypeGroupUpdated);
+        
+        if (contentTypeGroupUpdated && contentTypeGroupUpdated.GroupUpdatedCodec) {
+            console.log('GroupUpdatedCodec found:', typeof contentTypeGroupUpdated.GroupUpdatedCodec);
+            console.log('GroupUpdatedCodec:', contentTypeGroupUpdated.GroupUpdatedCodec);
+            
+            try {
+                const codec = new contentTypeGroupUpdated.GroupUpdatedCodec();
+                console.log('✅ GroupUpdatedCodec instantiated successfully:', codec);
+            } catch (error) {
+                console.error('❌ Failed to instantiate GroupUpdatedCodec:', error);
+            }
+        } else {
+            console.error('❌ GroupUpdatedCodec not found');
+        }
+    </script>
+</body>
+</html>

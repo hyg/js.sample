@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 XMTP SDK 调试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #log {
+            height: 300px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            border: 1px solid #ddd;
+        }
+        .log-entry {
+            margin: 2px 0;
+            padding: 2px 0;
+        }
+        .log-info { color: #007bff; }
+        .log-success { color: #28a745; }
+        .log-error { color: #dc3545; }
+        .debug-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border: 1px solid #dee2e6;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 XMTP SDK 调试页面</h1>
+        
+        <div class="status info">
+            <strong>📋 调试说明：</strong> 此页面用于深入调试XMTP SDK的加载问题
+        </div>
+        
+        <div>
+            <button onclick="debugXmtpJS()">🔍 调试 XmtpJS 对象</button>
+            <button onclick="debugClasses()">🔍 调试类定义</button>
+            <button onclick="testContentTypeId()">🧪 测试 ContentTypeId</button>
+            <button onclick="testClient()">🧪 测试 Client</button>
+            <button onclick="clearLog()">🗑️ 清除日志</button>
+        </div>
+        
+        <div id="debugInfo" class="debug-info">
+            调试信息将在这里显示...
+        </div>
+        
+        <div>
+            <h3>📋 操作日志:</h3>
+            <div id="log"></div>
+        </div>
+    </div>
+
+    <!-- XMTP 依赖项 -->
+    <script src="./xmtp-js/content-types/content-type-group-updated/dist/browser/index.umd.js"></script>
+    <script src="./xmtp-js/content-types/content-type-text/dist/browser/index.umd.js"></script>
+    <script src="./xmtp-js/content-types/content-type-primitives/dist/browser/index.umd.js"></script>
+    
+    <!-- 使用本地XMTP SDK -->
+    <script src="./xmtp-js/sdks/browser-sdk/dist/index.umd.js"></script>
+    
+    <script>
+        // 日志功能
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry log-${type}`;
+            
+            let emoji = '';
+            switch(type) {
+                case 'success': emoji = '✅'; break;
+                case 'error': emoji = '❌'; break;
+                case 'warning': emoji = '⚠️'; break;
+                default: emoji = 'ℹ️';
+            }
+            
+            logEntry.innerHTML = `[${timestamp}] ${emoji} ${message}`;
+            logDiv.appendChild(logEntry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(`[${timestamp}] ${message}`);
+        }
+
+        function updateDebugInfo(info) {
+            const debugDiv = document.getElementById('debugInfo');
+            debugDiv.textContent = info;
+        }
+
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+        }
+
+        // 调试 XmtpJS 对象
+        function debugXmtpJS() {
+            log('🔍 开始调试 XmtpJS 对象...', 'info');
+            
+            try {
+                if (typeof XmtpJS === 'undefined') {
+                    throw new Error('XmtpJS 未定义');
+                }
+                
+                log(`✅ XmtpJS 类型: ${typeof XmtpJS}`, 'success');
+                log(`📋 XmtpJS 键: ${Object.keys(XmtpJS).join(', ')}`, 'info');
+                
+                // 显示 XmtpJS 的详细信息
+                const debugInfo = `XmtpJS 对象信息:
+类型: ${typeof XmtpJS}
+构造函数: ${XmtpJS.constructor ? XmtpJS.constructor.name : 'N/A'}
+自有属性: ${Object.getOwnPropertyNames(XmtpJS).join(', ')}
+原型: ${Object.getPrototypeOf(XmtpJS)}`;
+                
+                updateDebugInfo(debugInfo);
+                log('✅ XmtpJS 对象调试完成', 'success');
+                
+            } catch (error) {
+                log(`❌ 调试失败: ${error.message}`, 'error');
+                updateDebugInfo(`错误: ${error.message}`);
+            }
+        }
+
+        // 调试类定义
+        function debugClasses() {
+            log('🔍 开始调试类定义...', 'info');
+            
+            try {
+                if (typeof XmtpJS === 'undefined') {
+                    throw new Error('XmtpJS 未定义');
+                }
+                
+                const classesToCheck = ['Client', 'ContentTypeId', 'ContentTypeText'];
+                let debugInfo = '类定义调试信息:\n\n';
+                
+                for (const className of classesToCheck) {
+                    const classObj = XmtpJS[className];
+                    debugInfo += `${className}:\n`;
+                    debugInfo += `  类型: ${typeof classObj}\n`;
+                    debugInfo += `  是否为函数: ${typeof classObj === 'function'}\n`;
+                    debugInfo += `  构造函数名: ${classObj ? classObj.name : 'N/A'}\n`;
+                    
+                    if (typeof classObj === 'function') {
+                        debugInfo += `  原型: ${classObj.prototype ? '存在' : '不存在'}\n`;
+                        if (classObj.prototype) {
+                            debugInfo += `  原型方法: ${Object.getOwnPropertyNames(classObj.prototype).join(', ')}\n`;
+                        }
+                    }
+                    debugInfo += '\n';
+                    
+                    if (typeof classObj === 'undefined') {
+                        log(`❌ ${className} 未定义`, 'error');
+                    } else {
+                        log(`✅ ${className} 已定义 (${typeof classObj})`, 'success');
+                    }
+                }
+                
+                updateDebugInfo(debugInfo);
+                log('✅ 类定义调试完成', 'success');
+                
+            } catch (error) {
+                log(`❌ 调试失败: ${error.message}`, 'error');
+                updateDebugInfo(`错误: ${error.message}`);
+            }
+        }
+
+        // 测试 ContentTypeId
+        function testContentTypeId() {
+            log('🧪 开始测试 ContentTypeId...', 'info');
+            
+            try {
+                if (typeof XmtpJS === 'undefined') {
+                    throw new Error('XmtpJS 未定义');
+                }
+                
+                if (typeof XmtpJS.ContentTypeId === 'undefined') {
+                    throw new Error('ContentTypeId 未定义');
+                }
+                
+                log(`✅ ContentTypeId 类型: ${typeof XmtpJS.ContentTypeId}`, 'success');
+                log(`✅ ContentTypeId 名称: ${XmtpJS.ContentTypeId.name}`, 'success');
+                
+                // 尝试创建实例
+                const contentTypeId = new XmtpJS.ContentTypeId('xmtp.org', 'text', 1, 0);
+                log(`✅ ContentTypeId 实例创建成功`, 'success');
+                log(`✅ toString(): ${contentTypeId.toString()}`, 'success');
+                
+                // 测试静态属性
+                if (XmtpJS.ContentTypeText) {
+                    log(`✅ ContentTypeText: ${XmtpJS.ContentTypeText.toString()}`, 'success');
+                }
+                
+                updateDebugInfo(`ContentTypeId 测试成功!
+实例: ${contentTypeId.toString()}
+构造函数: ${contentTypeId.constructor.name}
+原型方法: ${Object.getOwnPropertyNames(contentTypeId.__proto__).join(', ')}`);
+                
+                log('✅ ContentTypeId 测试完成', 'success');
+                
+            } catch (error) {
+                log(`❌ 测试失败: ${error.message}`, 'error');
+                log(`❌ 错误堆栈: ${error.stack || '无堆栈信息'}`, 'error');
+                updateDebugInfo(`错误: ${error.message}`);
+            }
+        }
+
+        // 测试 Client
+        function testClient() {
+            log('🧪 开始测试 Client...', 'info');
+            
+            try {
+                if (typeof XmtpJS === 'undefined') {
+                    throw new Error('XmtpJS 未定义');
+                }
+                
+                if (typeof XmtpJS.Client === 'undefined') {
+                    throw new Error('Client 未定义');
+                }
+                
+                log(`✅ Client 类型: ${typeof XmtpJS.Client}`, 'success');
+                log(`✅ Client 名称: ${XmtpJS.Client.name}`, 'success');
+                
+                // 测试静态方法
+                if (typeof XmtpJS.Client.create === 'function') {
+                    log('✅ Client.create 方法存在', 'success');
+                } else {
+                    log('❌ Client.create 方法不存在', 'error');
+                }
+                
+                if (typeof XmtpJS.Client.build === 'function') {
+                    log('✅ Client.build 方法存在', 'success');
+                } else {
+                    log('❌ Client.build 方法不存在', 'error');
+                }
+                
+                // 测试原型方法
+                const prototypeMethods = Object.getOwnPropertyNames(XmtpJS.Client.prototype);
+                log(`✅ 原型方法: ${prototypeMethods.join(', ')}`, 'success');
+                
+                updateDebugInfo(`Client 测试成功!
+构造函数名: ${XmtpJS.Client.name}
+静态方法: ${Object.getOwnPropertyNames(XmtpJS.Client).filter(name => typeof XmtpJS.Client[name] === 'function').join(', ')}
+原型方法: ${prototypeMethods.join(', ')}`);
+                
+                log('✅ Client 测试完成', 'success');
+                
+            } catch (error) {
+                log(`❌ 测试失败: ${error.message}`, 'error');
+                log(`❌ 错误堆栈: ${error.stack || '无堆栈信息'}`, 'error');
+                updateDebugInfo(`错误: ${error.message}`);
+            }
+        }
+
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            log('📄 页面加载完成', 'success');
+            log(`📋 XmtpJS 类型: ${typeof XmtpJS}`, 'info');
+            
+            if (typeof XmtpJS !== 'undefined') {
+                log('✅ XMTP SDK 已加载', 'success');
+                const availableKeys = Object.keys(XmtpJS);
+                log(`📋 可用键: ${availableKeys.slice(0, 10).join(', ')}${availableKeys.length > 10 ? '...' : ''}`, 'info');
+            } else {
+                log('❌ XMTP SDK 未加载', 'error');
+            }
+            
+            updateDebugInfo('页面初始化完成，点击调试按钮开始');
+        });
+    </script>
+</body>
+</html>

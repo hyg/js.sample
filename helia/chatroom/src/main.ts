@@ -2,7 +2,7 @@ import { createLibp2p } from 'libp2p'
 import { webSockets } from '@libp2p/websockets'
 import { webRTC } from '@libp2p/webrtc'
 import { noise } from '@libp2p/noise'
-import { yamux } from '@chainsafe/libp2p-yamux'
+// 暂时移除 yamux，使用默认的多路复用器
 import { bootstrap } from '@libp2p/bootstrap'
 import { gossipsub } from '@chainsafe/libp2p-gossipsub'
 
@@ -22,6 +22,7 @@ let topic: string
 // 1. 创建 libp2p 节点
 async function initNode() {
   statusDiv.innerHTML = '<p>正在初始化 P2P 节点...</p>'
+  console.log('Starting to initialize libp2p node...')
   try {
     node = await createLibp2p({
       transports: [
@@ -29,7 +30,7 @@ async function initNode() {
         webRTC() // 启用 WebRTC 传输
       ],
       connectionEncryption: [noise()],
-      streamMuxers: [yamux()],
+      // 移除 streamMuxers 配置，使用默认值
       peerDiscovery: [
         bootstrap({
           list: [
@@ -44,7 +45,8 @@ async function initNode() {
     })
 
     await node.start()
-    console.log('Node started, listening on:', node.getMultiaddrs())
+    console.log('Node started successfully.')
+    console.log('Node listening on addresses:', node.getMultiaddrs())
     statusDiv.innerHTML = '<p>节点初始化成功。请输入房间名并加入。</p>'
   } catch (err) {
     console.error('Failed to start libp2p node:', err)
@@ -61,17 +63,20 @@ joinButton.addEventListener('click', async () => {
   }
 
   topic = `/chat/${roomName}`
+  statusDiv.innerHTML = `<p>正在加入聊天室: ${roomName}...</p>`
+  console.log(`Attempting to join room: ${roomName} with topic: ${topic}`)
+  
   try {
     // 订阅聊天室主题
     node.services.pubsub.subscribe(topic)
-    console.log(`Subscribed to topic: ${topic}`)
+    console.log(`Successfully subscribed to topic: ${topic}`)
 
     // 监听消息
     node.services.pubsub.addEventListener('message', (event: any) => {
       const { detail: message } = event
       if (message.topic === topic) {
         const text = new TextDecoder().decode(message.data)
-        console.log('Received:', text)
+        console.log('Received message:', text)
         displayMessage(text, 'received')
       }
     })
@@ -81,6 +86,7 @@ joinButton.addEventListener('click', async () => {
     chatContainer.style.display = 'block'
     statusDiv.innerHTML = `<p>已加入聊天室: ${roomName}</p>`
     messageInput.focus()
+    console.log(`Successfully joined room: ${roomName}`)
   } catch (err) {
     console.error('Failed to join room:', err)
     statusDiv.innerHTML = `<p style="color: red;">加入聊天室失败: ${(err as Error).message}</p>`
@@ -94,7 +100,7 @@ async function sendMessage(text: string) {
   try {
     const data = new TextEncoder().encode(text)
     await node.services.pubsub.publish(topic, data)
-    console.log('Sent:', text)
+    console.log('Sent message:', text)
     displayMessage(text, 'sent')
     messageInput.value = ''
   } catch (err) {
@@ -123,4 +129,5 @@ function displayMessage(text: string, type: 'sent' | 'received') {
 }
 
 // 初始化节点
+console.log('Initializing application...')
 initNode()
