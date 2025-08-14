@@ -161,7 +161,8 @@ async function getQwenResponse(message, conversationId = null) {
     console.error(`⏱️ 失败时间: ${errorTime}ms`);
     console.error(`🔴 错误类型: ${error.name}`);
     console.error(`📝 错误信息: ${error.message}`);
-    console.error(`🌐 网络状态: ${navigator.onLine ? '在线' : '离线'}`);
+    const online = (typeof navigator !== 'undefined' && typeof navigator.onLine !== 'undefined') ? navigator.onLine : true;
+    console.error(`🌐 网络状态: ${online ? '在线' : '离线'}`);
     console.error('─'.repeat(50));
     return "Sorry, I'm having trouble connecting to the AI service.";
   }
@@ -327,7 +328,8 @@ async function listenForAllMessages(xmtp) {
     
     // Process each message as it comes in
     for await (const message of stream) {
-      console.log(`Received message from ${message.senderInboxId}: ${message.content}`);
+      const content = typeof message.content === 'function' ? message.content() : message.content;
+      console.log(`Received message from ${message.senderInboxId}: ${content}`);
       
       // Skip messages sent by the bot itself
       if (message.senderInboxId !== xmtp.inboxId) {
@@ -370,7 +372,10 @@ async function handleMessage(xmtp, message) {
     console.log(`📨 [${messageTimestamp}] 收到新消息`);
     console.log('─'.repeat(80));
     console.log(`👤 发送者: ${message.senderInboxId}`);
-    console.log(`💬 消息内容: "${message.content}"`);
+    {
+      const content = typeof message.content === 'function' ? message.content() : message.content;
+      console.log(`💬 消息内容: "${content}"`);
+    }
     console.log(`🆔 对话ID: ${message.conversationId}`);
     console.log(`📊 总处理消息数: ${messageCount}`);
     console.log('─'.repeat(80));
@@ -383,7 +388,10 @@ async function handleMessage(xmtp, message) {
     // 显示发送给LLM的消息
     console.log('\n🤖 发送到LLM模型:');
     console.log('─'.repeat(40));
-    console.log(`📝 用户消息: "${message.content}"`);
+    {
+      const content = typeof message.content === 'function' ? message.content() : message.content;
+      console.log(`📝 用户消息: "${content}"`);
+    }
     
     if (hasHistory) {
       console.log(`📚 包含历史对话: ${historyLength / 2} 轮`);
@@ -397,7 +405,10 @@ async function handleMessage(xmtp, message) {
     
     // Get response from Qwen AI with retry logic and conversation history
     console.log('\n⏳ 正在等待LLM响应...');
-    const aiResponse = await getQwenResponseWithRetry(message.content, message.conversationId);
+    {
+      const content = typeof message.content === 'function' ? message.content() : message.content;
+      var aiResponse = await getQwenResponseWithRetry(content, message.conversationId);
+    }
     const responseTime = Date.now() - startTime;
     
     // 显示LLM响应
@@ -411,19 +422,21 @@ async function handleMessage(xmtp, message) {
     console.log('\n📤 准备发送响应给客户端...');
     const conversation = await xmtp.conversations.getConversationById(message.conversationId);
     
-    if (conversation) {
+      if (conversation) {
       console.log(`✅ 找到对话: ${conversation.id}`);
       // Send the AI response back with retry logic
       console.log('📤 正在发送响应...');
-      const sendResult = await sendMessageWithRetry(conversation, aiResponse);
-      console.log(`✅ 响应发送成功! 消息ID: ${sendResult.id}`);
+        const sendResult = await sendMessageWithRetry(conversation, aiResponse);
+        const sentId = typeof sendResult === 'string' ? sendResult : (sendResult && sendResult.id ? sendResult.id : 'unknown');
+        console.log(`✅ 响应发送成功! 消息ID: ${sentId}`);
     } else {
       console.log('⚠️ 未找到对话，正在创建新对话...');
       // Try to create a new conversation with the sender
       try {
         const newConversation = await xmtp.conversations.newDm(message.senderInboxId);
-        const sendResult = await sendMessageWithRetry(newConversation, aiResponse);
-        console.log(`✅ 通过新对话发送成功! 消息ID: ${sendResult.id}`);
+          const sendResult = await sendMessageWithRetry(newConversation, aiResponse);
+          const sentId = typeof sendResult === 'string' ? sendResult : (sendResult && sendResult.id ? sendResult.id : 'unknown');
+          console.log(`✅ 通过新对话发送成功! 消息ID: ${sentId}`);
       } catch (createError) {
         console.error('❌ 创建新对话失败:', createError);
       }
@@ -443,7 +456,10 @@ async function handleMessage(xmtp, message) {
     console.error('\n❌ 处理消息时发生错误:');
     console.error('─'.repeat(40));
     console.error(`⏱️ 错误发生时间: ${errorTime}ms`);
-    console.error(`📨 原始消息: "${message.content}"`);
+    {
+      const content = typeof message.content === 'function' ? message.content() : message.content;
+      console.error(`📨 原始消息: "${content}"`);
+    }
     console.error(`👤 发送者: ${message.senderInboxId}`);
     console.error(`❌ 错误类型: ${error.name}`);
     console.error(`❌ 错误信息: ${error.message}`);
@@ -508,11 +524,12 @@ async function handleConversation(xmtp, conversation) {
     for await (const message of messageStream) {
       // Skip messages sent by the bot itself
       if (message.senderInboxId !== xmtp.inboxId) {
-        console.log(`Received message from ${message.senderInboxId}: ${message.content()}`);
+        const content = typeof message.content === 'function' ? message.content() : message.content;
+        console.log(`Received message from ${message.senderInboxId}: ${content}`);
         
         // Get response from Qwen AI
         console.log('Getting response from Qwen AI...');
-        const aiResponse = await getQwenResponse(message.content());
+        const aiResponse = await getQwenResponse(content);
         console.log(`AI response generated: ${aiResponse}`);
         
         // Send the AI response back
@@ -520,7 +537,8 @@ async function handleConversation(xmtp, conversation) {
         await conversation.send(aiResponse);
         console.log('Response sent successfully.');
       } else {
-        console.log(`Skipping message sent by bot itself: ${message.content()}`);
+        const content = typeof message.content === 'function' ? message.content() : message.content;
+        console.log(`Skipping message sent by bot itself: ${content}`);
       }
     }
   } catch (conversationError) {
@@ -616,7 +634,8 @@ function performHealthCheck() {
   }
   
   // 网络状态
-  console.log(`🌐 网络状态: ${navigator.onLine ? '在线' : '离线'}`);
+  const online = (typeof navigator !== 'undefined' && typeof navigator.onLine !== 'undefined') ? navigator.onLine : true;
+  console.log(`🌐 网络状态: ${online ? '在线' : '离线'}`);
   
   console.log('─'.repeat(50));
 }

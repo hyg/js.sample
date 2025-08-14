@@ -164,13 +164,14 @@ async function listenForAllMessages(xmtp) {
     
     // Process each message as it comes in
     for await (const message of stream) {
-      console.log(`Received message from ${message.senderInboxId}: ${message.content}`);
+        const content = typeof message.content === 'function' ? message.content() : message.content;
+        console.log(`Received message from ${message.senderInboxId}: ${content}`);
       
       // Skip messages sent by the bot itself
       if (message.senderInboxId !== xmtp.inboxId) {
         // Get response from Qwen AI
         console.log('Getting response from Qwen AI...');
-        const aiResponse = await getQwenResponse(message.content);
+        const aiResponse = await getQwenResponse(content);
         console.log(`AI response generated: ${aiResponse}`);
         
         // Find the conversation for this message
@@ -206,11 +207,12 @@ async function handleConversation(xmtp, conversation) {
     for await (const message of messageStream) {
       // Skip messages sent by the bot itself
       if (message.senderInboxId !== xmtp.inboxId) {
-        console.log(`Received message from ${message.senderInboxId}: ${message.content()}`);
+        const content = typeof message.content === 'function' ? message.content() : message.content;
+        console.log(`Received message from ${message.senderInboxId}: ${content}`);
         
         // Get response from Qwen AI
         console.log('Getting response from Qwen AI...');
-        const aiResponse = await getQwenResponse(message.content());
+        const aiResponse = await getQwenResponse(content);
         console.log(`AI response generated: ${aiResponse}`);
         
         // Send the AI response back
@@ -218,7 +220,8 @@ async function handleConversation(xmtp, conversation) {
         await conversation.send(aiResponse);
         console.log('Response sent successfully.');
       } else {
-        console.log(`Skipping message sent by bot itself: ${message.content()}`);
+        const content = typeof message.content === 'function' ? message.content() : message.content;
+        console.log(`Skipping message sent by bot itself: ${content}`);
       }
     }
   } catch (conversationError) {

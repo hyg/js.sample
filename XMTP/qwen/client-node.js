@@ -75,7 +75,8 @@ async function sendMessageToBot(xmtp, botInboxId, message) {
     console.log('Created new DM conversation with bot');
     
     // Send the message
-    const messageId = await conversation.send(message);
+    const sendResult = await conversation.send(message);
+    const messageId = typeof sendResult === 'string' ? sendResult : (sendResult && sendResult.id ? sendResult.id : 'unknown');
     console.log(`Message sent with ID: ${messageId}`);
     
     // Wait for and listen to the bot's response
