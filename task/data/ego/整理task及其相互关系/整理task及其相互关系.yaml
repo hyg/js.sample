@@ -1,0 +1,18 @@
+name: 整理task及其相互关系
+id: hkqdnd4t
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 整理task及其相互关系
+  所属分组: ego
+  预计时长: 90 分钟
+  
+  任务描述:
+  - read ../../draft/2024/07/20240704093000.md
+  - read ../../draft/2025/20250728.01.md
+  - read ../../draft/2025/20250731.01.md
+  
+step:
+log:

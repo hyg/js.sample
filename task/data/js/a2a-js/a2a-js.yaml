@@ -1,0 +1,19 @@
+name: a2a-js
+id: gbizps33
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: a2a-js
+  所属分组: js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://a2aprotocol.ai/blog/a2a-javascript-sdk-zh
+  - https://agent2agent.info/zh-cn/docs/examples/javascript/
+  - read ../../draft/2025/20250726.01.md
+  - read ../../draft/2025/20250805.02.md
+  
+step:
+log:

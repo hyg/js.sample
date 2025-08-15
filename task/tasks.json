@@ -1,0 +1,1119 @@
+{
+  "PSMD": [
+    {
+      "duration": 195,
+      "name": "machines model",
+      "readme": [
+        "read ../../draft/2024/07/20240723160000.md",
+        "read ../../draft/2024/07/20240724093000.md",
+        "read ../../draft/2024/07/20240725093000.md",
+        "read ../../draft/2024/07/20240726093000.md",
+        "read ../../draft/2024/07/20240730093000.md",
+        "read ../../draft/2024/07/20240731093000.md",
+        "read ../../draft/2024/08/20240801093000.md",
+        "read ../../draft/2024/08/20240806140000.md",
+        "read ../../draft/2024/08/20240807140000.md",
+        "read ../../draft/2024/08/20240808093000.md",
+        "read ../../draft/2024/09/20240915160000.md",
+        "read ../../draft/2024/09/20240926.01.md",
+        "a sample instance of machine,FPM,FSM in manifest code",
+        "实现FPM+FSM",
+        "从FSM、FPM中抽象出统一的mechine",
+        "实现joint、split机制",
+        "先用javascript的class实现"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "子1609:基于公司、合同",
+      "readme": [
+        "read ../../draft/2025/20250125.02.md",
+        "read ../../draft/2025/20250416.01.md",
+        "read ../../draft/2025/20250427.01.md",
+        "read ../../draft/2025/20250505.02.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "整理default模型",
+      "readme": [
+        "read ../../draft/2024/10/20241007.01.md",
+        "read ../../draft/2024/10/20241010.02.md",
+        "read ../../draft/2024/10/20241011.01.md",
+        "read ../../draft/2024/11/20241106.01.md",
+        "read ../../draft/2025/20250704.01.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "根据香港《公司條例》调整1609的部署方案 https://www.elegislation.gov.hk/hk/cap622",
+      "readme": [
+        "read ../../draft/2025/20250403.01.md",
+        "read ../../draft/2025/20250418.02.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "整理新版本term的manifest code",
+      "readme": [
+        "为了显示而设计的term model，并不适合与代码绑定。",
+        "设计前置protocol的定义和数据表现",
+        "自身的行为及其原因，可以自述的范围：标出理性与非理性（下意识）行为的边界。",
+        "对待自身与其他方采取相同标准的范围：标出公平与（无法自控、无法意识到的）歧视的边界。",
+        "上述范围与边界对合作行为有明显影响，是protocol可以要求参与者公示的。为了展示自身的范围和边界，最佳方式就是展示前置protocol和历史记录，今后发现更好的展示方式（前置protocol无法表达的）可以随之修订。",
+        "逐个条款签署和整份protocol签署的关系，是否还需要嵌套term。",
+        "根据FSM、FPM、machine的设计决定term的粒度。",
+        "设计每项知识的思考和案例积累锚点。",
+        "随之修订manifest text。",
+        "根据ego中joint、split两个原生操作的接口，设计protocol这一侧的接口。",
+        "read ../../draft/2024/09/20240905140000.md",
+        "read ../../draft/2024/09/20240906093000.md",
+        "read ../../draft/2024/09/20240908140000.md",
+        "read ../../draft/2024/09/20240909093000.md",
+        "read ../../draft/2024/09/20240911093000.md",
+        "read ../../draft/2024/09/20240912140000.md",
+        "read ../../draft/2024/09/20240913093000.md",
+        "read ../../draft/2024/09/20240918140000.md",
+        "read ../../draft/2025/20250114.02.md",
+        "read ../../draft/2025/20250115.02.md",
+        "read ../../draft/2025/20250116.02.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "智在科技项目准备",
+      "readme": [
+        "read ../../draft/2025/20250115.01.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "整理新版本term的manifest text",
+      "readme": [
+        "条款文本嵌入到machine模型。",
+        "以修订和任免定义的层级嵌入到machine模型。"
+      ]
+    },
+    {
+      "duration": 195,
+      "name": "term + COM matedata -> deploy metadata -> deploy view"
+    },
+    {
+      "duration": 90,
+      "name": "以1406为例检查知识图谱和blawx的语法"
+    },
+    {
+      "duration": 30,
+      "name": "整理闫岸家政能力讨论",
+      "readme": [
+        "read ../../draft/2024/09/20240924.01.md",
+        "read ../../draft/2024/09/20240925.03.md",
+        "read ../../draft/2024/10/20241011.03.md",
+        "read ../../draft/2024/10/20241013.03.md",
+        "read ../../draft/2024/10/20241014.02.md",
+        "read ../../draft/2024/10/20241015.03.md",
+        "read ../../draft/2024/10/20241016.04.md",
+        "read ../../draft/2024/10/20241017.02.md",
+        "read ../../draft/2024/10/20241019.01.md",
+        "read ../../draft/2024/10/20241020.03.md",
+        "read ../../draft/2024/10/20241021.01.md",
+        "read ../../draft/2024/10/20241022.03.md",
+        "read ../../draft/2024/10/20241023.01.md",
+        "read ../../draft/2024/10/20241024.02.md",
+        "read ../../draft/2024/10/20241025.03.md",
+        "read ../../draft/2024/10/20241026.03.md",
+        "read ../../draft/2024/10/20241027.03.md",
+        "read ../../draft/2024/10/20241028.03.md",
+        "read ../../draft/2024/10/20241029.03.md",
+        "read ../../draft/2024/10/20241030.03.md",
+        "read ../../draft/2024/10/20241031.02.md",
+        "read ../../draft/2024/11/20241101.03.md",
+        "read ../../draft/2024/11/20241104.01.md",
+        "read ../../draft/2024/11/20241105.03.md",
+        "read ../../draft/2024/11/20241106.03.md",
+        "read ../../draft/2024/11/20241107.03.md",
+        "read ../../draft/2024/11/20241108.01.md",
+        "read ../../draft/2024/11/20241110.01.md",
+        "read ../../draft/2024/11/20241111.03.md",
+        "read ../../draft/2024/11/20241112.01.md",
+        "read ../../draft/2024/11/20241114.04.md",
+        "read ../../draft/2024/11/20241115.01.md",
+        "read ../../draft/2024/11/20241117.05.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "term metadata的序号，分为显示序号和唯一id两种。"
+    }
+  ],
+  "ego": [
+    {
+      "duration": 30,
+      "name": "整理simplenote文件，准备转移到webDAV."
+    },
+    {
+      "duration": 90,
+      "name": "整理task及其相互关系",
+      "readme": [
+        "read ../../draft/2024/07/20240704093000.md",
+        "read ../../draft/2025/20250728.01.md",
+        "read ../../draft/2025/20250731.01.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "整理js对象检索的代码",
+      "readme": [
+        "read ../../draft/2025/20250605.03.md",
+        "read ../../draft/2025/20250714.03.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "基于真实数据标志财务报表",
+      "readme": [
+        "read ../../draft/2025/20250605.01.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "重新设计财务的基础元数据格式"
+    },
+    {
+      "duration": 60,
+      "name": "entry的按月归并",
+      "readme": [
+        "read ../../draft/2025/20250525.01.md",
+        "https://sql.js.org",
+        "read ../../draft/2025/20250526.03.md"
+      ]
+    },
+    {
+      "duration": 195,
+      "name": "新版ego, instance or model, any manifest",
+      "readme": [
+        "read ../../draft/2024/09/20240925.01.md",
+        "read ../../draft/2025/20250613.a.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "微观与宏观衔接的几篇论文",
+      "readme": [
+        "https://journals.aps.org/pra/abstract/10.1103/PhysRevA.109.032205",
+        "https://arxiv.org/abs/2307.01874",
+        "in the quantum world even points of view are uncertain:https://www.quantamagazine.org/in-the-quantum-world-even-points-of-view-are-uncertain-20241122/",
+        "https://arxiv.org/abs/2402.10267",
+        "read ../../draft/2025/20250711.a.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "新版实时手稿",
+      "readme": [
+        "read ../../draft/2025/20250226.02.md",
+        "read ../../draft/2025/20250322.02.md",
+        "read ../../draft/2025/20250330.01.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "新版本任务、子任务的数据结构",
+      "readme": [
+        "read ../../draft/2024/10/20241001.01.md",
+        "read ../../draft/2024/10/20241003.01.md",
+        "read ../../draft/2024/10/20241004.04.md",
+        "read ../../draft/2024/10/20241005.01.md",
+        "read ../../draft/2024/10/20241007.03.md",
+        "read ../../draft/2024/10/20241011.04.md",
+        "read ../../draft/2025/20250215.01.md",
+        "read ../../draft/2025/20250613.a.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "启用新字段存放前置任务的output，自动汇编写入新的draft文件。",
+      "readme": [
+        "read ../../draft/2025/20250202.01.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "eventemitter sample",
+      "readme": [
+        "event listener in module",
+        "auto load the event listener in main js file - load them in a function in module - load them in main js file use metadata"
+      ],
+      "bind": [
+        {
+          "duration": 60,
+          "name": "schema level 2 schema for code v1",
+          "readme": [
+            "schema means \"task level and stage defined by schema\"",
+            {
+              "schema manifest code": "generate tasks by level and stage define by schema"
+            },
+            {
+              "schame level 2 schema for code": "schema for develop \"generate tasks by level and stage define by schema\""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "schema manifest law v0",
+      "readme": [
+        "read 2024.07.21 07:45 draft"
+      ],
+      "bind": [
+        {
+          "duration": 90,
+          "name": "schema level 2 schema for law v1"
+        }
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "用js代码完成日小结后的git操作。",
+      "readme": [
+        "参考：D:\\huangyg\\git\\draft\\2024\\04\\20240430140000.md",
+        "在各task metadata中给出git库的路径，每天根据实际任务去操作。"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "重新设计ego.js的命令行参数，合并函数，整理代码。"
+    },
+    {
+      "duration": 30,
+      "name": "时间改为ISO8601格式",
+      "readme": [
+        "season metadata",
+        "day metada",
+        "draft文件名"
+      ]
+    }
+  ],
+  "infra": [
+    {
+      "duration": 90,
+      "name": "schema立项。",
+      "readme": [
+        "read ../../draft/2024/09/20240919140000.md",
+        "read ../../draft/2025/20250110.01.md",
+        "read ../../draft/2025/20250112.01.md",
+        "read ../../draft/2025/20250116.01.md",
+        "read ../../draft/2025/20250408.01.md",
+        "read ../../draft/2025/20250613.a.md"
+      ]
+    },
+    {
+      "duration": 195,
+      "name": "Rete/Phreak算法的自主实现"
+    }
+  ],
+  "learn": [
+    {
+      "duration": 30,
+      "name": "LegalRuleML（Legal Rule Markup Language）"
+    },
+    {
+      "duration": 30,
+      "name": "Tauri + Rust"
+    },
+    {
+      "duration": 30,
+      "name": "SBVR（OMG业务语义词汇与规则）"
+    },
+    {
+      "duration": 30,
+      "name": "Akoma Ntoso（结构化法务文档）"
+    },
+    {
+      "duration": 30,
+      "name": "OutSystems, Mendix,"
+    },
+    {
+      "duration": 30,
+      "name": "Zapier"
+    },
+    {
+      "duration": 30,
+      "name": "IFTTT"
+    },
+    {
+      "duration": 30,
+      "name": "OutSystems, Zapier"
+    },
+    {
+      "duration": 30,
+      "name": "描述逻辑（Description Logic, DL）"
+    },
+    {
+      "duration": 30,
+      "name": "CEV（Contract Expression Language）"
+    },
+    {
+      "duration": 30,
+      "name": "XACML 4.0 / ODRL 2.2"
+    },
+    {
+      "duration": 30,
+      "name": "RuleML,结构化规则语言（如RuleML的核心子集）"
+    },
+    {
+      "duration": 30,
+      "name": "CloudEvent（JSON 格式，spec 1.0+）"
+    },
+    {
+      "duration": 30,
+      "name": "Semantic Version + Content-Addressable Storage（如 OCI Artifacts 存 DMN/Regos）"
+    },
+    {
+      "duration": 30,
+      "name": "Ontology + SWRL（Semantic Web Rule Language）"
+    },
+    {
+      "duration": 30,
+      "name": "Common Logic (ISO/IEC 24707)"
+    },
+    {
+      "duration": 30,
+      "name": "Camunda Zeebe / Temporal.io"
+    },
+    {
+      "duration": 30,
+      "name": "Flink Complex Event Processing，直接运行 DMN 4Flink 或 Rego-on-Flink 扩展。"
+    },
+    {
+      "duration": 60,
+      "name": "领域特定语言（DSL）,Xtext,ANTLR"
+    },
+    {
+      "duration": 30,
+      "name": "OpenFGA/SpiceDB(Zanzibar模型)"
+    },
+    {
+      "duration": 30,
+      "name": "XACML（存量）"
+    },
+    {
+      "duration": 30,
+      "name": "SHACL（RDF/图谱场景）"
+    },
+    {
+      "duration": 30,
+      "name": "Esper EPL"
+    },
+    {
+      "duration": 30,
+      "name": "Apache Flink SQL"
+    },
+    {
+      "duration": 30,
+      "name": "ksqlDB（Kafka）"
+    },
+    {
+      "duration": 30,
+      "name": "宣告式流程 DCR Graphs/Declare"
+    },
+    {
+      "duration": 30,
+      "name": "JSON-LD / YAML + Schema（轻量级）"
+    },
+    {
+      "duration": 30,
+      "name": "BPMN-DMN,执行引擎（Camunda、Flowable、Flink DMN、Trisotech 等）"
+    },
+    {
+      "duration": 60,
+      "name": "Drools/DRL替代",
+      "readme": [
+        "IBM Operational Decision Manager（ODM）",
+        "Red Hat Decision Manager",
+        "Camunda",
+        "Flink DMN",
+        "AWS Decision Services",
+        "AWS Cedar",
+        "HashiCorp Sentinel",
+        "Togai",
+        "Pyke（Python规则引擎）",
+        "FEEL（Friendly Enough Expression Language）",
+        "Tracardi / Open Policy Agent (OPA)",
+        "RuleBook",
+        "Logic Programming 工具：Prolog / ErgoAI",
+        "JSON Rules Engine",
+        "OpenRules",
+        "Google Cloud Rules"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "消息总线（Kafka / RabbitMQ）"
+    },
+    {
+      "duration": 30,
+      "name": "规则解析引擎（如：RDF4J + SWRLAPI 或 自研DSL解析器）"
+    },
+    {
+      "duration": 30,
+      "name": "Digital Twin of Governance"
+    },
+    {
+      "duration": 60,
+      "name": "个人财务助理 https://open.chanjet.com/"
+    },
+    {
+      "duration": 30,
+      "name": "NER（命名实体识别）RE（关系抽取）",
+      "readme": [
+        "compromise",
+        "node-hanlp",
+        "https://www.npmjs.com/package/node-nlp",
+        "https://www.npmjs.com/package/natural",
+        "从文本抽取实体和关系，json格式",
+        "从文本中抽取三元组：文本：{输入文本} 格式：(头实体, 关系, 尾实体)"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "ANP（Agent Network Protocol）",
+      "readme": [
+        "https://agent-network-protocol.com/",
+        "https://m.jellow.club/users/e0e8bda8-1848-43ba-84dc-1959ba8e9529"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "ethers.js v6，Node.js 最流行的以太坊交互库。",
+      "readme": [
+        "https://rpc.sepolia.org",
+        "https://sepolia.etherscan.io",
+        "https://sepoliafaucet.com"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "Rete/Phreak算法"
+    },
+    {
+      "duration": 60,
+      "name": "业务规则引擎（BRMS）",
+      "readme": [
+        "https://www.drools.org",
+        "Red Hat KIE Group:Red Hat Process Automation Manager 7.x/8.x 已提供 kie-server-standalone.jar, java -jar kie-server.jar 即可启动",
+        "https://kogito.kie.org/",
+        "Kogito-js wasm  kie/kogito-dmn-loader（npm）",
+        "https://bpmn.io/toolkit/dmn-js/",
+        "https://www.npmjs.com/package/nools",
+        "https://www.npmjs.com/package/rules-js",
+        "https://www.npmjs.com/package/json-rules-engine",
+        "read ../../draft/2005/20250726.a.md",
+        "https://www.npmjs.com/package/node-rules"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "百炼平台API",
+      "readme": [
+        "read ../../draft/2025/20250724.02.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "去中心化节点",
+      "readme": [
+        "https://yjs.dev/",
+        "https://loco-sync.com",
+        "read ../../draft/2025/20250720.a.md",
+        "read ../../draft/2025/20250721.01.md",
+        "read ../../draft/2025/20250724.01.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "长安链智能合约",
+      "readme": [
+        "https://docs.chainmaker.org.cn/v2.3.7/html/sdk/NodejsSDK%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E.html"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "Hyperledger Fabric智能合约",
+      "readme": [
+        "https://hyperledgercn.github.io/hyperledgerDocs/sdk_node_zh/"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "智谱API开发",
+      "readme": [
+        "https://open.bigmodel.cn/"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "claude code + kimi K2",
+      "readme": [
+        "read ../../draft/2025/20250718.a.md"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "AutoGen"
+    },
+    {
+      "duration": 30,
+      "name": "react ink"
+    },
+    {
+      "duration": 195,
+      "name": "MCP in nodejs",
+      "readme": [
+        "read ../../draft/2025/20250720.01.md"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "TLA+"
+    },
+    {
+      "duration": 60,
+      "name": "node-datachannel"
+    },
+    {
+      "duration": 30,
+      "name": "国产区块链产品",
+      "readme": [
+        "antchain-sdk-nodejs",
+        "tbaas-sdk-nodejs"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "Virtuals Protocol",
+      "readme": [
+        "https://whitepaper.virtuals.io/"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "jami bot",
+      "readme": [
+        "read ../../draft/2025/20250719.a.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "量子力学的各种诠释:基于门电路、event机制的思想实验",
+      "readme": [
+        "read ../../draft/2025/20250505.01.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "热更新"
+    },
+    {
+      "duration": 195,
+      "name": "量子物理的数学基础",
+      "readme": [
+        "https://baike.baidu.com/item/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/11421",
+        "https://zhuanlan.zhihu.com/p/629852598",
+        "read ../../draft/2025/20250526.02.md",
+        "read ../../draft/2025/20250417.01.md",
+        "read ../../draft/2025/20250407.b.md",
+        "read ../../draft/2025/20250606.04.md",
+        "read ../../draft/2025/20250710.03.md",
+        "read ../../draft/2025/20250714.02.md",
+        "read ../../draft/2025/20250715.03.md",
+        "read ../../draft/2025/20250424.b.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "MCP in ts",
+      "readme": [
+        "https://github.com/modelcontextprotocol/typescript-sdk"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "claude code router"
+    },
+    {
+      "duration": 60,
+      "name": "腾讯文档sdk",
+      "readme": [
+        "https://docs.qq.com/open/developers",
+        "https://docs.qq.com/open/document/websdk/",
+        "https://docs.qq.com/open/document/app/openapi/v2/file/files/permission/set.html - https://docs.qq.com/open/document/app/openapi/v2/file/files/permission/common.html"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "飞书 nodejs sdk",
+      "readme": [
+        "https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/server-side-sdk/nodejs-sdk/preparation-before-development"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "webcontainers",
+      "readme": [
+        "https://webcontainers.io/",
+        "https://stackblitz.com/",
+        "https://nodejs.org/en/learn/getting-started/differences-between-nodejs-and-the-browser"
+      ],
+      "bind": [
+        {
+          "duration": 60,
+          "name": "基于dat,hypercore,hyperswarm等模块的浏览器动态页面范例。",
+          "readme": [
+            "read ../../draft/2025/20250326.01.md"
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "oData simple",
+      "readme": [
+        "https://services.odata.org/",
+        "http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "instantdb",
+      "readme": [
+        "https://www.instantdb.com",
+        "https://github.com/instantdb/instant"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "BEP 46",
+      "readme": [
+        "https://www.npmjs.com/package/mutable-webtorrent",
+        "https://github.com/lmatteis/dmt",
+        "https://webtorrent.io/docs"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "xLog",
+      "readme": [
+        "https://xlog.app/",
+        "https://www.xsync.app/",
+        "https://xchar.app/",
+        "https://rss3.io/",
+        "https://crossbell.js.org/"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "markmap",
+      "readme": [
+        "https://markmap.js.org/",
+        "file:///C:/Users/hyg/Downloads/markmap.html"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "MapLibre sample",
+      "readme": [
+        "https://maplibre.org/",
+        "https://maplibre.org/maplibre-gl-js/docs/",
+        "https://github.com/maplibre/maplibre-gl-js"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "PSMD term in helia dag-json https://www.npmjs.com/package/@helia/dag-json"
+    },
+    {
+      "duration": 60,
+      "name": "learn Blogging on the Decentralized Web https://proto.school/blog"
+    },
+    {
+      "duration": 30,
+      "name": "在nodejs读写OFD文件。",
+      "readme": [
+        "https://github.com/ofdrw/ofdrw",
+        "https://blog.csdn.net/lishangke/article/details/135245444",
+        "https://www.npmjs.com/package/ofd.js/v/0.8.0"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "https://proto.school/basics  IPFS,P2P Data Links with Content Addressing"
+    },
+    {
+      "duration": 30,
+      "name": "learn web-llm"
+    },
+    {
+      "duration": 60,
+      "name": "开发YARRRML范例"
+    },
+    {
+      "duration": 90,
+      "name": "把PSMD的data、src部分升级到rdf，如果升级成功则作为范例。"
+    },
+    {
+      "duration": 60,
+      "name": "Windows PowerShell"
+    },
+    {
+      "duration": 195,
+      "name": "rust入门",
+      "bind": [
+        {
+          "duration": 195,
+          "name": "开发reenet Contracts sample",
+          "readme": [
+            "https://docs.freenet.org/components/contracts.html",
+            "https://docs.freenet.org/introduction.html",
+            "https://docs.freenet.org/tutorial.html"
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "继续学习promise api",
+      "readme": [
+        "https://zh.javascript.info/promise-api"
+      ]
+    }
+  ],
+  "js": [
+    {
+      "duration": 30,
+      "name": "nextcloud",
+      "readme": [
+        "https://www.npmjs.com/package/nextcloud-node-client/v/1.5.1"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "IM bot",
+      "readme": [
+        "https://xmtp.org/",
+        "npm install @xmtp/xmtp-js",
+        "https://www.npmjs.com/package/matrix-js-sdk",
+        "https://www.dialect.to/",
+        "npm install @dialect-sdk/web3",
+        "https://orbitdb.org 基础上自己开发应用层。",
+        "抗审核的广播：https://nostr.how"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "a2a-js",
+      "readme": [
+        "https://a2aprotocol.ai/blog/a2a-javascript-sdk-zh",
+        "https://agent2agent.info/zh-cn/docs/examples/javascript/",
+        "read ../../draft/2025/20250726.01.md",
+        "read ../../draft/2025/20250805.02.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "LangChain.js",
+      "readme": [
+        "https://github.com/langchain-ai/langchainjs",
+        "https://js.langchain.com",
+        "https://docs.langchain.com.cn/",
+        "read ../../draft/2025/20250717.01.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "ai-sdk + moonshot",
+      "readme": [
+        "https://ai-sdk.dev/docs/foundations/providers-and-models",
+        "https://platform.moonshot.cn/docs/introduction",
+        "toolcalls, json mode,MCP(model context protocol),agentic"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "Vector Database in nodejs",
+      "readme": [
+        "https://www.dongaigc.com/p/Stevenic/vectra",
+        "https://therightsw.com/vector-database-crud"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "openpgp v6.1.1.",
+      "readme": [
+        "read ../../draft/2025/20250601.a.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "query yaml file or js obj",
+      "readme": [
+        "https://www.npmjs.com/package/json-query",
+        "https://www.lodashjs.com/docs/lodash.findKey",
+        "https://www.npmjs.com/package/jora",
+        "https://jsonquerylang.org/",
+        "https://www.npmjs.com/package/jsonpath",
+        "https://www.npmjs.com/package/@pulumi/query",
+        "read ../../draft/2025/20250528.01.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "TensorFlow.js",
+      "readme": [
+        "https://github.com/tensorflow/tfjs"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "learn factory, constructor, prototype",
+      "readme": [
+        "https://juejin.cn/post/6844903653774458888",
+        "https://segmentfault.com/a/1190000019054466",
+        "https://www.javascripttutorial.net/javascript-factory-functions/",
+        "https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object_prototypes"
+      ],
+      "bind": [
+        {
+          "duration": 30,
+          "name": "新版raw.js的子命令-营养成分详情",
+          "readme": [
+            "可选多种营养成分",
+            "考虑不同UI",
+            "使用新的模块化设计",
+            "使用新的data model"
+          ]
+        },
+        {
+          "duration": 30,
+          "name": "新版raw.js的子命令-营养成分排序"
+        }
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "copilot",
+      "readme": [
+        "https://github.com/features/copilot"
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "node.js",
+      "readme": [
+        "https://github.com/yunnysunny/nodebook",
+        "https://node.whyun.com/"
+      ],
+      "bind": [
+        {
+          "duration": 60,
+          "name": "debug",
+          "readme": [
+            "https://github.com/nswbmw/node-in-debugging"
+          ]
+        },
+        {
+          "duration": 60,
+          "name": "The Node.js best practices list (July 2024)",
+          "readme": [
+            "https://github.com/goldbergyoni/nodebestpractices"
+          ]
+        },
+        {
+          "duration": 60,
+          "name": "学习 nodejs test框架",
+          "readme": [
+            "https://github.com/Vanessa219/vditor - https://nodejs.cn/api/test.html",
+            "https://github.com/markedjs/marked",
+            "https://bun.sh/"
+          ],
+          "bind": [
+            {
+              "duration": 90,
+              "name": "实际编写自己的测试范例"
+            },
+            {
+              "duration": 60,
+              "name": "lint",
+              "readme": [
+                "https://www.javascriptcn.com/post/675439161b963fe9cc4d25ce",
+                "https://www.jslint.com/",
+                "https://jshint.com/",
+                "https://zh-hans.eslint.org/docs/latest/use/getting-started"
+              ]
+            }
+          ]
+        },
+        {
+          "duration": 60,
+          "name": "nodejs server side dev",
+          "readme": [
+            "https://github.com/qufei1993/Nodejs-Roadmap",
+            "https://www.nodejs.red"
+          ]
+        }
+      ]
+    },
+    {
+      "duration": 30,
+      "name": "passportjs"
+    },
+    {
+      "duration": 90,
+      "name": "learn graphql",
+      "readme": [
+        "https://www.graphql-js.org/docs/",
+        "https://github.com/graphql/graphql-js",
+        "https://the-guild.dev/graphql/tools",
+        "https://github.com/ardatan/graphql-tools",
+        "https://aosabook.org/en/500L/dagoba-an-in-memory-graph-database.html"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "implement a programming language in JavaScript",
+      "readme": [
+        "https://lisperator.net/pltut/",
+        "https://github.com/keyz/the-super-tiny-interpreter",
+        "https://github.com/jamiebuilds/the-super-tiny-compiler"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "浏览器自动化",
+      "readme": [
+        "https://github.com/microsoft/playwright-dotnet"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "向外提供js文件的范例，为代码层级互通做准备"
+    },
+    {
+      "duration": 30,
+      "name": "duckdb"
+    },
+    {
+      "duration": 90,
+      "name": "editor.js",
+      "readme": [
+        "https://editorjs.io/"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "embedded dbs",
+      "readme": [
+        "IndexedDB + dexie",
+        "pouchdb + leveldb",
+        "lowdb",
+        "nedb",
+        "rxdb",
+        "LokiJS",
+        "node-dirty",
+        "tiny,https://www.npmjs.com/package/tiny",
+        "TinyDB"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "学习'Electron'，创作一个范例。"
+    },
+    {
+      "duration": 60,
+      "name": "用代码中的对象或类，产生数据库创建SQL脚本、ER图（mermaid）"
+    }
+  ],
+  "raw": [
+    {
+      "duration": 60,
+      "name": "设计新的季度时间表",
+      "readme": [
+        "两片休整时间联合调节的算法需要整理。",
+        "餐谱和饱腹感时间需要综合算计。",
+        "read ../../draft/2024/09/20240904143000.md",
+        "read ../../draft/2024/09/20240907140000.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "熟悉内脏之间的关系",
+      "readme": [
+        "read ../../draft/2024/09/20240917143000.md"
+      ]
+    },
+    {
+      "duration": 60,
+      "name": "新版营养成分详情，允许多种营养成分。",
+      "bind": [
+        {
+          "duration": 90,
+          "name": "整理代码，理顺food.js几个成员函数之间的调用关系",
+          "readme": [
+            "read ../../draft/2024/09/20240907143000.md"
+          ],
+          "bind": [
+            {
+              "duration": 60,
+              "name": "新版本food预算决算"
+            }
+          ]
+        },
+        {
+          "duration": 60,
+          "name": "新版食材排序，包括升序、降序、特定值距离、多种营养成分特定值组合距离。"
+        }
+      ]
+    }
+  ],
+  "xuemen": [
+    {
+      "duration": 60,
+      "name": "月度事务"
+    },
+    {
+      "duration": 60,
+      "name": "根据最新政策文件，考虑AER、AVR文件升级。",
+      "readme": [
+        "http://kjs.mof.gov.cn/gongzuotongzhi/202505/t20250519_3964023.htm",
+        "https://zcool.17win.com/knowledge/996b8380aafc43c1a436b1ae3396076a",
+        "https://www.xbrl-cn.org/2025/0519/271458.shtml",
+        "http://www.xbrl.org",
+        "https://www.xbrl-cn.org/"
+      ]
+    },
+    {
+      "duration": 195,
+      "name": "kernel模型升级",
+      "readme": [
+        "read ../../draft/2024/11/20241120.01.md"
+      ]
+    },
+    {
+      "duration": 90,
+      "name": "mail server",
+      "readme": [
+        "https://stalw.art",
+        "read ../../draft/2025/20250531.a.md"
+      ]
+    },
+    {
+      "duration": 195,
+      "name": "重新设计S2状态下的学门基本管理制度"
+    },
+    {
+      "duration": 60,
+      "name": "term.e6f0caec -> xuemen COD metadata-S2状态下的部门模型"
+    }
+  ]
+}

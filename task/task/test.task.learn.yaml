@@ -1,0 +1,22 @@
+name: learn
+id: 6a8da52e
+parent id: 0
+start: 1975-03-22
+dependencies:
+path: 
+  - name: reading
+    path: ..\..\note\task
+    readme: |
+      文字类学习
+  - name: js
+    path: ..\..\js.sample\task
+    readme: |
+      javascript族编程学习
+readme: |
+  学习通用知识
+todo:
+  - 30: 初步熟悉npm、winget发布规则
+  - 30: 学习正则表达式RegExp
+  - 60: nosql
+  - 90: 把PSMD的data、src部分升级到rdf，如果升级成功则作为范例。
+log:

@@ -1,0 +1,17 @@
+name: 整理新版本term的manifest text
+id: l0cjvybp
+parent id: PSMD
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 整理新版本term的manifest text
+  所属分组: PSMD
+  预计时长: 90 分钟
+  
+  任务描述:
+  - 条款文本嵌入到machine模型。
+  - 以修订和任免定义的层级嵌入到machine模型。
+  
+step:
+log:

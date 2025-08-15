@@ -1,0 +1,16 @@
+name: 量子力学的各种诠释:基于门电路、event机制的思想实验
+id: iz7gqo5m
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 量子力学的各种诠释:基于门电路、event机制的思想实验
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - read ../../draft/2025/20250505.01.md
+  
+step:
+log:

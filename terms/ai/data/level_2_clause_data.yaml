@@ -1,0 +1,18 @@
+id: 916269b8
+name: 主节合规性详情
+readme: 主节的详细合规性结构。
+mappings:
+  "{SECTION_COMPLIANCE_OFFICER_9a8b7c6d5e}": 泽塔合规官
+subClauses:
+  - id: 63ad60b8
+    index: "2.1"
+    mapping: {}
+    numberPrefix: 一、
+  - id: c37c3617
+    index: "2.2"
+    mapping: {}
+    numberPrefix: 二、
+  - id: 10c64381
+    index: "2.3"
+    mapping: {}
+    numberPrefix: 三、

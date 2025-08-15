@@ -1,0 +1,15 @@
+name: XACML（存量）
+id: zzodq3um
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: XACML（存量）
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

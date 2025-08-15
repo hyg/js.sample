@@ -1,0 +1,7 @@
+id: 9df9783b
+text: 承包商查理·布朗将于2024年1月15日开始工作。
+name: 开工日期
+readme: 指定承包商的开工时间。
+mappings:
+  "{CONTRACTOR_NAME_abcdef1234}": 查理·布朗
+  "{START_DATE_5566778899}": 2024年1月15日

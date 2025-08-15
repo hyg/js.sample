@@ -1,0 +1,7 @@
+id: 09fa122c
+text: 检查员格雷迪必须在子系统交付后30天内完成检查。
+name: 检查责任
+readme: 定义谁执行检查及时间范围。
+mappings:
+  "{INSPECTOR_NAME_1a2b3c4d5e}": 格雷迪检查员
+  "{INSPECTION_DAYS_0e9d8c7b6a}": "30"

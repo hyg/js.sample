@@ -1,0 +1,16 @@
+name: 智谱API开发
+id: gg15jhsi
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 智谱API开发
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://open.bigmodel.cn/
+  
+step:
+log:

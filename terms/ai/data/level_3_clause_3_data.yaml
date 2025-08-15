@@ -1,0 +1,18 @@
+id: 10c64381
+name: C小节合规性
+readme: C小节的合规性细节。
+mappings:
+  "{SECTION_C_SUPERVISOR_1a2b3c4d5e}": 伊普西龙监理
+subClauses:
+  - id: 09fa122c
+    index: 3.c.1
+    mapping: {}
+    numberPrefix: a.
+  - id: d417acd2
+    index: 3.c.2
+    mapping: {}
+    numberPrefix: b.
+  - id: e54dcf8d
+    index: 3.c.3
+    mapping: {}
+    numberPrefix: c.

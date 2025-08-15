@@ -1,0 +1,21 @@
+name: NER（命名实体识别）RE（关系抽取）
+id: frn2nkk9
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: NER（命名实体识别）RE（关系抽取）
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述:
+  - compromise
+  - node-hanlp
+  - https://www.npmjs.com/package/node-nlp
+  - https://www.npmjs.com/package/natural
+  - 从文本抽取实体和关系，json格式
+  - 从文本中抽取三元组：文本：{输入文本} 格式：(头实体, 关系, 尾实体)
+  
+step:
+log:

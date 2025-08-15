@@ -1,0 +1,18 @@
+id: c37c3617
+name: B小节合规性
+readme: B小节的合规性细节，包括供应商条款。
+mappings:
+  "{SECTION_B_MANAGER_5f4e3d2c1b}": 西塔经理
+subClauses:
+  - id: 09fa122c
+    index: 3.b.1
+    mapping: {}
+    numberPrefix: ⒈
+  - id: d417acd2
+    index: 3.b.2
+    mapping: {}
+    numberPrefix: ⒉
+  - id: e54dcf8d
+    index: 3.b.3
+    mapping: {}
+    numberPrefix: ⒊

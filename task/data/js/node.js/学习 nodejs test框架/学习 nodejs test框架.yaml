@@ -1,0 +1,18 @@
+name: 学习 nodejs test框架
+id: fm55ed6w
+parent id: node.js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 学习 nodejs test框架
+  所属分组: node.js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://github.com/Vanessa219/vditor - https://nodejs.cn/api/test.html
+  - https://github.com/markedjs/marked
+  - https://bun.sh/
+  
+step:
+log:

@@ -1,0 +1,17 @@
+id: 63ad60b8
+name: A小节合规性
+readme: A小节的合规性细节。
+mappings: {}
+subClauses:
+  - id: 09fa122c
+    index: 3.a.1
+    mapping: {}
+    numberPrefix: ⑴
+  - id: d417acd2
+    index: 3.a.2
+    mapping: {}
+    numberPrefix: ⑵
+  - id: e54dcf8d
+    index: 3.a.3
+    mapping: {}
+    numberPrefix: ⑶

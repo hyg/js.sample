@@ -1,0 +1,18 @@
+name: MapLibre sample
+id: obw0smzo
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: MapLibre sample
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述:
+  - https://maplibre.org/
+  - https://maplibre.org/maplibre-gl-js/docs/
+  - https://github.com/maplibre/maplibre-gl-js
+  
+step:
+log:

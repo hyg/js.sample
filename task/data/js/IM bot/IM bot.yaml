@@ -1,0 +1,22 @@
+name: IM bot
+id: btlw5iq8
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: IM bot
+  所属分组: js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://xmtp.org/
+  - npm install @xmtp/xmtp-js
+  - https://www.npmjs.com/package/matrix-js-sdk
+  - https://www.dialect.to/
+  - npm install @dialect-sdk/web3
+  - https://orbitdb.org 基础上自己开发应用层。
+  - 抗审核的广播：https://nostr.how
+  
+step:
+log:

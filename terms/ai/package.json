@@ -1,0 +1,27 @@
+{
+  "name": "smart-clause-engine",
+  "version": "1.0.0",
+  "description": "A system for managing and generating smart contract-like clauses with anonymization features.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node src/test.js"
+  },
+  "keywords": [
+    "clause",
+    "anonymization",
+    "markdown",
+    "html"
+  ],
+  "author": "Qwen Code",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "1.0.1",
+    "fs": "0.0.1-security",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}

@@ -1,0 +1,17 @@
+name: 用js代码完成日小结后的git操作。
+id: svozxqh7
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 用js代码完成日小结后的git操作。
+  所属分组: ego
+  预计时长: 30 分钟
+  
+  任务描述:
+  - 参考：D:\huangyg\git\draft\2024\04\20240430140000.md
+  - 在各task metadata中给出git库的路径，每天根据实际任务去操作。
+  
+step:
+log:

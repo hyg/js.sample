@@ -1,0 +1,16 @@
+name: 长安链智能合约
+id: hnsn517v
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 长安链智能合约
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://docs.chainmaker.org.cn/v2.3.7/html/sdk/NodejsSDK%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E.html
+  
+step:
+log:

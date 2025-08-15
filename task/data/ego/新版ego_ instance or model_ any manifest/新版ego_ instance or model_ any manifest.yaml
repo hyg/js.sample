@@ -1,0 +1,17 @@
+name: 新版ego, instance or model, any manifest
+id: 679yhrqh
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 新版ego, instance or model, any manifest
+  所属分组: ego
+  预计时长: 195 分钟
+  
+  任务描述:
+  - read ../../draft/2024/09/20240925.01.md
+  - read ../../draft/2025/20250613.a.md
+  
+step:
+log:

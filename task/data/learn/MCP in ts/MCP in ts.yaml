@@ -1,0 +1,23 @@
+name: MCP in ts
+id: q739njmb
+parent id: learn
+start: 2025-07-01
+dependencies:
+  - learn: MCP in nodejs
+path: /note/task
+readme: |
+  任务名称: MCP in ts
+  所属分组: learn
+  预计时长: 90 分钟
+  
+  任务描述:
+  - https://github.com/modelcontextprotocol/typescript-sdk
+  
+  依赖任务:
+  - learn: MCP in nodejs
+  
+  补充说明:
+  - 此任务必须在 'learn: MCP in nodejs' 任务完成后才能开始。
+  
+step:
+log:

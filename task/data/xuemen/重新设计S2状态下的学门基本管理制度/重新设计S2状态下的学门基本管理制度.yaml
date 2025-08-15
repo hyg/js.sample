@@ -1,0 +1,15 @@
+name: 重新设计S2状态下的学门基本管理制度
+id: t1rcya3t
+parent id: xuemen
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 重新设计S2状态下的学门基本管理制度
+  所属分组: xuemen
+  预计时长: 195 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

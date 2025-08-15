@@ -1,0 +1,16 @@
+name: TensorFlow.js
+id: yop7cf8b
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: TensorFlow.js
+  所属分组: js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://github.com/tensorflow/tfjs
+  
+step:
+log:

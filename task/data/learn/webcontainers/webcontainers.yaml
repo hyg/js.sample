@@ -1,0 +1,18 @@
+name: webcontainers
+id: xpsxobm3
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: webcontainers
+  所属分组: learn
+  预计时长: 90 分钟
+  
+  任务描述:
+  - https://webcontainers.io/
+  - https://stackblitz.com/
+  - https://nodejs.org/en/learn/getting-started/differences-between-nodejs-and-the-browser
+  
+step:
+log:

@@ -1,0 +1,18 @@
+name: 时间改为ISO8601格式
+id: 702adgn3
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 时间改为ISO8601格式
+  所属分组: ego
+  预计时长: 30 分钟
+  
+  任务描述:
+  - season metadata
+  - day metada
+  - draft文件名
+  
+step:
+log:

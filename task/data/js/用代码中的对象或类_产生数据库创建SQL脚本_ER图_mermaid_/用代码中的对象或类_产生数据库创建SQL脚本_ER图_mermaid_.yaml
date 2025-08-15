@@ -1,0 +1,15 @@
+name: 用代码中的对象或类，产生数据库创建SQL脚本、ER图（mermaid）
+id: vk5ro47r
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 用代码中的对象或类，产生数据库创建SQL脚本、ER图（mermaid）
+  所属分组: js
+  预计时长: 60 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

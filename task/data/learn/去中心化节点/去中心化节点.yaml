@@ -1,0 +1,20 @@
+name: 去中心化节点
+id: klwnrsc4
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 去中心化节点
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://yjs.dev/
+  - https://loco-sync.com
+  - read ../../draft/2025/20250720.a.md
+  - read ../../draft/2025/20250721.01.md
+  - read ../../draft/2025/20250724.01.md
+  
+step:
+log:

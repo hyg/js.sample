@@ -1,0 +1,15 @@
+name: 以1406为例检查知识图谱和blawx的语法
+id: 5m88hwic
+parent id: PSMD
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 以1406为例检查知识图谱和blawx的语法
+  所属分组: PSMD
+  预计时长: 90 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

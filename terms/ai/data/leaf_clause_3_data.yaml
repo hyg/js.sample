@@ -1,0 +1,7 @@
+id: e54dcf8d
+text: 项目经理应在项目启动后15个工作日内提交详细项目计划。
+name: 项目计划提交
+readme: 规定项目经理提交计划的时间要求。
+mappings:
+  "{PROJECT_MANAGER_NAME_9f8e7d6c5b}": 项目经理
+  "{PLAN_SUBMISSION_DAYS_5544332211}": "15"

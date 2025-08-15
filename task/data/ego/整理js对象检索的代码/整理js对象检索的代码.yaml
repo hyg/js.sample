@@ -1,0 +1,17 @@
+name: 整理js对象检索的代码
+id: xolxkezc
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 整理js对象检索的代码
+  所属分组: ego
+  预计时长: 60 分钟
+  
+  任务描述:
+  - read ../../draft/2025/20250605.03.md
+  - read ../../draft/2025/20250714.03.md
+  
+step:
+log:

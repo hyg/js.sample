@@ -1,0 +1,24 @@
+name: embedded dbs
+id: zgmxhzz3
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: embedded dbs
+  所属分组: js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - IndexedDB + dexie
+  - pouchdb + leveldb
+  - lowdb
+  - nedb
+  - rxdb
+  - LokiJS
+  - node-dirty
+  - tiny,https://www.npmjs.com/package/tiny
+  - TinyDB
+  
+step:
+log:

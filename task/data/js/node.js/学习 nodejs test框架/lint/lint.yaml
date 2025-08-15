@@ -1,0 +1,19 @@
+name: lint
+id: szsq3obg
+parent id: 学习 nodejs test框架
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: lint
+  所属分组: 学习 nodejs test框架
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://www.javascriptcn.com/post/675439161b963fe9cc4d25ce
+  - https://www.jslint.com/
+  - https://jshint.com/
+  - https://zh-hans.eslint.org/docs/latest/use/getting-started
+  
+step:
+log:

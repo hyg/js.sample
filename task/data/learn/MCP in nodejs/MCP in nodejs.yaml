@@ -1,0 +1,16 @@
+name: MCP in nodejs
+id: 8eddm8uc
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: MCP in nodejs
+  所属分组: learn
+  预计时长: 195 分钟
+  
+  任务描述:
+  - read ../../draft/2025/20250720.01.md
+  
+step:
+log:

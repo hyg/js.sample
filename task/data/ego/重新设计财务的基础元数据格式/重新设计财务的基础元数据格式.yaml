@@ -1,0 +1,15 @@
+name: 重新设计财务的基础元数据格式
+id: 7oshdr30
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 重新设计财务的基础元数据格式
+  所属分组: ego
+  预计时长: 90 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

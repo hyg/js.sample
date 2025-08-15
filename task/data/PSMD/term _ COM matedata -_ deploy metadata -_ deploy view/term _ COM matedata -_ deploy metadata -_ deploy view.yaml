@@ -1,0 +1,18 @@
+name: term + COM matedata -> deploy metadata -> deploy view
+id: shlikqqk
+parent id: PSMD
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: term + COM matedata -> deploy metadata -> deploy view
+  所属分组: PSMD
+  预计时长: 195 分钟
+  
+  任务描述: 暂无详细描述。
+  
+  补充说明:
+  - 这是旧版本的任务，与新版本的machines和term工具无关。
+  
+step:
+log:

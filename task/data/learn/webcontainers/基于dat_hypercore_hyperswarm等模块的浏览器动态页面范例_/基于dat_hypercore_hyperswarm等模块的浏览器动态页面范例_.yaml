@@ -1,0 +1,16 @@
+name: 基于dat,hypercore,hyperswarm等模块的浏览器动态页面范例。
+id: ql2f572p
+parent id: webcontainers
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 基于dat,hypercore,hyperswarm等模块的浏览器动态页面范例。
+  所属分组: webcontainers
+  预计时长: 60 分钟
+  
+  任务描述:
+  - read ../../draft/2025/20250326.01.md
+  
+step:
+log:

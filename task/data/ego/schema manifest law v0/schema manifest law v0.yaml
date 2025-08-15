@@ -1,0 +1,16 @@
+name: schema manifest law v0
+id: uwvms6h8
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: schema manifest law v0
+  所属分组: ego
+  预计时长: 60 分钟
+  
+  任务描述:
+  - read 2024.07.21 07:45 draft
+  
+step:
+log:

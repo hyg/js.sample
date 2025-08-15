@@ -1,0 +1,23 @@
+name: 新版本任务、子任务的数据结构
+id: o7y1pp8q
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 新版本任务、子任务的数据结构
+  所属分组: ego
+  预计时长: 90 分钟
+  
+  任务描述:
+  - read ../../draft/2024/10/20241001.01.md
+  - read ../../draft/2024/10/20241003.01.md
+  - read ../../draft/2024/10/20241004.04.md
+  - read ../../draft/2024/10/20241005.01.md
+  - read ../../draft/2024/10/20241007.03.md
+  - read ../../draft/2024/10/20241011.04.md
+  - read ../../draft/2025/20250215.01.md
+  - read ../../draft/2025/20250613.a.md
+  
+step:
+log:

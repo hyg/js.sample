@@ -1,0 +1,16 @@
+name: 百炼平台API
+id: 1hor2ipl
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 百炼平台API
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - read ../../draft/2025/20250724.02.md
+  
+step:
+log:

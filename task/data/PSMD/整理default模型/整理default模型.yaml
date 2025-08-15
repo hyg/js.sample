@@ -1,0 +1,20 @@
+name: 整理default模型
+id: x5tgy80k
+parent id: PSMD
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 整理default模型
+  所属分组: PSMD
+  预计时长: 60 分钟
+  
+  任务描述:
+  - read ../../draft/2024/10/20241007.01.md
+  - read ../../draft/2024/10/20241010.02.md
+  - read ../../draft/2024/10/20241011.01.md
+  - read ../../draft/2024/11/20241106.01.md
+  - read ../../draft/2025/20250704.01.md
+  
+step:
+log:

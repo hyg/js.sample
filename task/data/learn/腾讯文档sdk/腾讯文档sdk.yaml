@@ -1,0 +1,18 @@
+name: 腾讯文档sdk
+id: hz3bc6j5
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 腾讯文档sdk
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://docs.qq.com/open/developers
+  - https://docs.qq.com/open/document/websdk/
+  - https://docs.qq.com/open/document/app/openapi/v2/file/files/permission/set.html - https://docs.qq.com/open/document/app/openapi/v2/file/files/permission/common.html
+  
+step:
+log:

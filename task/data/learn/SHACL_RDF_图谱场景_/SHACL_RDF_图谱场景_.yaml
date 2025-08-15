@@ -1,0 +1,15 @@
+name: SHACL（RDF/图谱场景）
+id: 0ankl8ux
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: SHACL（RDF/图谱场景）
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

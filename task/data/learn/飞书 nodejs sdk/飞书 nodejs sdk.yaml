@@ -1,0 +1,16 @@
+name: 飞书 nodejs sdk
+id: k3iw9zy5
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 飞书 nodejs sdk
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/server-side-sdk/nodejs-sdk/preparation-before-development
+  
+step:
+log:

@@ -1,0 +1,28 @@
+name: 业务规则引擎（BRMS）
+id: vzatgtfa
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 业务规则引擎（BRMS）
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://www.drools.org
+  - Red Hat KIE Group:Red Hat Process Automation Manager 7.x/8.x 已提供 kie-server-standalone.jar, java -jar kie-server.jar 即可启动
+  - https://kogito.kie.org/
+  - Kogito-js wasm  kie/kogito-dmn-loader（npm）
+  - https://bpmn.io/toolkit/dmn-js/
+  - https://www.npmjs.com/package/nools
+  - https://www.npmjs.com/package/rules-js
+  - https://www.npmjs.com/package/json-rules-engine
+  - read ../../draft/2005/20250726.a.md
+  - https://www.npmjs.com/package/node-rules
+  
+  补充说明:
+  - 'Drools/DRL替代' 是此任务的子任务。
+  
+step:
+log:

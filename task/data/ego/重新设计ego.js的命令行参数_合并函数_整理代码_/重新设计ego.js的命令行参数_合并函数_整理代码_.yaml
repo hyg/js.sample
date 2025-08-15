@@ -1,0 +1,15 @@
+name: 重新设计ego.js的命令行参数，合并函数，整理代码。
+id: cyssf07u
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 重新设计ego.js的命令行参数，合并函数，整理代码。
+  所属分组: ego
+  预计时长: 60 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

@@ -1,0 +1,15 @@
+name: term metadata的序号，分为显示序号和唯一id两种。
+id: g8n637sp
+parent id: PSMD
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: term metadata的序号，分为显示序号和唯一id两种。
+  所属分组: PSMD
+  预计时长: 90 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

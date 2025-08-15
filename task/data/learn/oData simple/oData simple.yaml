@@ -1,0 +1,17 @@
+name: oData simple
+id: 0g25c75r
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: oData simple
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述:
+  - https://services.odata.org/
+  - http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html
+  
+step:
+log:

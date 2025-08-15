@@ -1,0 +1,17 @@
+name: eventemitter sample
+id: 05inf32t
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: eventemitter sample
+  所属分组: ego
+  预计时长: 60 分钟
+  
+  任务描述:
+  - event listener in module
+  - auto load the event listener in main js file - load them in a function in module - load them in main js file use metadata
+  
+step:
+log:

@@ -1,0 +1,742 @@
+[
+  {
+    "name": "PSMD: machines model",
+    "start": "2025-06-30T16:00:00.000Z",
+    "end": "2025-06-30T19:15:00.000Z"
+  },
+  {
+    "name": "PSMD: 子1609:基于公司、合同",
+    "start": "2025-06-30T19:15:00.000Z",
+    "end": "2025-06-30T20:45:00.000Z"
+  },
+  {
+    "name": "PSMD: 整理default模型",
+    "start": "2025-06-30T20:45:00.000Z",
+    "end": "2025-06-30T21:45:00.000Z"
+  },
+  {
+    "name": "PSMD: 根据香港《公司條例》调整1609的部署方案 https://www.elegislation.gov.hk/hk/cap622",
+    "start": "2025-06-30T21:45:00.000Z",
+    "end": "2025-06-30T22:45:00.000Z"
+  },
+  {
+    "name": "PSMD: 整理新版本term的manifest code",
+    "start": "2025-06-30T22:45:00.000Z",
+    "end": "2025-07-01T00:15:00.000Z"
+  },
+  {
+    "name": "PSMD: 智在科技项目准备",
+    "start": "2025-07-01T00:15:00.000Z",
+    "end": "2025-07-01T01:45:00.000Z"
+  },
+  {
+    "name": "PSMD: 整理新版本term的manifest text",
+    "start": "2025-07-01T01:45:00.000Z",
+    "end": "2025-07-01T03:15:00.000Z"
+  },
+  {
+    "name": "PSMD: term + COM matedata -> deploy metadata -> deploy view",
+    "start": "2025-07-01T03:15:00.000Z",
+    "end": "2025-07-01T06:30:00.000Z"
+  },
+  {
+    "name": "PSMD: 以1406为例检查知识图谱和blawx的语法",
+    "start": "2025-07-01T06:30:00.000Z",
+    "end": "2025-07-01T08:00:00.000Z"
+  },
+  {
+    "name": "PSMD: 整理闫岸家政能力讨论",
+    "start": "2025-07-01T08:00:00.000Z",
+    "end": "2025-07-01T08:30:00.000Z"
+  },
+  {
+    "name": "PSMD: term metadata的序号，分为显示序号和唯一id两种。",
+    "start": "2025-07-01T08:30:00.000Z",
+    "end": "2025-07-01T10:00:00.000Z"
+  },
+  {
+    "name": "ego: 整理simplenote文件，准备转移到webDAV.",
+    "start": "2025-07-01T10:00:00.000Z",
+    "end": "2025-07-01T10:30:00.000Z"
+  },
+  {
+    "name": "ego: 整理task及其相互关系",
+    "start": "2025-07-01T10:30:00.000Z",
+    "end": "2025-07-01T12:00:00.000Z"
+  },
+  {
+    "name": "ego: 整理js对象检索的代码",
+    "start": "2025-07-01T12:00:00.000Z",
+    "end": "2025-07-01T13:00:00.000Z"
+  },
+  {
+    "name": "ego: 基于真实数据标志财务报表",
+    "start": "2025-07-01T13:00:00.000Z",
+    "end": "2025-07-01T14:30:00.000Z"
+  },
+  {
+    "name": "ego: 重新设计财务的基础元数据格式",
+    "start": "2025-07-01T14:30:00.000Z",
+    "end": "2025-07-01T16:00:00.000Z"
+  },
+  {
+    "name": "ego: entry的按月归并",
+    "start": "2025-07-01T16:00:00.000Z",
+    "end": "2025-07-01T17:00:00.000Z"
+  },
+  {
+    "name": "ego: 新版ego, instance or model, any manifest",
+    "start": "2025-07-01T17:00:00.000Z",
+    "end": "2025-07-01T20:15:00.000Z"
+  },
+  {
+    "name": "ego: 微观与宏观衔接的几篇论文",
+    "start": "2025-07-01T20:15:00.000Z",
+    "end": "2025-07-01T21:45:00.000Z"
+  },
+  {
+    "name": "ego: 新版实时手稿",
+    "start": "2025-07-01T21:45:00.000Z",
+    "end": "2025-07-01T23:15:00.000Z"
+  },
+  {
+    "name": "ego: 新版本任务、子任务的数据结构",
+    "start": "2025-07-01T23:15:00.000Z",
+    "end": "2025-07-02T00:45:00.000Z"
+  },
+  {
+    "name": "ego: 启用新字段存放前置任务的output，自动汇编写入新的draft文件。",
+    "start": "2025-07-02T00:45:00.000Z",
+    "end": "2025-07-02T02:15:00.000Z"
+  },
+  {
+    "name": "ego: eventemitter sample",
+    "start": "2025-07-02T02:15:00.000Z",
+    "end": "2025-07-02T03:15:00.000Z"
+  },
+  {
+    "name": "ego: eventemitter sample -> schema level 2 schema for code v1",
+    "start": "2025-07-02T03:15:00.000Z",
+    "end": "2025-07-02T04:15:00.000Z"
+  },
+  {
+    "name": "ego: schema manifest law v0",
+    "start": "2025-07-02T04:15:00.000Z",
+    "end": "2025-07-02T05:15:00.000Z"
+  },
+  {
+    "name": "ego: schema manifest law v0 -> schema level 2 schema for law v1",
+    "start": "2025-07-02T05:15:00.000Z",
+    "end": "2025-07-02T06:45:00.000Z"
+  },
+  {
+    "name": "ego: 用js代码完成日小结后的git操作。",
+    "start": "2025-07-02T06:45:00.000Z",
+    "end": "2025-07-02T07:15:00.000Z"
+  },
+  {
+    "name": "ego: 重新设计ego.js的命令行参数，合并函数，整理代码。",
+    "start": "2025-07-02T07:15:00.000Z",
+    "end": "2025-07-02T08:15:00.000Z"
+  },
+  {
+    "name": "ego: 时间改为ISO8601格式",
+    "start": "2025-07-02T08:15:00.000Z",
+    "end": "2025-07-02T08:45:00.000Z"
+  },
+  {
+    "name": "infra: schema立项。",
+    "start": "2025-07-02T08:45:00.000Z",
+    "end": "2025-07-02T10:15:00.000Z"
+  },
+  {
+    "name": "infra: Rete/Phreak算法的自主实现",
+    "start": "2025-07-02T10:15:00.000Z",
+    "end": "2025-07-02T13:30:00.000Z"
+  },
+  {
+    "name": "learn: LegalRuleML（Legal Rule Markup Language）",
+    "start": "2025-07-02T13:30:00.000Z",
+    "end": "2025-07-02T14:00:00.000Z"
+  },
+  {
+    "name": "learn: Tauri + Rust",
+    "start": "2025-07-02T14:00:00.000Z",
+    "end": "2025-07-02T14:30:00.000Z"
+  },
+  {
+    "name": "learn: SBVR（OMG业务语义词汇与规则）",
+    "start": "2025-07-02T14:30:00.000Z",
+    "end": "2025-07-02T15:00:00.000Z"
+  },
+  {
+    "name": "learn: Akoma Ntoso（结构化法务文档）",
+    "start": "2025-07-02T15:00:00.000Z",
+    "end": "2025-07-02T15:30:00.000Z"
+  },
+  {
+    "name": "learn: OutSystems, Mendix,",
+    "start": "2025-07-02T15:30:00.000Z",
+    "end": "2025-07-02T16:00:00.000Z"
+  },
+  {
+    "name": "learn: Zapier",
+    "start": "2025-07-02T16:00:00.000Z",
+    "end": "2025-07-02T16:30:00.000Z"
+  },
+  {
+    "name": "learn: IFTTT",
+    "start": "2025-07-02T16:30:00.000Z",
+    "end": "2025-07-02T17:00:00.000Z"
+  },
+  {
+    "name": "learn: OutSystems, Zapier",
+    "start": "2025-07-02T17:00:00.000Z",
+    "end": "2025-07-02T17:30:00.000Z"
+  },
+  {
+    "name": "learn: 描述逻辑（Description Logic, DL）",
+    "start": "2025-07-02T17:30:00.000Z",
+    "end": "2025-07-02T18:00:00.000Z"
+  },
+  {
+    "name": "learn: CEV（Contract Expression Language）",
+    "start": "2025-07-02T18:00:00.000Z",
+    "end": "2025-07-02T18:30:00.000Z"
+  },
+  {
+    "name": "learn: XACML 4.0 / ODRL 2.2",
+    "start": "2025-07-02T18:30:00.000Z",
+    "end": "2025-07-02T19:00:00.000Z"
+  },
+  {
+    "name": "learn: RuleML,结构化规则语言（如RuleML的核心子集）",
+    "start": "2025-07-02T19:00:00.000Z",
+    "end": "2025-07-02T19:30:00.000Z"
+  },
+  {
+    "name": "learn: CloudEvent（JSON 格式，spec 1.0+）",
+    "start": "2025-07-02T19:30:00.000Z",
+    "end": "2025-07-02T20:00:00.000Z"
+  },
+  {
+    "name": "learn: Semantic Version + Content-Addressable Storage（如 OCI Artifacts 存 DMN/Regos）",
+    "start": "2025-07-02T20:00:00.000Z",
+    "end": "2025-07-02T20:30:00.000Z"
+  },
+  {
+    "name": "learn: Ontology + SWRL（Semantic Web Rule Language）",
+    "start": "2025-07-02T20:30:00.000Z",
+    "end": "2025-07-02T21:00:00.000Z"
+  },
+  {
+    "name": "learn: Common Logic (ISO/IEC 24707)",
+    "start": "2025-07-02T21:00:00.000Z",
+    "end": "2025-07-02T21:30:00.000Z"
+  },
+  {
+    "name": "learn: Camunda Zeebe / Temporal.io",
+    "start": "2025-07-02T21:30:00.000Z",
+    "end": "2025-07-02T22:00:00.000Z"
+  },
+  {
+    "name": "learn: Flink Complex Event Processing，直接运行 DMN 4Flink 或 Rego-on-Flink 扩展。",
+    "start": "2025-07-02T22:00:00.000Z",
+    "end": "2025-07-02T22:30:00.000Z"
+  },
+  {
+    "name": "learn: 领域特定语言（DSL）,Xtext,ANTLR",
+    "start": "2025-07-02T22:30:00.000Z",
+    "end": "2025-07-02T23:30:00.000Z"
+  },
+  {
+    "name": "learn: OpenFGA/SpiceDB(Zanzibar模型)",
+    "start": "2025-07-02T23:30:00.000Z",
+    "end": "2025-07-03T00:00:00.000Z"
+  },
+  {
+    "name": "learn: XACML（存量）",
+    "start": "2025-07-03T00:00:00.000Z",
+    "end": "2025-07-03T00:30:00.000Z"
+  },
+  {
+    "name": "learn: SHACL（RDF/图谱场景）",
+    "start": "2025-07-03T00:30:00.000Z",
+    "end": "2025-07-03T01:00:00.000Z"
+  },
+  {
+    "name": "learn: Esper EPL",
+    "start": "2025-07-03T01:00:00.000Z",
+    "end": "2025-07-03T01:30:00.000Z"
+  },
+  {
+    "name": "learn: Apache Flink SQL",
+    "start": "2025-07-03T01:30:00.000Z",
+    "end": "2025-07-03T02:00:00.000Z"
+  },
+  {
+    "name": "learn: ksqlDB（Kafka）",
+    "start": "2025-07-03T02:00:00.000Z",
+    "end": "2025-07-03T02:30:00.000Z"
+  },
+  {
+    "name": "learn: 宣告式流程 DCR Graphs/Declare",
+    "start": "2025-07-03T02:30:00.000Z",
+    "end": "2025-07-03T03:00:00.000Z"
+  },
+  {
+    "name": "learn: JSON-LD / YAML + Schema（轻量级）",
+    "start": "2025-07-03T03:00:00.000Z",
+    "end": "2025-07-03T03:30:00.000Z"
+  },
+  {
+    "name": "learn: BPMN-DMN,执行引擎（Camunda、Flowable、Flink DMN、Trisotech 等）",
+    "start": "2025-07-03T03:30:00.000Z",
+    "end": "2025-07-03T04:00:00.000Z"
+  },
+  {
+    "name": "learn: Drools/DRL替代",
+    "start": "2025-07-03T04:00:00.000Z",
+    "end": "2025-07-03T05:00:00.000Z"
+  },
+  {
+    "name": "learn: 消息总线（Kafka / RabbitMQ）",
+    "start": "2025-07-03T05:00:00.000Z",
+    "end": "2025-07-03T05:30:00.000Z"
+  },
+  {
+    "name": "learn: 规则解析引擎（如：RDF4J + SWRLAPI 或 自研DSL解析器）",
+    "start": "2025-07-03T05:30:00.000Z",
+    "end": "2025-07-03T06:00:00.000Z"
+  },
+  {
+    "name": "learn: Digital Twin of Governance",
+    "start": "2025-07-03T06:00:00.000Z",
+    "end": "2025-07-03T06:30:00.000Z"
+  },
+  {
+    "name": "learn: 个人财务助理 https://open.chanjet.com/",
+    "start": "2025-07-03T06:30:00.000Z",
+    "end": "2025-07-03T07:30:00.000Z"
+  },
+  {
+    "name": "learn: NER（命名实体识别）RE（关系抽取）",
+    "start": "2025-07-03T07:30:00.000Z",
+    "end": "2025-07-03T08:00:00.000Z"
+  },
+  {
+    "name": "learn: ANP（Agent Network Protocol）",
+    "start": "2025-07-03T08:00:00.000Z",
+    "end": "2025-07-03T09:00:00.000Z"
+  },
+  {
+    "name": "learn: ethers.js v6，Node.js 最流行的以太坊交互库。",
+    "start": "2025-07-03T09:00:00.000Z",
+    "end": "2025-07-03T10:00:00.000Z"
+  },
+  {
+    "name": "learn: Rete/Phreak算法",
+    "start": "2025-07-03T10:00:00.000Z",
+    "end": "2025-07-03T10:30:00.000Z"
+  },
+  {
+    "name": "learn: 业务规则引擎（BRMS）",
+    "start": "2025-07-03T10:30:00.000Z",
+    "end": "2025-07-03T11:30:00.000Z"
+  },
+  {
+    "name": "learn: 百炼平台API",
+    "start": "2025-07-03T11:30:00.000Z",
+    "end": "2025-07-03T12:30:00.000Z"
+  },
+  {
+    "name": "learn: 去中心化节点",
+    "start": "2025-07-03T12:30:00.000Z",
+    "end": "2025-07-03T13:30:00.000Z"
+  },
+  {
+    "name": "learn: 长安链智能合约",
+    "start": "2025-07-03T13:30:00.000Z",
+    "end": "2025-07-03T14:30:00.000Z"
+  },
+  {
+    "name": "learn: Hyperledger Fabric智能合约",
+    "start": "2025-07-03T14:30:00.000Z",
+    "end": "2025-07-03T15:30:00.000Z"
+  },
+  {
+    "name": "learn: 智谱API开发",
+    "start": "2025-07-03T15:30:00.000Z",
+    "end": "2025-07-03T16:30:00.000Z"
+  },
+  {
+    "name": "learn: claude code + kimi K2",
+    "start": "2025-07-03T16:30:00.000Z",
+    "end": "2025-07-03T18:00:00.000Z"
+  },
+  {
+    "name": "learn: AutoGen",
+    "start": "2025-07-03T18:00:00.000Z",
+    "end": "2025-07-03T18:30:00.000Z"
+  },
+  {
+    "name": "learn: react ink",
+    "start": "2025-07-03T18:30:00.000Z",
+    "end": "2025-07-03T19:00:00.000Z"
+  },
+  {
+    "name": "learn: MCP in nodejs",
+    "start": "2025-07-03T19:00:00.000Z",
+    "end": "2025-07-03T22:15:00.000Z"
+  },
+  {
+    "name": "learn: TLA+",
+    "start": "2025-07-03T22:15:00.000Z",
+    "end": "2025-07-03T22:45:00.000Z"
+  },
+  {
+    "name": "learn: node-datachannel",
+    "start": "2025-07-03T22:45:00.000Z",
+    "end": "2025-07-03T23:45:00.000Z"
+  },
+  {
+    "name": "learn: 国产区块链产品",
+    "start": "2025-07-03T23:45:00.000Z",
+    "end": "2025-07-04T00:15:00.000Z"
+  },
+  {
+    "name": "learn: Virtuals Protocol",
+    "start": "2025-07-04T00:15:00.000Z",
+    "end": "2025-07-04T00:45:00.000Z"
+  },
+  {
+    "name": "learn: jami bot",
+    "start": "2025-07-04T00:45:00.000Z",
+    "end": "2025-07-04T01:45:00.000Z"
+  },
+  {
+    "name": "learn: 量子力学的各种诠释:基于门电路、event机制的思想实验",
+    "start": "2025-07-04T01:45:00.000Z",
+    "end": "2025-07-04T02:45:00.000Z"
+  },
+  {
+    "name": "learn: 热更新",
+    "start": "2025-07-04T02:45:00.000Z",
+    "end": "2025-07-04T04:15:00.000Z"
+  },
+  {
+    "name": "learn: 量子物理的数学基础",
+    "start": "2025-07-04T04:15:00.000Z",
+    "end": "2025-07-04T07:30:00.000Z"
+  },
+  {
+    "name": "learn: MCP in ts",
+    "start": "2025-07-04T07:30:00.000Z",
+    "end": "2025-07-04T09:00:00.000Z"
+  },
+  {
+    "name": "learn: claude code router",
+    "start": "2025-07-04T09:00:00.000Z",
+    "end": "2025-07-04T10:00:00.000Z"
+  },
+  {
+    "name": "learn: 腾讯文档sdk",
+    "start": "2025-07-04T10:00:00.000Z",
+    "end": "2025-07-04T11:00:00.000Z"
+  },
+  {
+    "name": "learn: 飞书 nodejs sdk",
+    "start": "2025-07-04T11:00:00.000Z",
+    "end": "2025-07-04T12:00:00.000Z"
+  },
+  {
+    "name": "learn: webcontainers",
+    "start": "2025-07-04T12:00:00.000Z",
+    "end": "2025-07-04T13:30:00.000Z"
+  },
+  {
+    "name": "learn: webcontainers -> 基于dat,hypercore,hyperswarm等模块的浏览器动态页面范例。",
+    "start": "2025-07-04T13:30:00.000Z",
+    "end": "2025-07-04T14:30:00.000Z"
+  },
+  {
+    "name": "learn: oData simple",
+    "start": "2025-07-04T14:30:00.000Z",
+    "end": "2025-07-04T15:00:00.000Z"
+  },
+  {
+    "name": "learn: instantdb",
+    "start": "2025-07-04T15:00:00.000Z",
+    "end": "2025-07-04T15:30:00.000Z"
+  },
+  {
+    "name": "learn: BEP 46",
+    "start": "2025-07-04T15:30:00.000Z",
+    "end": "2025-07-04T16:30:00.000Z"
+  },
+  {
+    "name": "learn: xLog",
+    "start": "2025-07-04T16:30:00.000Z",
+    "end": "2025-07-04T17:00:00.000Z"
+  },
+  {
+    "name": "learn: markmap",
+    "start": "2025-07-04T17:00:00.000Z",
+    "end": "2025-07-04T17:30:00.000Z"
+  },
+  {
+    "name": "learn: MapLibre sample",
+    "start": "2025-07-04T17:30:00.000Z",
+    "end": "2025-07-04T18:00:00.000Z"
+  },
+  {
+    "name": "learn: PSMD term in helia dag-json https://www.npmjs.com/package/@helia/dag-json",
+    "start": "2025-07-04T18:00:00.000Z",
+    "end": "2025-07-04T19:00:00.000Z"
+  },
+  {
+    "name": "learn: learn Blogging on the Decentralized Web https://proto.school/blog",
+    "start": "2025-07-04T19:00:00.000Z",
+    "end": "2025-07-04T20:00:00.000Z"
+  },
+  {
+    "name": "learn: 在nodejs读写OFD文件。",
+    "start": "2025-07-04T20:00:00.000Z",
+    "end": "2025-07-04T20:30:00.000Z"
+  },
+  {
+    "name": "learn: https://proto.school/basics  IPFS,P2P Data Links with Content Addressing",
+    "start": "2025-07-04T20:30:00.000Z",
+    "end": "2025-07-04T21:30:00.000Z"
+  },
+  {
+    "name": "learn: learn web-llm",
+    "start": "2025-07-04T21:30:00.000Z",
+    "end": "2025-07-04T22:00:00.000Z"
+  },
+  {
+    "name": "learn: 开发YARRRML范例",
+    "start": "2025-07-04T22:00:00.000Z",
+    "end": "2025-07-04T23:00:00.000Z"
+  },
+  {
+    "name": "learn: 把PSMD的data、src部分升级到rdf，如果升级成功则作为范例。",
+    "start": "2025-07-04T23:00:00.000Z",
+    "end": "2025-07-05T00:30:00.000Z"
+  },
+  {
+    "name": "learn: Windows PowerShell",
+    "start": "2025-07-05T00:30:00.000Z",
+    "end": "2025-07-05T01:30:00.000Z"
+  },
+  {
+    "name": "learn: rust入门",
+    "start": "2025-07-05T01:30:00.000Z",
+    "end": "2025-07-05T04:45:00.000Z"
+  },
+  {
+    "name": "learn: rust入门 -> 开发reenet Contracts sample",
+    "start": "2025-07-05T04:45:00.000Z",
+    "end": "2025-07-05T08:00:00.000Z"
+  },
+  {
+    "name": "learn: 继续学习promise api",
+    "start": "2025-07-05T08:00:00.000Z",
+    "end": "2025-07-05T09:00:00.000Z"
+  },
+  {
+    "name": "js: nextcloud",
+    "start": "2025-07-05T09:00:00.000Z",
+    "end": "2025-07-05T09:30:00.000Z"
+  },
+  {
+    "name": "js: IM bot",
+    "start": "2025-07-05T09:30:00.000Z",
+    "end": "2025-07-05T10:30:00.000Z"
+  },
+  {
+    "name": "js: a2a-js",
+    "start": "2025-07-05T10:30:00.000Z",
+    "end": "2025-07-05T11:30:00.000Z"
+  },
+  {
+    "name": "js: LangChain.js",
+    "start": "2025-07-05T11:30:00.000Z",
+    "end": "2025-07-05T12:30:00.000Z"
+  },
+  {
+    "name": "js: ai-sdk + moonshot",
+    "start": "2025-07-05T12:30:00.000Z",
+    "end": "2025-07-05T13:30:00.000Z"
+  },
+  {
+    "name": "js: Vector Database in nodejs",
+    "start": "2025-07-05T13:30:00.000Z",
+    "end": "2025-07-05T14:30:00.000Z"
+  },
+  {
+    "name": "js: openpgp v6.1.1.",
+    "start": "2025-07-05T14:30:00.000Z",
+    "end": "2025-07-05T16:00:00.000Z"
+  },
+  {
+    "name": "js: query yaml file or js obj",
+    "start": "2025-07-05T16:00:00.000Z",
+    "end": "2025-07-05T17:30:00.000Z"
+  },
+  {
+    "name": "js: TensorFlow.js",
+    "start": "2025-07-05T17:30:00.000Z",
+    "end": "2025-07-05T18:30:00.000Z"
+  },
+  {
+    "name": "js: learn factory, constructor, prototype",
+    "start": "2025-07-05T18:30:00.000Z",
+    "end": "2025-07-05T19:30:00.000Z"
+  },
+  {
+    "name": "js: learn factory, constructor, prototype -> 新版raw.js的子命令-营养成分详情",
+    "start": "2025-07-05T19:30:00.000Z",
+    "end": "2025-07-05T20:00:00.000Z"
+  },
+  {
+    "name": "js: learn factory, constructor, prototype -> 新版raw.js的子命令-营养成分排序",
+    "start": "2025-07-05T20:00:00.000Z",
+    "end": "2025-07-05T20:30:00.000Z"
+  },
+  {
+    "name": "js: copilot",
+    "start": "2025-07-05T20:30:00.000Z",
+    "end": "2025-07-05T21:00:00.000Z"
+  },
+  {
+    "name": "js: node.js",
+    "start": "2025-07-05T21:00:00.000Z",
+    "end": "2025-07-05T21:30:00.000Z"
+  },
+  {
+    "name": "js: node.js -> debug",
+    "start": "2025-07-05T21:30:00.000Z",
+    "end": "2025-07-05T22:30:00.000Z"
+  },
+  {
+    "name": "js: node.js -> The Node.js best practices list (July 2024)",
+    "start": "2025-07-05T22:30:00.000Z",
+    "end": "2025-07-05T23:30:00.000Z"
+  },
+  {
+    "name": "js: node.js -> 学习 nodejs test框架",
+    "start": "2025-07-05T23:30:00.000Z",
+    "end": "2025-07-06T00:30:00.000Z"
+  },
+  {
+    "name": "js: node.js -> nodejs server side dev",
+    "start": "2025-07-06T00:30:00.000Z",
+    "end": "2025-07-06T01:30:00.000Z"
+  },
+  {
+    "name": "js: passportjs",
+    "start": "2025-07-06T01:30:00.000Z",
+    "end": "2025-07-06T02:00:00.000Z"
+  },
+  {
+    "name": "js: learn graphql",
+    "start": "2025-07-06T02:00:00.000Z",
+    "end": "2025-07-06T03:30:00.000Z"
+  },
+  {
+    "name": "js: implement a programming language in JavaScript",
+    "start": "2025-07-06T03:30:00.000Z",
+    "end": "2025-07-06T05:00:00.000Z"
+  },
+  {
+    "name": "js: 浏览器自动化",
+    "start": "2025-07-06T05:00:00.000Z",
+    "end": "2025-07-06T06:00:00.000Z"
+  },
+  {
+    "name": "js: 向外提供js文件的范例，为代码层级互通做准备",
+    "start": "2025-07-06T06:00:00.000Z",
+    "end": "2025-07-06T07:00:00.000Z"
+  },
+  {
+    "name": "js: duckdb",
+    "start": "2025-07-06T07:00:00.000Z",
+    "end": "2025-07-06T07:30:00.000Z"
+  },
+  {
+    "name": "js: editor.js",
+    "start": "2025-07-06T07:30:00.000Z",
+    "end": "2025-07-06T09:00:00.000Z"
+  },
+  {
+    "name": "js: embedded dbs",
+    "start": "2025-07-06T09:00:00.000Z",
+    "end": "2025-07-06T10:00:00.000Z"
+  },
+  {
+    "name": "js: 学习'Electron'，创作一个范例。",
+    "start": "2025-07-06T10:00:00.000Z",
+    "end": "2025-07-06T11:00:00.000Z"
+  },
+  {
+    "name": "js: 用代码中的对象或类，产生数据库创建SQL脚本、ER图（mermaid）",
+    "start": "2025-07-06T11:00:00.000Z",
+    "end": "2025-07-06T12:00:00.000Z"
+  },
+  {
+    "name": "raw: 设计新的季度时间表",
+    "start": "2025-07-06T12:00:00.000Z",
+    "end": "2025-07-06T13:00:00.000Z"
+  },
+  {
+    "name": "raw: 熟悉内脏之间的关系",
+    "start": "2025-07-06T13:00:00.000Z",
+    "end": "2025-07-06T14:00:00.000Z"
+  },
+  {
+    "name": "raw: 新版营养成分详情，允许多种营养成分。",
+    "start": "2025-07-06T14:00:00.000Z",
+    "end": "2025-07-06T15:00:00.000Z"
+  },
+  {
+    "name": "raw: 新版营养成分详情，允许多种营养成分。 -> 整理代码，理顺food.js几个成员函数之间的调用关系",
+    "start": "2025-07-06T15:00:00.000Z",
+    "end": "2025-07-06T16:30:00.000Z"
+  },
+  {
+    "name": "raw: 新版营养成分详情，允许多种营养成分。 -> 新版食材排序，包括升序、降序、特定值距离、多种营养成分特定值组合距离。",
+    "start": "2025-07-06T16:30:00.000Z",
+    "end": "2025-07-06T17:30:00.000Z"
+  },
+  {
+    "name": "xuemen: 月度事务",
+    "start": "2025-07-06T17:30:00.000Z",
+    "end": "2025-07-06T18:30:00.000Z"
+  },
+  {
+    "name": "xuemen: 根据最新政策文件，考虑AER、AVR文件升级。",
+    "start": "2025-07-06T18:30:00.000Z",
+    "end": "2025-07-06T19:30:00.000Z"
+  },
+  {
+    "name": "xuemen: kernel模型升级",
+    "start": "2025-07-06T19:30:00.000Z",
+    "end": "2025-07-06T22:45:00.000Z"
+  },
+  {
+    "name": "xuemen: mail server",
+    "start": "2025-07-06T22:45:00.000Z",
+    "end": "2025-07-07T00:15:00.000Z"
+  },
+  {
+    "name": "xuemen: 重新设计S2状态下的学门基本管理制度",
+    "start": "2025-07-07T00:15:00.000Z",
+    "end": "2025-07-07T03:30:00.000Z"
+  },
+  {
+    "name": "xuemen: term.e6f0caec -> xuemen COD metadata-S2状态下的部门模型",
+    "start": "2025-07-07T03:30:00.000Z",
+    "end": "2025-07-07T04:30:00.000Z"
+  }
+]

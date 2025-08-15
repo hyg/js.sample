@@ -1,0 +1,18 @@
+name: 开发reenet Contracts sample
+id: ql86njwz
+parent id: rust入门
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 开发reenet Contracts sample
+  所属分组: rust入门
+  预计时长: 195 分钟
+  
+  任务描述:
+  - https://docs.freenet.org/components/contracts.html
+  - https://docs.freenet.org/introduction.html
+  - https://docs.freenet.org/tutorial.html
+  
+step:
+log:

@@ -1,0 +1,15 @@
+name: 宣告式流程 DCR Graphs/Declare
+id: 1ogi9mfh
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 宣告式流程 DCR Graphs/Declare
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

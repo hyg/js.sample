@@ -1,0 +1,16 @@
+name: Hyperledger Fabric智能合约
+id: s8alksb1
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: Hyperledger Fabric智能合约
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://hyperledgercn.github.io/hyperledgerDocs/sdk_node_zh/
+  
+step:
+log:

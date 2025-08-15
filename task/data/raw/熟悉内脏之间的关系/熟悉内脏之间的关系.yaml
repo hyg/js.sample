@@ -1,0 +1,16 @@
+name: 熟悉内脏之间的关系
+id: amty29fp
+parent id: raw
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 熟悉内脏之间的关系
+  所属分组: raw
+  预计时长: 60 分钟
+  
+  任务描述:
+  - read ../../draft/2024/09/20240917143000.md
+  
+step:
+log:

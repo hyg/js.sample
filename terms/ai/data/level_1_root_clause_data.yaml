@@ -1,0 +1,18 @@
+id: 2c88a2ef
+name: 主协议框架
+readme: 涵盖所有条款的总体框架。
+mappings:
+  "{MASTER_AGREEMENT_SIGNATORY_x5y4z3w2v1}": 阿尔法首席执行官
+subClauses:
+  - id: 916269b8
+    index: 1
+    mapping: {}
+    numberPrefix: ①
+  - id: 1eff7395
+    index: 2
+    mapping: {}
+    numberPrefix: ②
+  - id: a67332b7
+    index: 3
+    mapping: {}
+    numberPrefix: ③

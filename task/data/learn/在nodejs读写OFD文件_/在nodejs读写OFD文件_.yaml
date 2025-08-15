@@ -1,0 +1,18 @@
+name: 在nodejs读写OFD文件。
+id: q7chhifw
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 在nodejs读写OFD文件。
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述:
+  - https://github.com/ofdrw/ofdrw
+  - https://blog.csdn.net/lishangke/article/details/135245444
+  - https://www.npmjs.com/package/ofd.js/v/0.8.0
+  
+step:
+log:

@@ -1,0 +1,16 @@
+name: The Node.js best practices list (July 2024)
+id: mxh2zg6m
+parent id: node.js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: The Node.js best practices list (July 2024)
+  所属分组: node.js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://github.com/goldbergyoni/nodebestpractices
+  
+step:
+log:

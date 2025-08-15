@@ -1,0 +1,19 @@
+name: 设计新的季度时间表
+id: zt6rr402
+parent id: raw
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 设计新的季度时间表
+  所属分组: raw
+  预计时长: 60 分钟
+  
+  任务描述:
+  - 两片休整时间联合调节的算法需要整理。
+  - 餐谱和饱腹感时间需要综合算计。
+  - read ../../draft/2024/09/20240904143000.md
+  - read ../../draft/2024/09/20240907140000.md
+  
+step:
+log:

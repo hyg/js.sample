@@ -1,0 +1,15 @@
+name: 领域特定语言（DSL）,Xtext,ANTLR
+id: wxmheway
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 领域特定语言（DSL）,Xtext,ANTLR
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

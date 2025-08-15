@@ -1,0 +1,15 @@
+name: rust入门
+id: 9qrg0bpp
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: rust入门
+  所属分组: learn
+  预计时长: 195 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

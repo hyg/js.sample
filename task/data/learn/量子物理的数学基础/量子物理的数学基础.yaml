@@ -1,0 +1,25 @@
+name: 量子物理的数学基础
+id: 91bdnv4p
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 量子物理的数学基础
+  所属分组: learn
+  预计时长: 195 分钟
+  
+  任务描述:
+  - https://baike.baidu.com/item/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/11421
+  - https://zhuanlan.zhihu.com/p/629852598
+  - read ../../draft/2025/20250526.02.md
+  - read ../../draft/2025/20250417.01.md
+  - read ../../draft/2025/20250407.b.md
+  - read ../../draft/2025/20250606.04.md
+  - read ../../draft/2025/20250710.03.md
+  - read ../../draft/2025/20250714.02.md
+  - read ../../draft/2025/20250715.03.md
+  - read ../../draft/2025/20250424.b.md
+  
+step:
+log:

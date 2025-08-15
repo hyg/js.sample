@@ -1,0 +1,17 @@
+name: Vector Database in nodejs
+id: zct2lrwz
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: Vector Database in nodejs
+  所属分组: js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://www.dongaigc.com/p/Stevenic/vectra
+  - https://therightsw.com/vector-database-crud
+  
+step:
+log:

@@ -1,0 +1,18 @@
+name: 新版实时手稿
+id: ti7lbvmb
+parent id: ego
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 新版实时手稿
+  所属分组: ego
+  预计时长: 90 分钟
+  
+  任务描述:
+  - read ../../draft/2025/20250226.02.md
+  - read ../../draft/2025/20250322.02.md
+  - read ../../draft/2025/20250330.01.md
+  
+step:
+log:

@@ -1,0 +1,7 @@
+id: 6f1937ba
+text: The contractor, Charlie Brown, will commence work on 2024-01-15.
+name: Commencement Date
+readme: Specifies when the contractor starts.
+mappings:
+  "{CONTRACTOR_NAME_abcdef1234}": Charlie Brown
+  "{START_DATE_5566778899}": "2024-01-15"

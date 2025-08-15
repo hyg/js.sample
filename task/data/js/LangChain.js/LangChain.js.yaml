@@ -1,0 +1,19 @@
+name: LangChain.js
+id: r5pbwvf5
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: LangChain.js
+  所属分组: js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://github.com/langchain-ai/langchainjs
+  - https://js.langchain.com
+  - https://docs.langchain.com.cn/
+  - read ../../draft/2025/20250717.01.md
+  
+step:
+log:

@@ -1,0 +1,17 @@
+name: ANP（Agent Network Protocol）
+id: xk7gf73a
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: ANP（Agent Network Protocol）
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://agent-network-protocol.com/
+  - https://m.jellow.club/users/e0e8bda8-1848-43ba-84dc-1959ba8e9529
+  
+step:
+log:

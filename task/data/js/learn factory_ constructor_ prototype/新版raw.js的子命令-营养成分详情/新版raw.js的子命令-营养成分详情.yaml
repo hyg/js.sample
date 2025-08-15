@@ -1,0 +1,19 @@
+name: 新版raw.js的子命令-营养成分详情
+id: ro408bnw
+parent id: learn factory, constructor, prototype
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 新版raw.js的子命令-营养成分详情
+  所属分组: learn factory, constructor, prototype
+  预计时长: 30 分钟
+  
+  任务描述:
+  - 可选多种营养成分
+  - 考虑不同UI
+  - 使用新的模块化设计
+  - 使用新的data model
+  
+step:
+log:

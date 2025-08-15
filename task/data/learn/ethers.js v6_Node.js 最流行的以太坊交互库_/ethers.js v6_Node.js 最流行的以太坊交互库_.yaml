@@ -1,0 +1,18 @@
+name: ethers.js v6，Node.js 最流行的以太坊交互库。
+id: l6b9t32o
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: ethers.js v6，Node.js 最流行的以太坊交互库。
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://rpc.sepolia.org
+  - https://sepolia.etherscan.io
+  - https://sepoliafaucet.com
+  
+step:
+log:

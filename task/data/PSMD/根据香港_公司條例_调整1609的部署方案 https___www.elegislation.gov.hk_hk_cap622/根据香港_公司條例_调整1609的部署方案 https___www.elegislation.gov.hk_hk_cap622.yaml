@@ -1,0 +1,17 @@
+name: 根据香港《公司條例》调整1609的部署方案 https://www.elegislation.gov.hk/hk/cap622
+id: 0e5okohl
+parent id: PSMD
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 根据香港《公司條例》调整1609的部署方案 https://www.elegislation.gov.hk/hk/cap622
+  所属分组: PSMD
+  预计时长: 60 分钟
+  
+  任务描述:
+  - read ../../draft/2025/20250403.01.md
+  - read ../../draft/2025/20250418.02.md
+  
+step:
+log:

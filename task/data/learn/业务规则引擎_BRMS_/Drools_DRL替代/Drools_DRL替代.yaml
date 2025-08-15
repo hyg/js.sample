@@ -1,0 +1,31 @@
+name: Drools/DRL替代
+id: 4a5utu5f
+parent id: 业务规则引擎（BRMS）
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: Drools/DRL替代
+  所属分组: 业务规则引擎（BRMS）
+  预计时长: 60 分钟
+  
+  任务描述:
+  - IBM Operational Decision Manager（ODM）
+  - Red Hat Decision Manager
+  - Camunda
+  - Flink DMN
+  - AWS Decision Services
+  - AWS Cedar
+  - HashiCorp Sentinel
+  - Togai
+  - Pyke（Python规则引擎）
+  - FEEL（Friendly Enough Expression Language）
+  - Tracardi / Open Policy Agent (OPA)
+  - RuleBook
+  - Logic Programming 工具：Prolog / ErgoAI
+  - JSON Rules Engine
+  - OpenRules
+  - Google Cloud Rules
+  
+step:
+log:

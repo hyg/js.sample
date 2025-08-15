@@ -1,0 +1,36 @@
+name: machines model
+id: woim02d1
+parent id: PSMD
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: machines model
+  所属分组: PSMD
+  预计时长: 195 分钟
+  
+  任务描述:
+  - read ../../draft/2024/07/20240723160000.md
+  - read ../../draft/2024/07/20240724093000.md
+  - read ../../draft/2024/07/20240725093000.md
+  - read ../../draft/2024/07/20240726093000.md
+  - read ../../draft/2024/07/20240730093000.md
+  - read ../../draft/2024/07/20240731093000.md
+  - read ../../draft/2024/08/20240801093000.md
+  - read ../../draft/2024/08/20240806140000.md
+  - read ../../draft/2024/08/20240807140000.md
+  - read ../../draft/2024/08/20240808093000.md
+  - read ../../draft/2024/09/20240915160000.md
+  - read ../../draft/2024/09/20240926.01.md
+  - a sample instance of machine,FPM,FSM in manifest code
+  - 实现FPM+FSM
+  - 从FSM、FPM中抽象出统一的mechine
+  - 实现joint、split机制
+  - 先用javascript的class实现
+  
+  补充说明:
+  - 这是PSMD新版本的核心工具之一。
+  - 与term manifest code/text任务并行，但为term任务提供基础支持。
+  
+step:
+log:

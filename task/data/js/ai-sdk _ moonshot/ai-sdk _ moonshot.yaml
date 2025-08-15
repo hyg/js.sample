@@ -1,0 +1,18 @@
+name: ai-sdk + moonshot
+id: qp4xq822
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: ai-sdk + moonshot
+  所属分组: js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://ai-sdk.dev/docs/foundations/providers-and-models
+  - https://platform.moonshot.cn/docs/introduction
+  - toolcalls, json mode,MCP(model context protocol),agentic
+  
+step:
+log:

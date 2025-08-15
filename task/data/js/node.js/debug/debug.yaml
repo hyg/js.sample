@@ -1,0 +1,16 @@
+name: debug
+id: p24szcz7
+parent id: node.js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: debug
+  所属分组: node.js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://github.com/nswbmw/node-in-debugging
+  
+step:
+log:

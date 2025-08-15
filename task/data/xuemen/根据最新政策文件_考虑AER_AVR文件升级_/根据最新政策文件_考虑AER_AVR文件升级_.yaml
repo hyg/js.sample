@@ -1,0 +1,20 @@
+name: 根据最新政策文件，考虑AER、AVR文件升级。
+id: 738ensw2
+parent id: xuemen
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 根据最新政策文件，考虑AER、AVR文件升级。
+  所属分组: xuemen
+  预计时长: 60 分钟
+  
+  任务描述:
+  - http://kjs.mof.gov.cn/gongzuotongzhi/202505/t20250519_3964023.htm
+  - https://zcool.17win.com/knowledge/996b8380aafc43c1a436b1ae3396076a
+  - https://www.xbrl-cn.org/2025/0519/271458.shtml
+  - http://www.xbrl.org
+  - https://www.xbrl-cn.org/
+  
+step:
+log:

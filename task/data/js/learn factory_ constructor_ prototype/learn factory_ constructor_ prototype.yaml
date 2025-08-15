@@ -1,0 +1,19 @@
+name: learn factory, constructor, prototype
+id: v3cb5wht
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: learn factory, constructor, prototype
+  所属分组: js
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://juejin.cn/post/6844903653774458888
+  - https://segmentfault.com/a/1190000019054466
+  - https://www.javascripttutorial.net/javascript-factory-functions/
+  - https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object_prototypes
+  
+step:
+log:

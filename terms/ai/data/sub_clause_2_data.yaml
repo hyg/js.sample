@@ -1,0 +1,6 @@
+id: 96b09815
+text: The project duration is 180 days. All deliverables are due 180 days from the start date.
+name: Project Duration
+readme: Defines the length of the project and delivery terms.
+mappings:
+  "{DURATION_DAYS_fedcba4321}": "180"

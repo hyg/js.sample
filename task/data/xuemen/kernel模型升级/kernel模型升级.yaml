@@ -1,0 +1,23 @@
+name: kernel模型升级
+id: d2b5u5eq
+parent id: xuemen
+start: 2025-07-01
+dependencies:
+  - xuemen: 重新设计S2状态下的学门基本管理制度
+path: /note/task
+readme: |
+  任务名称: kernel模型升级
+  所属分组: xuemen
+  预计时长: 195 分钟
+  
+  任务描述:
+  - read ../../draft/2024/11/20241120.01.md
+  
+  依赖任务:
+  - xuemen: 重新设计S2状态下的学门基本管理制度
+  
+  补充说明:
+  - 此任务是 '重新设计S2状态下的学门基本管理制度' 的一部分。
+  
+step:
+log:

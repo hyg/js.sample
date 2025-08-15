@@ -1,0 +1,16 @@
+name: Virtuals Protocol
+id: cefjdore
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: Virtuals Protocol
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述:
+  - https://whitepaper.virtuals.io/
+  
+step:
+log:

@@ -1,0 +1,15 @@
+name: OpenFGA/SpiceDB(Zanzibar模型)
+id: wvidex9t
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: OpenFGA/SpiceDB(Zanzibar模型)
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

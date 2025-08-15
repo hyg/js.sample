@@ -1,0 +1,16 @@
+name: nextcloud
+id: odgrz8lr
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: nextcloud
+  所属分组: js
+  预计时长: 30 分钟
+  
+  任务描述:
+  - https://www.npmjs.com/package/nextcloud-node-client/v/1.5.1
+  
+step:
+log:

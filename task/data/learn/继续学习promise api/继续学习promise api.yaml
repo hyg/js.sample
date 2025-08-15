@@ -1,0 +1,16 @@
+name: 继续学习promise api
+id: vf477rxg
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 继续学习promise api
+  所属分组: learn
+  预计时长: 60 分钟
+  
+  任务描述:
+  - https://zh.javascript.info/promise-api
+  
+step:
+log:

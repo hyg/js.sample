@@ -1,0 +1,16 @@
+name: claude code + kimi K2
+id: d2c9op2z
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: claude code + kimi K2
+  所属分组: learn
+  预计时长: 90 分钟
+  
+  任务描述:
+  - read ../../draft/2025/20250718.a.md
+  
+step:
+log:

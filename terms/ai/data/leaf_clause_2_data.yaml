@@ -1,0 +1,7 @@
+id: d417acd2
+text: 供应商贝塔提供的零件保修期为安装之日起2年。
+name: 供应商贝塔保修条款
+readme: 专门针对供应商贝塔的保修条件。
+mappings:
+  "{SUPPLIER_BETA_NAME_f0e9d8c7b6}": 贝塔供应商
+  "{SUPPLIER_BETA_WARRANTY_YEARS_a1b2c3d4e5}": "2"

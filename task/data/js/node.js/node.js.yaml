@@ -1,0 +1,17 @@
+name: node.js
+id: rbx8n0xa
+parent id: js
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: node.js
+  所属分组: js
+  预计时长: 30 分钟
+  
+  任务描述:
+  - https://github.com/yunnysunny/nodebook
+  - https://node.whyun.com/
+  
+step:
+log:

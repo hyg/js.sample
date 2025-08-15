@@ -1,0 +1,6 @@
+id: db6cb29e
+text: 项目工期为180天。所有交付物需在开工日期后180天内完成。
+name: 项目工期
+readme: 定义项目时长和交付条款。
+mappings:
+  "{DURATION_DAYS_fedcba4321}": "180"

@@ -1,0 +1,16 @@
+name: 整理代码，理顺food.js几个成员函数之间的调用关系
+id: cs6do13c
+parent id: 新版营养成分详情，允许多种营养成分。
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: 整理代码，理顺food.js几个成员函数之间的调用关系
+  所属分组: 新版营养成分详情，允许多种营养成分。
+  预计时长: 90 分钟
+  
+  任务描述:
+  - read ../../draft/2024/09/20240907143000.md
+  
+step:
+log:

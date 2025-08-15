@@ -1,0 +1,25 @@
+name: entry的按月归并
+id: ilhtc944
+parent id: ego
+start: 2025-07-01
+dependencies:
+  - js: embedded dbs
+path: /note/task
+readme: |
+  任务名称: entry的按月归并
+  所属分组: ego
+  预计时长: 60 分钟
+  
+  任务描述:
+  - read ../../draft/2025/20250525.01.md
+  - https://sql.js.org
+  - read ../../draft/2025/20250526.03.md
+  
+  依赖任务:
+  - js: embedded dbs
+  
+  补充说明:
+  - 此任务依赖于 'js: embedded dbs' 任务的完成。
+  
+step:
+log:

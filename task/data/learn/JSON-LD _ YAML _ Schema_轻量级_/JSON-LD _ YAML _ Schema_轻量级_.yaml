@@ -1,0 +1,15 @@
+name: JSON-LD / YAML + Schema（轻量级）
+id: k751qm13
+parent id: learn
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: JSON-LD / YAML + Schema（轻量级）
+  所属分组: learn
+  预计时长: 30 分钟
+  
+  任务描述: 暂无详细描述。
+  
+step:
+log:

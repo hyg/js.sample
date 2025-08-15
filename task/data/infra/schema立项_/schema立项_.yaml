@@ -1,0 +1,21 @@
+name: schema立项。
+id: xb9lwiqi
+parent id: infra
+start: 2025-07-01
+dependencies:
+path: /note/task
+readme: |
+  任务名称: schema立项。
+  所属分组: infra
+  预计时长: 90 分钟
+  
+  任务描述:
+  - read ../../draft/2024/09/20240919140000.md
+  - read ../../draft/2025/20250110.01.md
+  - read ../../draft/2025/20250112.01.md
+  - read ../../draft/2025/20250116.01.md
+  - read ../../draft/2025/20250408.01.md
+  - read ../../draft/2025/20250613.a.md
+  
+step:
+log:
