@@ -46,8 +46,11 @@ class Clause {
           mapping: scData.mapping || {}, // Mapping that overrides sub-clause's own mapping when used in this context
           numberPrefix: scData.numberPrefix || ""
       }));
-      // The ID for a composite clause is generated based on its sub-clause structure.
-      this.id = data.id || this._generateCompositeId(this.subClauses);
+      // The ID for a composite clause is generated based on its sub-clause IDs only.
+      // This makes the composite ID more stable, changing only if a sub-clause ID changes.
+      // The original structure-based ID is commented out below for reference.
+      // this.id = data.id || this._generateCompositeId(this.subClauses); // Original structure-based ID
+      this.id = data.id || this._generateCompositeIdFromSubClauseIds(this.subClauses.map(sc => sc.id)); // New ID based on sub-clause IDs
       this.localMapping = data.localMapping || {};
     } else {
       throw new Error("Clause must have either 'text' or 'subClauses' defined.");
@@ -75,6 +78,22 @@ class Clause {
     return hash.digest('hex').substring(0, 8);
   }
 
+  /** 
+   * Generates an ID for a composite clause based on the IDs of its sub-clauses.
+   * This makes the composite ID more stable, as it only changes if a sub-clause ID changes,
+   * not if the structure (index, mapping, prefix) of a sub-clause definition changes.
+   * @param {Array<string>} subClauseIds - The IDs of the sub-clauses.
+   * @returns {string} The generated ID.
+   * @private
+   */
+  _generateCompositeIdFromSubClauseIds(subClauseIds) {
+    // Sort the IDs to ensure order doesn't affect the hash if order is not significant to identity
+    // If the order of sub-clauses is part of the identity, remove the sort.
+    const sortedIds = [...subClauseIds].sort();
+    const idsStr = JSON.stringify(sortedIds);
+    return this._generateId(idsStr);
+  }
+  
   /**
    * Generates an ID for a composite clause based on its sub-clause structure.
    * @param {Array<Object>} subClauses - The sub-clause definitions.
@@ -116,10 +135,13 @@ class Clause {
 
   /**
    * Generates the content of the clause, applying anonymization.
+   * @param {Object} [overrideParentMapping] - An optional mapping to override the parent mapping for this generation cycle.
    * @returns {Object} An object containing the original and anonymized text.
    */
-  generateContent() {
-    const effectiveMapping = this.getEffectiveMapping();
+  generateContent(overrideParentMapping = null) {
+    // Use override mapping if provided, otherwise use the instance's parent mapping
+    const effectiveParentMapping = overrideParentMapping !== null ? overrideParentMapping : this.parentMapping;
+    const effectiveMapping = { ...effectiveParentMapping, ...this.localMapping };
 
     if (this.text !== null) {
       // Text clause
@@ -168,14 +190,8 @@ class Clause {
             ...subClauseDef.mapping 
         };
         
-        // Temporarily set the context mapping for the sub-clause
-        const originalParentMapping = subClause.parentMapping;
-        subClause.parentMapping = contextMappingForSubClause;
-
-        const subContent = subClause.generateContent();
-        
-        // Restore the original parent mapping
-        subClause.parentMapping = originalParentMapping;
+        // Pass the context mapping directly to generateContent to avoid mutating subClause
+        const subContent = subClause.generateContent(contextMappingForSubClause);
 
         // Apply number prefix from sub-clause definition to each line of the sub-clause content
         const prefix = subClauseDef.numberPrefix;
@@ -256,17 +272,18 @@ class Clause {
     }
     
     // Function to wrap number prefixes in HTML <span> tags for styling
+    // This regex is more robust: it captures any non-whitespace characters at the start of a line as the prefix
+    // and ensures there's content following it (after optional whitespace) before applying the span.
+    // It handles prefixes like "1.2.3", "A.", "①", "一、" etc., without requiring a trailing space in the prefix definition.
     const wrapNumberPrefixes = (text) => {
-        // This regex finds lines that start with content not followed by a space and then a space.
-        // It then wraps that initial part (the prefix) in a <span>.
-        // This should work for prefixes like "1.2.3 ", "A. ", "① ", "一、" etc.
-        // It uses a non-greedy match .*? to stop at the first space.
-        // Lines that are empty or contain only the prefix (e.g., just "1. ") will also be handled.
-        // The (.*?) captures the prefix part, and (.*?)(\n|$) captures the rest of the line or end of string.
-        // The 's' flag (dotAll) is not used, so . does not match \n. We handle lines separately.
-        // The 'm' flag (multiline) makes ^ and $ match line beginnings and ends.
-        // This approach replaces the entire line, wrapping the prefix.
-        return text.replace(/^(.*? )(.*)$/gm, '<span class="number-prefix">$1</span>$2');
+        return text.replace(/^(\S+\s*)(.*?)($)/gm, (match, prefix, rest, newline) => {
+            // Only wrap if there's actual content after the prefix
+            if (rest.trim() !== '') {
+                return `<span class="number-prefix">${prefix}</span>${rest}${newline}`;
+            }
+            // If the line is just a prefix (or empty after prefix), return as is
+            return match;
+        });
     };
     
     html += `
