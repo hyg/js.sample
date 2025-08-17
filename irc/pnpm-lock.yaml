@@ -1,0 +1,58 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      irc:
+        specifier: ^0.5.2
+        version: 0.5.2
+
+packages:
+
+  iconv@2.2.3:
+    resolution: {integrity: sha512-evIiYeKdt5nEGYKNkQcGPQy781sYgbBKi3gEkt1s4CwteCdOHSjGGRyyp6lP8inYFZwvzG3lgjXEvGUC8nqQ5A==}
+    engines: {node: '>=0.8.0'}
+
+  irc-colors@1.5.0:
+    resolution: {integrity: sha512-HtszKchBQTcqw1DC09uD7i7vvMayHGM1OCo6AHt5pkgZEyo99ClhHTMJdf+Ezc9ovuNNxcH89QfyclGthjZJOw==}
+    engines: {node: '>=6'}
+
+  irc@0.5.2:
+    resolution: {integrity: sha512-KnrvkV05Y71SWmRWHtnlWEIH7LA/YeDul6l7tncCGLNEw4B6Obtmkatb3ACnSLj0kOJ6UBiuhss9e+eRG3zlxw==}
+    engines: {node: '>=0.10.0'}
+
+  nan@2.23.0:
+    resolution: {integrity: sha512-1UxuyYGdoQHcGg87Lkqm3FzefucTa0NAiOcuRsDmysep3c1LVCRK2krrUDafMWtjSG04htvAmvg96+SDknOmgQ==}
+
+  node-icu-charset-detector@0.2.0:
+    resolution: {integrity: sha512-DYOFJ3NfKdxEi9hPbmoCss6WydGhJsxpSleUlZfAWEbZt3AU7JuxailgA9tnqQdsHiujfUY9VtDfWD9m0+ThtQ==}
+    engines: {node: '>=0.6'}
+
+snapshots:
+
+  iconv@2.2.3:
+    dependencies:
+      nan: 2.23.0
+    optional: true
+
+  irc-colors@1.5.0: {}
+
+  irc@0.5.2:
+    dependencies:
+      irc-colors: 1.5.0
+    optionalDependencies:
+      iconv: 2.2.3
+      node-icu-charset-detector: 0.2.0
+
+  nan@2.23.0:
+    optional: true
+
+  node-icu-charset-detector@0.2.0:
+    dependencies:
+      nan: 2.23.0
+    optional: true
