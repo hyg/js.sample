@@ -29,4 +29,5 @@ export const system =`使用nodejs开发一个节点软件：
     { host: '87.98.162.88', port: 6881 },
     { host: '185.145.245.121', port: 8656 },
     { host: '52.201.45.189', port: 6880 }
+在停止运行时，把当前可用的ip、port显示出来，以便作为今后的dht的BOOTSTRAPS。
 `;
