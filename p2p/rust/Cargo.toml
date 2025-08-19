@@ -25,3 +25,7 @@ path = "src/bin/performance_benchmark.rs"
 [[bin]]
 name = "nat_traversal_test"
 path = "src/bin/nat_traversal_test.rs"
+
+[[bin]]
+name = "improved_nat_traversal_test"
+path = "src/bin/improved_nat_traversal_test.rs"
