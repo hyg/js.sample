@@ -60,8 +60,8 @@ RESPONDER_PID=$!
 # 等待几秒钟让响应者节点启动
 sleep 5
 
-# 启动发起者节点
-cargo run --bin nat_traversal_test initiator test_room
+# 启动发起者节点（使用默认的共享参数"default_room"）
+cargo run --bin nat_traversal_test initiator default_room
 
 # 获取发起者节点的退出码
 INITIATOR_EXIT_CODE=$?
@@ -96,7 +96,7 @@ cargo run --bin nat_traversal_test
 
 **机器B（发起者）:**
 ```bash
-cargo run --bin nat_traversal_test initiator test_room
+cargo run --bin nat_traversal_test initiator default_room
 ```
 
 观察机器B的输出结果和退出码来判断测试是否成功。
