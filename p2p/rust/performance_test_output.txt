@@ -1,0 +1,60 @@
+warning: function `save_performance_test_results` is never used
+   --> src\bin\performance_benchmark.rs:537:10
+    |
+537 | async fn save_performance_test_results(
+    |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `p2p` (bin "performance_benchmark") generated 1 warning
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.58s
+     Running `target\debug\performance_benchmark.exe`
+Local peer ID: PeerId("12D3KooWKZgP7EHYRVNSRs948G84B9w7YMruafsLWzU12Li5exTp")
+Warning: Bootstrap address /ip4/34.197.35.250/tcp/6880 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/72.46.58.63/tcp/51413 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/46.53.251.68/tcp/16970 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/191.95.16.229/tcp/55998 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/79.173.94.111/tcp/1438 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/45.233.86.50/tcp/61995 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/178.162.174.28/tcp/28013 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/178.162.174.240/tcp/28006 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/72.21.17.101/tcp/22643 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/31.181.42.46/tcp/22566 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/67.213.106.46/tcp/61956 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/201.131.172.249/tcp/53567 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/185.203.152.184/tcp/2003 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/68.146.23.207/tcp/42107 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/51.195.222.183/tcp/8653 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/85.17.170.48/tcp/28005 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/87.98.162.88/tcp/6881 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/185.145.245.121/tcp/8656 does not contain a PeerId. Adding without explicit peer ID.
+Warning: Bootstrap address /ip4/52.201.45.189/tcp/6880 does not contain a PeerId. Adding without explicit peer ID.
+Routing table updated with peer: QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN
+Routing table updated with peer: QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa
+Routing table updated with peer: QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb
+Routing table updated with peer: QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt
+Routing table updated with peer: QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmPYiLMwpSM
+Routing table updated with peer: QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM
+Routing table updated with peer: QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
+Routing table updated with peer: QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64
+Node 12D3KooWKZgP7EHYRVNSRs948G84B9w7YMruafsLWzU12Li5exTp listening on /ip4/192.168.3.24/tcp/52791
+Node 12D3KooWKZgP7EHYRVNSRs948G84B9w7YMruafsLWzU12Li5exTp listening on /ip4/127.0.0.1/tcp/52791
+Starting initial bootstrap...
+Outgoing connection error to Some(PeerId("QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb")): Transport([(/dnsaddr/bootstrap.libp2p.io/p2p/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb, MultiaddrNotSupported(/dnsaddr/bootstrap.libp2p.io/p2p/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb))])
+Outgoing connection error to Some(PeerId("QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN")): Transport([(/dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN, MultiaddrNotSupported(/dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN))])
+Outgoing connection error to Some(PeerId("QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt")): Transport([(/dnsaddr/bootstrap.libp2p.io/p2p/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt, MultiaddrNotSupported(/dnsaddr/bootstrap.libp2p.io/p2p/QmcZf59bWwK5XFi76CZX8cbJ4BhTzzA3gU1ZjYZcYW3dwt))])
+Outgoing connection error to Some(PeerId("QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa")): Transport([(/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa, MultiaddrNotSupported(/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa))])
+Outgoing connection error to Some(PeerId("QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmPYiLMwpSM")): WrongPeerId { obtained: PeerId("QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ"), address: /ip4/104.131.131.82/tcp/4001/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmPYiLMwpSM }
+Other connection error: WrongPeerId { obtained: PeerId("QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmvsqQLuvuJ"), address: /ip4/104.131.131.82/tcp/4001/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmPYiLMwpSM }
+Successfully bootstrapped with PeerId("12D3KooWKZgP7EHYRVNSRs948G84B9w7YMruafsLWzU12Li5exTp")
+Successfully bootstrapped with PeerId("12D3KooWKZgP7EHYRVNSRs948G84B9w7YMruafsLWzU12Li5exTp")
+Outgoing connection error to Some(PeerId("QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb")): Transport([(/dnsaddr/bootstrap.libp2p.io/p2p/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb, MultiaddrNotSupported(/dnsaddr/bootstrap.libp2p.io/p2p/QmbLHAnMoJPWSCR5Zhtx6BHJX9KiKNN6tpvbUcqanj75Nb))])
+Outgoing connection error to Some(PeerId("QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN")): Transport([(/dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN, MultiaddrNotSupported(/dnsaddr/bootstrap.libp2p.io/p2p/QmNnooDu7bfjPFoTZYxMNLWUQJyrVwtbZg5gBMjTezGAJN))])
+Outgoing connection error to Some(PeerId("QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu")): Transport([(/ip4/128.199.219.111/tcp/4001/p2p/QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu, Other(Custom { kind: Other, error: Left(Left(Os { code: 10060, kind: TimedOut, message: "由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。" })) }))])
+Outgoing connection error to Some(PeerId("QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64")): Transport([(/ip4/104.236.76.40/tcp/4001/p2p/QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64, Other(Custom { kind: Other, error: Left(Left(Os { code: 10060, kind: TimedOut, message: "由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。" })) }))])
+Outgoing connection error to Some(PeerId("QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa")): Transport([(/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa, MultiaddrNotSupported(/dnsaddr/bootstrap.libp2p.io/p2p/QmQCU2EcMqAqQPR2i9bChDtGNJchTbq5TbXJJ16u19uLTa))])
+Maximum connection attempts (10) reached. Shutting down...
+Node shutdown complete.
+Final node-to-node communication status:
+  Success: false
+  Attempts: 10/10

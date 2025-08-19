@@ -1,0 +1,52 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.59s
+     Running `target\debug\performance_benchmark.exe`
+Local peer ID: PeerId("12D3KooWKJz5pa6g6Whu9m3BMvW87LtwuhCZ9hqWA52T21meJK5G")
+Node 12D3KooWKJz5pa6g6Whu9m3BMvW87LtwuhCZ9hqWA52T21meJK5G listening on /ip4/192.168.3.24/tcp/50574
+Node 12D3KooWKJz5pa6g6Whu9m3BMvW87LtwuhCZ9hqWA52T21meJK5G listening on /ip4/127.0.0.1/tcp/50574
+Starting initial bootstrap...
+Failed to start bootstrap.
+Starting initial bootstrap...
+Failed to start bootstrap.
+Starting initial bootstrap...
+Failed to start bootstrap.
+Starting initial bootstrap...
+Failed to start bootstrap.
+Starting initial bootstrap...
+Failed to start bootstrap.
+Starting initial bootstrap...
+Failed to start bootstrap.
+Refreshing peer discovery...
+Found 0 closest peers for [0, 36, 8, 1, 18, 32, 141, 14, 13, 233, 40, 44, 118, 221, 188, 87, 46, 185, 229, 214, 254, 16, 120, 69, 50, 78, 124, 39, 166, 111, 163, 166, 147, 61, 131, 177, 11, 119]
+Current known bootstrap nodes:
+  /ip4/104.131.131.82/tcp/4001/p2p/QmaCpDMGvV2BGHeYERUEnRQAwe3N8SzbUtfsmPYiLMwpSM
+  /ip4/104.236.179.241/tcp/4001/p2p/QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM
+  /ip4/128.199.219.111/tcp/4001/p2p/QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu
+  /ip4/104.236.76.40/tcp/4001/p2p/QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64
+  /ip4/178.62.158.247/tcp/4001/p2p/QmSoLer265NRgSp2LA3dPaeykiS1J6DifTC88f5uVQKNAd
+  /ip4/34.197.35.250/tcp/6880
+  /ip4/72.46.58.63/tcp/51413
+  /ip4/46.53.251.68/tcp/16970
+  /ip4/191.95.16.229/tcp/55998
+  /ip4/79.173.94.111/tcp/1438
+  /ip4/45.233.86.50/tcp/61995
+  /ip4/178.162.174.28/tcp/28013
+  /ip4/178.162.174.240/tcp/28006
+  /ip4/72.21.17.101/tcp/22643
+  /ip4/31.181.42.46/tcp/22566
+  /ip4/67.213.106.46/tcp/61956
+  /ip4/201.131.172.249/tcp/53567
+  /ip4/185.203.152.184/tcp/2003
+  /ip4/68.146.23.207/tcp/42107
+  /ip4/51.195.222.183/tcp/8653
+  /ip4/85.17.170.48/tcp/28005
+  /ip4/87.98.162.88/tcp/6881
+  /ip4/185.145.245.121/tcp/8656
+  /ip4/52.201.45.189/tcp/6880
+Discovered public address via STUN: 221.218.141.220:7268
+NAT traversal success detected through STUN request
+Bootstrap node information saved to BOOTSTRAPS.json
+Node-to-node communication succeeded. Shutting down...
+Node shutdown complete.
+Final node-to-node communication status:
+  Success: true
+  Attempts: 0/10
