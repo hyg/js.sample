@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "node --inspect index.js"
+    "dev": "node --inspect index.js",
+    "cc": "node node_modules\\@anthropic-ai\\claude-code\\mycli.js"
   },
   "dependencies": {
+    "@anthropic-ai/claude-code": "^1.0.85",
     "@mistralai/mistralai": "^1.7.5",
     "axios": "^1.6.0",
     "colors": "^1.4.0",
