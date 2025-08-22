@@ -1,0 +1,21 @@
+{
+  "name": "p2p-node",
+  "version": "1.0.0",
+  "description": "P2P Node Software with DHT and NAT Traversal",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "demo": "node demo.js",
+    "test": "node test/test.js"
+  },
+  "keywords": ["p2p", "dht", "nat-traversal", "peer-to-peer"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
