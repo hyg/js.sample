@@ -1,0 +1,16 @@
+{
+  "name": "voucher-processor",
+  "version": "1.0.0",
+  "description": "电子凭证自动整理工具",
+  "main": "voucher.js",
+  "scripts": {
+    "start": "node voucher.js",
+    "interactive": "node voucher-interactive.js"
+  },
+  "keywords": [
+    "voucher",
+    "processor"
+  ],
+  "author": "Claude Code",
+  "license": "MIT"
+}
