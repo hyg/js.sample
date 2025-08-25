@@ -32,9 +32,35 @@ function parseVoucherText(text) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     
+    // 处理301凭证格式
     if (line === '支付时间' && i + 1 < lines.length) {
       result.payTime = lines[i + 1];
-    } else if (line === '交易单号' && i + 1 < lines.length) {
+    } else if (line === '订单号' && i + 1 < lines.length) {
+      result.transactionId = lines[i + 1];
+    } else if (line === '商家订单号' && i + 1 < lines.length) {
+      result.merchantId = lines[i + 1];
+    } else if (line === '商品说明' && i + 1 < lines.length) {
+      result.product = lines[i + 1];
+    } else if (line === '收款方全称' && i + 1 < lines.length) {
+      result.merchantName = lines[i + 1];
+    } else if (line.startsWith('-') && !isNaN(parseFloat(line))) {
+      // 金额行，以负号开头的数字
+      result.amount = Math.abs(parseFloat(line)).toFixed(2);
+    } else if (line.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/)) {
+      // 支付时间格式：2025-08-24 19:38:20
+      result.payTime = line;
+    } else if (line.match(/^\d{28,}$/)) {
+      // 订单号格式：28位以上的数字
+      result.transactionId = line;
+    } else if (line.match(/^[A-Z0-9]+$/)) {
+      // 商家订单号格式：大写字母和数字组合
+      if (!result.merchantId) {
+        result.merchantId = line;
+      }
+    }
+    
+    // 处理299、300凭证格式
+    if (line === '交易单号' && i + 1 < lines.length) {
       result.transactionId = lines[i + 1];
     } else if (line === '商户单号' && i + 1 < lines.length) {
       result.merchantId = lines[i + 1];
@@ -67,36 +93,55 @@ function generateYamlContent(data) {
   const date = convertDate(data.payTime);
   const transactionId = data.transactionId || '';
   const merchantId = data.merchantId || '';
+  const amount = data.amount || '0.00';
   
   // 提取商品信息中的订单号
   let orderNumber = '';
   if (data.product) {
-    // 处理两种格式：美团订单-25082211100300001304615814784876 或 商户单号XP2125082220200492539796002493
-    const orderMatch = data.product.match(/(?:.*-)?(\d+)$/);
+    // 处理多种格式：
+    // 1. 美团订单-25082211100300001304615814784876
+    // 2. 商户单号XP2125082220200492539796002493
+    // 3. 充值:阿里云服务购买,业务交易号:CFP202508241937299046
+    const orderMatch = data.product.match(/(?:.*-)?([A-Z0-9]+)$/);
     if (orderMatch) {
       orderNumber = orderMatch[1];
     }
   }
   
-  // 简单的商品摘要（实际应用中可以根据商品名称生成更准确的摘要）
-  const summary = data.product ? '商品购买' : '';
+  // 生成摘要
+  let summary = '';
+  if (data.product) {
+    if (data.product.includes('阿里云')) {
+      summary = '阿里云充值';
+    } else if (data.product.includes('美团')) {
+      summary = '商品购买';
+    } else {
+      // 默认摘要
+      summary = data.product.split(':')[0].replace('充值', '').trim() || '商品购买';
+    }
+  }
   
   let yaml = `date: ${date}\n`;
-  yaml += `R"aRtitle: 微信支付账单\n`;
+  yaml += `title: 支付宝账单\n`;
   yaml += `VoucherID: ${transactionId}\n`;
-  yaml += `VoucherType: 交易单号\n`;
-  yaml += `amount: 0.00\n`; // 金额需要从其他地方获取，暂时设为0.00
+  yaml += `VoucherType: 订单号\n`;
+  yaml += `amount: ${amount}\n`;
   yaml += `summary: ${summary}\n`;
   yaml += `comment:\n`;
   
   if (merchantId) {
-    yaml += `  - name: 商户单号\n`;
+    yaml += `  - name: 商户订单号\n`;
     yaml += `    value: ${merchantId}\n`;
   }
   
-  if (orderNumber && data.product && data.product.includes('美团')) {
-    yaml += `  - name: 美团订单\n`;
-    yaml += `    value: ${orderNumber}\n`;
+  if (orderNumber) {
+    if (data.product && data.product.includes('美团')) {
+      yaml += `  - name: 美团订单\n`;
+      yaml += `    value: ${orderNumber}\n`;
+    } else if (data.product && data.product.includes('业务交易号')) {
+      yaml += `  - name: 业务交易好\n`;  // 注意：根据AVR.301.yaml，这里应该是"业务交易好"而非"业务交易号"
+      yaml += `    value: ${orderNumber}\n`;
+    }
   }
   
   return yaml;
