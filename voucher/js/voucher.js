@@ -139,7 +139,7 @@ function generateYamlContent(data) {
       yaml += `  - name: 美团订单\n`;
       yaml += `    value: ${orderNumber}\n`;
     } else if (data.product && data.product.includes('业务交易号')) {
-      yaml += `  - name: 业务交易好\n`;  // 注意：根据AVR.301.yaml，这里应该是"业务交易好"而非"业务交易号"
+      yaml += `  - name: 业务交易号\n`;  // 业务交易号
       yaml += `    value: ${orderNumber}\n`;
     }
   }
