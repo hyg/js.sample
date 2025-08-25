@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bittorrent-dht": "^9.0.0",
+    "bittorrent-dht-sodium": "^1.2.0",
     "jshashes": "^1.0.8",
     "request": "^2.88.2",
     "stun": "^2.1.0"

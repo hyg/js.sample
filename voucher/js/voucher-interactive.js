@@ -33,11 +33,12 @@ function parseVoucherText(text) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     
-    // 处理301凭证格式
+    // 处理301凭证格式（支付宝支付）
     if (line === '支付时间' && i + 1 < lines.length) {
       result.payTime = lines[i + 1];
     } else if (line === '订单号' && i + 1 < lines.length) {
       result.transactionId = lines[i + 1];
+      result.voucherType = 'alipay'; // 标记为支付宝支付
     } else if (line === '商家订单号' && i + 1 < lines.length) {
       result.merchantId = lines[i + 1];
     } else if (line === '商品说明' && i + 1 < lines.length) {
@@ -53,6 +54,9 @@ function parseVoucherText(text) {
     } else if (line.match(/^\d{28,}$/)) {
       // 订单号格式：28位以上的数字
       result.transactionId = line;
+      if (!result.voucherType) {
+        result.voucherType = 'alipay'; // 默认标记为支付宝支付
+      }
     } else if (line.match(/^[A-Z0-9]+$/)) {
       // 商家订单号格式：大写字母和数字组合
       if (!result.merchantId) {
@@ -60,9 +64,10 @@ function parseVoucherText(text) {
       }
     }
     
-    // 处理299、300凭证格式
+    // 处理299、300凭证格式（微信支付）
     if (line === '交易单号' && i + 1 < lines.length) {
       result.transactionId = lines[i + 1];
+      result.voucherType = 'wechat'; // 标记为微信支付
     } else if (line === '商户单号' && i + 1 < lines.length) {
       result.merchantId = lines[i + 1];
     } else if (line === '商品' && i + 1 < lines.length) {
@@ -96,6 +101,17 @@ function generateYamlContent(data) {
   const merchantId = data.merchantId || '';
   const amount = data.amount || '0.00';
   
+  // 根据凭证内容特征判断凭证类型
+  // 微信支付凭证包含"交易单号"，支付宝支付凭证包含"订单号"
+  let title = '支付宝账单';
+  let voucherType = '订单号';
+  const isWeChatPay = data.voucherType === 'wechat';
+  
+  if (isWeChatPay) {
+    title = '微信支付账单';
+    voucherType = '交易单号';
+  }
+  
   // 提取商品信息中的订单号
   let orderNumber = '';
   if (data.product) {
@@ -123,15 +139,16 @@ function generateYamlContent(data) {
   }
   
   let yaml = `date: ${date}\n`;
-  yaml += `title: 支付宝账单\n`;
+  yaml += `title: ${title}\n`;
   yaml += `VoucherID: ${transactionId}\n`;
-  yaml += `VoucherType: 订单号\n`;
+  yaml += `VoucherType: ${voucherType}\n`;
   yaml += `amount: ${amount}\n`;
   yaml += `summary: ${summary}\n`;
   yaml += `comment:\n`;
   
   if (merchantId) {
-    yaml += `  - name: 商户订单号\n`;
+    const merchantLabel = isWeChatPay ? '商户单号' : '商户订单号';
+    yaml += `  - name: ${merchantLabel}\n`;
     yaml += `    value: ${merchantId}\n`;
   }
   

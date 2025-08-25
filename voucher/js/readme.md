@@ -5,7 +5,9 @@
 
 ### 数据格式
 
-- 299.txt的内容对应AVR.299.yaml，300.txt对应AVR.300.yaml。
+- 299.txt的内容对应AVR.299.yaml;
+- 300.txt对应AVR.300.yaml;
+- 301.txt对应AVR.301.yaml.
 
 ### UI
 
