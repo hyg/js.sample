@@ -51,17 +51,15 @@ function parseVoucherText(text) {
     } else if (line.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/)) {
       // 支付时间格式：2025-08-24 19:38:20
       result.payTime = line;
-    } else if (line.match(/^\d{28,}$/)) {
-      // 订单号格式：28位以上的数字
+    } else if (line.match(/^\d{28,}$/) && !result.transactionId) {
+      // 订单号格式：28位以上的数字（仅当尚未设置transactionId时）
       result.transactionId = line;
       if (!result.voucherType) {
         result.voucherType = 'alipay'; // 默认标记为支付宝支付
       }
-    } else if (line.match(/^[A-Z0-9]+$/)) {
-      // 商家订单号格式：大写字母和数字组合
-      if (!result.merchantId) {
-        result.merchantId = line;
-      }
+    } else if (line.match(/^[A-Z0-9]+$/) && !result.merchantId) {
+      // 商家订单号格式：大写字母和数字组合（仅当尚未设置merchantId时）
+      result.merchantId = line;
     }
     
     // 处理299、300凭证格式（微信支付）
