@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node test-voucher.js:*)",
+      "Bash(node comprehensive-test.js:*)"
+    ],
+    "deny": []
+  }
+}
