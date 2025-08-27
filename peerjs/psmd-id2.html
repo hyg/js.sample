@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PSMD ID2</title>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <div id="messages"></div>
+    <input type="text" id="messageInput" placeholder="输入消息...">
+    <button onclick="sendMessage()">发送</button>
+
+    <script>
+        let peer = new Peer('psmd-id2');
+        let conn;
+
+        peer.on('connection', connection => {
+            conn = connection;
+            conn.on('data', data => {
+                document.getElementById('messages').innerHTML += `<div><strong>psmd-id1:</strong> ${data}</div>`;
+            });
+        });
+
+        peer.on('error', err => {
+            console.error(err);
+        });
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            if (conn && input.value) {
+                conn.send(input.value);
+                document.getElementById('messages').innerHTML += `<div><strong>psmd-id2:</strong> ${input.value}</div>`;
+                input.value = '';
+            }
+        }
+
+        // Connect to peer after a short delay to ensure both peers are initialized
+        setTimeout(() => {
+            conn = peer.connect('psmd-id1');
+            conn.on('open', () => {
+                console.log('Connected to psmd-id1');
+            });
+            conn.on('data', data => {
+                document.getElementById('messages').innerHTML += `<div><strong>psmd-id1:</strong> ${data}</div>`;
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
