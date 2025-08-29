@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const readline = require('readline');
 const yaml = require('js-yaml');
 
 // 获取目标路径（脚本所在目录）
@@ -471,56 +472,67 @@ function processUserInput(inputText) {
   return { avrFilename, aerFilename };
 }
 
-// 主函数
-function main() {
-  console.log('请输入电子凭证（输入完成后按 Ctrl+D 或 Ctrl+C 结束输入）:');
-  
-  let inputText = '';
-  
-  // 监听输入
-  process.stdin.setEncoding('utf8');
-  process.stdin.on('data', (chunk) => {
-    inputText += chunk;
+// 创建交互式界面
+function createInteractiveInterface() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
   });
   
-  // 处理输入结束
-  process.stdin.on('end', () => {
-    if (inputText.trim() !== '') {
-      try {
-        processUserInput(inputText);
-      } catch (error) {
-        console.error('处理输入时出错:', error.message);
+  function promptUser() {
+    console.log('\n请输入电子凭证（输入完成后输入"END"结束）:');
+    let inputLines = [];
+    
+    rl.on('line', (line) => {
+      if (line.trim() === 'END') {
+        // 处理输入
+        if (inputLines.length > 0) {
+          const inputText = inputLines.join('\n');
+          try {
+            processUserInput(inputText);
+          } catch (error) {
+            console.error('处理输入时出错:', error.message);
+          }
+        }
+        
+        // 移除事件监听器并重新开始
+        rl.removeAllListeners('line');
+        promptUser();
+      } else {
+        inputLines.push(line);
       }
-    }
-    console.log('\n程序退出');
-    process.exit(0);
-  });
+    });
+  }
   
-  // 处理退出信号
-  process.on('SIGINT', () => {
-    if (inputText.trim() !== '') {
-      try {
-        processUserInput(inputText);
-      } catch (error) {
-        console.error('处理输入时出错:', error.message);
-      }
-    }
-    console.log('\n程序退出');
-    process.exit(0);
-  });
+  promptUser();
 }
 
-// 导出函数供测试使用
-module.exports = {
-  parseVoucherText,
-  generateYamlContent,
-  convertDate,
-  parseAvrFile,
-  generateAerContent,
-  getAccountTitle,
-  getCreditAccountTitle,
-  getUnitBySummary
-};
+// 主函数
+function main() {
+  if (process.stdin.isTTY) {
+    // 交互式模式
+    console.log('电子凭证自动整理工具');
+    createInteractiveInterface();
+  } else {
+    // 管道模式
+    let inputText = '';
+    process.stdin.setEncoding('utf8');
+    
+    process.stdin.on('data', (chunk) => {
+      inputText += chunk;
+    });
+    
+    process.stdin.on('end', () => {
+      if (inputText.trim() !== '') {
+        try {
+          processUserInput(inputText);
+        } catch (error) {
+          console.error('处理输入时出错:', error.message);
+        }
+      }
+    });
+  }
+}
 
 // 如果是直接运行此脚本，则执行主函数
 if (require.main === module) {

@@ -5,12 +5,15 @@
   "main": "voucher.js",
   "scripts": {
     "start": "node voucher.js",
-    "interactive": "node voucher-interactive.js"
+    "interactive": "node vi.js"
   },
   "keywords": [
     "voucher",
     "processor"
   ],
   "author": "Claude Code",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
 }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PSMD Web Client</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/4.2.6/mqtt.min.js"></script>
+</head>
+<body>
+  <h1>PSMD Web Client (Node C)</h1>
+  <div>
+    <label for="messageInput">Message:</label>
+    <input type="text" id="messageInput" placeholder="Type your message here">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  <div>
+    <h2>Messages:</h2>
+    <ul id="messagesList"></ul>
+  </div>
+
+  <script>
+    // Web Client C configuration
+    const clientId = 'webClientC_' + Math.random().toString(16).substr(2, 8);
+    const topic = 'psmd/chat';
+    const brokerUrl = 'ws://broker.emqx.io:8083/mqtt';
+    let client; // Declare client variable
+
+    // Initialize MQTT connection after page load
+    window.addEventListener('load', () => {
+      // Connect to MQTT broker
+      client = mqtt.connect(brokerUrl, { clientId });
+
+      client.on('connect', () => {
+        console.log('Web Client C connected to MQTT broker');
+        document.getElementById('messagesList').innerHTML += '<li>Connected to broker</li>';
+        client.subscribe(topic, (err) => {
+          if (err) {
+            console.error('Subscription error:', err);
+          } else {
+            console.log(`Web Client C subscribed to topic: ${topic}`);
+            document.getElementById('messagesList').innerHTML += '<li>Subscribed to topic</li>';
+          }
+        });
+      });
+
+      client.on('message', (receivedTopic, message) => {
+        if (receivedTopic === topic) {
+          const messageText = message.toString();
+          console.log(`Received message: ${messageText}`);
+          document.getElementById('messagesList').innerHTML += `<li>${messageText}</li>`;
+        }
+      });
+    });
+
+    function sendMessage() {
+      // Check if client is initialized and connected
+      if (client && client.connected) {
+        const inputElement = document.getElementById('messageInput');
+        const message = inputElement.value;
+        if (message) {
+          client.publish(topic, `Web Client C: ${message}`);
+          inputElement.value = '';
+        }
+      } else {
+        console.log("Client not connected");
+      }
+    }
+  </script>
+</body>
+</html>
